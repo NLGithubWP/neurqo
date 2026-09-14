@@ -1,0 +1,28 @@
+Alpha scheduling sensitivity on JOB Random
+
+Schedule policy  WS        GS        Imp              NQO total (s)  Runtime / learned
+---------------  --------  --------  ---------------  -------------  -----------------
+Fixed alpha=0.0  1.581317  0.920016  53/113 (46.90%)  185.637        1.1318           
+Fixed alpha=0.5  1.777505  1.008728  59/113 (52.21%)  165.148        1.0069           
+Fixed alpha=1.0  1.630586  0.976257  54/113 (47.79%)  180.028        1.0976           
+Learned alpha_t  1.789778  1.024788  60/113 (53.10%)  164.015        1.0000           
+
+Fold-level WS
+
+Schedule policy  Fold a    Fold b    Fold c  
+---------------  --------  --------  --------
+Fixed alpha=0.0  1.304052  1.525100  1.922577
+Fixed alpha=0.5  1.475573  1.669811  2.195688
+Fixed alpha=1.0  1.356035  1.686848  1.858678
+Learned alpha_t  1.475573  1.708767  2.195688
+
+Realized Select decisions
+
+Schedule policy  #Select  alpha=0.0  alpha=0.5  alpha=1.0
+---------------  -------  ---------  ---------  ---------
+Fixed alpha=0.0  188      188/188    0/188      0/188    
+Fixed alpha=0.5  193      0/193      193/193    0/193    
+Fixed alpha=1.0  191      0/191      0/191      191/191  
+Learned alpha_t  193      0/193      146/193    47/193   
+
+Fixed-alpha cache coverage: 261/339 hits; 78 physical executions.

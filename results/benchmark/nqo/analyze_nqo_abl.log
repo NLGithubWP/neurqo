@@ -1,0 +1,29 @@
+RL formulation cache audit
+Tasks: 6/6
+Cache hits: 225/225
+Physical executions: 0
+
+State ablation cache audit
+Tasks: 18/18
+Cache hits: 494/494
+Physical executions: 0
+
+Action ablation cache audit
+Tasks: 33/33
+Cache hits: 966/966
+Physical executions: 0
+
+RL Formulation and State Ablation
+Method              JOB WS    JOB GS    JOB IMP          STACK WS  STACK GS  STACK IMP        TPC-H WS  TPC-H GS  TPC-H IMP
+------------------  --------  --------  ---------------  --------  --------  ---------------  --------  --------  -------------
+Full NQO            1.789778  1.024788  60/113 (53.10%)  1.635543  0.904246  42/112 (37.50%)  1.048593  1.004016  8/22 (36.36%)
+One-step RL         1.654796  0.926309  55/113 (48.67%)  1.462874  0.945720  40/112 (35.71%)  —         —         —
+w/o Query Topology  1.714203  0.971524  51/113 (45.13%)  1.424510  0.947381  38/112 (33.93%)  1.009295  0.961522  8/22 (36.36%)
+w/o Plan Topology   1.532734  0.930065  50/113 (44.25%)  1.472904  0.950055  40/112 (35.71%)  1.009286  0.961485  8/22 (36.36%)
+
+Action Importance on the Random split
+Dataset  Full NQO WS  w/o Query Split WS  w/o TOPK WS  w/o Filter WS  w/o AJoin WS
+-------  -----------  ------------------  -----------  -------------  ------------
+JOB      1.789778     1.248472            1.360611     1.451699       1.496277
+STACK    1.635543     0.977543            1.546129     1.535097       1.540386
+TPC-H    1.048593     —                   1.013135     1.009105       1.015898

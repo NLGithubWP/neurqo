@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nqo"
+version = "0.1.0"
+description = "Workload-agnostic learned query optimization runtime"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+  "numpy>=2.0,<3",
+  "psycopg2>=2.9,<3",
+  "torch>=2.7,<2.8",
+]
+
+[project.scripts]
+nqo-server = "runtime.action_server:main"
+nqo-train = "training.experience_trainer:main"
+nqo-train-mixed = "training.multi_workload:main"
+nqo-incremental-trainer = "training.incremental_trainer:main"
+nqo-benchmark = "benchmarking.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = [
+  "benchmarking*",
+  "database*",
+  "experience*",
+  "model*",
+  "optimization*",
+  "runtime*",
+  "training*",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "."]
+testpaths = ["tests"]

@@ -1,0 +1,32 @@
+{
+  "22c": {
+    "median_charged_ms": 2017.125643789768,
+    "official_charged_ms": 2017.125643789768,
+    "official_client_wall_ms": 2017.125643789768,
+    "official_repetition": 0,
+    "query_id": "22c",
+    "result_hash": null,
+    "result_rows": 0,
+    "status": "ok"
+  },
+  "29a": {
+    "median_charged_ms": 2289.833426475525,
+    "official_charged_ms": 2289.833426475525,
+    "official_client_wall_ms": 2289.833426475525,
+    "official_repetition": 0,
+    "query_id": "29a",
+    "result_hash": null,
+    "result_rows": 0,
+    "status": "ok"
+  },
+  "33a": {
+    "median_charged_ms": 320.330306887627,
+    "official_charged_ms": 320.330306887627,
+    "official_client_wall_ms": 320.330306887627,
+    "official_repetition": 0,
+    "query_id": "33a",
+    "result_hash": null,
+    "result_rows": 0,
+    "status": "ok"
+  }
+}

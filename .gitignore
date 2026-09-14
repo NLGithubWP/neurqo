@@ -1,0 +1,46 @@
+# Python-generated files
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+
+# Native extension build files
+/db_integration/**/*.o
+/db_integration/**/*.so
+/db_integration/**/*.bc
+
+# Local working files
+/.local/
+/.claude/
+/.vscode/
+
+# Baseline source checkouts; keep the repository guide.
+/thrid_party/*
+!/thrid_party/README.md
+
+# Generated experiment artifacts
+/results/**/*.pt
+/results/**/*.pth
+/results/**/*.ckpt
+/results/**/*.jsonl
+/results/**/*.pkl
+
+# Released checkpoints are versioned reproducibility artifacts.
+!/results/models/**/*.pt
+
+# SQLite process-local sidecars are not release artifacts.
+/results/buffers/*.sql-shm
+/results/buffers/*.sql-wal
+
+# Local execution and training smoke-test artifacts.
+/results/raw_buffer/
+/results/runs/
+/results/benchmark/temp_baseline_reproduction/
+/results/benchmark/temp_nqo_reproduction/
+
+# Local AutoSteer collection results and logs.
+/results/benchmark/genjoin_baselines/auto_steer/
+
+# Generated paper figures
+/results/paper/figs/*.pdf

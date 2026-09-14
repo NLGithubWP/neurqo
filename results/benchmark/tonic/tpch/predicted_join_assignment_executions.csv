@@ -1,0 +1,23 @@
+workload,protocol,fold,query_id,predicted_assignment,hint,postgres_first_s,execution_first_s,first_timed_out,inference_s
+TPCH,random,random_a,3,HH,HashJoin(o c) HashJoin(l o c),1.7256545722484589,2.213885635137558,False,0.01709352433681488
+TPCH,random,random_a,6,,,0.4440123364329338,0.5093284174799919,False,0.0029627233743667603
+TPCH,random,random_a,10,NHH,NestLoop(l o) HashJoin(l o c) HashJoin(l o c n),1.4297003522515297,1.5531681030988693,False,0.005921132862567902
+TPCH,random,random_a,13,H,HashJoin(o c),1.14161117374897,1.14630988240242,False,0.0047651901841163635
+TPCH,random,random_a,16,N,NestLoop(ps p),0.6255303099751472,1.0662388280034065,False,0.00499521940946579
+TPCH,random,random_a,17,N,NestLoop(l p),0.9705450087785721,0.16105490177869797,False,0.0047213733196258545
+TPCH,random,random_a,22,H,HashJoin(o c),0.17893275618553162,0.3722332715988159,False,0.003897935152053833
+TPCH,random,random_b,2,HHHHHHH,HashJoin(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) HashJoin(ps p s n r),1.1536444425582886,1.122903861105442,False,0.006802558898925781
+TPCH,random,random_b,7,HHHHH,HashJoin(c n2) HashJoin(o c n2) HashJoin(l o c n2) HashJoin(s n1) HashJoin(l o c n2 s n1),0.8438690975308418,0.9443081095814705,False,0.00639922171831131
+TPCH,random,random_b,11,NNHH,NestLoop(s2 n2) NestLoop(ps2 s2 n2) HashJoin(s n) HashJoin(ps s n),0.11692218482494354,0.18989674001932144,False,0.0031010136008262634
+TPCH,random,random_b,14,N,NestLoop(l p),0.17282789200544357,0.2859118729829788,False,0.002211235463619232
+TPCH,random,random_b,15,H,HashJoin(s r),0.24126050621271133,0.24318069219589233,False,0.0026174336671829224
+TPCH,random,random_b,19,N,NestLoop(l p),0.11354592442512512,0.07872503250837326,False,0.004490122199058533
+TPCH,random,random_b,20,HHH,HashJoin(s n) HashJoin(ps p) HashJoin(s n ps p),0.19558879733085632,0.9779439866542816,True,0.0031254440546035767
+TPCH,random,random_c,1,,,7.768677711486816,6.999056465923786,False,0.0027493536472320557
+TPCH,random,random_c,4,N,NestLoop(l o),0.26466844975948334,0.2474403753876686,False,0.0023559927940368652
+TPCH,random,random_c,5,HHHHH,HashJoin(n r) HashJoin(c n r) HashJoin(o c n r) HashJoin(l o c n r) HashJoin(l o c n r s),0.296418659389019,0.9933251962065697,False,0.005964219570159912
+TPCH,random,random_c,8,NHHHHHH,NestLoop(l p) HashJoin(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.6686711311340332,0.3204774633049965,False,0.006749697029590607
+TPCH,random,random_c,9,HHHHH,HashJoin(l p) HashJoin(o l p) HashJoin(o l p s) HashJoin(o l p s ps) HashJoin(o l p s ps n),1.6287659481167793,2.1310030668973923,False,0.007999330759048462
+TPCH,random,random_c,12,N,NestLoop(l o),0.9981310740113258,0.6062225997447968,False,0.0027943626046180725
+TPCH,random,random_c,18,NNH,NestLoop(l o) NestLoop(l o c) HashJoin(l o c l2),4.402746334671974,11.479960717260838,False,0.003952912986278534
+TPCH,random,random_c,21,NNHHH,NestLoop(s n) NestLoop(l1 s n) HashJoin(o l1 s n) HashJoin(o l1 s n l2) HashJoin(l3 o l1 s n l2),0.9022716879844666,3.6913219019770622,False,0.004889778792858124

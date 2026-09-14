@@ -1,0 +1,32 @@
+{
+  "q13_935e2051": {
+    "median_charged_ms": 16069.959938526154,
+    "official_charged_ms": 16069.959938526154,
+    "official_client_wall_ms": 16069.959938526154,
+    "official_repetition": 0,
+    "query_id": "q13_935e2051",
+    "result_hash": null,
+    "result_rows": 0,
+    "status": "ok"
+  },
+  "q2_q2-012": {
+    "median_charged_ms": 20593.424074351788,
+    "official_charged_ms": 20593.424074351788,
+    "official_client_wall_ms": 20593.424074351788,
+    "official_repetition": 0,
+    "query_id": "q2_q2-012",
+    "result_hash": null,
+    "result_rows": 0,
+    "status": "ok"
+  },
+  "q3_q3-099": {
+    "median_charged_ms": 26959.115095436573,
+    "official_charged_ms": 26959.115095436573,
+    "official_client_wall_ms": 26959.115095436573,
+    "official_repetition": 0,
+    "query_id": "q3_q3-099",
+    "result_hash": null,
+    "result_rows": 0,
+    "status": "ok"
+  }
+}

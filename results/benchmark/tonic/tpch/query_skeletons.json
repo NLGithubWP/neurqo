@@ -1,0 +1,833 @@
+{
+  "1": {
+    "default_assignment": "",
+    "leading_tree": "l",
+    "query_id": "1",
+    "steps": []
+  },
+  "10": {
+    "default_assignment": "HHH",
+    "leading_tree": "(((l o) c) n)",
+    "query_id": "10",
+    "steps": [
+      {
+        "aliases": [
+          "l",
+          "o"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "lineitem",
+          "orders"
+        ]
+      },
+      {
+        "aliases": [
+          "l",
+          "o",
+          "c"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "customer"
+        ]
+      },
+      {
+        "aliases": [
+          "l",
+          "o",
+          "c",
+          "n"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "nation"
+        ]
+      }
+    ]
+  },
+  "11": {
+    "default_assignment": "HHHH",
+    "leading_tree": "(ps (s n))",
+    "query_id": "11",
+    "steps": [
+      {
+        "aliases": [
+          "s2",
+          "n2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#supplier",
+          "#nation"
+        ]
+      },
+      {
+        "aliases": [
+          "ps2",
+          "s2",
+          "n2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#nation"
+        ]
+      },
+      {
+        "aliases": [
+          "s",
+          "n"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#supplier",
+          "#nation"
+        ]
+      },
+      {
+        "aliases": [
+          "ps",
+          "s",
+          "n"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "supplier#nation"
+        ]
+      }
+    ]
+  },
+  "12": {
+    "default_assignment": "H",
+    "leading_tree": "(l o)",
+    "query_id": "12",
+    "steps": [
+      {
+        "aliases": [
+          "l",
+          "o"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "lineitem",
+          "orders"
+        ]
+      }
+    ]
+  },
+  "13": {
+    "default_assignment": "H",
+    "leading_tree": "(o c)",
+    "query_id": "13",
+    "steps": [
+      {
+        "aliases": [
+          "o",
+          "c"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "orders",
+          "customer"
+        ]
+      }
+    ]
+  },
+  "14": {
+    "default_assignment": "H",
+    "leading_tree": "(l p)",
+    "query_id": "14",
+    "steps": [
+      {
+        "aliases": [
+          "l",
+          "p"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "lineitem",
+          "part"
+        ]
+      }
+    ]
+  },
+  "15": {
+    "default_assignment": "H",
+    "leading_tree": "(s r)",
+    "query_id": "15",
+    "steps": [
+      {
+        "aliases": [
+          "s",
+          "r"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "supplier",
+          "revenue"
+        ]
+      }
+    ]
+  },
+  "16": {
+    "default_assignment": "H",
+    "leading_tree": "(ps p)",
+    "query_id": "16",
+    "steps": [
+      {
+        "aliases": [
+          "ps",
+          "p"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "partsupp",
+          "part"
+        ]
+      }
+    ]
+  },
+  "17": {
+    "default_assignment": "H",
+    "leading_tree": "(l p)",
+    "query_id": "17",
+    "steps": [
+      {
+        "aliases": [
+          "l",
+          "p"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "lineitem",
+          "part"
+        ]
+      }
+    ]
+  },
+  "18": {
+    "default_assignment": "HHH",
+    "leading_tree": "(((l o) c) l2)",
+    "query_id": "18",
+    "steps": [
+      {
+        "aliases": [
+          "l",
+          "o"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "lineitem",
+          "orders"
+        ]
+      },
+      {
+        "aliases": [
+          "l",
+          "o",
+          "c"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "customer"
+        ]
+      },
+      {
+        "aliases": [
+          "l",
+          "o",
+          "c",
+          "l2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "lineitem"
+        ]
+      }
+    ]
+  },
+  "19": {
+    "default_assignment": "H",
+    "leading_tree": "(l p)",
+    "query_id": "19",
+    "steps": [
+      {
+        "aliases": [
+          "l",
+          "p"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "lineitem",
+          "part"
+        ]
+      }
+    ]
+  },
+  "2": {
+    "default_assignment": "HHNNHHH",
+    "leading_tree": "(((ps p) s) (n r))",
+    "query_id": "2",
+    "steps": [
+      {
+        "aliases": [
+          "ps",
+          "p"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "partsupp",
+          "part"
+        ]
+      },
+      {
+        "aliases": [
+          "n2",
+          "r2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#nation",
+          "#region"
+        ]
+      },
+      {
+        "aliases": [
+          "n2",
+          "r2",
+          "ps2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#partsupp"
+        ]
+      },
+      {
+        "aliases": [
+          "n2",
+          "r2",
+          "ps2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#supplier"
+        ]
+      },
+      {
+        "aliases": [
+          "ps",
+          "p",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "nation#region#partsupp#supplier"
+        ]
+      },
+      {
+        "aliases": [
+          "n",
+          "r"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#nation",
+          "#region"
+        ]
+      },
+      {
+        "aliases": [
+          "ps",
+          "p",
+          "s",
+          "n",
+          "r"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "nation#region"
+        ]
+      }
+    ]
+  },
+  "20": {
+    "default_assignment": "HHH",
+    "leading_tree": "((s n) (ps p))",
+    "query_id": "20",
+    "steps": [
+      {
+        "aliases": [
+          "s",
+          "n"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "supplier",
+          "nation"
+        ]
+      },
+      {
+        "aliases": [
+          "ps",
+          "p"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#partsupp",
+          "#part"
+        ]
+      },
+      {
+        "aliases": [
+          "s",
+          "n",
+          "ps",
+          "p"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "partsupp#part"
+        ]
+      }
+    ]
+  },
+  "21": {
+    "default_assignment": "HHHHH",
+    "leading_tree": "(l3 ((o (l1 (s n))) l2))",
+    "query_id": "21",
+    "steps": [
+      {
+        "aliases": [
+          "s",
+          "n"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#supplier",
+          "#nation"
+        ]
+      },
+      {
+        "aliases": [
+          "l1",
+          "s",
+          "n"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#nation"
+        ]
+      },
+      {
+        "aliases": [
+          "o",
+          "l1",
+          "s",
+          "n"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#nation"
+        ]
+      },
+      {
+        "aliases": [
+          "o",
+          "l1",
+          "s",
+          "n",
+          "l2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#lineitem"
+        ]
+      },
+      {
+        "aliases": [
+          "l3",
+          "o",
+          "l1",
+          "s",
+          "n",
+          "l2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "orders#lineitem#supplier#nation#lineitem"
+        ]
+      }
+    ]
+  },
+  "22": {
+    "default_assignment": "H",
+    "leading_tree": "(o c)",
+    "query_id": "22",
+    "steps": [
+      {
+        "aliases": [
+          "o",
+          "c"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "orders",
+          "customer"
+        ]
+      }
+    ]
+  },
+  "3": {
+    "default_assignment": "HH",
+    "leading_tree": "(l (o c))",
+    "query_id": "3",
+    "steps": [
+      {
+        "aliases": [
+          "o",
+          "c"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#orders",
+          "#customer"
+        ]
+      },
+      {
+        "aliases": [
+          "l",
+          "o",
+          "c"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "orders#customer"
+        ]
+      }
+    ]
+  },
+  "4": {
+    "default_assignment": "H",
+    "leading_tree": "(l o)",
+    "query_id": "4",
+    "steps": [
+      {
+        "aliases": [
+          "l",
+          "o"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "lineitem",
+          "orders"
+        ]
+      }
+    ]
+  },
+  "5": {
+    "default_assignment": "HHHHH",
+    "leading_tree": "((l (o (c (n r)))) s)",
+    "query_id": "5",
+    "steps": [
+      {
+        "aliases": [
+          "n",
+          "r"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#nation",
+          "#region"
+        ]
+      },
+      {
+        "aliases": [
+          "c",
+          "n",
+          "r"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#region"
+        ]
+      },
+      {
+        "aliases": [
+          "o",
+          "c",
+          "n",
+          "r"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#region"
+        ]
+      },
+      {
+        "aliases": [
+          "l",
+          "o",
+          "c",
+          "n",
+          "r"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "orders#customer#nation#region"
+        ]
+      },
+      {
+        "aliases": [
+          "l",
+          "o",
+          "c",
+          "n",
+          "r",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "supplier"
+        ]
+      }
+    ]
+  },
+  "6": {
+    "default_assignment": "",
+    "leading_tree": "l",
+    "query_id": "6",
+    "steps": []
+  },
+  "7": {
+    "default_assignment": "HHHHH",
+    "leading_tree": "((l (o (c n2))) (s n1))",
+    "query_id": "7",
+    "steps": [
+      {
+        "aliases": [
+          "c",
+          "n2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#customer",
+          "#nation"
+        ]
+      },
+      {
+        "aliases": [
+          "o",
+          "c",
+          "n2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#nation"
+        ]
+      },
+      {
+        "aliases": [
+          "l",
+          "o",
+          "c",
+          "n2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "orders#customer#nation"
+        ]
+      },
+      {
+        "aliases": [
+          "s",
+          "n1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#supplier",
+          "#nation"
+        ]
+      },
+      {
+        "aliases": [
+          "l",
+          "o",
+          "c",
+          "n2",
+          "s",
+          "n1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "supplier#nation"
+        ]
+      }
+    ]
+  },
+  "8": {
+    "default_assignment": "HHHHHHH",
+    "leading_tree": "((((l p) (o (c (n1 r)))) s) n2)",
+    "query_id": "8",
+    "steps": [
+      {
+        "aliases": [
+          "l",
+          "p"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "lineitem",
+          "part"
+        ]
+      },
+      {
+        "aliases": [
+          "n1",
+          "r"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#nation",
+          "#region"
+        ]
+      },
+      {
+        "aliases": [
+          "c",
+          "n1",
+          "r"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#region"
+        ]
+      },
+      {
+        "aliases": [
+          "o",
+          "c",
+          "n1",
+          "r"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#region"
+        ]
+      },
+      {
+        "aliases": [
+          "l",
+          "p",
+          "o",
+          "c",
+          "n1",
+          "r"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "orders#customer#nation#region"
+        ]
+      },
+      {
+        "aliases": [
+          "l",
+          "p",
+          "o",
+          "c",
+          "n1",
+          "r",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "supplier"
+        ]
+      },
+      {
+        "aliases": [
+          "l",
+          "p",
+          "o",
+          "c",
+          "n1",
+          "r",
+          "s",
+          "n2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "nation"
+        ]
+      }
+    ]
+  },
+  "9": {
+    "default_assignment": "HHHHH",
+    "leading_tree": "((((o (l p)) s) ps) n)",
+    "query_id": "9",
+    "steps": [
+      {
+        "aliases": [
+          "l",
+          "p"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#lineitem",
+          "#part"
+        ]
+      },
+      {
+        "aliases": [
+          "o",
+          "l",
+          "p"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "lineitem#part"
+        ]
+      },
+      {
+        "aliases": [
+          "o",
+          "l",
+          "p",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "supplier"
+        ]
+      },
+      {
+        "aliases": [
+          "o",
+          "l",
+          "p",
+          "s",
+          "ps"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "partsupp"
+        ]
+      },
+      {
+        "aliases": [
+          "o",
+          "l",
+          "p",
+          "s",
+          "ps",
+          "n"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "nation"
+        ]
+      }
+    ]
+  }
+}

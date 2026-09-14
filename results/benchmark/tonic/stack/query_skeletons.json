@@ -1,0 +1,9488 @@
+{
+  "q11_0ea8bacd": {
+    "default_assignment": "HHH",
+    "leading_tree": "(q ((tq s) t))",
+    "query_id": "q11_0ea8bacd",
+    "steps": [
+      {
+        "aliases": [
+          "tq",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q",
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#site#tag"
+        ]
+      }
+    ]
+  },
+  "q11_33e1caf2": {
+    "default_assignment": "HHH",
+    "leading_tree": "(q ((tq s) t))",
+    "query_id": "q11_33e1caf2",
+    "steps": [
+      {
+        "aliases": [
+          "tq",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q",
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#site#tag"
+        ]
+      }
+    ]
+  },
+  "q11_6c5cba41": {
+    "default_assignment": "HHH",
+    "leading_tree": "(q ((tq s) t))",
+    "query_id": "q11_6c5cba41",
+    "steps": [
+      {
+        "aliases": [
+          "tq",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q",
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#site#tag"
+        ]
+      }
+    ]
+  },
+  "q11_87c4bd09": {
+    "default_assignment": "HHH",
+    "leading_tree": "(q ((tq s) t))",
+    "query_id": "q11_87c4bd09",
+    "steps": [
+      {
+        "aliases": [
+          "tq",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q",
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#site#tag"
+        ]
+      }
+    ]
+  },
+  "q11_9389f588": {
+    "default_assignment": "HHH",
+    "leading_tree": "(q ((tq s) t))",
+    "query_id": "q11_9389f588",
+    "steps": [
+      {
+        "aliases": [
+          "tq",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q",
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#site#tag"
+        ]
+      }
+    ]
+  },
+  "q11_aa96c8d7": {
+    "default_assignment": "HHH",
+    "leading_tree": "(q ((tq s) t))",
+    "query_id": "q11_aa96c8d7",
+    "steps": [
+      {
+        "aliases": [
+          "tq",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q",
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#site#tag"
+        ]
+      }
+    ]
+  },
+  "q11_c1ae2a99": {
+    "default_assignment": "HHH",
+    "leading_tree": "(q ((tq s) t))",
+    "query_id": "q11_c1ae2a99",
+    "steps": [
+      {
+        "aliases": [
+          "tq",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q",
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#site#tag"
+        ]
+      }
+    ]
+  },
+  "q11_e4ca3559": {
+    "default_assignment": "HHH",
+    "leading_tree": "(q ((tq s) t))",
+    "query_id": "q11_e4ca3559",
+    "steps": [
+      {
+        "aliases": [
+          "tq",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q",
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#site#tag"
+        ]
+      }
+    ]
+  },
+  "q12_06c8d688": {
+    "default_assignment": "HHHHH",
+    "leading_tree": "(q1 (u1 (a1 ((tq1 s) t1))))",
+    "query_id": "q12_06c8d688",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "a1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "u1",
+          "a1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "so_user#answer#tag_question#site#tag"
+        ]
+      }
+    ]
+  },
+  "q12_07007205": {
+    "default_assignment": "HHHHH",
+    "leading_tree": "((q1 u1) (a1 ((tq1 s) t1)))",
+    "query_id": "q12_07007205",
+    "steps": [
+      {
+        "aliases": [
+          "q1",
+          "u1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "question",
+          "so_user"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "u1",
+          "a1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#tag_question#site#tag"
+        ]
+      }
+    ]
+  },
+  "q12_547c6bf1": {
+    "default_assignment": "HHHHH",
+    "leading_tree": "((q1 (tq1 t1)) (a1 (u1 s)))",
+    "query_id": "q12_547c6bf1",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "u1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1",
+          "a1",
+          "u1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#so_user#site"
+        ]
+      }
+    ]
+  },
+  "q12_55de941e": {
+    "default_assignment": "HHHHH",
+    "leading_tree": "((q1 u1) (a1 ((tq1 s) t1)))",
+    "query_id": "q12_55de941e",
+    "steps": [
+      {
+        "aliases": [
+          "q1",
+          "u1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "question",
+          "so_user"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "u1",
+          "a1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#tag_question#site#tag"
+        ]
+      }
+    ]
+  },
+  "q12_5a5ff9bd": {
+    "default_assignment": "HHHHH",
+    "leading_tree": "((q1 (tq1 t1)) (a1 (u1 s)))",
+    "query_id": "q12_5a5ff9bd",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "u1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1",
+          "a1",
+          "u1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#so_user#site"
+        ]
+      }
+    ]
+  },
+  "q12_76a47868": {
+    "default_assignment": "HHHHH",
+    "leading_tree": "((q1 (tq1 t1)) (a1 (u1 s)))",
+    "query_id": "q12_76a47868",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "u1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1",
+          "a1",
+          "u1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#so_user#site"
+        ]
+      }
+    ]
+  },
+  "q12_812a3eff": {
+    "default_assignment": "HHHHH",
+    "leading_tree": "((q1 (tq1 t1)) (a1 (u1 s)))",
+    "query_id": "q12_812a3eff",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "u1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1",
+          "a1",
+          "u1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#so_user#site"
+        ]
+      }
+    ]
+  },
+  "q12_bde6c0cf": {
+    "default_assignment": "HHHHH",
+    "leading_tree": "((q1 (u1 s)) (a1 (tq1 t1)))",
+    "query_id": "q12_bde6c0cf",
+    "steps": [
+      {
+        "aliases": [
+          "u1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "u1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "so_user#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "u1",
+          "s",
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q13_13ad1b8c": {
+    "default_assignment": "HHHHHHH",
+    "leading_tree": "(q1 (b (acc (u1 (a1 ((tq1 s) t1))))))",
+    "query_id": "q13_13ad1b8c",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "a1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "a1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "b",
+          "acc",
+          "u1",
+          "a1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b",
+          "acc",
+          "u1",
+          "a1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge#account#so_user#answer#tag_question#site#tag"
+        ]
+      }
+    ]
+  },
+  "q13_1ddcc865": {
+    "default_assignment": "HHHHHHH",
+    "leading_tree": "(q1 (b ((a1 (acc (u1 s))) (tq1 t1))))",
+    "query_id": "q13_1ddcc865",
+    "steps": [
+      {
+        "aliases": [
+          "u1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "acc",
+          "u1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "acc",
+          "u1",
+          "s",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "b",
+          "a1",
+          "acc",
+          "u1",
+          "s",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b",
+          "a1",
+          "acc",
+          "u1",
+          "s",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge#answer#account#so_user#site#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q13_935e2051": {
+    "default_assignment": "HHHHHHH",
+    "leading_tree": "(b (a1 (acc (u1 (q1 ((tq1 s) t1))))))",
+    "query_id": "q13_935e2051",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "q1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "b",
+          "a1",
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#account#so_user#question#tag_question#site#tag"
+        ]
+      }
+    ]
+  },
+  "q13_a091adce": {
+    "default_assignment": "HHHHHHH",
+    "leading_tree": "(q1 (b (acc (u1 (a1 ((tq1 s) t1))))))",
+    "query_id": "q13_a091adce",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "a1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "a1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "b",
+          "acc",
+          "u1",
+          "a1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b",
+          "acc",
+          "u1",
+          "a1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge#account#so_user#answer#tag_question#site#tag"
+        ]
+      }
+    ]
+  },
+  "q13_a3d03772": {
+    "default_assignment": "HHHHHHH",
+    "leading_tree": "((q1 (a1 ((tq1 s) t1))) (acc (b u1)))",
+    "query_id": "q13_a3d03772",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "a1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#tag_question#site#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "b",
+          "u1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#badge",
+          "#so_user"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "b",
+          "u1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "a1",
+          "tq1",
+          "s",
+          "t1",
+          "acc",
+          "b",
+          "u1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "account#badge#so_user"
+        ]
+      }
+    ]
+  },
+  "q13_add0df9d": {
+    "default_assignment": "HHHHHHH",
+    "leading_tree": "(q1 (b (acc ((a1 u1) ((tq1 s) t1)))))",
+    "query_id": "q13_add0df9d",
+    "steps": [
+      {
+        "aliases": [
+          "a1",
+          "u1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#answer",
+          "#so_user"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "u1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "a1",
+          "u1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "b",
+          "acc",
+          "a1",
+          "u1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b",
+          "acc",
+          "a1",
+          "u1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge#account#answer#so_user#tag_question#site#tag"
+        ]
+      }
+    ]
+  },
+  "q13_d383cd5b": {
+    "default_assignment": "HHHHHHH",
+    "leading_tree": "(((q1 (tq1 s)) (acc ((a1 u1) t1))) b)",
+    "query_id": "q13_d383cd5b",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#site"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "u1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#answer",
+          "#so_user"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "u1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "a1",
+          "u1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s",
+          "acc",
+          "a1",
+          "u1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "account#answer#so_user#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s",
+          "acc",
+          "a1",
+          "u1",
+          "t1",
+          "b"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge"
+        ]
+      }
+    ]
+  },
+  "q13_d4707be2": {
+    "default_assignment": "HHHHHHH",
+    "leading_tree": "((q1 (acc (u1 (b (a1 (tq1 s)))))) t1)",
+    "query_id": "q13_d4707be2",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "b",
+          "a1",
+          "tq1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "b",
+          "a1",
+          "tq1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "b",
+          "a1",
+          "tq1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "acc",
+          "u1",
+          "b",
+          "a1",
+          "tq1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "account#so_user#badge#answer#tag_question#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "acc",
+          "u1",
+          "b",
+          "a1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag"
+        ]
+      }
+    ]
+  },
+  "q14_4063b6cb": {
+    "default_assignment": "HHHHHHH",
+    "leading_tree": "((q1 (a1 ((tq1 s) t1))) (acc (b u1)))",
+    "query_id": "q14_4063b6cb",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "a1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#tag_question#site#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "b",
+          "u1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#badge",
+          "#so_user"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "b",
+          "u1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "a1",
+          "tq1",
+          "s",
+          "t1",
+          "acc",
+          "b",
+          "u1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "account#badge#so_user"
+        ]
+      }
+    ]
+  },
+  "q14_5dbc1d1f": {
+    "default_assignment": "HHHHHHH",
+    "leading_tree": "(q1 (b ((a1 (tq1 t1)) (acc (u1 s)))))",
+    "query_id": "q14_5dbc1d1f",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1",
+          "acc",
+          "u1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "b",
+          "a1",
+          "tq1",
+          "t1",
+          "acc",
+          "u1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b",
+          "a1",
+          "tq1",
+          "t1",
+          "acc",
+          "u1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge#answer#tag_question#tag#account#so_user#site"
+        ]
+      }
+    ]
+  },
+  "q14_5e4835cd": {
+    "default_assignment": "HHHHHHH",
+    "leading_tree": "(b (a1 (acc (u1 (q1 ((tq1 s) t1))))))",
+    "query_id": "q14_5e4835cd",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "q1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "b",
+          "a1",
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#account#so_user#question#tag_question#site#tag"
+        ]
+      }
+    ]
+  },
+  "q14_63c0776f": {
+    "default_assignment": "HHHHHHH",
+    "leading_tree": "(q1 (b ((a1 (acc (u1 s))) (tq1 t1))))",
+    "query_id": "q14_63c0776f",
+    "steps": [
+      {
+        "aliases": [
+          "u1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "acc",
+          "u1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "acc",
+          "u1",
+          "s",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "b",
+          "a1",
+          "acc",
+          "u1",
+          "s",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b",
+          "a1",
+          "acc",
+          "u1",
+          "s",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge#answer#account#so_user#site#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q14_719e692d": {
+    "default_assignment": "HHHHHHH",
+    "leading_tree": "(b (a1 (acc (u1 (q1 ((tq1 s) t1))))))",
+    "query_id": "q14_719e692d",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "q1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "b",
+          "a1",
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#account#so_user#question#tag_question#site#tag"
+        ]
+      }
+    ]
+  },
+  "q14_74fd1af6": {
+    "default_assignment": "HHHHHHH",
+    "leading_tree": "((q1 (a1 ((tq1 s) t1))) (acc (b u1)))",
+    "query_id": "q14_74fd1af6",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "a1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#tag_question#site#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "b",
+          "u1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#badge",
+          "#so_user"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "b",
+          "u1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "a1",
+          "tq1",
+          "s",
+          "t1",
+          "acc",
+          "b",
+          "u1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "account#badge#so_user"
+        ]
+      }
+    ]
+  },
+  "q14_97e68ad5": {
+    "default_assignment": "HHHHHHH",
+    "leading_tree": "((q1 (a1 ((tq1 s) t1))) (acc (b u1)))",
+    "query_id": "q14_97e68ad5",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "a1",
+          "tq1",
+          "s",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#tag_question#site#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "b",
+          "u1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#badge",
+          "#so_user"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "b",
+          "u1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "a1",
+          "tq1",
+          "s",
+          "t1",
+          "acc",
+          "b",
+          "u1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "account#badge#so_user"
+        ]
+      }
+    ]
+  },
+  "q14_b49361f8": {
+    "default_assignment": "HHHHHHH",
+    "leading_tree": "(q1 (acc (u1 ((b s) (a1 (tq1 t1))))))",
+    "query_id": "q14_b49361f8",
+    "steps": [
+      {
+        "aliases": [
+          "b",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#badge",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "b",
+          "s",
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "b",
+          "s",
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "b",
+          "s",
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "acc",
+          "u1",
+          "b",
+          "s",
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "account#so_user#badge#site#answer#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q15_21e4988a": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "(q1 ((tq1 ((b1 s) (u1 acc))) t1))",
+    "query_id": "q15_21e4988a",
+    "steps": [
+      {
+        "aliases": [
+          "b1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#badge",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "b1",
+          "s",
+          "u1",
+          "acc",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "b1",
+          "s",
+          "u1",
+          "acc",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#badge#site#so_user#account#tag"
+        ]
+      }
+    ]
+  },
+  "q15_3e37e626": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((q1 ((b1 s) (u1 acc))) (tq1 t1))",
+    "query_id": "q15_3e37e626",
+    "steps": [
+      {
+        "aliases": [
+          "b1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#badge",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge#site#so_user#account"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b1",
+          "s",
+          "u1",
+          "acc",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q15_543ab3f7": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((q1 ((b1 s) (u1 acc))) (tq1 t1))",
+    "query_id": "q15_543ab3f7",
+    "steps": [
+      {
+        "aliases": [
+          "b1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#badge",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge#site#so_user#account"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b1",
+          "s",
+          "u1",
+          "acc",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q15_78995a5f": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "(((q1 (tq1 t1)) (u1 acc)) (b1 s))",
+    "query_id": "q15_78995a5f",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "so_user#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#badge",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1",
+          "u1",
+          "acc",
+          "b1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge#site"
+        ]
+      }
+    ]
+  },
+  "q15_b2ee2c78": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((q1 ((b1 s) (u1 acc))) (tq1 t1))",
+    "query_id": "q15_b2ee2c78",
+    "steps": [
+      {
+        "aliases": [
+          "b1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#badge",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge#site#so_user#account"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b1",
+          "s",
+          "u1",
+          "acc",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q15_b8ddf65b": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((q1 ((b1 s) (u1 acc))) (tq1 t1))",
+    "query_id": "q15_b8ddf65b",
+    "steps": [
+      {
+        "aliases": [
+          "b1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#badge",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge#site#so_user#account"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b1",
+          "s",
+          "u1",
+          "acc",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q15_c9619ad4": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((q1 ((b1 s) (u1 acc))) (tq1 t1))",
+    "query_id": "q15_c9619ad4",
+    "steps": [
+      {
+        "aliases": [
+          "b1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#badge",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge#site#so_user#account"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b1",
+          "s",
+          "u1",
+          "acc",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q15_d5546c01": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((q1 ((b1 s) (u1 acc))) (tq1 t1))",
+    "query_id": "q15_d5546c01",
+    "steps": [
+      {
+        "aliases": [
+          "b1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#badge",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge#site#so_user#account"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b1",
+          "s",
+          "u1",
+          "acc",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q16_1e863562": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((q1 ((b1 s) (u1 acc))) (tq1 t1))",
+    "query_id": "q16_1e863562",
+    "steps": [
+      {
+        "aliases": [
+          "b1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#badge",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge#site#so_user#account"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b1",
+          "s",
+          "u1",
+          "acc",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q16_374e3e4c": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "(q1 ((tq1 ((b1 s) (u1 acc))) t1))",
+    "query_id": "q16_374e3e4c",
+    "steps": [
+      {
+        "aliases": [
+          "b1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#badge",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "b1",
+          "s",
+          "u1",
+          "acc",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "b1",
+          "s",
+          "u1",
+          "acc",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#badge#site#so_user#account#tag"
+        ]
+      }
+    ]
+  },
+  "q16_b1a96cd4": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((q1 ((b1 s) (u1 acc))) (tq1 t1))",
+    "query_id": "q16_b1a96cd4",
+    "steps": [
+      {
+        "aliases": [
+          "b1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#badge",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge#site#so_user#account"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b1",
+          "s",
+          "u1",
+          "acc",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q16_d5290889": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((q1 ((b1 s) (u1 acc))) (tq1 t1))",
+    "query_id": "q16_d5290889",
+    "steps": [
+      {
+        "aliases": [
+          "b1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#badge",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge#site#so_user#account"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b1",
+          "s",
+          "u1",
+          "acc",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q16_ea9efde5": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((q1 ((b1 s) (u1 acc))) (tq1 t1))",
+    "query_id": "q16_ea9efde5",
+    "steps": [
+      {
+        "aliases": [
+          "b1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#badge",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge#site#so_user#account"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b1",
+          "s",
+          "u1",
+          "acc",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q16_ed2ffeae": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "(q1 ((tq1 ((b1 s) (u1 acc))) t1))",
+    "query_id": "q16_ed2ffeae",
+    "steps": [
+      {
+        "aliases": [
+          "b1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#badge",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "b1",
+          "s",
+          "u1",
+          "acc",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "b1",
+          "s",
+          "u1",
+          "acc",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#badge#site#so_user#account#tag"
+        ]
+      }
+    ]
+  },
+  "q16_f67cec3d": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "(q1 ((tq1 ((b1 s) (u1 acc))) t1))",
+    "query_id": "q16_f67cec3d",
+    "steps": [
+      {
+        "aliases": [
+          "b1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#badge",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "b1",
+          "s",
+          "u1",
+          "acc",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "b1",
+          "s",
+          "u1",
+          "acc",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#badge#site#so_user#account#tag"
+        ]
+      }
+    ]
+  },
+  "q16_fbe34e8f": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((q1 ((b1 s) (u1 acc))) (tq1 t1))",
+    "query_id": "q16_fbe34e8f",
+    "steps": [
+      {
+        "aliases": [
+          "b1",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#badge",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b1",
+          "s",
+          "u1",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge#site#so_user#account"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "b1",
+          "s",
+          "u1",
+          "acc",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q1_q1-009": {
+    "default_assignment": "HHH",
+    "leading_tree": "(q ((tq s) t))",
+    "query_id": "q1_q1-009",
+    "steps": [
+      {
+        "aliases": [
+          "tq",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q",
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#site#tag"
+        ]
+      }
+    ]
+  },
+  "q1_q1-031": {
+    "default_assignment": "HHH",
+    "leading_tree": "(q ((tq s) t))",
+    "query_id": "q1_q1-031",
+    "steps": [
+      {
+        "aliases": [
+          "tq",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q",
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#site#tag"
+        ]
+      }
+    ]
+  },
+  "q1_q1-035": {
+    "default_assignment": "HHH",
+    "leading_tree": "(q ((tq s) t))",
+    "query_id": "q1_q1-035",
+    "steps": [
+      {
+        "aliases": [
+          "tq",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q",
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#site#tag"
+        ]
+      }
+    ]
+  },
+  "q1_q1-067": {
+    "default_assignment": "HHH",
+    "leading_tree": "(q ((tq s) t))",
+    "query_id": "q1_q1-067",
+    "steps": [
+      {
+        "aliases": [
+          "tq",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q",
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#site#tag"
+        ]
+      }
+    ]
+  },
+  "q1_q1-075": {
+    "default_assignment": "HHH",
+    "leading_tree": "(q ((tq s) t))",
+    "query_id": "q1_q1-075",
+    "steps": [
+      {
+        "aliases": [
+          "tq",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q",
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#site#tag"
+        ]
+      }
+    ]
+  },
+  "q1_q1-098": {
+    "default_assignment": "HHH",
+    "leading_tree": "(q ((tq s) t))",
+    "query_id": "q1_q1-098",
+    "steps": [
+      {
+        "aliases": [
+          "tq",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q",
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#site#tag"
+        ]
+      }
+    ]
+  },
+  "q1_q1-099": {
+    "default_assignment": "HHH",
+    "leading_tree": "(q ((tq s) t))",
+    "query_id": "q1_q1-099",
+    "steps": [
+      {
+        "aliases": [
+          "tq",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q",
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#site#tag"
+        ]
+      }
+    ]
+  },
+  "q1_q1-100": {
+    "default_assignment": "HHH",
+    "leading_tree": "(q ((tq s) t))",
+    "query_id": "q1_q1-100",
+    "steps": [
+      {
+        "aliases": [
+          "tq",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q",
+          "tq",
+          "s",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#site#tag"
+        ]
+      }
+    ]
+  },
+  "q2_q2-001": {
+    "default_assignment": "HHHHHHHHHH",
+    "leading_tree": "(((q1 ((tq1 s1) t1)) (u1 (acc (u2 (q2 (tq2 s2)))))) t2)",
+    "query_id": "q2_q2-001",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "s1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#site#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s1",
+          "t1",
+          "u1",
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "so_user#account#so_user#question#tag_question#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s1",
+          "t1",
+          "u1",
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2",
+          "t2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag"
+        ]
+      }
+    ]
+  },
+  "q2_q2-012": {
+    "default_assignment": "HHHHHHHHHH",
+    "leading_tree": "(((q1 ((tq1 s1) t1)) (u1 (acc (u2 (q2 (tq2 s2)))))) t2)",
+    "query_id": "q2_q2-012",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "s1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#site#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s1",
+          "t1",
+          "u1",
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "so_user#account#so_user#question#tag_question#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s1",
+          "t1",
+          "u1",
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2",
+          "t2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag"
+        ]
+      }
+    ]
+  },
+  "q2_q2-032": {
+    "default_assignment": "HHHHHHHHHH",
+    "leading_tree": "(((q1 ((tq1 s1) t1)) (u1 (acc (u2 (q2 (tq2 s2)))))) t2)",
+    "query_id": "q2_q2-032",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "s1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#site#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s1",
+          "t1",
+          "u1",
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "so_user#account#so_user#question#tag_question#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s1",
+          "t1",
+          "u1",
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2",
+          "t2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag"
+        ]
+      }
+    ]
+  },
+  "q2_q2-035": {
+    "default_assignment": "HHHHHHHHHH",
+    "leading_tree": "(((q1 ((tq1 s1) t1)) (u1 (acc (u2 (q2 (tq2 s2)))))) t2)",
+    "query_id": "q2_q2-035",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "s1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#site#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s1",
+          "t1",
+          "u1",
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "so_user#account#so_user#question#tag_question#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s1",
+          "t1",
+          "u1",
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2",
+          "t2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag"
+        ]
+      }
+    ]
+  },
+  "q2_q2-050": {
+    "default_assignment": "HHHHHHHHHH",
+    "leading_tree": "(((q1 ((tq1 s1) t1)) (u1 (acc (u2 (q2 (tq2 s2)))))) t2)",
+    "query_id": "q2_q2-050",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "s1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#site#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s1",
+          "t1",
+          "u1",
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "so_user#account#so_user#question#tag_question#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s1",
+          "t1",
+          "u1",
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2",
+          "t2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag"
+        ]
+      }
+    ]
+  },
+  "q2_q2-081": {
+    "default_assignment": "HHHHHHHHHH",
+    "leading_tree": "(((q1 ((tq1 s1) t1)) (u1 (acc (u2 (q2 (tq2 s2)))))) t2)",
+    "query_id": "q2_q2-081",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "s1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#site#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s1",
+          "t1",
+          "u1",
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "so_user#account#so_user#question#tag_question#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s1",
+          "t1",
+          "u1",
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2",
+          "t2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag"
+        ]
+      }
+    ]
+  },
+  "q2_q2-094": {
+    "default_assignment": "HHHHHHHHHH",
+    "leading_tree": "(((q1 ((tq1 s1) t1)) (u1 (acc (u2 (q2 (tq2 s2)))))) t2)",
+    "query_id": "q2_q2-094",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "s1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#site#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s1",
+          "t1",
+          "u1",
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "so_user#account#so_user#question#tag_question#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s1",
+          "t1",
+          "u1",
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2",
+          "t2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag"
+        ]
+      }
+    ]
+  },
+  "q2_q2-098": {
+    "default_assignment": "HHHHHHHHHH",
+    "leading_tree": "(((q1 ((tq1 s1) t1)) (u1 (acc (u2 (q2 (tq2 s2)))))) t2)",
+    "query_id": "q2_q2-098",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "s1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag_question#site#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s1",
+          "t1",
+          "u1",
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "so_user#account#so_user#question#tag_question#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "s1",
+          "t1",
+          "u1",
+          "acc",
+          "u2",
+          "q2",
+          "tq2",
+          "s2",
+          "t2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "tag"
+        ]
+      }
+    ]
+  },
+  "q3_q3-018": {
+    "default_assignment": "HHHHHHHHHHH",
+    "leading_tree": "((q1 ((q2 ((tq2 s2) t2)) (u2 (acc (u1 s1))))) (a1 (tq1 t1)))",
+    "query_id": "q3_q3-018",
+    "steps": [
+      {
+        "aliases": [
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq2",
+          "s2",
+          "t2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "tq2",
+          "s2",
+          "t2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u2",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "tq2",
+          "s2",
+          "t2",
+          "u2",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "q2",
+          "tq2",
+          "s2",
+          "t2",
+          "u2",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "question#tag_question#site#tag#so_user#account#so_user#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "q2",
+          "tq2",
+          "s2",
+          "t2",
+          "u2",
+          "acc",
+          "u1",
+          "s1",
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q3_q3-040": {
+    "default_assignment": "HHHHHHHHHHH",
+    "leading_tree": "((q1 ((q2 ((tq2 s2) t2)) (u2 (acc (u1 s1))))) (a1 (tq1 t1)))",
+    "query_id": "q3_q3-040",
+    "steps": [
+      {
+        "aliases": [
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq2",
+          "s2",
+          "t2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "tq2",
+          "s2",
+          "t2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u2",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "tq2",
+          "s2",
+          "t2",
+          "u2",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "q2",
+          "tq2",
+          "s2",
+          "t2",
+          "u2",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "question#tag_question#site#tag#so_user#account#so_user#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "q2",
+          "tq2",
+          "s2",
+          "t2",
+          "u2",
+          "acc",
+          "u1",
+          "s1",
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q3_q3-043": {
+    "default_assignment": "HHHHHHHHHHH",
+    "leading_tree": "((q1 ((q2 ((tq2 s2) t2)) (u2 (acc (u1 s1))))) (a1 (tq1 t1)))",
+    "query_id": "q3_q3-043",
+    "steps": [
+      {
+        "aliases": [
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq2",
+          "s2",
+          "t2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "tq2",
+          "s2",
+          "t2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u2",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "tq2",
+          "s2",
+          "t2",
+          "u2",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "q2",
+          "tq2",
+          "s2",
+          "t2",
+          "u2",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "question#tag_question#site#tag#so_user#account#so_user#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "q2",
+          "tq2",
+          "s2",
+          "t2",
+          "u2",
+          "acc",
+          "u1",
+          "s1",
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q3_q3-046": {
+    "default_assignment": "HHHHHHHHHHH",
+    "leading_tree": "((q1 ((q2 ((tq2 s2) t2)) (u2 (acc (u1 s1))))) (a1 (tq1 t1)))",
+    "query_id": "q3_q3-046",
+    "steps": [
+      {
+        "aliases": [
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq2",
+          "s2",
+          "t2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "tq2",
+          "s2",
+          "t2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u2",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "tq2",
+          "s2",
+          "t2",
+          "u2",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "q2",
+          "tq2",
+          "s2",
+          "t2",
+          "u2",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "question#tag_question#site#tag#so_user#account#so_user#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "q2",
+          "tq2",
+          "s2",
+          "t2",
+          "u2",
+          "acc",
+          "u1",
+          "s1",
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q3_q3-066": {
+    "default_assignment": "HHHHHHHHHHH",
+    "leading_tree": "((q1 ((q2 ((tq2 s2) t2)) (u2 (acc (u1 s1))))) (a1 (tq1 t1)))",
+    "query_id": "q3_q3-066",
+    "steps": [
+      {
+        "aliases": [
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq2",
+          "s2",
+          "t2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "tq2",
+          "s2",
+          "t2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u2",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "tq2",
+          "s2",
+          "t2",
+          "u2",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "q2",
+          "tq2",
+          "s2",
+          "t2",
+          "u2",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "question#tag_question#site#tag#so_user#account#so_user#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "q2",
+          "tq2",
+          "s2",
+          "t2",
+          "u2",
+          "acc",
+          "u1",
+          "s1",
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q3_q3-068": {
+    "default_assignment": "HHHHHHHHHHH",
+    "leading_tree": "((q1 ((q2 ((tq2 s2) t2)) (u2 (acc (u1 s1))))) (a1 (tq1 t1)))",
+    "query_id": "q3_q3-068",
+    "steps": [
+      {
+        "aliases": [
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq2",
+          "s2",
+          "t2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "tq2",
+          "s2",
+          "t2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u2",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "tq2",
+          "s2",
+          "t2",
+          "u2",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "q2",
+          "tq2",
+          "s2",
+          "t2",
+          "u2",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "question#tag_question#site#tag#so_user#account#so_user#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "q2",
+          "tq2",
+          "s2",
+          "t2",
+          "u2",
+          "acc",
+          "u1",
+          "s1",
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q3_q3-086": {
+    "default_assignment": "HHHHHHHHHHH",
+    "leading_tree": "((q1 ((q2 ((tq2 s2) t2)) (u2 (acc (u1 s1))))) (a1 (tq1 t1)))",
+    "query_id": "q3_q3-086",
+    "steps": [
+      {
+        "aliases": [
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq2",
+          "s2",
+          "t2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "tq2",
+          "s2",
+          "t2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u2",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "tq2",
+          "s2",
+          "t2",
+          "u2",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "q2",
+          "tq2",
+          "s2",
+          "t2",
+          "u2",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "question#tag_question#site#tag#so_user#account#so_user#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "q2",
+          "tq2",
+          "s2",
+          "t2",
+          "u2",
+          "acc",
+          "u1",
+          "s1",
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q3_q3-099": {
+    "default_assignment": "HHHHHHHHHHH",
+    "leading_tree": "((q1 ((q2 ((tq2 s2) t2)) (u2 (acc (u1 s1))))) (a1 (tq1 t1)))",
+    "query_id": "q3_q3-099",
+    "steps": [
+      {
+        "aliases": [
+          "tq2",
+          "s2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq2",
+          "s2",
+          "t2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "tq2",
+          "s2",
+          "t2"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "u2",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "tq2",
+          "s2",
+          "t2",
+          "u2",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "q2",
+          "tq2",
+          "s2",
+          "t2",
+          "u2",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "question#tag_question#site#tag#so_user#account#so_user#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "q2",
+          "tq2",
+          "s2",
+          "t2",
+          "u2",
+          "acc",
+          "u1",
+          "s1",
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q4_q4-002": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "(q1 ((a1 (tq1 t1)) (acc (u1 s1))))",
+    "query_id": "q4_q4-002",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "a1",
+          "tq1",
+          "t1",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#tag_question#tag#account#so_user#site"
+        ]
+      }
+    ]
+  },
+  "q4_q4-026": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "(q1 ((a1 (tq1 t1)) (acc (u1 s1))))",
+    "query_id": "q4_q4-026",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "a1",
+          "tq1",
+          "t1",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#tag_question#tag#account#so_user#site"
+        ]
+      }
+    ]
+  },
+  "q4_q4-041": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "(q1 ((a1 (tq1 t1)) (acc (u1 s1))))",
+    "query_id": "q4_q4-041",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "a1",
+          "tq1",
+          "t1",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#tag_question#tag#account#so_user#site"
+        ]
+      }
+    ]
+  },
+  "q4_q4-042": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "(q1 ((a1 (tq1 t1)) (acc (u1 s1))))",
+    "query_id": "q4_q4-042",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "a1",
+          "tq1",
+          "t1",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#tag_question#tag#account#so_user#site"
+        ]
+      }
+    ]
+  },
+  "q4_q4-064": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "(q1 ((a1 (tq1 t1)) (acc (u1 s1))))",
+    "query_id": "q4_q4-064",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "a1",
+          "tq1",
+          "t1",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#tag_question#tag#account#so_user#site"
+        ]
+      }
+    ]
+  },
+  "q4_q4-074": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "(q1 ((a1 (tq1 t1)) (acc (u1 s1))))",
+    "query_id": "q4_q4-074",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "a1",
+          "tq1",
+          "t1",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#tag_question#tag#account#so_user#site"
+        ]
+      }
+    ]
+  },
+  "q4_q4-086": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "(q1 ((a1 (tq1 t1)) (acc (u1 s1))))",
+    "query_id": "q4_q4-086",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "a1",
+          "tq1",
+          "t1",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#tag_question#tag#account#so_user#site"
+        ]
+      }
+    ]
+  },
+  "q4_q4-089": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "(q1 ((a1 (tq1 t1)) (acc (u1 s1))))",
+    "query_id": "q4_q4-089",
+    "steps": [
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "a1",
+          "tq1",
+          "t1",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "a1",
+          "tq1",
+          "t1",
+          "acc",
+          "u1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "answer#tag_question#tag#account#so_user#site"
+        ]
+      }
+    ]
+  },
+  "q5_q5-015": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((c1 s1) (acc (u1 (q1 (tq1 t1)))))",
+    "query_id": "q5_q5-015",
+    "steps": [
+      {
+        "aliases": [
+          "c1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "comment",
+          "site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "c1",
+          "s1",
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "account#so_user#question#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q5_q5-032": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((c1 s1) (acc (u1 (q1 (tq1 t1)))))",
+    "query_id": "q5_q5-032",
+    "steps": [
+      {
+        "aliases": [
+          "c1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "comment",
+          "site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "c1",
+          "s1",
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "account#so_user#question#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q5_q5-041": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((c1 s1) (acc (u1 (q1 (tq1 t1)))))",
+    "query_id": "q5_q5-041",
+    "steps": [
+      {
+        "aliases": [
+          "c1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "comment",
+          "site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "c1",
+          "s1",
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "account#so_user#question#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q5_q5-052": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((c1 s1) (acc (u1 (q1 (tq1 t1)))))",
+    "query_id": "q5_q5-052",
+    "steps": [
+      {
+        "aliases": [
+          "c1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "comment",
+          "site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "c1",
+          "s1",
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "account#so_user#question#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q5_q5-059": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((c1 s1) (acc (u1 (q1 (tq1 t1)))))",
+    "query_id": "q5_q5-059",
+    "steps": [
+      {
+        "aliases": [
+          "c1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "comment",
+          "site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "c1",
+          "s1",
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "account#so_user#question#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q5_q5-077": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((c1 s1) (acc (u1 (q1 (tq1 t1)))))",
+    "query_id": "q5_q5-077",
+    "steps": [
+      {
+        "aliases": [
+          "c1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "comment",
+          "site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "c1",
+          "s1",
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "account#so_user#question#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q5_q5-079": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((c1 s1) (acc (u1 (q1 (tq1 t1)))))",
+    "query_id": "q5_q5-079",
+    "steps": [
+      {
+        "aliases": [
+          "c1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "comment",
+          "site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "c1",
+          "s1",
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "account#so_user#question#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q5_q5-082": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((c1 s1) (acc (u1 (q1 (tq1 t1)))))",
+    "query_id": "q5_q5-082",
+    "steps": [
+      {
+        "aliases": [
+          "c1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "comment",
+          "site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "c1",
+          "s1",
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "account#so_user#question#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q6_q6-002": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((c1 s1) (acc (u1 (q1 (tq1 t1)))))",
+    "query_id": "q6_q6-002",
+    "steps": [
+      {
+        "aliases": [
+          "c1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "comment",
+          "site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "c1",
+          "s1",
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "account#so_user#question#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q6_q6-009": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((c1 s1) (acc (u1 (q1 (tq1 t1)))))",
+    "query_id": "q6_q6-009",
+    "steps": [
+      {
+        "aliases": [
+          "c1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "comment",
+          "site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "c1",
+          "s1",
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "account#so_user#question#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q6_q6-060": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((c1 s1) (acc (u1 (q1 (tq1 t1)))))",
+    "query_id": "q6_q6-060",
+    "steps": [
+      {
+        "aliases": [
+          "c1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "comment",
+          "site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "c1",
+          "s1",
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "account#so_user#question#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q6_q6-064": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((c1 s1) (acc (u1 (q1 (tq1 t1)))))",
+    "query_id": "q6_q6-064",
+    "steps": [
+      {
+        "aliases": [
+          "c1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "comment",
+          "site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "c1",
+          "s1",
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "account#so_user#question#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q6_q6-065": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((c1 s1) (acc (u1 (q1 (tq1 t1)))))",
+    "query_id": "q6_q6-065",
+    "steps": [
+      {
+        "aliases": [
+          "c1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "comment",
+          "site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "c1",
+          "s1",
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "account#so_user#question#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q6_q6-067": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((c1 s1) (acc (u1 (q1 (tq1 t1)))))",
+    "query_id": "q6_q6-067",
+    "steps": [
+      {
+        "aliases": [
+          "c1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "comment",
+          "site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "c1",
+          "s1",
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "account#so_user#question#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q6_q6-069": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((c1 s1) (acc (u1 (q1 (tq1 t1)))))",
+    "query_id": "q6_q6-069",
+    "steps": [
+      {
+        "aliases": [
+          "c1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "comment",
+          "site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "c1",
+          "s1",
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "account#so_user#question#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q6_q6-085": {
+    "default_assignment": "HHHHHH",
+    "leading_tree": "((c1 s1) (acc (u1 (q1 (tq1 t1)))))",
+    "query_id": "q6_q6-085",
+    "steps": [
+      {
+        "aliases": [
+          "c1",
+          "s1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "comment",
+          "site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "c1",
+          "s1",
+          "acc",
+          "u1",
+          "q1",
+          "tq1",
+          "t1"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "account#so_user#question#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q7_q7-034": {
+    "default_assignment": "HHH",
+    "leading_tree": "(b1 (b2 (u acc)))",
+    "query_id": "q7_q7-034",
+    "steps": [
+      {
+        "aliases": [
+          "u",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b2",
+          "u",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b1",
+          "b2",
+          "u",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge#so_user#account"
+        ]
+      }
+    ]
+  },
+  "q7_q7-036": {
+    "default_assignment": "HHH",
+    "leading_tree": "(b1 (b2 (u acc)))",
+    "query_id": "q7_q7-036",
+    "steps": [
+      {
+        "aliases": [
+          "u",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b2",
+          "u",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b1",
+          "b2",
+          "u",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge#so_user#account"
+        ]
+      }
+    ]
+  },
+  "q7_q7-047": {
+    "default_assignment": "HHH",
+    "leading_tree": "(b1 (b2 (u acc)))",
+    "query_id": "q7_q7-047",
+    "steps": [
+      {
+        "aliases": [
+          "u",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b2",
+          "u",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b1",
+          "b2",
+          "u",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge#so_user#account"
+        ]
+      }
+    ]
+  },
+  "q7_q7-077": {
+    "default_assignment": "HHH",
+    "leading_tree": "(b1 (b2 (u acc)))",
+    "query_id": "q7_q7-077",
+    "steps": [
+      {
+        "aliases": [
+          "u",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b2",
+          "u",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b1",
+          "b2",
+          "u",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge#so_user#account"
+        ]
+      }
+    ]
+  },
+  "q7_q7-082": {
+    "default_assignment": "HHH",
+    "leading_tree": "(b1 (b2 (u acc)))",
+    "query_id": "q7_q7-082",
+    "steps": [
+      {
+        "aliases": [
+          "u",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b2",
+          "u",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b1",
+          "b2",
+          "u",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge#so_user#account"
+        ]
+      }
+    ]
+  },
+  "q7_q7-085": {
+    "default_assignment": "HHH",
+    "leading_tree": "(b1 (b2 (u acc)))",
+    "query_id": "q7_q7-085",
+    "steps": [
+      {
+        "aliases": [
+          "u",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b2",
+          "u",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b1",
+          "b2",
+          "u",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge#so_user#account"
+        ]
+      }
+    ]
+  },
+  "q7_q7-095": {
+    "default_assignment": "HHH",
+    "leading_tree": "(b1 (b2 (u acc)))",
+    "query_id": "q7_q7-095",
+    "steps": [
+      {
+        "aliases": [
+          "u",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b2",
+          "u",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b1",
+          "b2",
+          "u",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge#so_user#account"
+        ]
+      }
+    ]
+  },
+  "q7_q7-099": {
+    "default_assignment": "HHH",
+    "leading_tree": "(b1 (b2 (u acc)))",
+    "query_id": "q7_q7-099",
+    "steps": [
+      {
+        "aliases": [
+          "u",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#so_user",
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b2",
+          "u",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#account"
+        ]
+      },
+      {
+        "aliases": [
+          "b1",
+          "b2",
+          "u",
+          "acc"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "badge#so_user#account"
+        ]
+      }
+    ]
+  },
+  "q8_q8-006": {
+    "default_assignment": "HHHHHHHH",
+    "leading_tree": "(c1 (q2 (q1 ((tq1 (pl (c2 s))) (tq2 t)))))",
+    "query_id": "q8_q8-006",
+    "steps": [
+      {
+        "aliases": [
+          "c2",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#comment",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "pl",
+          "c2",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "pl",
+          "c2",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "q1",
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "c1",
+          "q2",
+          "q1",
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "question#question#tag_question#post_link#comment#site#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q8_q8-025": {
+    "default_assignment": "HHHHHHHH",
+    "leading_tree": "(c1 (q2 (q1 ((tq1 (pl (c2 s))) (tq2 t)))))",
+    "query_id": "q8_q8-025",
+    "steps": [
+      {
+        "aliases": [
+          "c2",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#comment",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "pl",
+          "c2",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "pl",
+          "c2",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "q1",
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "c1",
+          "q2",
+          "q1",
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "question#question#tag_question#post_link#comment#site#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q8_q8-046": {
+    "default_assignment": "HHHHHHHH",
+    "leading_tree": "(c1 (q2 (q1 ((tq1 (pl (c2 s))) (tq2 t)))))",
+    "query_id": "q8_q8-046",
+    "steps": [
+      {
+        "aliases": [
+          "c2",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#comment",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "pl",
+          "c2",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "pl",
+          "c2",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "q1",
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "c1",
+          "q2",
+          "q1",
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "question#question#tag_question#post_link#comment#site#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q8_q8-062": {
+    "default_assignment": "HHHHHHHH",
+    "leading_tree": "(c1 (q2 (q1 ((tq1 (pl (c2 s))) (tq2 t)))))",
+    "query_id": "q8_q8-062",
+    "steps": [
+      {
+        "aliases": [
+          "c2",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#comment",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "pl",
+          "c2",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "pl",
+          "c2",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "q1",
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "c1",
+          "q2",
+          "q1",
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "question#question#tag_question#post_link#comment#site#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q8_q8-065": {
+    "default_assignment": "HHHHHHHH",
+    "leading_tree": "(c1 (q2 (q1 ((tq1 (pl (c2 s))) (tq2 t)))))",
+    "query_id": "q8_q8-065",
+    "steps": [
+      {
+        "aliases": [
+          "c2",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#comment",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "pl",
+          "c2",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "pl",
+          "c2",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "q1",
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "c1",
+          "q2",
+          "q1",
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "question#question#tag_question#post_link#comment#site#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q8_q8-074": {
+    "default_assignment": "HHHHHHHH",
+    "leading_tree": "(c1 (q2 (q1 ((tq1 (pl (c2 s))) (tq2 t)))))",
+    "query_id": "q8_q8-074",
+    "steps": [
+      {
+        "aliases": [
+          "c2",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#comment",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "pl",
+          "c2",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "pl",
+          "c2",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "q1",
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "c1",
+          "q2",
+          "q1",
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "question#question#tag_question#post_link#comment#site#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q8_q8-076": {
+    "default_assignment": "HHHHHHHH",
+    "leading_tree": "(c1 (q2 (q1 ((tq1 (pl (c2 s))) (tq2 t)))))",
+    "query_id": "q8_q8-076",
+    "steps": [
+      {
+        "aliases": [
+          "c2",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#comment",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "pl",
+          "c2",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "pl",
+          "c2",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "q1",
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "c1",
+          "q2",
+          "q1",
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "question#question#tag_question#post_link#comment#site#tag_question#tag"
+        ]
+      }
+    ]
+  },
+  "q8_q8-096": {
+    "default_assignment": "HHHHHHHH",
+    "leading_tree": "(c1 (q2 (q1 ((tq1 (pl (c2 s))) (tq2 t)))))",
+    "query_id": "q8_q8-096",
+    "steps": [
+      {
+        "aliases": [
+          "c2",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#comment",
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "pl",
+          "c2",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "pl",
+          "c2",
+          "s"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#site"
+        ]
+      },
+      {
+        "aliases": [
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag_question",
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q1",
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "q2",
+          "q1",
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "#tag"
+        ]
+      },
+      {
+        "aliases": [
+          "c1",
+          "q2",
+          "q1",
+          "tq1",
+          "pl",
+          "c2",
+          "s",
+          "tq2",
+          "t"
+        ],
+        "controllable": true,
+        "path_keys": [
+          "question#question#tag_question#post_link#comment#site#tag_question#tag"
+        ]
+      }
+    ]
+  }
+}

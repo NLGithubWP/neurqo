@@ -1,0 +1,449 @@
+workload,query_id,assignment,join_count,hint,collection_timeout_s,run1_s,run1_charged_s,run1_timed_out
+TPCH,1,,0,,10.0,7.865986242890358,7.865986242890358,False
+TPCH,2,HHHHHHH,7,HashJoin(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) HashJoin(ps p s n r),2.307288885116577,1.3332632258534431,1.3332632258534431,False
+TPCH,2,HHHHHHN,7,HashJoin(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) NestLoop(ps p s n r),2.307288885116577,1.0576054528355598,1.0576054528355598,False
+TPCH,2,HHHHHNH,7,HashJoin(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) HashJoin(ps p s n r),2.1152109056711197,1.075563758611679,1.075563758611679,False
+TPCH,2,HHHHHNN,7,HashJoin(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) NestLoop(ps p s n r),2.1152109056711197,1.0793478563427925,1.0793478563427925,False
+TPCH,2,HHHHNHH,7,HashJoin(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) HashJoin(ps p s n r),2.1152109056711197,1.1742952913045883,1.1742952913045883,False
+TPCH,2,HHHHNHN,7,HashJoin(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) NestLoop(ps p s n r),2.1152109056711197,1.3602618724107742,1.3602618724107742,False
+TPCH,2,HHHHNNH,7,HashJoin(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) HashJoin(ps p s n r),2.1152109056711197,1.114430457353592,1.114430457353592,False
+TPCH,2,HHHHNNN,7,HashJoin(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) NestLoop(ps p s n r),2.1152109056711197,1.347986713051796,1.347986713051796,False
+TPCH,2,HHHNHHH,7,HashJoin(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) HashJoin(ps p s n r),2.1152109056711197,1.050820179283619,1.050820179283619,False
+TPCH,2,HHHNHHN,7,HashJoin(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) NestLoop(ps p s n r),2.101640358567238,1.0541390478610992,1.0541390478610992,False
+TPCH,2,HHHNHNH,7,HashJoin(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) HashJoin(ps p s n r),2.101640358567238,1.0593751966953278,1.0593751966953278,False
+TPCH,2,HHHNHNN,7,HashJoin(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) NestLoop(ps p s n r),2.101640358567238,1.0696143060922623,1.0696143060922623,False
+TPCH,2,HHHNNHH,7,HashJoin(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) HashJoin(ps p s n r),2.101640358567238,1.110069178044796,1.110069178044796,False
+TPCH,2,HHHNNHN,7,HashJoin(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) NestLoop(ps p s n r),2.101640358567238,1.3638691455125809,1.3638691455125809,False
+TPCH,2,HHHNNNH,7,HashJoin(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) HashJoin(ps p s n r),2.101640358567238,1.098704271018505,1.098704271018505,False
+TPCH,2,HHHNNNN,7,HashJoin(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) NestLoop(ps p s n r),2.101640358567238,1.380126953125,1.380126953125,False
+TPCH,2,HHNHHHH,7,HashJoin(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) HashJoin(ps p s n r),2.101640358567238,1.0502342507243156,1.0502342507243156,False
+TPCH,2,HHNHHHN,7,HashJoin(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) NestLoop(ps p s n r),2.1004685014486313,1.0641172900795937,1.0641172900795937,False
+TPCH,2,HHNHHNH,7,HashJoin(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) HashJoin(ps p s n r),2.1004685014486313,1.0538456067442894,1.0538456067442894,False
+TPCH,2,HHNHHNN,7,HashJoin(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) NestLoop(ps p s n r),2.1004685014486313,1.0507545173168182,1.0507545173168182,False
+TPCH,2,HHNHNHH,7,HashJoin(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) HashJoin(ps p s n r),2.1004685014486313,1.1235477700829506,1.1235477700829506,False
+TPCH,2,HHNHNHN,7,HashJoin(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) NestLoop(ps p s n r),2.1004685014486313,1.356560505926609,1.356560505926609,False
+TPCH,2,HHNHNNH,7,HashJoin(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) HashJoin(ps p s n r),2.1004685014486313,1.0956382155418396,1.0956382155418396,False
+TPCH,2,HHNHNNN,7,HashJoin(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) NestLoop(ps p s n r),2.1004685014486313,1.3493753522634506,1.3493753522634506,False
+TPCH,2,HHNNHHH,7,HashJoin(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) HashJoin(ps p s n r),2.1004685014486313,1.0814736112952232,1.0814736112952232,False
+TPCH,2,HHNNHHN,7,HashJoin(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) NestLoop(ps p s n r),2.1004685014486313,1.0517373979091644,1.0517373979091644,False
+TPCH,2,HHNNHNH,7,HashJoin(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) HashJoin(ps p s n r),2.1004685014486313,1.0557991862297058,1.0557991862297058,False
+TPCH,2,HHNNHNN,7,HashJoin(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) NestLoop(ps p s n r),2.1004685014486313,1.0612008348107338,1.0612008348107338,False
+TPCH,2,HHNNNHH,7,HashJoin(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) HashJoin(ps p s n r),2.1004685014486313,1.120170921087265,1.120170921087265,False
+TPCH,2,HHNNNHN,7,HashJoin(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) NestLoop(ps p s n r),2.1004685014486313,1.392141155898571,1.392141155898571,False
+TPCH,2,HHNNNNH,7,HashJoin(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) HashJoin(ps p s n r),2.1004685014486313,1.1241632625460625,1.1241632625460625,False
+TPCH,2,HHNNNNN,7,HashJoin(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) NestLoop(ps p s n r),2.1004685014486313,1.352183736860752,1.352183736860752,False
+TPCH,2,HNHHHHH,7,HashJoin(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) HashJoin(ps p s n r),2.1004685014486313,1.0530760735273361,1.0530760735273361,False
+TPCH,2,HNHHHHN,7,HashJoin(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) NestLoop(ps p s n r),2.1004685014486313,1.0634985491633415,1.0634985491633415,False
+TPCH,2,HNHHHNH,7,HashJoin(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) HashJoin(ps p s n r),2.1004685014486313,1.0652160346508026,1.0652160346508026,False
+TPCH,2,HNHHHNN,7,HashJoin(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) NestLoop(ps p s n r),2.1004685014486313,1.0655675008893013,1.0655675008893013,False
+TPCH,2,HNHHNHH,7,HashJoin(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) HashJoin(ps p s n r),2.1004685014486313,1.1059257164597511,1.1059257164597511,False
+TPCH,2,HNHHNHN,7,HashJoin(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) NestLoop(ps p s n r),2.1004685014486313,1.3694817125797272,1.3694817125797272,False
+TPCH,2,HNHHNNH,7,HashJoin(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) HashJoin(ps p s n r),2.1004685014486313,1.116888590157032,1.116888590157032,False
+TPCH,2,HNHHNNN,7,HashJoin(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) NestLoop(ps p s n r),2.1004685014486313,1.3571807965636253,1.3571807965636253,False
+TPCH,2,HNHNHHH,7,HashJoin(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) HashJoin(ps p s n r),2.1004685014486313,1.0604946613311768,1.0604946613311768,False
+TPCH,2,HNHNHHN,7,HashJoin(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) NestLoop(ps p s n r),2.1004685014486313,1.0642267018556595,1.0642267018556595,False
+TPCH,2,HNHNHNH,7,HashJoin(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) HashJoin(ps p s n r),2.1004685014486313,1.0812265053391457,1.0812265053391457,False
+TPCH,2,HNHNHNN,7,HashJoin(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) NestLoop(ps p s n r),2.1004685014486313,1.052430547773838,1.052430547773838,False
+TPCH,2,HNHNNHH,7,HashJoin(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) HashJoin(ps p s n r),2.1004685014486313,1.1038706749677658,1.1038706749677658,False
+TPCH,2,HNHNNHN,7,HashJoin(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) NestLoop(ps p s n r),2.1004685014486313,1.3569276854395866,1.3569276854395866,False
+TPCH,2,HNHNNNH,7,HashJoin(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) HashJoin(ps p s n r),2.1004685014486313,1.1126408353447914,1.1126408353447914,False
+TPCH,2,HNHNNNN,7,HashJoin(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) NestLoop(ps p s n r),2.1004685014486313,1.3602030724287033,1.3602030724287033,False
+TPCH,2,HNNHHHH,7,HashJoin(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) HashJoin(ps p s n r),2.1004685014486313,1.0554651319980621,1.0554651319980621,False
+TPCH,2,HNNHHHN,7,HashJoin(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) NestLoop(ps p s n r),2.1004685014486313,1.056215114891529,1.056215114891529,False
+TPCH,2,HNNHHNH,7,HashJoin(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) HashJoin(ps p s n r),2.1004685014486313,1.0559402629733086,1.0559402629733086,False
+TPCH,2,HNNHHNN,7,HashJoin(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) NestLoop(ps p s n r),2.1004685014486313,1.0704923495650291,1.0704923495650291,False
+TPCH,2,HNNHNHH,7,HashJoin(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) HashJoin(ps p s n r),2.1004685014486313,1.1010107919573784,1.1010107919573784,False
+TPCH,2,HNNHNHN,7,HashJoin(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) NestLoop(ps p s n r),2.1004685014486313,1.3524094074964523,1.3524094074964523,False
+TPCH,2,HNNHNNH,7,HashJoin(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) HashJoin(ps p s n r),2.1004685014486313,1.0899174436926842,1.0899174436926842,False
+TPCH,2,HNNHNNN,7,HashJoin(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) NestLoop(ps p s n r),2.1004685014486313,1.385747216641903,1.385747216641903,False
+TPCH,2,HNNNHHH,7,HashJoin(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) HashJoin(ps p s n r),2.1004685014486313,1.0493909046053886,1.0493909046053886,False
+TPCH,2,HNNNHHN,7,HashJoin(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) NestLoop(ps p s n r),2.0987818092107773,1.059146411716938,1.059146411716938,False
+TPCH,2,HNNNHNH,7,HashJoin(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) HashJoin(ps p s n r),2.0987818092107773,1.0507164672017097,1.0507164672017097,False
+TPCH,2,HNNNHNN,7,HashJoin(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) NestLoop(ps p s n r),2.0987818092107773,1.0501509085297585,1.0501509085297585,False
+TPCH,2,HNNNNHH,7,HashJoin(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) HashJoin(ps p s n r),2.0987818092107773,1.1120864748954773,1.1120864748954773,False
+TPCH,2,HNNNNHN,7,HashJoin(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) NestLoop(ps p s n r),2.0987818092107773,1.3467994779348373,1.3467994779348373,False
+TPCH,2,HNNNNNH,7,HashJoin(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) HashJoin(ps p s n r),2.0987818092107773,1.0909926146268845,1.0909926146268845,False
+TPCH,2,HNNNNNN,7,HashJoin(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) NestLoop(ps p s n r),2.0987818092107773,1.3592438474297523,1.3592438474297523,False
+TPCH,2,NHHHHHH,7,NestLoop(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) HashJoin(ps p s n r),2.0987818092107773,0.9967697337269783,0.9967697337269783,False
+TPCH,2,NHHHHHN,7,NestLoop(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) NestLoop(ps p s n r),1.9935394674539566,0.9653025791049004,0.9653025791049004,False
+TPCH,2,NHHHHNH,7,NestLoop(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) HashJoin(ps p s n r),1.9306051582098007,0.9524830654263496,0.9524830654263496,False
+TPCH,2,NHHHHNN,7,NestLoop(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) NestLoop(ps p s n r),1.9049661308526993,0.9551416486501694,0.9551416486501694,False
+TPCH,2,NHHHNHH,7,NestLoop(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) HashJoin(ps p s n r),1.9049661308526993,1.0949650406837463,1.0949650406837463,False
+TPCH,2,NHHHNHN,7,NestLoop(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) NestLoop(ps p s n r),1.9049661308526993,1.3660148158669472,1.3660148158669472,False
+TPCH,2,NHHHNNH,7,NestLoop(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) HashJoin(ps p s n r),1.9049661308526993,1.0966036543250084,1.0966036543250084,False
+TPCH,2,NHHHNNN,7,NestLoop(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) NestLoop(ps p s n r),1.9049661308526993,1.344956286251545,1.344956286251545,False
+TPCH,2,NHHNHHH,7,NestLoop(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) HashJoin(ps p s n r),1.9049661308526993,0.9507896155118942,0.9507896155118942,False
+TPCH,2,NHHNHHN,7,NestLoop(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) NestLoop(ps p s n r),1.9015792310237885,0.9728594422340393,0.9728594422340393,False
+TPCH,2,NHHNHNH,7,NestLoop(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) HashJoin(ps p s n r),1.9015792310237885,0.9675291925668716,0.9675291925668716,False
+TPCH,2,NHHNHNN,7,NestLoop(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) NestLoop(ps p s n r),1.9015792310237885,0.9620696976780891,0.9620696976780891,False
+TPCH,2,NHHNNHH,7,NestLoop(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) HashJoin(ps p s n r),1.9015792310237885,1.0958111882209778,1.0958111882209778,False
+TPCH,2,NHHNNHN,7,NestLoop(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) NestLoop(ps p s n r),1.9015792310237885,1.357798308134079,1.357798308134079,False
+TPCH,2,NHHNNNH,7,NestLoop(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) HashJoin(ps p s n r),1.9015792310237885,1.0942637398838997,1.0942637398838997,False
+TPCH,2,NHHNNNN,7,NestLoop(ps p) HashJoin(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) NestLoop(ps p s n r),1.9015792310237885,1.364238552749157,1.364238552749157,False
+TPCH,2,NHNHHHH,7,NestLoop(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) HashJoin(ps p s n r),1.9015792310237885,0.9551050364971161,0.9551050364971161,False
+TPCH,2,NHNHHHN,7,NestLoop(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) NestLoop(ps p s n r),1.9015792310237885,0.9692701920866966,0.9692701920866966,False
+TPCH,2,NHNHHNH,7,NestLoop(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) HashJoin(ps p s n r),1.9015792310237885,0.9817709922790527,0.9817709922790527,False
+TPCH,2,NHNHHNN,7,NestLoop(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) NestLoop(ps p s n r),1.9015792310237885,0.9585456699132919,0.9585456699132919,False
+TPCH,2,NHNHNHH,7,NestLoop(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) HashJoin(ps p s n r),1.9015792310237885,1.1093470975756645,1.1093470975756645,False
+TPCH,2,NHNHNHN,7,NestLoop(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) NestLoop(ps p s n r),1.9015792310237885,1.346534140408039,1.346534140408039,False
+TPCH,2,NHNHNNH,7,NestLoop(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) HashJoin(ps p s n r),1.9015792310237885,1.0923428609967232,1.0923428609967232,False
+TPCH,2,NHNHNNN,7,NestLoop(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) NestLoop(ps p s n r),1.9015792310237885,1.3474013954401016,1.3474013954401016,False
+TPCH,2,NHNNHHH,7,NestLoop(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) HashJoin(ps p s n r),1.9015792310237885,0.9739450514316559,0.9739450514316559,False
+TPCH,2,NHNNHHN,7,NestLoop(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) NestLoop(ps p s n r),1.9015792310237885,0.9543826878070831,0.9543826878070831,False
+TPCH,2,NHNNHNH,7,NestLoop(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) HashJoin(ps p s n r),1.9015792310237885,0.9510252699255943,0.9510252699255943,False
+TPCH,2,NHNNHNN,7,NestLoop(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) NestLoop(ps p s n r),1.9015792310237885,0.9586504325270653,0.9586504325270653,False
+TPCH,2,NHNNNHH,7,NestLoop(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) HashJoin(ps p s n r),1.9015792310237885,1.1005052626132965,1.1005052626132965,False
+TPCH,2,NHNNNHN,7,NestLoop(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) NestLoop(ps p s n r),1.9015792310237885,1.370700716972351,1.370700716972351,False
+TPCH,2,NHNNNNH,7,NestLoop(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) HashJoin(ps p s n r),1.9015792310237885,1.091640904545784,1.091640904545784,False
+TPCH,2,NHNNNNN,7,NestLoop(ps p) HashJoin(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) NestLoop(ps p s n r),1.9015792310237885,1.3444504961371422,1.3444504961371422,False
+TPCH,2,NNHHHHH,7,NestLoop(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) HashJoin(ps p s n r),1.9015792310237885,0.9548378810286522,0.9548378810286522,False
+TPCH,2,NNHHHHN,7,NestLoop(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) NestLoop(ps p s n r),1.9015792310237885,0.9712642133235931,0.9712642133235931,False
+TPCH,2,NNHHHNH,7,NestLoop(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) HashJoin(ps p s n r),1.9015792310237885,0.9617551043629646,0.9617551043629646,False
+TPCH,2,NNHHHNN,7,NestLoop(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) NestLoop(ps p s n r),1.9015792310237885,0.95969408005476,0.95969408005476,False
+TPCH,2,NNHHNHH,7,NestLoop(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) HashJoin(ps p s n r),1.9015792310237885,1.0942302867770195,1.0942302867770195,False
+TPCH,2,NNHHNHN,7,NestLoop(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) NestLoop(ps p s n r),1.9015792310237885,1.361649975180626,1.361649975180626,False
+TPCH,2,NNHHNNH,7,NestLoop(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) HashJoin(ps p s n r),1.9015792310237885,1.1196432635188103,1.1196432635188103,False
+TPCH,2,NNHHNNN,7,NestLoop(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) NestLoop(ps p s n r),1.9015792310237885,1.3524216935038567,1.3524216935038567,False
+TPCH,2,NNHNHHH,7,NestLoop(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) HashJoin(ps p s n r),1.9015792310237885,0.9647290334105492,0.9647290334105492,False
+TPCH,2,NNHNHHN,7,NestLoop(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) NestLoop(ps p s n r),1.9015792310237885,0.9669331610202789,0.9669331610202789,False
+TPCH,2,NNHNHNH,7,NestLoop(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) HashJoin(ps p s n r),1.9015792310237885,0.9595223367214203,0.9595223367214203,False
+TPCH,2,NNHNHNN,7,NestLoop(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) NestLoop(ps p s n r),1.9015792310237885,0.9734744057059288,0.9734744057059288,False
+TPCH,2,NNHNNHH,7,NestLoop(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) HashJoin(ps p s n r),1.9015792310237885,1.1074339374899864,1.1074339374899864,False
+TPCH,2,NNHNNHN,7,NestLoop(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) NestLoop(ps p s n r),1.9015792310237885,1.353454351425171,1.353454351425171,False
+TPCH,2,NNHNNNH,7,NestLoop(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) HashJoin(ps p s n r),1.9015792310237885,1.1030517295002937,1.1030517295002937,False
+TPCH,2,NNHNNNN,7,NestLoop(ps p) NestLoop(n2 r2) HashJoin(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) NestLoop(ps p s n r),1.9015792310237885,1.3626095652580261,1.3626095652580261,False
+TPCH,2,NNNHHHH,7,NestLoop(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) HashJoin(ps p s n r),1.9015792310237885,0.957636371254921,0.957636371254921,False
+TPCH,2,NNNHHHN,7,NestLoop(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) NestLoop(ps p s n r),1.9015792310237885,0.9704586863517761,0.9704586863517761,False
+TPCH,2,NNNHHNH,7,NestLoop(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) HashJoin(ps p s n r),1.9015792310237885,0.9594281762838364,0.9594281762838364,False
+TPCH,2,NNNHHNN,7,NestLoop(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) NestLoop(ps p s n r),1.9015792310237885,0.9570676758885384,0.9570676758885384,False
+TPCH,2,NNNHNHH,7,NestLoop(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) HashJoin(ps p s n r),1.9015792310237885,1.1032185927033424,1.1032185927033424,False
+TPCH,2,NNNHNHN,7,NestLoop(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) NestLoop(ps p s n r),1.9015792310237885,1.346067912876606,1.346067912876606,False
+TPCH,2,NNNHNNH,7,NestLoop(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) HashJoin(ps p s n r),1.9015792310237885,1.098623052239418,1.098623052239418,False
+TPCH,2,NNNHNNN,7,NestLoop(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) HashJoin(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) NestLoop(ps p s n r),1.9015792310237885,1.3559423014521599,1.3559423014521599,False
+TPCH,2,NNNNHHH,7,NestLoop(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) HashJoin(ps p s n r),1.9015792310237885,0.9603334292769432,0.9603334292769432,False
+TPCH,2,NNNNHHN,7,NestLoop(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) HashJoin(n r) NestLoop(ps p s n r),1.9015792310237885,0.9753451496362686,0.9753451496362686,False
+TPCH,2,NNNNHNH,7,NestLoop(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) HashJoin(ps p s n r),1.9015792310237885,0.9512282460927963,0.9512282460927963,False
+TPCH,2,NNNNHNN,7,NestLoop(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) HashJoin(ps p s) NestLoop(n r) NestLoop(ps p s n r),1.9015792310237885,0.9671894460916519,0.9671894460916519,False
+TPCH,2,NNNNNHH,7,NestLoop(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) HashJoin(ps p s n r),1.9015792310237885,1.0922854393720627,1.0922854393720627,False
+TPCH,2,NNNNNHN,7,NestLoop(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) HashJoin(n r) NestLoop(ps p s n r),1.9015792310237885,1.3530977219343185,1.3530977219343185,False
+TPCH,2,NNNNNNH,7,NestLoop(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) HashJoin(ps p s n r),1.9015792310237885,1.0920005962252617,1.0920005962252617,False
+TPCH,2,NNNNNNN,7,NestLoop(ps p) NestLoop(n2 r2) NestLoop(n2 r2 ps2) NestLoop(n2 r2 ps2 s2) NestLoop(ps p s) NestLoop(n r) NestLoop(ps p s n r),1.9015792310237885,1.3494054824113846,1.3494054824113846,False
+TPCH,3,HH,2,HashJoin(o c) HashJoin(l o c),3.4513091444969177,1.7543254643678665,1.7543254643678665,False
+TPCH,3,HN,2,HashJoin(o c) NestLoop(l o c),3.4513091444969177,0.8238362595438957,0.8238362595438957,False
+TPCH,3,NH,2,NestLoop(o c) HashJoin(l o c),1.6476725190877914,1.5066136866807938,1.5066136866807938,False
+TPCH,3,NN,2,NestLoop(o c) NestLoop(l o c),1.6476725190877914,1.1640584990382195,1.1640584990382195,False
+TPCH,4,H,1,HashJoin(l o),0.5293368995189667,,0.5293368995189667,True
+TPCH,4,N,1,NestLoop(l o),0.5293368995189667,0.20094792544841766,0.20094792544841766,False
+TPCH,5,HHHHH,5,HashJoin(n r) HashJoin(c n r) HashJoin(o c n r) HashJoin(l o c n r) HashJoin(l o c n r s),0.592837318778038,,0.592837318778038,True
+TPCH,5,HHHHN,5,HashJoin(n r) HashJoin(c n r) HashJoin(o c n r) HashJoin(l o c n r) NestLoop(l o c n r s),0.592837318778038,,0.592837318778038,True
+TPCH,5,HHHNH,5,HashJoin(n r) HashJoin(c n r) HashJoin(o c n r) NestLoop(l o c n r) HashJoin(l o c n r s),0.592837318778038,0.32371338456869125,0.32371338456869125,False
+TPCH,5,HHHNN,5,HashJoin(n r) HashJoin(c n r) HashJoin(o c n r) NestLoop(l o c n r) NestLoop(l o c n r s),0.592837318778038,0.5330937877297401,0.5330937877297401,False
+TPCH,5,HHNHH,5,HashJoin(n r) HashJoin(c n r) NestLoop(o c n r) HashJoin(l o c n r) HashJoin(l o c n r s),0.592837318778038,,0.592837318778038,True
+TPCH,5,HHNHN,5,HashJoin(n r) HashJoin(c n r) NestLoop(o c n r) HashJoin(l o c n r) NestLoop(l o c n r s),0.592837318778038,,0.592837318778038,True
+TPCH,5,HHNNH,5,HashJoin(n r) HashJoin(c n r) NestLoop(o c n r) NestLoop(l o c n r) HashJoin(l o c n r s),0.592837318778038,0.3799252063035965,0.3799252063035965,False
+TPCH,5,HHNNN,5,HashJoin(n r) HashJoin(c n r) NestLoop(o c n r) NestLoop(l o c n r) NestLoop(l o c n r s),0.592837318778038,,0.592837318778038,True
+TPCH,5,HNHHH,5,HashJoin(n r) NestLoop(c n r) HashJoin(o c n r) HashJoin(l o c n r) HashJoin(l o c n r s),0.592837318778038,,0.592837318778038,True
+TPCH,5,HNHHN,5,HashJoin(n r) NestLoop(c n r) HashJoin(o c n r) HashJoin(l o c n r) NestLoop(l o c n r s),0.592837318778038,,0.592837318778038,True
+TPCH,5,HNHNH,5,HashJoin(n r) NestLoop(c n r) HashJoin(o c n r) NestLoop(l o c n r) HashJoin(l o c n r s),0.592837318778038,0.31660494208335876,0.31660494208335876,False
+TPCH,5,HNHNN,5,HashJoin(n r) NestLoop(c n r) HashJoin(o c n r) NestLoop(l o c n r) NestLoop(l o c n r s),0.592837318778038,0.5209182351827621,0.5209182351827621,False
+TPCH,5,HNNHH,5,HashJoin(n r) NestLoop(c n r) NestLoop(o c n r) HashJoin(l o c n r) HashJoin(l o c n r s),0.592837318778038,,0.592837318778038,True
+TPCH,5,HNNHN,5,HashJoin(n r) NestLoop(c n r) NestLoop(o c n r) HashJoin(l o c n r) NestLoop(l o c n r s),0.592837318778038,,0.592837318778038,True
+TPCH,5,HNNNH,5,HashJoin(n r) NestLoop(c n r) NestLoop(o c n r) NestLoop(l o c n r) HashJoin(l o c n r s),0.592837318778038,0.3873865008354187,0.3873865008354187,False
+TPCH,5,HNNNN,5,HashJoin(n r) NestLoop(c n r) NestLoop(o c n r) NestLoop(l o c n r) NestLoop(l o c n r s),0.592837318778038,,0.592837318778038,True
+TPCH,5,NHHHH,5,NestLoop(n r) HashJoin(c n r) HashJoin(o c n r) HashJoin(l o c n r) HashJoin(l o c n r s),0.592837318778038,,0.592837318778038,True
+TPCH,5,NHHHN,5,NestLoop(n r) HashJoin(c n r) HashJoin(o c n r) HashJoin(l o c n r) NestLoop(l o c n r s),0.592837318778038,,0.592837318778038,True
+TPCH,5,NHHNH,5,NestLoop(n r) HashJoin(c n r) HashJoin(o c n r) NestLoop(l o c n r) HashJoin(l o c n r s),0.592837318778038,0.33659668266773224,0.33659668266773224,False
+TPCH,5,NHHNN,5,NestLoop(n r) HashJoin(c n r) HashJoin(o c n r) NestLoop(l o c n r) NestLoop(l o c n r s),0.592837318778038,0.525270976126194,0.525270976126194,False
+TPCH,5,NHNHH,5,NestLoop(n r) HashJoin(c n r) NestLoop(o c n r) HashJoin(l o c n r) HashJoin(l o c n r s),0.592837318778038,,0.592837318778038,True
+TPCH,5,NHNHN,5,NestLoop(n r) HashJoin(c n r) NestLoop(o c n r) HashJoin(l o c n r) NestLoop(l o c n r s),0.592837318778038,,0.592837318778038,True
+TPCH,5,NHNNH,5,NestLoop(n r) HashJoin(c n r) NestLoop(o c n r) NestLoop(l o c n r) HashJoin(l o c n r s),0.592837318778038,0.3931511715054512,0.3931511715054512,False
+TPCH,5,NHNNN,5,NestLoop(n r) HashJoin(c n r) NestLoop(o c n r) NestLoop(l o c n r) NestLoop(l o c n r s),0.592837318778038,,0.592837318778038,True
+TPCH,5,NNHHH,5,NestLoop(n r) NestLoop(c n r) HashJoin(o c n r) HashJoin(l o c n r) HashJoin(l o c n r s),0.592837318778038,,0.592837318778038,True
+TPCH,5,NNHHN,5,NestLoop(n r) NestLoop(c n r) HashJoin(o c n r) HashJoin(l o c n r) NestLoop(l o c n r s),0.592837318778038,,0.592837318778038,True
+TPCH,5,NNHNH,5,NestLoop(n r) NestLoop(c n r) HashJoin(o c n r) NestLoop(l o c n r) HashJoin(l o c n r s),0.592837318778038,0.32254254072904587,0.32254254072904587,False
+TPCH,5,NNHNN,5,NestLoop(n r) NestLoop(c n r) HashJoin(o c n r) NestLoop(l o c n r) NestLoop(l o c n r s),0.592837318778038,0.5200522616505623,0.5200522616505623,False
+TPCH,5,NNNHH,5,NestLoop(n r) NestLoop(c n r) NestLoop(o c n r) HashJoin(l o c n r) HashJoin(l o c n r s),0.592837318778038,,0.592837318778038,True
+TPCH,5,NNNHN,5,NestLoop(n r) NestLoop(c n r) NestLoop(o c n r) HashJoin(l o c n r) NestLoop(l o c n r s),0.592837318778038,,0.592837318778038,True
+TPCH,5,NNNNH,5,NestLoop(n r) NestLoop(c n r) NestLoop(o c n r) NestLoop(l o c n r) HashJoin(l o c n r s),0.592837318778038,0.3875998258590698,0.3875998258590698,False
+TPCH,5,NNNNN,5,NestLoop(n r) NestLoop(c n r) NestLoop(o c n r) NestLoop(l o c n r) NestLoop(l o c n r s),0.592837318778038,,0.592837318778038,True
+TPCH,6,,0,,0.8880246728658676,0.4350699856877327,0.4350699856877327,False
+TPCH,7,HHHHH,5,HashJoin(c n2) HashJoin(o c n2) HashJoin(l o c n2) HashJoin(s n1) HashJoin(l o c n2 s n1),1.6877381950616837,0.9179734587669373,0.9179734587669373,False
+TPCH,7,HHHHN,5,HashJoin(c n2) HashJoin(o c n2) HashJoin(l o c n2) HashJoin(s n1) NestLoop(l o c n2 s n1),1.6877381950616837,0.9334502071142197,0.9334502071142197,False
+TPCH,7,HHHNH,5,HashJoin(c n2) HashJoin(o c n2) HashJoin(l o c n2) NestLoop(s n1) HashJoin(l o c n2 s n1),1.6877381950616837,0.9205842241644859,0.9205842241644859,False
+TPCH,7,HHHNN,5,HashJoin(c n2) HashJoin(o c n2) HashJoin(l o c n2) NestLoop(s n1) NestLoop(l o c n2 s n1),1.6877381950616837,0.937672421336174,0.937672421336174,False
+TPCH,7,HHNHH,5,HashJoin(c n2) HashJoin(o c n2) NestLoop(l o c n2) HashJoin(s n1) HashJoin(l o c n2 s n1),1.6877381950616837,0.6597342491149902,0.6597342491149902,False
+TPCH,7,HHNHN,5,HashJoin(c n2) HashJoin(o c n2) NestLoop(l o c n2) HashJoin(s n1) NestLoop(l o c n2 s n1),1.3194684982299805,0.6995788812637329,0.6995788812637329,False
+TPCH,7,HHNNH,5,HashJoin(c n2) HashJoin(o c n2) NestLoop(l o c n2) NestLoop(s n1) HashJoin(l o c n2 s n1),1.3194684982299805,0.6848920658230782,0.6848920658230782,False
+TPCH,7,HHNNN,5,HashJoin(c n2) HashJoin(o c n2) NestLoop(l o c n2) NestLoop(s n1) NestLoop(l o c n2 s n1),1.3194684982299805,0.6900428012013435,0.6900428012013435,False
+TPCH,7,HNHHH,5,HashJoin(c n2) NestLoop(o c n2) HashJoin(l o c n2) HashJoin(s n1) HashJoin(l o c n2 s n1),1.3194684982299805,0.8178837448358536,0.8178837448358536,False
+TPCH,7,HNHHN,5,HashJoin(c n2) NestLoop(o c n2) HashJoin(l o c n2) HashJoin(s n1) NestLoop(l o c n2 s n1),1.3194684982299805,0.8005155175924301,0.8005155175924301,False
+TPCH,7,HNHNH,5,HashJoin(c n2) NestLoop(o c n2) HashJoin(l o c n2) NestLoop(s n1) HashJoin(l o c n2 s n1),1.3194684982299805,0.7915828824043274,0.7915828824043274,False
+TPCH,7,HNHNN,5,HashJoin(c n2) NestLoop(o c n2) HashJoin(l o c n2) NestLoop(s n1) NestLoop(l o c n2 s n1),1.3194684982299805,0.8041079938411713,0.8041079938411713,False
+TPCH,7,HNNHH,5,HashJoin(c n2) NestLoop(o c n2) NestLoop(l o c n2) HashJoin(s n1) HashJoin(l o c n2 s n1),1.3194684982299805,0.732376217842102,0.732376217842102,False
+TPCH,7,HNNHN,5,HashJoin(c n2) NestLoop(o c n2) NestLoop(l o c n2) HashJoin(s n1) NestLoop(l o c n2 s n1),1.3194684982299805,0.7577625513076782,0.7577625513076782,False
+TPCH,7,HNNNH,5,HashJoin(c n2) NestLoop(o c n2) NestLoop(l o c n2) NestLoop(s n1) HashJoin(l o c n2 s n1),1.3194684982299805,0.7429474368691444,0.7429474368691444,False
+TPCH,7,HNNNN,5,HashJoin(c n2) NestLoop(o c n2) NestLoop(l o c n2) NestLoop(s n1) NestLoop(l o c n2 s n1),1.3194684982299805,0.7661302164196968,0.7661302164196968,False
+TPCH,7,NHHHH,5,NestLoop(c n2) HashJoin(o c n2) HashJoin(l o c n2) HashJoin(s n1) HashJoin(l o c n2 s n1),1.3194684982299805,0.8853291347622871,0.8853291347622871,False
+TPCH,7,NHHHN,5,NestLoop(c n2) HashJoin(o c n2) HashJoin(l o c n2) HashJoin(s n1) NestLoop(l o c n2 s n1),1.3194684982299805,0.927634671330452,0.927634671330452,False
+TPCH,7,NHHNH,5,NestLoop(c n2) HashJoin(o c n2) HashJoin(l o c n2) NestLoop(s n1) HashJoin(l o c n2 s n1),1.3194684982299805,0.9084101617336273,0.9084101617336273,False
+TPCH,7,NHHNN,5,NestLoop(c n2) HashJoin(o c n2) HashJoin(l o c n2) NestLoop(s n1) NestLoop(l o c n2 s n1),1.3194684982299805,0.9384433105587959,0.9384433105587959,False
+TPCH,7,NHNHH,5,NestLoop(c n2) HashJoin(o c n2) NestLoop(l o c n2) HashJoin(s n1) HashJoin(l o c n2 s n1),1.3194684982299805,0.6506143361330032,0.6506143361330032,False
+TPCH,7,NHNHN,5,NestLoop(c n2) HashJoin(o c n2) NestLoop(l o c n2) HashJoin(s n1) NestLoop(l o c n2 s n1),1.3012286722660065,0.681731179356575,0.681731179356575,False
+TPCH,7,NHNNH,5,NestLoop(c n2) HashJoin(o c n2) NestLoop(l o c n2) NestLoop(s n1) HashJoin(l o c n2 s n1),1.3012286722660065,0.6601686030626297,0.6601686030626297,False
+TPCH,7,NHNNN,5,NestLoop(c n2) HashJoin(o c n2) NestLoop(l o c n2) NestLoop(s n1) NestLoop(l o c n2 s n1),1.3012286722660065,0.682279109954834,0.682279109954834,False
+TPCH,7,NNHHH,5,NestLoop(c n2) NestLoop(o c n2) HashJoin(l o c n2) HashJoin(s n1) HashJoin(l o c n2 s n1),1.3012286722660065,0.7466056793928146,0.7466056793928146,False
+TPCH,7,NNHHN,5,NestLoop(c n2) NestLoop(o c n2) HashJoin(l o c n2) HashJoin(s n1) NestLoop(l o c n2 s n1),1.3012286722660065,0.7843706086277962,0.7843706086277962,False
+TPCH,7,NNHNH,5,NestLoop(c n2) NestLoop(o c n2) HashJoin(l o c n2) NestLoop(s n1) HashJoin(l o c n2 s n1),1.3012286722660065,0.7736606895923615,0.7736606895923615,False
+TPCH,7,NNHNN,5,NestLoop(c n2) NestLoop(o c n2) HashJoin(l o c n2) NestLoop(s n1) NestLoop(l o c n2 s n1),1.3012286722660065,0.7855187729001045,0.7855187729001045,False
+TPCH,7,NNNHH,5,NestLoop(c n2) NestLoop(o c n2) NestLoop(l o c n2) HashJoin(s n1) HashJoin(l o c n2 s n1),1.3012286722660065,0.7222678661346436,0.7222678661346436,False
+TPCH,7,NNNHN,5,NestLoop(c n2) NestLoop(o c n2) NestLoop(l o c n2) HashJoin(s n1) NestLoop(l o c n2 s n1),1.3012286722660065,0.7509674802422523,0.7509674802422523,False
+TPCH,7,NNNNH,5,NestLoop(c n2) NestLoop(o c n2) NestLoop(l o c n2) NestLoop(s n1) HashJoin(l o c n2 s n1),1.3012286722660065,0.7308011502027512,0.7308011502027512,False
+TPCH,7,NNNNN,5,NestLoop(c n2) NestLoop(o c n2) NestLoop(l o c n2) NestLoop(s n1) NestLoop(l o c n2 s n1),1.3012286722660065,0.7428315952420235,0.7428315952420235,False
+TPCH,8,HHHHHHH,7,HashJoin(l p) HashJoin(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.9773249924182892,0.9773249924182892,False
+TPCH,8,HHHHHHN,7,HashJoin(l p) HashJoin(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9707772210240364,0.9707772210240364,False
+TPCH,8,HHHHHNH,7,HashJoin(l p) HashJoin(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.965981625020504,0.965981625020504,False
+TPCH,8,HHHHHNN,7,HashJoin(l p) HashJoin(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9819475263357162,0.9819475263357162,False
+TPCH,8,HHHHNHH,7,HashJoin(l p) HashJoin(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.9870437681674957,0.9870437681674957,False
+TPCH,8,HHHHNHN,7,HashJoin(l p) HashJoin(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9905504733324051,0.9905504733324051,False
+TPCH,8,HHHHNNH,7,HashJoin(l p) HashJoin(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,1.0017680376768112,1.0017680376768112,False
+TPCH,8,HHHHNNN,7,HashJoin(l p) HashJoin(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9716950207948685,0.9716950207948685,False
+TPCH,8,HHHNHHH,7,HashJoin(l p) HashJoin(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.9482297226786613,0.9482297226786613,False
+TPCH,8,HHHNHHN,7,HashJoin(l p) HashJoin(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9495103135704994,0.9495103135704994,False
+TPCH,8,HHHNHNH,7,HashJoin(l p) HashJoin(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.940111055970192,0.940111055970192,False
+TPCH,8,HHHNHNN,7,HashJoin(l p) HashJoin(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9534341171383858,0.9534341171383858,False
+TPCH,8,HHHNNHH,7,HashJoin(l p) HashJoin(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.9474483653903008,0.9474483653903008,False
+TPCH,8,HHHNNHN,7,HashJoin(l p) HashJoin(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9452027603983879,0.9452027603983879,False
+TPCH,8,HHHNNNH,7,HashJoin(l p) HashJoin(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.9442040100693703,0.9442040100693703,False
+TPCH,8,HHHNNNN,7,HashJoin(l p) HashJoin(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9606393575668335,0.9606393575668335,False
+TPCH,8,HHNHHHH,7,HashJoin(l p) HashJoin(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.9670658931136131,0.9670658931136131,False
+TPCH,8,HHNHHHN,7,HashJoin(l p) HashJoin(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9520019516348839,0.9520019516348839,False
+TPCH,8,HHNHHNH,7,HashJoin(l p) HashJoin(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.9815383404493332,0.9815383404493332,False
+TPCH,8,HHNHHNN,7,HashJoin(l p) HashJoin(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9731823429465294,0.9731823429465294,False
+TPCH,8,HHNHNHH,7,HashJoin(l p) HashJoin(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.9841130971908569,0.9841130971908569,False
+TPCH,8,HHNHNHN,7,HashJoin(l p) HashJoin(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9751076325774193,0.9751076325774193,False
+TPCH,8,HHNHNNH,7,HashJoin(l p) HashJoin(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,1.0100641921162605,1.0100641921162605,False
+TPCH,8,HHNHNNN,7,HashJoin(l p) HashJoin(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9637931734323502,0.9637931734323502,False
+TPCH,8,HHNNHHH,7,HashJoin(l p) HashJoin(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.9361142069101334,0.9361142069101334,False
+TPCH,8,HHNNHHN,7,HashJoin(l p) HashJoin(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.934398740530014,0.934398740530014,False
+TPCH,8,HHNNHNH,7,HashJoin(l p) HashJoin(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.9340464398264885,0.9340464398264885,False
+TPCH,8,HHNNHNN,7,HashJoin(l p) HashJoin(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9362325072288513,0.9362325072288513,False
+TPCH,8,HHNNNHH,7,HashJoin(l p) HashJoin(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.9340071454644203,0.9340071454644203,False
+TPCH,8,HHNNNHN,7,HashJoin(l p) HashJoin(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9521711468696594,0.9521711468696594,False
+TPCH,8,HHNNNNH,7,HashJoin(l p) HashJoin(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.9403927624225616,0.9403927624225616,False
+TPCH,8,HHNNNNN,7,HashJoin(l p) HashJoin(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9635068997740746,0.9635068997740746,False
+TPCH,8,HNHHHHH,7,HashJoin(l p) NestLoop(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.9810942783951759,0.9810942783951759,False
+TPCH,8,HNHHHHN,7,HashJoin(l p) NestLoop(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9805914089083672,0.9805914089083672,False
+TPCH,8,HNHHHNH,7,HashJoin(l p) NestLoop(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.9626138806343079,0.9626138806343079,False
+TPCH,8,HNHHHNN,7,HashJoin(l p) NestLoop(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9734224081039429,0.9734224081039429,False
+TPCH,8,HNHHNHH,7,HashJoin(l p) NestLoop(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.9889279380440712,0.9889279380440712,False
+TPCH,8,HNHHNHN,7,HashJoin(l p) NestLoop(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9927181378006935,0.9927181378006935,False
+TPCH,8,HNHHNNH,7,HashJoin(l p) NestLoop(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.9914322644472122,0.9914322644472122,False
+TPCH,8,HNHHNNN,7,HashJoin(l p) NestLoop(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9623854458332062,0.9623854458332062,False
+TPCH,8,HNHNHHH,7,HashJoin(l p) NestLoop(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.9433115646243095,0.9433115646243095,False
+TPCH,8,HNHNHHN,7,HashJoin(l p) NestLoop(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9421931877732277,0.9421931877732277,False
+TPCH,8,HNHNHNH,7,HashJoin(l p) NestLoop(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.9544707089662552,0.9544707089662552,False
+TPCH,8,HNHNHNN,7,HashJoin(l p) NestLoop(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9515094310045242,0.9515094310045242,False
+TPCH,8,HNHNNHH,7,HashJoin(l p) NestLoop(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.946607194840908,0.946607194840908,False
+TPCH,8,HNHNNHN,7,HashJoin(l p) NestLoop(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9552728980779648,0.9552728980779648,False
+TPCH,8,HNHNNNH,7,HashJoin(l p) NestLoop(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.955805703997612,0.955805703997612,False
+TPCH,8,HNHNNNN,7,HashJoin(l p) NestLoop(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9654189273715019,0.9654189273715019,False
+TPCH,8,HNNHHHH,7,HashJoin(l p) NestLoop(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.9649170711636543,0.9649170711636543,False
+TPCH,8,HNNHHHN,7,HashJoin(l p) NestLoop(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9573185443878174,0.9573185443878174,False
+TPCH,8,HNNHHNH,7,HashJoin(l p) NestLoop(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.9838060662150383,0.9838060662150383,False
+TPCH,8,HNNHHNN,7,HashJoin(l p) NestLoop(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9631157144904137,0.9631157144904137,False
+TPCH,8,HNNHNHH,7,HashJoin(l p) NestLoop(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.9781808629631996,0.9781808629631996,False
+TPCH,8,HNNHNHN,7,HashJoin(l p) NestLoop(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.997753918170929,0.997753918170929,False
+TPCH,8,HNNHNNH,7,HashJoin(l p) NestLoop(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.9846286252140999,0.9846286252140999,False
+TPCH,8,HNNHNNN,7,HashJoin(l p) NestLoop(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9597246423363686,0.9597246423363686,False
+TPCH,8,HNNNHHH,7,HashJoin(l p) NestLoop(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.9433206245303154,0.9433206245303154,False
+TPCH,8,HNNNHHN,7,HashJoin(l p) NestLoop(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9347874149680138,0.9347874149680138,False
+TPCH,8,HNNNHNH,7,HashJoin(l p) NestLoop(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.935596838593483,0.935596838593483,False
+TPCH,8,HNNNHNN,7,HashJoin(l p) NestLoop(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9381463825702667,0.9381463825702667,False
+TPCH,8,HNNNNHH,7,HashJoin(l p) NestLoop(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.9400299936532974,0.9400299936532974,False
+TPCH,8,HNNNNHN,7,HashJoin(l p) NestLoop(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9479704722762108,0.9479704722762108,False
+TPCH,8,HNNNNNH,7,HashJoin(l p) NestLoop(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.9379897788167,0.9379897788167,False
+TPCH,8,HNNNNNN,7,HashJoin(l p) NestLoop(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),1.3373422622680664,0.9700899347662926,0.9700899347662926,False
+TPCH,8,NHHHHHH,7,NestLoop(l p) HashJoin(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),1.3373422622680664,0.38885144889354706,0.38885144889354706,False
+TPCH,8,NHHHHHN,7,NestLoop(l p) HashJoin(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.7777028977870941,0.3159509301185608,0.3159509301185608,False
+TPCH,8,NHHHHNH,7,NestLoop(l p) HashJoin(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.6319018602371216,0.3107803836464882,0.3107803836464882,False
+TPCH,8,NHHHHNN,7,NestLoop(l p) HashJoin(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.6215607672929764,0.31695495545864105,0.31695495545864105,False
+TPCH,8,NHHHNHH,7,NestLoop(l p) HashJoin(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.6215607672929764,0.3283732980489731,0.3283732980489731,False
+TPCH,8,NHHHNHN,7,NestLoop(l p) HashJoin(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.6215607672929764,0.31874701380729675,0.31874701380729675,False
+TPCH,8,NHHHNNH,7,NestLoop(l p) HashJoin(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.6215607672929764,0.3207677751779556,0.3207677751779556,False
+TPCH,8,NHHHNNN,7,NestLoop(l p) HashJoin(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.6215607672929764,0.3088596388697624,0.3088596388697624,False
+TPCH,8,NHHNHHH,7,NestLoop(l p) HashJoin(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.6177192777395248,0.29525599628686905,0.29525599628686905,False
+TPCH,8,NHHNHHN,7,NestLoop(l p) HashJoin(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5905119925737381,0.29580433666706085,0.29580433666706085,False
+TPCH,8,NHHNHNH,7,NestLoop(l p) HashJoin(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5905119925737381,0.2891070693731308,0.2891070693731308,False
+TPCH,8,NHHNHNN,7,NestLoop(l p) HashJoin(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5782141387462616,0.29156988114118576,0.29156988114118576,False
+TPCH,8,NHHNNHH,7,NestLoop(l p) HashJoin(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5782141387462616,0.29545096307992935,0.29545096307992935,False
+TPCH,8,NHHNNHN,7,NestLoop(l p) HashJoin(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5782141387462616,0.2917926162481308,0.2917926162481308,False
+TPCH,8,NHHNNNH,7,NestLoop(l p) HashJoin(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5782141387462616,0.29190705716609955,0.29190705716609955,False
+TPCH,8,NHHNNNN,7,NestLoop(l p) HashJoin(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5782141387462616,0.30965761840343475,0.30965761840343475,False
+TPCH,8,NHNHHHH,7,NestLoop(l p) HashJoin(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5782141387462616,0.30736808478832245,0.30736808478832245,False
+TPCH,8,NHNHHHN,7,NestLoop(l p) HashJoin(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5782141387462616,0.2993049994111061,0.2993049994111061,False
+TPCH,8,NHNHHNH,7,NestLoop(l p) HashJoin(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5782141387462616,0.3026881739497185,0.3026881739497185,False
+TPCH,8,NHNHHNN,7,NestLoop(l p) HashJoin(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5782141387462616,0.3073645234107971,0.3073645234107971,False
+TPCH,8,NHNHNHH,7,NestLoop(l p) HashJoin(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5782141387462616,0.3094640076160431,0.3094640076160431,False
+TPCH,8,NHNHNHN,7,NestLoop(l p) HashJoin(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5782141387462616,0.31554535031318665,0.31554535031318665,False
+TPCH,8,NHNHNNH,7,NestLoop(l p) HashJoin(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5782141387462616,0.30657432973384857,0.30657432973384857,False
+TPCH,8,NHNHNNN,7,NestLoop(l p) HashJoin(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5782141387462616,0.31455332785844803,0.31455332785844803,False
+TPCH,8,NHNNHHH,7,NestLoop(l p) HashJoin(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5782141387462616,0.28476446121931076,0.28476446121931076,False
+TPCH,8,NHNNHHN,7,NestLoop(l p) HashJoin(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5695289224386215,0.2922157496213913,0.2922157496213913,False
+TPCH,8,NHNNHNH,7,NestLoop(l p) HashJoin(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5695289224386215,0.28002220392227173,0.28002220392227173,False
+TPCH,8,NHNNHNN,7,NestLoop(l p) HashJoin(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5600444078445435,0.291003942489624,0.291003942489624,False
+TPCH,8,NHNNNHH,7,NestLoop(l p) HashJoin(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5600444078445435,0.28742364048957825,0.28742364048957825,False
+TPCH,8,NHNNNHN,7,NestLoop(l p) HashJoin(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5600444078445435,0.28171125799417496,0.28171125799417496,False
+TPCH,8,NHNNNNH,7,NestLoop(l p) HashJoin(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5600444078445435,0.2856627330183983,0.2856627330183983,False
+TPCH,8,NHNNNNN,7,NestLoop(l p) HashJoin(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5600444078445435,0.31132641434669495,0.31132641434669495,False
+TPCH,8,NNHHHHH,7,NestLoop(l p) NestLoop(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5600444078445435,0.31149793416261673,0.31149793416261673,False
+TPCH,8,NNHHHHN,7,NestLoop(l p) NestLoop(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5600444078445435,0.3052939102053642,0.3052939102053642,False
+TPCH,8,NNHHHNH,7,NestLoop(l p) NestLoop(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5600444078445435,0.30932556837797165,0.30932556837797165,False
+TPCH,8,NNHHHNN,7,NestLoop(l p) NestLoop(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5600444078445435,0.30849897861480713,0.30849897861480713,False
+TPCH,8,NNHHNHH,7,NestLoop(l p) NestLoop(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5600444078445435,0.3090529590845108,0.3090529590845108,False
+TPCH,8,NNHHNHN,7,NestLoop(l p) NestLoop(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5600444078445435,0.312115915119648,0.312115915119648,False
+TPCH,8,NNHHNNH,7,NestLoop(l p) NestLoop(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5600444078445435,0.31850461661815643,0.31850461661815643,False
+TPCH,8,NNHHNNN,7,NestLoop(l p) NestLoop(n1 r) HashJoin(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5600444078445435,0.3070000857114792,0.3070000857114792,False
+TPCH,8,NNHNHHH,7,NestLoop(l p) NestLoop(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5600444078445435,0.29143325984477997,0.29143325984477997,False
+TPCH,8,NNHNHHN,7,NestLoop(l p) NestLoop(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5600444078445435,0.29147399961948395,0.29147399961948395,False
+TPCH,8,NNHNHNH,7,NestLoop(l p) NestLoop(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5600444078445435,0.287669338285923,0.287669338285923,False
+TPCH,8,NNHNHNN,7,NestLoop(l p) NestLoop(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5600444078445435,0.2900692969560623,0.2900692969560623,False
+TPCH,8,NNHNNHH,7,NestLoop(l p) NestLoop(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5600444078445435,0.2903900295495987,0.2903900295495987,False
+TPCH,8,NNHNNHN,7,NestLoop(l p) NestLoop(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5600444078445435,0.29218997061252594,0.29218997061252594,False
+TPCH,8,NNHNNNH,7,NestLoop(l p) NestLoop(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5600444078445435,0.2987998202443123,0.2987998202443123,False
+TPCH,8,NNHNNNN,7,NestLoop(l p) NestLoop(n1 r) HashJoin(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5600444078445435,0.30795102566480637,0.30795102566480637,False
+TPCH,8,NNNHHHH,7,NestLoop(l p) NestLoop(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5600444078445435,0.30174918472766876,0.30174918472766876,False
+TPCH,8,NNNHHHN,7,NestLoop(l p) NestLoop(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5600444078445435,0.29823988676071167,0.29823988676071167,False
+TPCH,8,NNNHHNH,7,NestLoop(l p) NestLoop(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5600444078445435,0.30028126388788223,0.30028126388788223,False
+TPCH,8,NNNHHNN,7,NestLoop(l p) NestLoop(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5600444078445435,0.31513015180826187,0.31513015180826187,False
+TPCH,8,NNNHNHH,7,NestLoop(l p) NestLoop(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5600444078445435,0.30374498665332794,0.30374498665332794,False
+TPCH,8,NNNHNHN,7,NestLoop(l p) NestLoop(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5600444078445435,0.3163013234734535,0.3163013234734535,False
+TPCH,8,NNNHNNH,7,NestLoop(l p) NestLoop(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5600444078445435,0.31306809186935425,0.31306809186935425,False
+TPCH,8,NNNHNNN,7,NestLoop(l p) NestLoop(n1 r) NestLoop(c n1 r) HashJoin(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5600444078445435,0.30566150695085526,0.30566150695085526,False
+TPCH,8,NNNNHHH,7,NestLoop(l p) NestLoop(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5600444078445435,0.2858307287096977,0.2858307287096977,False
+TPCH,8,NNNNHHN,7,NestLoop(l p) NestLoop(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5600444078445435,0.2800312414765358,0.2800312414765358,False
+TPCH,8,NNNNHNH,7,NestLoop(l p) NestLoop(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5600444078445435,0.28234900534152985,0.28234900534152985,False
+TPCH,8,NNNNHNN,7,NestLoop(l p) NestLoop(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) HashJoin(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5600444078445435,0.28433404862880707,0.28433404862880707,False
+TPCH,8,NNNNNHH,7,NestLoop(l p) NestLoop(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5600444078445435,0.2855103462934494,0.2855103462934494,False
+TPCH,8,NNNNNHN,7,NestLoop(l p) NestLoop(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) HashJoin(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5600444078445435,0.2826376333832741,0.2826376333832741,False
+TPCH,8,NNNNNNH,7,NestLoop(l p) NestLoop(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) HashJoin(l p o c n1 r s n2),0.5600444078445435,0.2822757884860039,0.2822757884860039,False
+TPCH,8,NNNNNNN,7,NestLoop(l p) NestLoop(n1 r) NestLoop(c n1 r) NestLoop(o c n1 r) NestLoop(l p o c n1 r) NestLoop(l p o c n1 r s) NestLoop(l p o c n1 r s n2),0.5600444078445435,0.30281034857034683,0.30281034857034683,False
+TPCH,9,HHHHH,5,HashJoin(l p) HashJoin(o l p) HashJoin(o l p s) HashJoin(o l p s ps) HashJoin(o l p s ps n),3.2575318962335587,2.076496198773384,2.076496198773384,False
+TPCH,9,HHHHN,5,HashJoin(l p) HashJoin(o l p) HashJoin(o l p s) HashJoin(o l p s ps) NestLoop(o l p s ps n),3.2575318962335587,2.129201300442219,2.129201300442219,False
+TPCH,9,HHHNH,5,HashJoin(l p) HashJoin(o l p) HashJoin(o l p s) NestLoop(o l p s ps) HashJoin(o l p s ps n),3.2575318962335587,2.0702407211065292,2.0702407211065292,False
+TPCH,9,HHHNN,5,HashJoin(l p) HashJoin(o l p) HashJoin(o l p s) NestLoop(o l p s ps) NestLoop(o l p s ps n),3.2575318962335587,2.2074356228113174,2.2074356228113174,False
+TPCH,9,HHNHH,5,HashJoin(l p) HashJoin(o l p) NestLoop(o l p s) HashJoin(o l p s ps) HashJoin(o l p s ps n),3.2575318962335587,2.058619201183319,2.058619201183319,False
+TPCH,9,HHNHN,5,HashJoin(l p) HashJoin(o l p) NestLoop(o l p s) HashJoin(o l p s ps) NestLoop(o l p s ps n),3.2575318962335587,2.12034572660923,2.12034572660923,False
+TPCH,9,HHNNH,5,HashJoin(l p) HashJoin(o l p) NestLoop(o l p s) NestLoop(o l p s ps) HashJoin(o l p s ps n),3.2575318962335587,2.09672549366951,2.09672549366951,False
+TPCH,9,HHNNN,5,HashJoin(l p) HashJoin(o l p) NestLoop(o l p s) NestLoop(o l p s ps) NestLoop(o l p s ps n),3.2575318962335587,2.1884340345859528,2.1884340345859528,False
+TPCH,9,HNHHH,5,HashJoin(l p) NestLoop(o l p) HashJoin(o l p s) HashJoin(o l p s ps) HashJoin(o l p s ps n),3.2575318962335587,2.090500131249428,2.090500131249428,False
+TPCH,9,HNHHN,5,HashJoin(l p) NestLoop(o l p) HashJoin(o l p s) HashJoin(o l p s ps) NestLoop(o l p s ps n),3.2575318962335587,2.144377216696739,2.144377216696739,False
+TPCH,9,HNHNH,5,HashJoin(l p) NestLoop(o l p) HashJoin(o l p s) NestLoop(o l p s ps) HashJoin(o l p s ps n),3.2575318962335587,2.0951778814196587,2.0951778814196587,False
+TPCH,9,HNHNN,5,HashJoin(l p) NestLoop(o l p) HashJoin(o l p s) NestLoop(o l p s ps) NestLoop(o l p s ps n),3.2575318962335587,2.197299487888813,2.197299487888813,False
+TPCH,9,HNNHH,5,HashJoin(l p) NestLoop(o l p) NestLoop(o l p s) HashJoin(o l p s ps) HashJoin(o l p s ps n),3.2575318962335587,2.0694768503308296,2.0694768503308296,False
+TPCH,9,HNNHN,5,HashJoin(l p) NestLoop(o l p) NestLoop(o l p s) HashJoin(o l p s ps) NestLoop(o l p s ps n),3.2575318962335587,2.1337025985121727,2.1337025985121727,False
+TPCH,9,HNNNH,5,HashJoin(l p) NestLoop(o l p) NestLoop(o l p s) NestLoop(o l p s ps) HashJoin(o l p s ps n),3.2575318962335587,2.1575487852096558,2.1575487852096558,False
+TPCH,9,HNNNN,5,HashJoin(l p) NestLoop(o l p) NestLoop(o l p s) NestLoop(o l p s ps) NestLoop(o l p s ps n),3.2575318962335587,2.201198160648346,2.201198160648346,False
+TPCH,9,NHHHH,5,NestLoop(l p) HashJoin(o l p) HashJoin(o l p s) HashJoin(o l p s ps) HashJoin(o l p s ps n),3.2575318962335587,3.0403992906212807,3.0403992906212807,False
+TPCH,9,NHHHN,5,NestLoop(l p) HashJoin(o l p) HashJoin(o l p s) HashJoin(o l p s ps) NestLoop(o l p s ps n),3.2575318962335587,3.1448523700237274,3.1448523700237274,False
+TPCH,9,NHHNH,5,NestLoop(l p) HashJoin(o l p) HashJoin(o l p s) NestLoop(o l p s ps) HashJoin(o l p s ps n),3.2575318962335587,3.0484114438295364,3.0484114438295364,False
+TPCH,9,NHHNN,5,NestLoop(l p) HashJoin(o l p) HashJoin(o l p s) NestLoop(o l p s ps) NestLoop(o l p s ps n),3.2575318962335587,2.119219161570072,2.119219161570072,False
+TPCH,9,NHNHH,5,NestLoop(l p) HashJoin(o l p) NestLoop(o l p s) HashJoin(o l p s ps) HashJoin(o l p s ps n),3.2575318962335587,3.0566157177090645,3.0566157177090645,False
+TPCH,9,NHNHN,5,NestLoop(l p) HashJoin(o l p) NestLoop(o l p s) HashJoin(o l p s ps) NestLoop(o l p s ps n),3.2575318962335587,3.123707354068756,3.123707354068756,False
+TPCH,9,NHNNH,5,NestLoop(l p) HashJoin(o l p) NestLoop(o l p s) NestLoop(o l p s ps) HashJoin(o l p s ps n),3.2575318962335587,3.064809888601303,3.064809888601303,False
+TPCH,9,NHNNN,5,NestLoop(l p) HashJoin(o l p) NestLoop(o l p s) NestLoop(o l p s ps) NestLoop(o l p s ps n),3.2575318962335587,2.094687804579735,2.094687804579735,False
+TPCH,9,NNHHH,5,NestLoop(l p) NestLoop(o l p) HashJoin(o l p s) HashJoin(o l p s ps) HashJoin(o l p s ps n),3.2575318962335587,3.068020097911358,3.068020097911358,False
+TPCH,9,NNHHN,5,NestLoop(l p) NestLoop(o l p) HashJoin(o l p s) HashJoin(o l p s ps) NestLoop(o l p s ps n),3.2575318962335587,3.112410604953766,3.112410604953766,False
+TPCH,9,NNHNH,5,NestLoop(l p) NestLoop(o l p) HashJoin(o l p s) NestLoop(o l p s ps) HashJoin(o l p s ps n),3.2575318962335587,3.0583682730793953,3.0583682730793953,False
+TPCH,9,NNHNN,5,NestLoop(l p) NestLoop(o l p) HashJoin(o l p s) NestLoop(o l p s ps) NestLoop(o l p s ps n),3.2575318962335587,2.1100690215826035,2.1100690215826035,False
+TPCH,9,NNNHH,5,NestLoop(l p) NestLoop(o l p) NestLoop(o l p s) HashJoin(o l p s ps) HashJoin(o l p s ps n),3.2575318962335587,3.0713040083646774,3.0713040083646774,False
+TPCH,9,NNNHN,5,NestLoop(l p) NestLoop(o l p) NestLoop(o l p s) HashJoin(o l p s ps) NestLoop(o l p s ps n),3.2575318962335587,3.1215037181973457,3.1215037181973457,False
+TPCH,9,NNNNH,5,NestLoop(l p) NestLoop(o l p) NestLoop(o l p s) NestLoop(o l p s ps) HashJoin(o l p s ps n),3.2575318962335587,3.085698515176773,3.085698515176773,False
+TPCH,9,NNNNN,5,NestLoop(l p) NestLoop(o l p) NestLoop(o l p s) NestLoop(o l p s ps) NestLoop(o l p s ps n),3.2575318962335587,2.1019895300269127,2.1019895300269127,False
+TPCH,10,HHH,3,HashJoin(l o) HashJoin(l o c) HashJoin(l o c n),2.8594007045030594,1.2765770852565765,1.2765770852565765,False
+TPCH,10,HHN,3,HashJoin(l o) HashJoin(l o c) NestLoop(l o c n),2.553154170513153,1.2713242918252945,1.2713242918252945,False
+TPCH,10,HNH,3,HashJoin(l o) NestLoop(l o c) HashJoin(l o c n),2.542648583650589,1.2896149456501007,1.2896149456501007,False
+TPCH,10,HNN,3,HashJoin(l o) NestLoop(l o c) NestLoop(l o c n),2.542648583650589,1.3446121588349342,1.3446121588349342,False
+TPCH,10,NHH,3,NestLoop(l o) HashJoin(l o c) HashJoin(l o c n),2.542648583650589,1.2908457592129707,1.2908457592129707,False
+TPCH,10,NHN,3,NestLoop(l o) HashJoin(l o c) NestLoop(l o c n),2.542648583650589,1.291934311389923,1.291934311389923,False
+TPCH,10,NNH,3,NestLoop(l o) NestLoop(l o c) HashJoin(l o c n),2.542648583650589,1.2813040390610695,1.2813040390610695,False
+TPCH,10,NNN,3,NestLoop(l o) NestLoop(l o c) NestLoop(l o c n),2.542648583650589,0.48359837383031845,0.48359837383031845,False
+TPCH,11,HHHH,4,HashJoin(s2 n2) HashJoin(ps2 s2 n2) HashJoin(s n) HashJoin(ps s n),0.23384436964988708,,0.23384436964988708,True
+TPCH,11,HHHN,4,HashJoin(s2 n2) HashJoin(ps2 s2 n2) HashJoin(s n) NestLoop(ps s n),0.23384436964988708,0.17643674463033676,0.17643674463033676,False
+TPCH,11,HHNH,4,HashJoin(s2 n2) HashJoin(ps2 s2 n2) NestLoop(s n) HashJoin(ps s n),0.23384436964988708,,0.23384436964988708,True
+TPCH,11,HHNN,4,HashJoin(s2 n2) HashJoin(ps2 s2 n2) NestLoop(s n) NestLoop(ps s n),0.23384436964988708,0.16167384386062622,0.16167384386062622,False
+TPCH,11,HNHH,4,HashJoin(s2 n2) NestLoop(ps2 s2 n2) HashJoin(s n) HashJoin(ps s n),0.23384436964988708,0.17780666798353195,0.17780666798353195,False
+TPCH,11,HNHN,4,HashJoin(s2 n2) NestLoop(ps2 s2 n2) HashJoin(s n) NestLoop(ps s n),0.23384436964988708,0.08822118490934372,0.08822118490934372,False
+TPCH,11,HNNH,4,HashJoin(s2 n2) NestLoop(ps2 s2 n2) NestLoop(s n) HashJoin(ps s n),0.17644236981868744,0.16346892714500427,0.16346892714500427,False
+TPCH,11,HNNN,4,HashJoin(s2 n2) NestLoop(ps2 s2 n2) NestLoop(s n) NestLoop(ps s n),0.17644236981868744,0.08328519016504288,0.08328519016504288,False
+TPCH,11,NHHH,4,NestLoop(s2 n2) HashJoin(ps2 s2 n2) HashJoin(s n) HashJoin(ps s n),0.16657038033008575,,0.16657038033008575,True
+TPCH,11,NHHN,4,NestLoop(s2 n2) HashJoin(ps2 s2 n2) HashJoin(s n) NestLoop(ps s n),0.16657038033008575,0.16433680802583694,0.16433680802583694,False
+TPCH,11,NHNH,4,NestLoop(s2 n2) HashJoin(ps2 s2 n2) NestLoop(s n) HashJoin(ps s n),0.16657038033008575,,0.16657038033008575,True
+TPCH,11,NHNN,4,NestLoop(s2 n2) HashJoin(ps2 s2 n2) NestLoop(s n) NestLoop(ps s n),0.16657038033008575,0.15792077034711838,0.15792077034711838,False
+TPCH,11,NNHH,4,NestLoop(s2 n2) NestLoop(ps2 s2 n2) HashJoin(s n) HashJoin(ps s n),0.16657038033008575,0.15969516336917877,0.15969516336917877,False
+TPCH,11,NNHN,4,NestLoop(s2 n2) NestLoop(ps2 s2 n2) HashJoin(s n) NestLoop(ps s n),0.16657038033008575,0.07622376829385757,0.07622376829385757,False
+TPCH,11,NNNH,4,NestLoop(s2 n2) NestLoop(ps2 s2 n2) NestLoop(s n) HashJoin(ps s n),0.15244753658771515,,0.15244753658771515,True
+TPCH,11,NNNN,4,NestLoop(s2 n2) NestLoop(ps2 s2 n2) NestLoop(s n) NestLoop(ps s n),0.15244753658771515,0.07555871456861496,0.07555871456861496,False
+TPCH,12,H,1,HashJoin(l o),1.9962621480226517,0.9760414883494377,0.9760414883494377,False
+TPCH,12,N,1,NestLoop(l o),1.9520829766988754,0.5751796364784241,0.5751796364784241,False
+TPCH,13,H,1,HashJoin(o c),2.28322234749794,1.0936112254858017,1.0936112254858017,False
+TPCH,13,N,1,NestLoop(o c),2.1872224509716034,1.8737263232469559,1.8737263232469559,False
+TPCH,14,H,1,HashJoin(l p),0.34565578401088715,0.1572565957903862,0.1572565957903862,False
+TPCH,14,N,1,NestLoop(l p),0.3145131915807724,0.29890697449445724,0.29890697449445724,False
+TPCH,15,H,1,HashJoin(s r),0.48252101242542267,0.22547279298305511,0.22547279298305511,False
+TPCH,15,N,1,NestLoop(s r),0.45094558596611023,0.2343180999159813,0.2343180999159813,False
+TPCH,16,H,1,HashJoin(ps p),1.2510606199502945,0.5910554155707359,0.5910554155707359,False
+TPCH,16,N,1,NestLoop(ps p),1.1821108311414719,0.9404816403985023,0.9404816403985023,False
+TPCH,17,H,1,HashJoin(l p),1.9410900175571442,0.9088818654417992,0.9088818654417992,False
+TPCH,17,N,1,NestLoop(l p),1.8177637308835983,0.16120649874210358,0.16120649874210358,False
+TPCH,18,HHH,3,HashJoin(l o) HashJoin(l o c) HashJoin(l o c l2),8.805492669343948,7.359443977475166,7.359443977475166,False
+TPCH,18,HHN,3,HashJoin(l o) HashJoin(l o c) NestLoop(l o c l2),8.805492669343948,7.343217588961124,7.343217588961124,False
+TPCH,18,HNH,3,HashJoin(l o) NestLoop(l o c) HashJoin(l o c l2),8.805492669343948,8.316857174038887,8.316857174038887,False
+TPCH,18,HNN,3,HashJoin(l o) NestLoop(l o c) NestLoop(l o c l2),8.805492669343948,8.301338851451874,8.301338851451874,False
+TPCH,18,NHH,3,NestLoop(l o) HashJoin(l o c) HashJoin(l o c l2),8.805492669343948,6.887656591832638,6.887656591832638,False
+TPCH,18,NHN,3,NestLoop(l o) HashJoin(l o c) NestLoop(l o c l2),8.805492669343948,6.920388147234917,6.920388147234917,False
+TPCH,18,NNH,3,NestLoop(l o) NestLoop(l o c) HashJoin(l o c l2),8.805492669343948,,8.805492669343948,True
+TPCH,18,NNN,3,NestLoop(l o) NestLoop(l o c) NestLoop(l o c l2),8.805492669343948,,8.805492669343948,True
+TPCH,19,H,1,HashJoin(l p),0.22709184885025024,,0.22709184885025024,True
+TPCH,19,N,1,NestLoop(l p),0.22709184885025024,0.10347304493188858,0.10347304493188858,False
+TPCH,20,HHH,3,HashJoin(s n) HashJoin(ps p) HashJoin(s n ps p),0.39117759466171265,,0.39117759466171265,True
+TPCH,20,HHN,3,HashJoin(s n) HashJoin(ps p) NestLoop(s n ps p),0.39117759466171265,,0.39117759466171265,True
+TPCH,20,HNH,3,HashJoin(s n) NestLoop(ps p) HashJoin(s n ps p),0.39117759466171265,0.26973747462034225,0.26973747462034225,False
+TPCH,20,HNN,3,HashJoin(s n) NestLoop(ps p) NestLoop(s n ps p),0.39117759466171265,0.20355189591646194,0.20355189591646194,False
+TPCH,20,NHH,3,NestLoop(s n) HashJoin(ps p) HashJoin(s n ps p),0.39117759466171265,,0.39117759466171265,True
+TPCH,20,NHN,3,NestLoop(s n) HashJoin(ps p) NestLoop(s n ps p),0.39117759466171265,,0.39117759466171265,True
+TPCH,20,NNH,3,NestLoop(s n) NestLoop(ps p) HashJoin(s n ps p),0.39117759466171265,0.11826916038990021,0.11826916038990021,False
+TPCH,20,NNN,3,NestLoop(s n) NestLoop(ps p) NestLoop(s n ps p),0.23653832077980042,0.20358332246541977,0.20358332246541977,False
+TPCH,21,HHHHH,5,HashJoin(s n) HashJoin(l1 s n) HashJoin(o l1 s n) HashJoin(o l1 s n l2) HashJoin(l3 o l1 s n l2),1.804543375968933,,1.804543375968933,True
+TPCH,21,HHHHN,5,HashJoin(s n) HashJoin(l1 s n) HashJoin(o l1 s n) HashJoin(o l1 s n l2) NestLoop(l3 o l1 s n l2),1.804543375968933,,1.804543375968933,True
+TPCH,21,HHHNH,5,HashJoin(s n) HashJoin(l1 s n) HashJoin(o l1 s n) NestLoop(o l1 s n l2) HashJoin(l3 o l1 s n l2),1.804543375968933,,1.804543375968933,True
+TPCH,21,HHHNN,5,HashJoin(s n) HashJoin(l1 s n) HashJoin(o l1 s n) NestLoop(o l1 s n l2) NestLoop(l3 o l1 s n l2),1.804543375968933,1.6335694342851639,1.6335694342851639,False
+TPCH,21,HHNHH,5,HashJoin(s n) HashJoin(l1 s n) NestLoop(o l1 s n) HashJoin(o l1 s n l2) HashJoin(l3 o l1 s n l2),1.804543375968933,,1.804543375968933,True
+TPCH,21,HHNHN,5,HashJoin(s n) HashJoin(l1 s n) NestLoop(o l1 s n) HashJoin(o l1 s n l2) NestLoop(l3 o l1 s n l2),1.804543375968933,,1.804543375968933,True
+TPCH,21,HHNNH,5,HashJoin(s n) HashJoin(l1 s n) NestLoop(o l1 s n) NestLoop(o l1 s n l2) HashJoin(l3 o l1 s n l2),1.804543375968933,,1.804543375968933,True
+TPCH,21,HHNNN,5,HashJoin(s n) HashJoin(l1 s n) NestLoop(o l1 s n) NestLoop(o l1 s n l2) NestLoop(l3 o l1 s n l2),1.804543375968933,1.5428204238414764,1.5428204238414764,False
+TPCH,21,HNHHH,5,HashJoin(s n) NestLoop(l1 s n) HashJoin(o l1 s n) HashJoin(o l1 s n l2) HashJoin(l3 o l1 s n l2),1.804543375968933,,1.804543375968933,True
+TPCH,21,HNHHN,5,HashJoin(s n) NestLoop(l1 s n) HashJoin(o l1 s n) HashJoin(o l1 s n l2) NestLoop(l3 o l1 s n l2),1.804543375968933,,1.804543375968933,True
+TPCH,21,HNHNH,5,HashJoin(s n) NestLoop(l1 s n) HashJoin(o l1 s n) NestLoop(o l1 s n l2) HashJoin(l3 o l1 s n l2),1.804543375968933,,1.804543375968933,True
+TPCH,21,HNHNN,5,HashJoin(s n) NestLoop(l1 s n) HashJoin(o l1 s n) NestLoop(o l1 s n l2) NestLoop(l3 o l1 s n l2),1.804543375968933,0.8801615536212921,0.8801615536212921,False
+TPCH,21,HNNHH,5,HashJoin(s n) NestLoop(l1 s n) NestLoop(o l1 s n) HashJoin(o l1 s n l2) HashJoin(l3 o l1 s n l2),1.7603231072425842,,1.7603231072425842,True
+TPCH,21,HNNHN,5,HashJoin(s n) NestLoop(l1 s n) NestLoop(o l1 s n) HashJoin(o l1 s n l2) NestLoop(l3 o l1 s n l2),1.7603231072425842,,1.7603231072425842,True
+TPCH,21,HNNNH,5,HashJoin(s n) NestLoop(l1 s n) NestLoop(o l1 s n) NestLoop(o l1 s n l2) HashJoin(l3 o l1 s n l2),1.7603231072425842,,1.7603231072425842,True
+TPCH,21,HNNNN,5,HashJoin(s n) NestLoop(l1 s n) NestLoop(o l1 s n) NestLoop(o l1 s n l2) NestLoop(l3 o l1 s n l2),1.7603231072425842,1.1381760463118553,1.1381760463118553,False
+TPCH,21,NHHHH,5,NestLoop(s n) HashJoin(l1 s n) HashJoin(o l1 s n) HashJoin(o l1 s n l2) HashJoin(l3 o l1 s n l2),1.7603231072425842,,1.7603231072425842,True
+TPCH,21,NHHHN,5,NestLoop(s n) HashJoin(l1 s n) HashJoin(o l1 s n) HashJoin(o l1 s n l2) NestLoop(l3 o l1 s n l2),1.7603231072425842,,1.7603231072425842,True
+TPCH,21,NHHNH,5,NestLoop(s n) HashJoin(l1 s n) HashJoin(o l1 s n) NestLoop(o l1 s n l2) HashJoin(l3 o l1 s n l2),1.7603231072425842,,1.7603231072425842,True
+TPCH,21,NHHNN,5,NestLoop(s n) HashJoin(l1 s n) HashJoin(o l1 s n) NestLoop(o l1 s n l2) NestLoop(l3 o l1 s n l2),1.7603231072425842,1.6405803188681602,1.6405803188681602,False
+TPCH,21,NHNHH,5,NestLoop(s n) HashJoin(l1 s n) NestLoop(o l1 s n) HashJoin(o l1 s n l2) HashJoin(l3 o l1 s n l2),1.7603231072425842,,1.7603231072425842,True
+TPCH,21,NHNHN,5,NestLoop(s n) HashJoin(l1 s n) NestLoop(o l1 s n) HashJoin(o l1 s n l2) NestLoop(l3 o l1 s n l2),1.7603231072425842,,1.7603231072425842,True
+TPCH,21,NHNNH,5,NestLoop(s n) HashJoin(l1 s n) NestLoop(o l1 s n) NestLoop(o l1 s n l2) HashJoin(l3 o l1 s n l2),1.7603231072425842,,1.7603231072425842,True
+TPCH,21,NHNNN,5,NestLoop(s n) HashJoin(l1 s n) NestLoop(o l1 s n) NestLoop(o l1 s n l2) NestLoop(l3 o l1 s n l2),1.7603231072425842,1.5318464040756226,1.5318464040756226,False
+TPCH,21,NNHHH,5,NestLoop(s n) NestLoop(l1 s n) HashJoin(o l1 s n) HashJoin(o l1 s n l2) HashJoin(l3 o l1 s n l2),1.7603231072425842,,1.7603231072425842,True
+TPCH,21,NNHHN,5,NestLoop(s n) NestLoop(l1 s n) HashJoin(o l1 s n) HashJoin(o l1 s n l2) NestLoop(l3 o l1 s n l2),1.7603231072425842,,1.7603231072425842,True
+TPCH,21,NNHNH,5,NestLoop(s n) NestLoop(l1 s n) HashJoin(o l1 s n) NestLoop(o l1 s n l2) HashJoin(l3 o l1 s n l2),1.7603231072425842,,1.7603231072425842,True
+TPCH,21,NNHNN,5,NestLoop(s n) NestLoop(l1 s n) HashJoin(o l1 s n) NestLoop(o l1 s n l2) NestLoop(l3 o l1 s n l2),1.7603231072425842,0.8790768906474113,0.8790768906474113,False
+TPCH,21,NNNHH,5,NestLoop(s n) NestLoop(l1 s n) NestLoop(o l1 s n) HashJoin(o l1 s n l2) HashJoin(l3 o l1 s n l2),1.7581537812948227,,1.7581537812948227,True
+TPCH,21,NNNHN,5,NestLoop(s n) NestLoop(l1 s n) NestLoop(o l1 s n) HashJoin(o l1 s n l2) NestLoop(l3 o l1 s n l2),1.7581537812948227,,1.7581537812948227,True
+TPCH,21,NNNNH,5,NestLoop(s n) NestLoop(l1 s n) NestLoop(o l1 s n) NestLoop(o l1 s n l2) HashJoin(l3 o l1 s n l2),1.7581537812948227,,1.7581537812948227,True
+TPCH,21,NNNNN,5,NestLoop(s n) NestLoop(l1 s n) NestLoop(o l1 s n) NestLoop(o l1 s n l2) NestLoop(l3 o l1 s n l2),1.7581537812948227,1.1265948042273521,1.1265948042273521,False
+TPCH,22,H,1,HashJoin(o c),0.35786551237106323,,0.35786551237106323,True
+TPCH,22,N,1,NestLoop(o c),0.35786551237106323,0.17069973051548004,0.17069973051548004,False

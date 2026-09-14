@@ -1,0 +1,2 @@
+profile,query_count,pg_total_ms,action_total_ms,workload_speedup,geometric_mean_speedup,improved_queries,improved_pct,regressed_queries,timeouts,wrong_results,errors,split_applied_queries,split_application_pct,search_applied_queries,search_application_pct,lip_applied_queries,lip_application_pct,aja_applied_queries,aja_application_pct,action_applied_queries,action_application_pct,coverage_complete,valid
+query_split,3,4627.28937715292,3167.7602976560593,1.4607447983285917,1.8556958557471923,1,33.333333333333336,2,0,0,0,3,100.0,0,0.0,0,0.0,0,0.0,3,100.0,True,True

@@ -1,0 +1,219 @@
+{
+  "action_config": {
+    "config_hash": null,
+    "path": null
+  },
+  "code_versions": {
+    "pgdb": {
+      "dirty": "True",
+      "head": "0b9bf71ba80b9f1b9cfe28ba6128bd6e3dd3905e",
+      "implementation_files": [
+        "src/runtime/policies/replay.py",
+        "dbengine/src/backend/executor/nodeNqoAdaptiveJoin.c",
+        "dbengine/src/backend/parser/query_split.c",
+        "dbengine/src/backend/utils/misc/guc_tables.c",
+        "dbengine/src/include/executor/nodeNqoAdaptiveJoin.h",
+        "dbengine/src/include/parser/query_split.h",
+        "src/runtime/action_server.py",
+        "src/runtime/policies/fixed.py",
+        "src/training/incremental_trainer.py"
+      ],
+      "implementation_hash": "f2907bd464f5c0d6edddf21a12d53dd136299d5c998bc813092f128d44bd665b",
+      "path": "../pgdb"
+    },
+    "nqo": {
+      "dirty": "True",
+      "head": "32fb5dff4b37c76f233d878b4e5571f468d51fe1",
+      "implementation_files": [
+        "scripts/benchmark/build_training_baseline.py",
+        "scripts/benchmark/merge_experience.py",
+        "scripts/benchmark/run_action_benchmark.py",
+        "scripts/benchmark/run_action_tuning.py",
+        "scripts/benchmark/run_mixed_transfer_training.py",
+        "scripts/benchmark/run_benchmark_matrix.py",
+        "scripts/benchmark/run_online_training.py",
+        "scripts/benchmark/run_rl_formulation_comparison.py",
+        "scripts/benchmark/run_state_representation_ablation.py",
+        "scripts/benchmark/run_transferability.py",
+        "scripts/benchmark/seed_decomposition_experience.py",
+        "scripts/benchmark/seed_experience_from_light_cache.py",
+        "scripts/benchmark/select_common_actions.py",
+        "scripts/benchmark/summarize_action_protocols.py",
+        "src/model/hrl/__init__.py",
+        "src/model/hrl/analyze_results.py",
+        "src/model/hrl/eval_best_checkpoints.py",
+        "src/model/hrl/hrl_shared.py",
+        "src/model/hrl/hrl_train.py",
+        "src/model/hrl/mixed_online_ppo.py",
+        "src/model/hrl/online_experience.py",
+        "src/model/hrl/online_ppo.py",
+        "src/model/hrl/online_runtime.py",
+        "src/model/hrl/query_graph_encoder.py",
+        "src/model/hrl/run_hrl_experiments.py",
+        "src/model/hrl/transfer_state.py",
+        "src/model/hrl/workload_config.py",
+        "workloads/train_test.py"
+      ],
+      "implementation_hash": "df8ef3e781c6212341236877cb0737c92097672a36f454dac19ddd436509a68b",
+      "path": "."
+    }
+  },
+  "created_at": "2026-08-06T10:27:04.000062+00:00",
+  "dataset_snapshot_id": "STACK",
+  "execution_cache": {
+    "action_space_version": "high2-schedule3-search2-low4-v2",
+    "match_mode": "statewise",
+    "mode": "read-write"
+  },
+  "experiment_id": "decomposition-depth-stack-d4-v3-20260806",
+  "fold": "a",
+  "implementation_version": "4fee5dc96cd96d12bc9ff52d0328fb70cfa27bd951ab1c2a86d504fec9ba926c",
+  "last_started_at": "2026-08-06T10:27:04.000089+00:00",
+  "manifest_schema_version": 2,
+  "measurements": 1,
+  "model": {
+    "action_ablation": "none",
+    "coverage_counts": null,
+    "coverage_counts_hash": null,
+    "coverage_mix": 0.0,
+    "coverage_power": 0.5,
+    "deterministic_rule": "masked_argmax",
+    "exploration_epsilon": 0.0,
+    "hidden": 128,
+    "inference_mode": "deterministic",
+    "method": "standardmdp_rl",
+    "policy_version": null,
+    "sampling_seed": 42,
+    "source": null,
+    "source_sha256": null,
+    "stochastic_heads": null,
+    "temperature": 1.0
+  },
+  "prewarm": {
+    "enabled": false
+  },
+  "profiles": [
+    {
+      "aja": "none",
+      "aja_aggressive_max_nestloop_cost_ratio_pct": 125,
+      "aja_aggressive_rows": 3624434,
+      "aja_conservative_rows": 362443,
+      "aja_max_nestloop_cost_ratio_pct": 150,
+      "high": "split",
+      "lip": "none",
+      "lip_max_build_relation_rows": 500000,
+      "lip_max_build_selectivity_pct": 10,
+      "lip_max_filters": 4,
+      "lip_min_probe_ratio": 2,
+      "lip_selective_plan_rows": 10000,
+      "max_rounds": 16,
+      "name": "query_split",
+      "nqo_enabled": true,
+      "schedule_alpha": 0.5,
+      "schedule_alpha_sequence": [],
+      "search": "default",
+      "search_exact_cardinality": false,
+      "search_k": 5,
+      "search_max_rels": 12,
+      "split_rounds": 4
+    }
+  ],
+  "protocol": "random",
+  "query_ids": [
+    "q3_q3-099",
+    "q2_q2-012",
+    "q13_935e2051"
+  ],
+  "replay_group": "decomposition-depth-stack-d4-v3-20260806",
+  "resume_contract": {
+    "action_config_hash": null,
+    "baseline_hash": "a8e8679b8e001a88286bb7ef3d7d5562484edf19781591743d2943796911b877",
+    "correctness": "strict",
+    "dataset_snapshot_id": "STACK",
+    "execution_cache": {
+      "action_space_version": "high2-schedule3-search2-low4-v2",
+      "match_mode": "statewise",
+      "mode": "read-write"
+    },
+    "experience_path": "../pgdb/.nqo_runtime/online/experience/decomposition-depth-stack-v3-20260806.sqlite",
+    "experiment_id": "decomposition-depth-stack-d4-v3-20260806",
+    "fold": "a",
+    "implementation_version": "4fee5dc96cd96d12bc9ff52d0328fb70cfa27bd951ab1c2a86d504fec9ba926c",
+    "measurements": 1,
+    "model": {
+      "action_ablation": "none",
+      "coverage_counts": null,
+      "coverage_counts_hash": null,
+      "coverage_mix": 0.0,
+      "coverage_power": 0.5,
+      "deterministic_rule": "masked_argmax",
+      "exploration_epsilon": 0.0,
+      "hidden": 128,
+      "inference_mode": "deterministic",
+      "method": "standardmdp_rl",
+      "policy_version": null,
+      "sampling_seed": 42,
+      "source": null,
+      "source_sha256": null,
+      "stochastic_heads": null,
+      "temperature": 1.0
+    },
+    "prewarm": false,
+    "profiles": [
+      {
+        "aja": "none",
+        "aja_aggressive_max_nestloop_cost_ratio_pct": 125,
+        "aja_aggressive_rows": 3624434,
+        "aja_conservative_rows": 362443,
+        "aja_max_nestloop_cost_ratio_pct": 150,
+        "high": "split",
+        "lip": "none",
+        "lip_max_build_relation_rows": 500000,
+        "lip_max_build_selectivity_pct": 10,
+        "lip_max_filters": 4,
+        "lip_min_probe_ratio": 2,
+        "lip_selective_plan_rows": 10000,
+        "max_rounds": 16,
+        "name": "query_split",
+        "nqo_enabled": true,
+        "schedule_alpha": 0.5,
+        "schedule_alpha_sequence": [],
+        "search": "default",
+        "search_exact_cardinality": false,
+        "search_k": 5,
+        "search_max_rels": 12,
+        "split_rounds": 4
+      }
+    ],
+    "protocol": "random",
+    "query_ids": [
+      "q3_q3-099",
+      "q2_q2-012",
+      "q13_935e2051"
+    ],
+    "replay_group": "decomposition-depth-stack-d4-v3-20260806",
+    "role": "all",
+    "schema_version": 1,
+    "sql_execution_slots": 4,
+    "timeout": {
+      "charge_cap_ms": 360000,
+      "charge_factor": 5.0,
+      "charge_mode": "min(5*pg_official_ms,360000)",
+      "execution_mode": "ceil(min(5*pg_official_ms,60000))",
+      "statement_timeout_ms": 60000
+    },
+    "warmups": 0,
+    "workload": "STACK"
+  },
+  "role": "all",
+  "sql_execution_slots": 4,
+  "timeout": {
+    "charge_cap_ms": 360000,
+    "charge_factor": 5.0,
+    "charge_mode": "min(5*pg_official_ms,360000)",
+    "execution_mode": "ceil(min(5*pg_official_ms,60000))",
+    "statement_timeout_ms": 60000
+  },
+  "warmups": 0,
+  "workload": "STACK"
+}

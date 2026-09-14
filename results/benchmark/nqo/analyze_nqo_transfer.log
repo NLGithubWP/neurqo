@@ -1,0 +1,37 @@
+Zero-shot transfer cache audit
+Input: results/benchmark/nqo/nqo_transfer_run.csv
+Checkpoint-fold evaluations: 20
+Cache hits: 565/569
+Physical executions: 4
+
+Cross-workload metrics (first-run semantics)
+Source                  Target  Queries  Cache Hits  WS        GS        IMP
+----------------------  ------  -------  ----------  --------  --------  ---------------
+STACK (best-best-best)  JOB     113      113         1.473394  0.828596  50/113 (44.25%)
+TPCH (best-best-best)   JOB     113      113         1.205701  0.902078  40/113 (35.40%)
+JOB (best-best-best)    STACK   112      112         0.824509  0.732409  38/112 (33.93%)
+JOB (best-best-0000)    STACK   112      112         0.847505  0.737966  39/112 (34.82%)
+JOB (best-0016-best)    STACK   112      108         0.999762  0.760795  36/112 (32.14%)
+JOB (best-0016-0000)    STACK   112      108         1.033773  0.766568  37/112 (33.04%)
+TPCH (best-best-best)   STACK   112      112         0.468880  0.423223  25/112 (22.32%)
+JOB (best-best-best)    TPCH    22       22          1.032013  0.971968  9/22 (40.91%)
+STACK (best-best-best)  TPCH    22       22          0.998605  0.937258  9/22 (40.91%)
+
+WS_first matrix
+Target  Source=JOB  Source=STACK  Source=TPC-H
+------  ----------  ------------  ------------
+JOB     —           1.473394      1.205701
+STACK   1.033773    —             0.468880
+TPCH    1.032013    0.998605      —
+
+Mixed-workload cache audit
+Tasks: 9/9
+Cache hits: 247/247
+Physical executions: 0
+
+Mixed-workload metrics (first-run semantics)
+Target  Queries  Cache Hits  WS        GS        IMP
+------  -------  ----------  --------  --------  ---------------
+JOB     113      113         1.626803  1.048093  56/113 (49.56%)
+STACK   112      112         1.391619  0.916983  46/112 (41.07%)
+TPCH    22       22          1.035380  0.976039  9/22 (40.91%)

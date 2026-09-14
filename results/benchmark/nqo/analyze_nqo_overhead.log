@@ -1,0 +1,29 @@
+NQO resource and runtime overhead
+
+Inputs
+  NQO runs: results/benchmark/nqo/nqo_runs.csv
+  Independent Actions: results/benchmark/nqo/nqo_independent_action_runs.csv
+  NQO JOB events: results/buffers/job_light.sql
+  NQO STACK events: results/buffers/stack_light.sql
+  NQO TPCH events: results/buffers/tpch_light.sql
+
+(a) Materialization footprint (lower is better)
+
+Workload  Method      Avg materializations/query (#)  Avg materialized data/query (MiB)  Materialized-data reduction (%)
+--------  ----------  ------------------------------  ---------------------------------  -------------------------------
+JOB       QuerySplit                            3.68                               6.80                                —
+JOB       NQO                                   1.71                               3.88                             42.9
+STACK     QuerySplit                            4.99                               5.97                                —
+STACK     NQO                                   3.04                               2.47                             58.7
+
+TPC-H is omitted because Query Split is not enabled for that workload.
+
+(b) Directly measured NQO-specific runtime overhead (% of end-to-end time)
+
+Workload  #Q   Inference  LIP build  AJA build  Search  Decomp. bookkeeping  Total measured
+--------  ---  ---------  ---------  ---------  ------  -------------------  --------------
+JOB       113       7.11       0.25       0.12    0.00                 1.23            8.70
+STACK     112       3.45       0.00       0.07    0.00                 0.84            4.36
+TPCH      22        0.32       0.00       3.61    0.08                 0.00            4.00
+
+Materialization execution and regular PostgreSQL planning/execution are query-processing work and are not counted as NQO-specific overhead.

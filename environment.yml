@@ -1,0 +1,15 @@
+name: nqo
+channels:
+  - defaults
+dependencies:
+  - python=3.11.14
+  - pip=25.3
+  - psycopg2=2.9.11
+  - pip:
+      # Matches the environment used for the reproduced experiments.
+      - --extra-index-url https://download.pytorch.org/whl/cu118
+      - matplotlib==3.10.8
+      - numpy==2.4.1
+      - pandas==3.0.1
+      - pytest==8.3.5
+      - torch==2.7.1+cu118

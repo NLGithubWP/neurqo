@@ -1,0 +1,32 @@
+PG baseline timeouts are excluded from paired metrics; NQO timeouts retain their charged runtime.
+Inference overhead is sum(inference_ms) / sum(NQO end-to-end runtime_ms) over the paired queries.
+
+JOB
+NQO end-to-end
+Data       WS        GS        Imp              PG (s)   NQO (s)  Inf. overhead (%)  NQO timeouts  PG excluded
+---------  --------  --------  ---------------  -------  -------  -----------------  ------------  -----------
+Full       1.789778  1.024788  60/113 (53.10%)  293.551  164.015  7.11               2             0
+Title 75%  1.306544  0.739016  31/113 (27.43%)  195.511  149.640  16.51              8             0
+Title 50%  1.184680  0.658596  29/113 (25.66%)  144.705  122.147  20.03              11            0
+Title 25%  0.973733  0.552927  22/113 (19.47%)  84.282   86.555   28.64              15            0
+
+NQO without inference time
+Data       WS        GS        Imp              PG (s)   NQO (s)  NQO timeouts  PG excluded
+---------  --------  --------  ---------------  -------  -------  ------------  -----------
+Full       1.924302  1.350700  63/113 (55.75%)  293.551  152.549  2             0
+Title 75%  1.550529  1.100518  50/113 (44.25%)  195.511  126.093  8             0
+Title 50%  1.461363  1.020628  47/113 (41.59%)  144.705  99.021   11            0
+Title 25%  1.321412  0.927299  41/113 (36.28%)  84.282   63.782   15            0
+
+STACK
+NQO end-to-end
+Data        WS        GS        Imp              PG (s)   NQO (s)  Inf. overhead (%)  NQO timeouts  PG excluded
+----------  --------  --------  ---------------  -------  -------  -----------------  ------------  -----------
+Full        1.635543  0.904246  42/112 (37.50%)  301.978  184.635  3.45               12            0
+Thread 50%  1.300537  0.636677  32/111 (28.83%)  155.502  119.567  22.99              18            1
+
+NQO without inference time
+Data        WS        GS        Imp              PG (s)   NQO (s)  NQO timeouts  PG excluded
+----------  --------  --------  ---------------  -------  -------  ------------  -----------
+Full        1.688047  1.091101  49/112 (43.75%)  301.978  178.892  12            0
+Thread 50%  1.653193  1.156899  65/111 (58.56%)  155.502  94.061   18            1
