@@ -18,7 +18,7 @@ WORKLOADS = ["job", "stack", "tpch"]
 WORKLOAD_LABEL = {"job": "JOB", "stack": "STACK", "tpch": "TPC-H"}
 SETTINGS = ["nqo", "wo_split", "wo_search", "wo_lip", "wo_aja"]
 SETTING_LABEL = {
-    "nqo": "NQO",
+    "nqo": "NeurQO",
     "wo_split": "w/o Dec",
     "wo_search": "w/o TOP-K",
     "wo_lip": "w/o Filter",
@@ -128,7 +128,7 @@ def plot(rows: list[dict]) -> None:
         frameon=False,
         ncol=5,
         loc="upper center",
-        bbox_to_anchor=(0.54, 1.24),
+        bbox_to_anchor=(0.54, 1.42),
         columnspacing=0.8,
         handlelength=1.3,
         handletextpad=0.5,

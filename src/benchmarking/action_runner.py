@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run reproducible PostgreSQL/NQO action benchmarks."""
+"""Run reproducible PostgreSQL/NeurQO action benchmarks."""
 from __future__ import annotations
 
 import argparse
@@ -170,12 +170,12 @@ def load_profiles(args: argparse.Namespace) -> list[ActionProfile]:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="nqo-benchmark run")
+    parser = argparse.ArgumentParser(prog="neurqo-benchmark run")
     parser.add_argument("--workload", choices=("JOB", "STACK", "TPCH"), default="JOB")
     parser.add_argument(
         "--profiles",
         default=(
-            "pg,nqo_none,query_split,split_search,top5,top10,lip_full,"
+            "pg,neurqo_none,query_split,split_search,top5,top10,lip_full,"
             "lip_selective,aja_conservative,aja_aggressive"
         ),
     )
@@ -230,8 +230,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--model-hidden", type=int, default=128)
     parser.add_argument("--model-device", default="cpu")
     parser.add_argument(
-        "--model-nqo-src",
-        default="/code/pgdb-dev/.nqo_runtime/nqo/src",
+        "--model-neurqo-src",
+        default="/code/pgdb-dev/.neurqo_runtime/neurqo/src",
         help="container path to the model source matching the checkpoint",
     )
     parser.add_argument(
@@ -435,7 +435,7 @@ def main(argv: list[str] | None = None) -> int:
 
     dataset_snapshot_id = args.workload.upper()
     code_versions = {
-        "nqo": repository_version(ROOT),
+        "neurqo": repository_version(ROOT),
         "pgdb": repository_version(args.pgdb_root.resolve()),
     }
     implementation_version = content_hash(code_versions)
@@ -519,10 +519,10 @@ def main(argv: list[str] | None = None) -> int:
     episodes_csv = EpisodeCsv(output_dir / "episodes.csv")
     prewarm = prewarm_database(args) if args.prewarm else {"enabled": False}
     runtime_host_dir = (
-        args.pgdb_root.resolve() / ".nqo_runtime" / "benchmark" / args.experiment_id
+        args.pgdb_root.resolve() / ".neurqo_runtime" / "benchmark" / args.experiment_id
     )
     runtime_container_dir = (
-        f"/code/pgdb-dev/.nqo_runtime/benchmark/{args.experiment_id}"
+        f"/code/pgdb-dev/.neurqo_runtime/benchmark/{args.experiment_id}"
     )
     runtime_host_dir.mkdir(parents=True, exist_ok=True)
     model_container_path = None
@@ -630,7 +630,7 @@ def main(argv: list[str] | None = None) -> int:
                     "runtime_gucs": {
                         key: value
                         for key, value in profile.guc_settings().items()
-                        if key != "nqo.search_topk"
+                        if key != "neurqo.search_topk"
                     },
                 }
             )
@@ -661,7 +661,7 @@ def main(argv: list[str] | None = None) -> int:
                     workload=args.workload,
                     catalog_container_path=catalog_container_path,
                     model_device=args.model_device,
-                    nqo_src=args.model_nqo_src,
+                    neurqo_src=args.model_neurqo_src,
                     inference_mode=args.inference_mode,
                     temperature=args.temperature,
                     exploration_epsilon=args.exploration_epsilon,

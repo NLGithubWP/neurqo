@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run and aggregate the complete NQO benchmark matrix."""
+"""Run and aggregate the complete NeurQO benchmark matrix."""
 from __future__ import annotations
 
 import argparse
@@ -126,7 +126,7 @@ def main(argv: list[str] | None = None) -> int:
         )
         return 130
 
-    parser = argparse.ArgumentParser(prog="nqo-benchmark matrix")
+    parser = argparse.ArgumentParser(prog="neurqo-benchmark matrix")
     parser.add_argument(
         "--workload",
         choices=("JOB", "STACK", "TPCH"),
@@ -517,7 +517,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.workload == "STACK" and args.sql_execution_lock is None:
         args.sql_execution_lock = (
             args.pgdb_root
-            / ".nqo_runtime"
+            / ".neurqo_runtime"
             / "online"
             / ".stack-sql-execution.lock"
         )
@@ -526,7 +526,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     matrix_dir = args.output_root / args.workload.lower() / matrix_id
     matrix_dir.mkdir(parents=True, exist_ok=True)
-    runtime_dir = args.pgdb_root / ".nqo_runtime" / "benchmark" / matrix_id
+    runtime_dir = args.pgdb_root / ".neurqo_runtime" / "benchmark" / matrix_id
     runtime_dir.mkdir(parents=True, exist_ok=True)
     runtime_dir.chmod(0o777)
     frozen_action_config = None
@@ -716,7 +716,7 @@ def main(argv: list[str] | None = None) -> int:
         "action_calibration": "once_per_dataset",
         "experience_db": str(dataset_experience_db),
         "config": vars(args),
-        "ws_definition": "sum(PG test wall time) / sum(NQO test wall time)",
+        "ws_definition": "sum(PG test wall time) / sum(NeurQO test wall time)",
         "checkpoint_selection": "maximum fold-local test WS",
         "test_policy": "deterministic eligibility-mask argmax",
         "test_multiplicity": {

@@ -1,16 +1,19 @@
-# NQO
+# NeurQO
 
-NQO is a workload-agnostic learned query optimizer for PostgreSQL. A
+Naming and compatibility with released NQO models, buffers, and result files
+are documented in [Naming Compatibility](docs/naming_compatibility.md).
+
+NeurQO is a workload-agnostic learned query optimizer for PostgreSQL. A
 hierarchical policy composes actions across pre-planning, planning, and
 execution using shared query-graph and plan-tree representations.
 
-![NQO system architecture](docs/system.png)
+![NeurQO system architecture](docs/system.png)
 
 ## 1. Setup
 
 ```bash
 conda env create -f environment.yml
-conda activate nqo
+conda activate neurqo
 pip install -e .
 ```
 
@@ -19,7 +22,7 @@ Apply the database patch and build the LIP extension as described in
 service can then be started with:
 
 ```bash
-nqo-server --host 127.0.0.1 --port 8088
+neurqo-server --host 127.0.0.1 --port 8088
 ```
 
 The canonical SQL sets are `workloads/query_job` (113 queries),
@@ -51,19 +54,19 @@ for db in imdb_ori imdb_scale_25 imdb_scale_50 imdb_scale_75 \
 done
 ```
 
-NQO action GUCs are set per session by the reproduction runners. Run
+NeurQO action GUCs are set per session by the reproduction runners. Run
 `prewarm_all.sql` only for warm-cache experiments; after loading or changing
 data, refresh table statistics explicitly because autovacuum is disabled.
 
-## 2. Using NQO
+## 2. Using NeurQO
 
 After installing the PostgreSQL patch, the LIP extension, and starting
-`nqo-server`, enable NQO for a database session and submit ordinary SQL:
+`neurqo-server`, enable NeurQO for a database session and submit ordinary SQL:
 
 ```bash
 psql -h localhost -p 15432 -U pgdb -d imdb_ori <<'SQL'
-SET nqo = on;
-SET nqo.server_url = 'http://127.0.0.1:8088/action';
+SET neurqo = on;
+SET neurqo.server_url = 'http://127.0.0.1:8088/action';
 SELECT count(*)
 FROM title AS t JOIN movie_info AS mi ON mi.movie_id = t.id
 WHERE t.production_year >= 2000;
@@ -79,40 +82,40 @@ import psycopg2
 with psycopg2.connect(host="localhost", port=15432,
                       dbname="imdb_ori", user="pgdb") as conn:
     with conn.cursor() as cur:
-        cur.execute("SET nqo = on")
-        cur.execute("SET nqo.server_url = 'http://127.0.0.1:8088/action'")
+        cur.execute("SET neurqo = on")
+        cur.execute("SET neurqo.server_url = 'http://127.0.0.1:8088/action'")
         cur.execute("SELECT count(*) FROM title")
         print(cur.fetchone()[0])
 ```
 
 The settings apply to all subsequent `SELECT` statements on that connection.
-Use `SET nqo = off` to return to native PostgreSQL optimization.
+Use `SET neurqo = off` to return to native PostgreSQL optimization.
 
 ### Using individual actions
 
-`SET nqo = on` enables the NQO pipeline but does not force a particular
-action. Action choices come from the policy server. The `nqo.search_*`,
-`nqo.aja_*`, and `nqo.lip_*` GUC families configure plan-search parameters and
+`SET neurqo = on` enables the NeurQO pipeline but does not force a particular
+action. Action choices come from the policy server. The `neurqo.search_*`,
+`neurqo.aja_*`, and `neurqo.lip_*` GUC families configure plan-search parameters and
 execution-action guardrails; they do not select actions. To isolate one action,
 stop the current policy server and start the fixed policy on port `8088` with
 one of these commands:
 
 ```bash
 # Dec only: apply query decomposition once, then execute the residual query.
-NQO_FIXED_DEC=apply NQO_FIXED_DEC_ROUNDS=1 \
-  nqo-server --model-module runtime.policies.fixed:predict
+NEURQO_FIXED_DEC=apply NEURQO_FIXED_DEC_ROUNDS=1 \
+  neurqo-server --model-module runtime.policies.fixed:predict
 
 # Enum only: retain five alternative join orders.
-NQO_FIXED_ENUM=top5 \
-  nqo-server --model-module runtime.policies.fixed:predict
+NEURQO_FIXED_ENUM=top5 \
+  neurqo-server --model-module runtime.policies.fixed:predict
 
 # Filter only: selectively apply the Bloom-filter action.
-NQO_FIXED_FILTER=selective \
-  nqo-server --model-module runtime.policies.fixed:predict
+NEURQO_FIXED_FILTER=selective \
+  neurqo-server --model-module runtime.policies.fixed:predict
 
 # AJoin only: use the conservative adaptive-join action.
-NQO_FIXED_AJOIN=conservative \
-  nqo-server --model-module runtime.policies.fixed:predict
+NEURQO_FIXED_AJOIN=conservative \
+  neurqo-server --model-module runtime.policies.fixed:predict
 ```
 
 After starting any one of the servers above, execute the same ordinary SQL
@@ -120,8 +123,8 @@ through `psql`:
 
 ```bash
 psql -h localhost -p 15432 -U pgdb -d imdb_ori <<'SQL'
-SET nqo = on;
-SET nqo.server_url = 'http://127.0.0.1:8088/action';
+SET neurqo = on;
+SET neurqo.server_url = 'http://127.0.0.1:8088/action';
 SELECT count(*)
 FROM title AS t
 JOIN movie_info AS mi ON mi.movie_id = t.id
@@ -148,58 +151,58 @@ one-table schema and every field are documented in
 [results/buffers/README.md](results/buffers/README.md).
 
 Released buffers are read-only inputs. New executions should use a separate
-path under `../pgdb/.nqo_runtime/` so that released measurements remain
+path under `../pgdb/.neurqo_runtime/` so that released measurements remain
 unchanged.
 
 ### Models
 
-`results/models/` contains 176 versioned NQO checkpoints (about 348 MiB)
+`results/models/` contains 176 versioned NeurQO checkpoints (about 348 MiB)
 trained using the released execution experience. It includes workload-specific,
 mixed-workload, and ablation checkpoints used by the paper experiments.
 
-## 4. Reproducing NQO results
+## 4. Reproducing NeurQO results
 
-Released NQO measurements and analysis programs are under
+Released NeurQO measurements and analysis programs are under
 `results/benchmark/nqo/`. Fresh runs must use a separate output path; runtime
 logs and private writable buffers are placed under
-`../pgdb/.nqo_runtime/reproduction/`. Unless stated otherwise, producer scripts
-are under `scripts/reproduce/nqo/`, and released analysis scripts and logs are
+`../pgdb/.neurqo_runtime/reproduction/`. Unless stated otherwise, producer scripts
+are under `scripts/reproduce/neurqo/`, and released analysis scripts and logs are
 under `results/benchmark/nqo/`.
 
 Verify all released checkpoints and buffer references without executing SQL:
 
 ```bash
-python scripts/reproduce/nqo/verify_artifacts.py
+python scripts/reproduce/neurqo/verify_artifacts.py
 ```
 
 ### Overall performance
 
-**Purpose.** Evaluate NQO against PostgreSQL over every workload--split
+**Purpose.** Evaluate NeurQO against PostgreSQL over every workload--split
 combination, both end to end and per query.
 
 **Run.** `run.py` is the core runner. The JOB and STACK wrappers evaluate all
 three protocols and folds; TPC-H uses the random split.
 
 ```bash
-OUT=results/benchmark/temp_nqo_reproduction
+OUT=results/benchmark/temp_neurqo_reproduction
 mkdir -p "$OUT/logs"
 
 # Evaluate every JOB protocol and fold.
-NQO_OUTPUT="$OUT/nqo_runs.csv" \
-  bash scripts/reproduce/nqo/run_job_parallel.sh error \
+NEURQO_OUTPUT="$OUT/nqo_runs.csv" \
+  bash scripts/reproduce/neurqo/run_job_parallel.sh error \
   2>&1 | tee "$OUT/logs/job.log"
 # Evaluate every STACK protocol and fold.
-NQO_OUTPUT="$OUT/nqo_runs.csv" \
-  bash scripts/reproduce/nqo/run_stack_parallel.sh error \
+NEURQO_OUTPUT="$OUT/nqo_runs.csv" \
+  bash scripts/reproduce/neurqo/run_stack_parallel.sh error \
   2>&1 | tee "$OUT/logs/stack.log"
 
 # Evaluate PostgreSQL and the three TPC-H random-split folds.
 {
-  python scripts/reproduce/nqo/run.py \
+  python scripts/reproduce/neurqo/run.py \
     --dataset tpch --method postgres --output "$OUT/nqo_runs.csv"
   for fold in a b c; do
-    python scripts/reproduce/nqo/run.py \
-      --dataset tpch --method nqo --protocol random --fold "$fold" \
+    python scripts/reproduce/neurqo/run.py \
+      --dataset tpch --method neurqo --protocol random --fold "$fold" \
       --output "$OUT/nqo_runs.csv"
   done
 } 2>&1 | tee "$OUT/logs/tpch.log"
@@ -211,14 +214,14 @@ per-query, and action-frequency summaries. Its released output is
 `analyze_nqo.log`.
 
 ```bash
-OUT=results/benchmark/temp_nqo_reproduction
+OUT=results/benchmark/temp_neurqo_reproduction
 mkdir -p "$OUT/logs"
 python results/benchmark/nqo/analyze_nqo.py all \
   2>&1 | tee "$OUT/logs/analyze_nqo.log"
 python results/benchmark/build_overall_performance_comparison.py
 ```
 
-The unified NQO/baseline table is
+The unified NeurQO/baseline table is
 `results/benchmark/overall_performance_comparison.csv`.
 
 ### Learning efficiency
@@ -231,16 +234,16 @@ writes one `learning_curve.csv` per workload; after those runs finish, export
 their cumulative active training times with the second command.
 
 ```bash
-OUT=results/benchmark/temp_nqo_reproduction
+OUT=results/benchmark/temp_neurqo_reproduction
 mkdir -p "$OUT/logs"
 
 # Evaluate all retained checkpoints.
-python scripts/reproduce/nqo/run_learning_trace.py \
+python scripts/reproduce/neurqo/run_learning_trace.py \
   --output "$OUT/nqo_learning_trace.csv" \
   2>&1 | tee "$OUT/logs/learning_trace.log"
 
 # Export cumulative training time after fresh matrix training completes.
-python scripts/reproduce/nqo/export_learning_time.py \
+python scripts/reproduce/neurqo/export_learning_time.py \
   --matrix JOB=/path/to/job/learning_curve.csv \
   --matrix STACK=/path/to/stack/learning_curve.csv \
   --matrix TPCH=/path/to/tpch/learning_curve.csv \
@@ -253,7 +256,7 @@ together with `analyze_nqo_learning.py`; the released printed output is
 `analyze_nqo_learning.log`.
 
 ```bash
-OUT=results/benchmark/temp_nqo_reproduction
+OUT=results/benchmark/temp_neurqo_reproduction
 mkdir -p "$OUT/logs"
 python results/benchmark/nqo/analyze_nqo_learning.py \
   2>&1 | tee "$OUT/logs/analyze_nqo_learning.log"
@@ -261,27 +264,27 @@ python results/benchmark/nqo/analyze_nqo_learning.py \
 
 ### Transferability
 
-**Purpose.** Evaluate whether NQO policies transfer across workloads without
+**Purpose.** Evaluate whether NeurQO policies transfer across workloads without
 retraining and remain effective when database scale changes.
 
 **Run.** Run the mixed-workload and zero-shot evaluations, followed by the JOB
 and STACK data-scale experiments.
 
 ```bash
-OUT=results/benchmark/temp_nqo_reproduction
+OUT=results/benchmark/temp_neurqo_reproduction
 mkdir -p "$OUT/logs"
 
 # Mixed-workload training and zero-shot cross-workload transfer.
-python scripts/reproduce/nqo/run_transfer.py \
+python scripts/reproduce/neurqo/run_transfer.py \
   --experiment all --output "$OUT/nqo_transfer_run.csv" \
   2>&1 | tee "$OUT/logs/transfer.log"
 # JOB policies evaluated on three reduced database scales.
-NQO_OUTPUT_ROOT="$OUT" \
-  bash scripts/reproduce/nqo/run_data_scale.sh 25 50 75 \
+NEURQO_OUTPUT_ROOT="$OUT" \
+  bash scripts/reproduce/neurqo/run_data_scale.sh 25 50 75 \
   2>&1 | tee "$OUT/logs/job_data_scale.log"
 # STACK policies evaluated on the 50% database scale.
-NQO_OUTPUT_ROOT="$OUT" \
-  bash scripts/reproduce/nqo/run_stack_data_scale.sh \
+NEURQO_OUTPUT_ROOT="$OUT" \
+  bash scripts/reproduce/neurqo/run_stack_data_scale.sh \
   2>&1 | tee "$OUT/logs/stack_data_scale.log"
 ```
 
@@ -292,7 +295,7 @@ them with `analyze_nqo_transfer.py` and `analyze_nqo_data_scale.py`. Their
 released printed outputs are the adjacent `.log` files.
 
 ```bash
-OUT=results/benchmark/temp_nqo_reproduction
+OUT=results/benchmark/temp_neurqo_reproduction
 mkdir -p "$OUT/logs"
 python results/benchmark/nqo/analyze_nqo_transfer.py \
   2>&1 | tee "$OUT/logs/analyze_nqo_transfer.log"
@@ -311,26 +314,26 @@ fixed released output path directly; the other commands below use a temporary
 output directory.
 
 ```bash
-OUT=results/benchmark/temp_nqo_reproduction
+OUT=results/benchmark/temp_neurqo_reproduction
 mkdir -p "$OUT/logs"
 
 # Action importance: evaluate checkpoints retrained with one action disabled.
-python scripts/reproduce/nqo/run_abl_action.py \
+python scripts/reproduce/neurqo/run_abl_action.py \
   --output "$OUT/nqo_abl_action_run.csv" \
   2>&1 | tee "$OUT/logs/abl_action.log"
 # RL formulation: evaluate hierarchical SMDP and one-step RL checkpoints.
-python scripts/reproduce/nqo/run_abl_rl.py \
+python scripts/reproduce/neurqo/run_abl_rl.py \
   --output "$OUT/nqo_abl_rl_run.csv" \
   2>&1 | tee "$OUT/logs/abl_rl.log"
 # State representation: evaluate checkpoints trained without query or plan topology.
-python scripts/reproduce/nqo/run_abl_state.py \
+python scripts/reproduce/neurqo/run_abl_state.py \
   --output "$OUT/nqo_abl_sate_run.csv" \
   2>&1 | tee "$OUT/logs/abl_state.log"
 # Decomposition depth: force a fixed number of split rounds.
-python scripts/reproduce/nqo/run_decomposition_depth.py \
+python scripts/reproduce/neurqo/run_decomposition_depth.py \
   2>&1 | tee "$OUT/logs/decomposition_depth.log"
 # Scheduling sensitivity: override learned scheduling with fixed alpha values.
-python scripts/reproduce/nqo/run_alpha_sensitivity.py \
+python scripts/reproduce/neurqo/run_alpha_sensitivity.py \
   --output "$OUT/nqo_alpha_sensitivity.csv" \
   2>&1 | tee "$OUT/logs/alpha_sensitivity.log"
 ```
@@ -341,9 +344,9 @@ released component results are `nqo_abl_action_run.csv`, `nqo_abl_rl_run.csv`,
 `nqo_alpha_sensitivity.csv`. Print the corresponding analyses with:
 
 ```bash
-OUT=results/benchmark/temp_nqo_reproduction
+OUT=results/benchmark/temp_neurqo_reproduction
 mkdir -p "$OUT/logs"
-# Action frequencies from the main NQO evaluation.
+# Action frequencies from the main NeurQO evaluation.
 python results/benchmark/nqo/analyze_nqo.py all \
   2>&1 | tee "$OUT/logs/action_frequency.log"
 # Action, RL-formulation, and state-representation ablations.
@@ -359,18 +362,18 @@ python results/benchmark/nqo/analyze_nqo_alpha_sensitivity.py \
 
 ### Overhead analysis
 
-**Purpose.** Measure NQO training and inference costs, plus the runtime and
+**Purpose.** Measure NeurQO training and inference costs, plus the runtime and
 materialization overhead of its individual optimization actions.
 
 **Run.** Execute each standalone action against PostgreSQL and export the
 compact measurements.
 
 ```bash
-OUT=results/benchmark/temp_nqo_reproduction
+OUT=results/benchmark/temp_neurqo_reproduction
 mkdir -p "$OUT/logs"
 
 # Execute Dec, Enum, Filter, and AJoin independently.
-python scripts/reproduce/nqo/run_independent_actions.py \
+python scripts/reproduce/neurqo/run_independent_actions.py \
   --output "$OUT/nqo_independent_action_runs.csv" \
   2>&1 | tee "$OUT/logs/independent_actions.log"
 ```
@@ -384,7 +387,7 @@ Print the released overhead tables with
 `analyze_nqo_overhead.py`; its captured output is `analyze_nqo_overhead.log`.
 
 ```bash
-OUT=results/benchmark/temp_nqo_reproduction
+OUT=results/benchmark/temp_neurqo_reproduction
 mkdir -p "$OUT/logs"
 python results/benchmark/nqo/analyze_nqo_overhead.py \
   2>&1 | tee "$OUT/logs/analyze_nqo_overhead.log"

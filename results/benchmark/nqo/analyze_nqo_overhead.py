@@ -12,6 +12,10 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Iterable
 
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
+from optimization.naming import ResultDictReader
+
 
 REPO = Path(__file__).resolve().parents[3]
 HERE = Path(__file__).resolve().parent
@@ -25,7 +29,7 @@ BUFFER_FILES = {
 
 def read_csv(path: Path) -> list[dict[str, str]]:
     with path.open(newline="", encoding="utf-8") as handle:
-        return list(csv.DictReader(handle))
+        return list(ResultDictReader(handle))
 
 
 def decode_json(encoding: str, payload: bytes) -> object:
@@ -79,7 +83,7 @@ def selected_nqo_rows(
         row
         for row in runs
         if row["dataset"] == dataset
-        and row["method"] == "NQO"
+        and row["method"] == "NeurQO"
         and row["protocol"] == "random"
     ]
 
@@ -192,15 +196,15 @@ def main() -> None:
         nqo_rows[dataset] = selected_nqo_rows(runs, dataset)
         nqo_events[dataset] = cached_events(dataset, nqo_rows[dataset])
 
-    print("NQO resource and runtime overhead\n")
+    print("NeurQO resource and runtime overhead\n")
     print("Inputs")
-    print(f"  NQO runs: {args.runs.resolve().relative_to(REPO)}")
+    print(f"  NeurQO runs: {args.runs.resolve().relative_to(REPO)}")
     print(
         "  Independent Actions: "
         f"{INDEPENDENT_ACTION_RUNS.relative_to(REPO)}"
     )
     for dataset, path in BUFFER_FILES.items():
-        print(f"  NQO {dataset} events: {path.relative_to(REPO)}")
+        print(f"  NeurQO {dataset} events: {path.relative_to(REPO)}")
     print()
 
     print("(a) Materialization footprint (lower is better)\n")
@@ -219,7 +223,7 @@ def main() -> None:
                 ),
                 (
                     dataset,
-                    "NQO",
+                    "NeurQO",
                     f"{nqo['mat_per_query']:.2f}",
                     f"{nqo['mib_per_query']:.2f}",
                     relative_reduction(
@@ -240,7 +244,7 @@ def main() -> None:
     )
     print("\nTPC-H is omitted because Query Split is not enabled for that workload.\n")
 
-    print("(b) Directly measured NQO-specific runtime overhead (% of end-to-end time)\n")
+    print("(b) Directly measured NeurQO-specific runtime overhead (% of end-to-end time)\n")
     panel_b = []
     for dataset in ("JOB", "STACK", "TPCH"):
         overhead = runtime_overhead(nqo_rows[dataset], nqo_events[dataset])
@@ -272,7 +276,7 @@ def main() -> None:
     )
     print(
         "\nMaterialization execution and regular PostgreSQL planning/execution are "
-        "query-processing work and are not counted as NQO-specific overhead."
+        "query-processing work and are not counted as NeurQO-specific overhead."
     )
 
 

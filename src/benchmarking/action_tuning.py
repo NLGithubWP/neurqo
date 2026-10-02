@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Calibrate and freeze independent NQO actions once per dataset."""
+"""Calibrate and freeze independent NeurQO actions once per dataset."""
 from __future__ import annotations
 
 import argparse
@@ -450,7 +450,7 @@ def collect_prefix_replay(
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="nqo-benchmark tune")
+    parser = argparse.ArgumentParser(prog="neurqo-benchmark tune")
     parser.add_argument(
         "--workload",
         choices=("JOB", "STACK", "TPCH"),
@@ -629,7 +629,7 @@ def main(argv: list[str] | None = None) -> int:
         parser.error("--branch-alpha-depth-grid values must be at least 2")
     args.output_root = args.output_root.resolve()
     args.pgdb_root = args.pgdb_root.resolve()
-    args.runtime_project = args.pgdb_root / ".nqo_runtime" / "nqo"
+    args.runtime_project = args.pgdb_root / ".neurqo_runtime" / "neurqo"
     sync_runtime(args.pgdb_root, args.runtime_project)
 
     master_id = args.experiment_id or (
@@ -637,7 +637,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     result_dir = args.output_root / args.workload.lower() / master_id
     result_dir.mkdir(parents=True, exist_ok=True)
-    runtime_dir = args.pgdb_root / ".nqo_runtime" / "benchmark" / master_id
+    runtime_dir = args.pgdb_root / ".neurqo_runtime" / "benchmark" / master_id
     runtime_dir.mkdir(parents=True, exist_ok=True)
     experience_db = (
         args.experience_db.resolve()
@@ -981,11 +981,11 @@ def main(argv: list[str] | None = None) -> int:
             reuse_master_id=args.reuse_tuning_experiment_id,
         )
     selected_train_replay = {
-        "nqo_none": run_candidate(
+        "neurqo_none": run_candidate(
             args,
             master_id=master_id,
-            candidate_id="replay-nqo-none",
-            profile="nqo_none",
+            candidate_id="replay-neurqo-none",
+            profile="neurqo_none",
             query_ids=train_query_ids,
             role="train",
             experience_db=experience_db,
@@ -1013,11 +1013,11 @@ def main(argv: list[str] | None = None) -> int:
             measurements=args.replay_measurements,
         )
     standalone_test = {
-        "nqo_none": run_candidate(
+        "neurqo_none": run_candidate(
             args,
             master_id=master_id,
-            candidate_id="nqo-none",
-            profile="nqo_none",
+            candidate_id="neurqo-none",
+            profile="neurqo_none",
             query_ids=test_query_ids,
             role="test",
             experience_db=experience_db,

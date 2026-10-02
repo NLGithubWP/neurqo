@@ -16,7 +16,7 @@
     "is_spj_compatible": "True when the join core avoids structures unsafe for the current QuerySplit rewrite. Simple MIN(column), COUNT(*), and COUNT(DISTINCT column) result reducers are allowed.",
     "non_spj_features": "Syntactic reasons for classifying the SQL as incompatible; this classification does not require PostgreSQL.",
     "empty_array": "PostgreSQL found at most one raw center, so no intermediate decomposition center is exposed.",
-    "null": "The query was excluded by the compatibility check or bypassed the NQO decomposition hook, so FK-Centers were not enumerated."
+    "null": "The query was excluded by the compatibility check or bypassed the NeurQO decomposition hook, so FK-Centers were not enumerated."
   },
   "workloads": {
     "JOB": {

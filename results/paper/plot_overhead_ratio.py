@@ -201,7 +201,7 @@ def main():
         ax_top.set_title(WORKLOAD_LABELS[workload], fontsize=FONT["title"], pad=3)
         ax_bot.set_xticks(x)
         ax_bot.set_xticklabels(
-            METHODS,
+            ["NeurQO" if method == "NQO" else method for method in METHODS],
             rotation=36,
             ha="right",
             rotation_mode="anchor",

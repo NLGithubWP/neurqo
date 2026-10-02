@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Repository-local entry point for NQO benchmark workflows."""
+"""Repository-local entry point for NeurQO benchmark workflows."""
 
 import sys
 from pathlib import Path

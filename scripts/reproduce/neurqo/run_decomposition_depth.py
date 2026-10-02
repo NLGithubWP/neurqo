@@ -17,13 +17,13 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[3]
 PGDB_ROOT = ROOT.parent / "pgdb"
 ACTION_RUNNER_MODULE = "benchmarking.action_runner"
-NQO_RUNS = ROOT / "results" / "benchmark" / "nqo" / "nqo_runs.csv"
+NEURQO_RUNS = ROOT / "results" / "benchmark" / "nqo" / "nqo_runs.csv"
 OUTPUT_CSV = ROOT / "results" / "benchmark" / "nqo" / "nqo_decomposition_depth.csv"
 TEMP_ROOT = ROOT / "results" / "benchmark" / "nqo" / "temp_decomposition_depth"
 RAW_ROOT = TEMP_ROOT / "raw"
 BASELINE_ROOT = TEMP_ROOT / "baselines"
 LOG_ROOT = ROOT / ".local" / "logs" / "decomposition_depth"
-LOCK_PATH = PGDB_ROOT / ".nqo_runtime" / "reproduction" / "locks" / "decomposition-depth.lock"
+LOCK_PATH = PGDB_ROOT / ".neurqo_runtime" / "reproduction" / "locks" / "decomposition-depth.lock"
 VERSION = "v3-20260806"
 
 # Each workload includes a deep-decomposition win, a second structural regime,
@@ -93,7 +93,7 @@ def atomic_json(path: Path, payload: Any) -> None:
 
 def load_pg_rows() -> dict[tuple[str, str], dict[str, str]]:
     selected: dict[tuple[str, str], dict[str, str]] = {}
-    with NQO_RUNS.open(newline="", encoding="utf-8") as handle:
+    with NEURQO_RUNS.open(newline="", encoding="utf-8") as handle:
         for row in csv.DictReader(handle):
             workload = row["dataset"]
             if workload not in QUERY_SPECS or row["method"] != "PostgreSQL":
@@ -140,7 +140,7 @@ def build_baselines(
 def seed_cache(workload: str) -> Path:
     path = (
         PGDB_ROOT
-        / ".nqo_runtime"
+        / ".neurqo_runtime"
         / "online"
         / "experience"
         / f"decomposition-depth-{workload.lower()}-{VERSION}_raw_light.sql"
@@ -344,7 +344,7 @@ def collect_rows(
                 else:
                     trace = (
                         PGDB_ROOT
-                        / ".nqo_runtime"
+                        / ".neurqo_runtime"
                         / "online"
                         / task.experiment_id
                         / f"query_split.{query_id}.0.db.jsonl"

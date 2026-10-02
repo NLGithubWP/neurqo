@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from optimization.naming import environ
+
 import json
 import math
 import os
@@ -16,7 +18,7 @@ DEFAULT_ANALYSIS_PATH = (
     REPO_ROOT
     / "scripts"
     / "reproduce"
-    / "nqo"
+    / "neurqo"
     / "workload_fk_center_analysis.json"
 )
 
@@ -31,7 +33,7 @@ class DecompositionEligibility:
 
 
 def _analysis_path(path: str | Path | None = None) -> Path:
-    configured = path or os.environ.get("NQO_WORKLOAD_CENTER_ANALYSIS")
+    configured = path or environ.get("NEURQO_WORKLOAD_CENTER_ANALYSIS")
     return Path(configured).resolve() if configured else DEFAULT_ANALYSIS_PATH
 
 

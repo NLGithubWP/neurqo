@@ -1,4 +1,4 @@
-"""Database metadata used by NQO."""
+"""Database metadata used by NeurQO."""
 
 from .catalog import catalog_snapshot_hash, read_postgres_catalog, write_catalog_snapshot
 

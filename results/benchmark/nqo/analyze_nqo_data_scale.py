@@ -8,6 +8,10 @@ import math
 import statistics
 from pathlib import Path
 
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
+from optimization.naming import ResultDictReader
+
 
 ROOT = Path(__file__).resolve().parent
 EXPERIMENTS = (
@@ -32,7 +36,7 @@ EXPERIMENTS = (
 
 def load(path: Path) -> list[dict[str, str]]:
     with path.open(newline="", encoding="utf-8") as handle:
-        return list(csv.DictReader(handle))
+        return list(ResultDictReader(handle))
 
 
 def summarize(
@@ -47,7 +51,7 @@ def summarize(
         row
         for row in rows
         if row["dataset"] == dataset
-        and row["method"] == "NQO"
+        and row["method"] == "NeurQO"
         and row["protocol"] == "random"
     ]
     pairs = []
@@ -68,7 +72,7 @@ def summarize(
         pairs.append((float(baseline["runtime_ms"]), runtime))
         timeouts += row["status"] == "timeout"
     if not pairs:
-        raise RuntimeError(f"no {dataset} Random NQO rows")
+        raise RuntimeError(f"no {dataset} Random NeurQO rows")
     pg_sum = sum(base for base, _ in pairs)
     nqo_sum = sum(value for _, value in pairs)
     ws = pg_sum / nqo_sum
@@ -107,8 +111,8 @@ def table(headers: tuple[str, ...], rows: list[tuple[str, ...]]) -> None:
 def main() -> None:
     print(
         "PG baseline timeouts are excluded from paired metrics; "
-        "NQO timeouts retain their charged runtime.\n"
-        "Inference overhead is sum(inference_ms) / sum(NQO end-to-end runtime_ms) "
+        "NeurQO timeouts retain their charged runtime.\n"
+        "Inference overhead is sum(inference_ms) / sum(NeurQO end-to-end runtime_ms) "
         "over the paired queries.\n"
     )
     for dataset_index, (dataset, inputs) in enumerate(EXPERIMENTS):
@@ -117,8 +121,8 @@ def main() -> None:
         loaded = [(label, load(path)) for label, path in inputs]
         print(dataset)
         modes = (
-            (False, "NQO end-to-end"),
-            (True, "NQO without inference time"),
+            (False, "NeurQO end-to-end"),
+            (True, "NeurQO without inference time"),
         )
         for mode_index, (without_inference, title) in enumerate(modes):
             if mode_index:
@@ -152,11 +156,11 @@ def main() -> None:
                 output.append(
                     values + (str(timeouts), str(excluded_pg_timeouts))
                 )
-            headers = ("Data", "WS", "GS", "Imp", "PG (s)", "NQO (s)")
+            headers = ("Data", "WS", "GS", "Imp", "PG (s)", "NeurQO (s)")
             if not without_inference:
                 headers += ("Inf. overhead (%)",)
             table(
-                headers + ("NQO timeouts", "PG excluded"), output
+                headers + ("NeurQO timeouts", "PG excluded"), output
             )
 
 

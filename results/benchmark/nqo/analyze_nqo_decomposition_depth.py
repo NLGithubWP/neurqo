@@ -8,6 +8,10 @@ import csv
 from collections import defaultdict
 from pathlib import Path
 
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
+from optimization.naming import ResultDictReader
+
 
 DEFAULT_INPUT = Path(__file__).resolve().parent / "nqo_decomposition_depth.csv"
 
@@ -33,7 +37,7 @@ def main() -> int:
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     args = parser.parse_args()
     with args.input.open(newline="", encoding="utf-8") as handle:
-        rows = list(csv.DictReader(handle))
+        rows = list(ResultDictReader(handle))
 
     pg = {
         (row["dataset"], row["query_id"]): float(row["runtime_ms"])

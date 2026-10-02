@@ -25,7 +25,7 @@ MODEL_ROOT = REPO / "results" / "models" / "ablation"
 LEGACY_ACTION_MODEL_DIR = {"no_dec": "no_split", "no_enum": "no_topk"}
 REFERENCE_CSV = REPO / "results" / "benchmark" / "nqo" / "nqo_runs.csv"
 OUTPUT_ROOT = REPO / "results" / "benchmark" / "nqo"
-RUNTIME_ROOT = PGDB_ROOT / ".nqo_runtime" / "reproduction" / "ablation"
+RUNTIME_ROOT = PGDB_ROOT / ".neurqo_runtime" / "reproduction" / "ablation"
 FOLDS = ("a", "b", "c")
 CSV_FIELDS = (
     "dataset",
@@ -83,7 +83,7 @@ FAMILY_CONFIG = {
 os.environ.setdefault("PYTHONUNBUFFERED", "1")
 sys.path.insert(0, str(REPO))
 
-from scripts.reproduce.nqo.run import (  # noqa: E402
+from scripts.reproduce.neurqo.run import (  # noqa: E402
     DATASETS,
     DockerLearnedPolicyServer,
     ExperienceStore,
@@ -106,6 +106,10 @@ from scripts.reproduce.nqo.run import (  # noqa: E402
 from optimization.decomposition_eligibility import (  # noqa: E402
     workload_supports_decomposition,
 )
+
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
+from optimization.naming import ResultDictReader
 
 
 @dataclass(frozen=True)
@@ -218,15 +222,15 @@ def load_reference_rows(workloads: tuple[str, ...]) -> tuple[
     selected: list[dict[str, str]] = []
     pg_index: dict[tuple[str, str], dict[str, str]] = {}
     with REFERENCE_CSV.open(newline="", encoding="utf-8") as handle:
-        for row in csv.DictReader(handle):
+        for row in ResultDictReader(handle):
             dataset = row["dataset"].lower()
             if dataset not in workloads:
                 continue
             if row["method"] == "PostgreSQL":
                 pg_index[(row["dataset"], row["sql_path"])] = row
                 method = "PostgreSQL"
-            elif row["method"] == "NQO" and row["protocol"] == "random":
-                method = "Full NQO"
+            elif row["method"] == "NeurQO" and row["protocol"] == "random":
+                method = "Full NeurQO"
             else:
                 continue
             selected.append(
@@ -247,14 +251,14 @@ def load_reference_rows(workloads: tuple[str, ...]) -> tuple[
                     "actions_json": row["actions_json"],
                 }
             )
-    full = [row for row in selected if row["method"] == "Full NQO"]
+    full = [row for row in selected if row["method"] == "Full NeurQO"]
     full_keys = [(row["dataset"], row["sql_path"]) for row in full]
     if not pg_index:
         raise RuntimeError("missing PostgreSQL rows")
     if len(full_keys) != len(set(full_keys)):
-        raise RuntimeError("duplicate Full NQO query rows")
+        raise RuntimeError("duplicate Full NeurQO query rows")
     if set(full_keys) != set(pg_index):
-        raise RuntimeError("PostgreSQL and Full NQO query sets differ")
+        raise RuntimeError("PostgreSQL and Full NeurQO query sets differ")
     return selected, pg_index
 
 
@@ -297,7 +301,7 @@ def evaluate_task(task: Task) -> dict[str, Any]:
                 workload=spec.name,
                 catalog_container_path=catalog_container_path,
                 model_device=task.device,
-                nqo_src="/code/pgdb-dev/.nqo_runtime/nqo/src",
+                neurqo_src="/code/pgdb-dev/.neurqo_runtime/neurqo/src",
                 inference_mode="deterministic",
                 temperature=1.0,
                 exploration_epsilon=0.0,
@@ -604,7 +608,7 @@ def run_family(family: str) -> int:
         with args.output.open(newline="", encoding="utf-8") as handle:
             existing_rows = [
                 row
-                for row in csv.DictReader(handle)
+                for row in ResultDictReader(handle)
                 if row["dataset"].lower() not in args.workloads
             ]
     rows = sorted(

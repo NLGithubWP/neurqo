@@ -9,10 +9,14 @@ import math
 from dataclasses import dataclass
 from pathlib import Path
 
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
+from optimization.naming import ResultDictReader
+
 
 REPO = Path(__file__).resolve().parents[3]
 BENCHMARK_RESULTS = REPO / "results" / "benchmark"
-NQO_RUNS = BENCHMARK_RESULTS / "nqo" / "nqo_runs.csv"
+NEURQO_RUNS = BENCHMARK_RESULTS / "nqo" / "nqo_runs.csv"
 DEFAULT_OUTPUT = BENCHMARK_RESULTS / "overall_performance_comparison.csv"
 
 COLUMNS = (
@@ -48,7 +52,7 @@ class Summary:
 
 def read_csv(path: Path) -> list[dict[str, str]]:
     with path.open(newline="") as handle:
-        return list(csv.DictReader(handle))
+        return list(ResultDictReader(handle))
 
 
 def as_bool(value: str) -> bool:
@@ -137,8 +141,8 @@ def learned_summaries() -> dict[tuple[str, str, str, bool], Summary]:
     return result
 
 
-def nqo_summaries() -> dict[tuple[str, str, str, bool], Summary]:
-    rows = read_csv(NQO_RUNS)
+def neurqo_summaries() -> dict[tuple[str, str, str, bool], Summary]:
+    rows = read_csv(NEURQO_RUNS)
     required = {
         "dataset",
         "protocol",
@@ -151,7 +155,7 @@ def nqo_summaries() -> dict[tuple[str, str, str, bool], Summary]:
     }
     missing = required - set(rows[0] if rows else ())
     if missing:
-        raise RuntimeError(f"missing NQO CSV columns: {sorted(missing)}")
+        raise RuntimeError(f"missing NeurQO CSV columns: {sorted(missing)}")
 
     result_keys = [
         (
@@ -176,7 +180,7 @@ def nqo_summaries() -> dict[tuple[str, str, str, bool], Summary]:
         pg[key] = float(row["runtime_ms"])
 
     result = {}
-    for method in (*NON_LEARNED, "NQO"):
+    for method in (*NON_LEARNED, "NeurQO"):
         for _, workload, protocol in COLUMNS:
             if method in NON_LEARNED:
                 selected = [
@@ -204,7 +208,7 @@ def nqo_summaries() -> dict[tuple[str, str, str, bool], Summary]:
                 ]
             if not selected:
                 continue
-            variants = (False, True) if method == "NQO" else (False,)
+            variants = (False, True) if method == "NeurQO" else (False,)
             for without_inference in variants:
                 pairs = []
                 for row in selected:
@@ -224,7 +228,7 @@ def nqo_summaries() -> dict[tuple[str, str, str, bool], Summary]:
 
 def comparison_rows() -> list[dict[str, str]]:
     learned = learned_summaries()
-    nqo = nqo_summaries()
+    neurqo = neurqo_summaries()
     output: list[dict[str, str]] = []
 
     def append_row(
@@ -251,9 +255,9 @@ def comparison_rows() -> list[dict[str, str]]:
             learned,
         )
     for method in NON_LEARNED:
-        append_row("Non-learned", method, method, False, nqo)
-    append_row("NQO", "NQO", "NQO", False, nqo)
-    append_row("NQO", "NQO w/o inference time", "NQO", True, nqo)
+        append_row("Non-learned", method, method, False, neurqo)
+    append_row("NeurQO", "NeurQO", "NeurQO", False, neurqo)
+    append_row("NeurQO", "NeurQO w/o inference time", "NeurQO", True, neurqo)
     return output
 
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit the retained NQO paper artifacts and their reproduction entry points."""
+"""Audit the retained NeurQO paper artifacts and their reproduction entry points."""
 
 from __future__ import annotations
 
@@ -7,9 +7,13 @@ import csv
 import sqlite3
 from pathlib import Path
 
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
+from optimization.naming import ResultDictReader
+
 
 REPO = Path(__file__).resolve().parents[3]
-NQO_RESULTS = REPO / "results" / "benchmark" / "nqo"
+NEURQO_RESULTS = REPO / "results" / "benchmark" / "nqo"
 PRODUCERS = {
     "nqo_runs.csv": ("run.py",),
     "nqo_independent_action_runs.csv": ("run_independent_actions.py",),
@@ -37,7 +41,7 @@ SCALE_BUFFERS = {
 
 def read_csv(path: Path) -> list[dict[str, str]]:
     with path.open(newline="", encoding="utf-8") as handle:
-        return list(csv.DictReader(handle))
+        return list(ResultDictReader(handle))
 
 
 def existing_cache_ids(path: Path) -> set[str]:
@@ -68,7 +72,7 @@ def verify_learning_inventory(errors: list[str]) -> None:
             int(row["iteration"]),
             row["checkpoint"],
         )
-        for row in read_csv(NQO_RESULTS / "nqo_learning_trace.csv")
+        for row in read_csv(NEURQO_RESULTS / "nqo_learning_trace.csv")
         if int(row["iteration"]) >= 0
     }
     inventory_path = Path(__file__).with_name("learning_trace_checkpoints.csv")
@@ -91,7 +95,7 @@ def main() -> int:
     script_root = Path(__file__).resolve().parent
     rows_by_file: dict[str, list[dict[str, str]]] = {}
     for filename, producers in PRODUCERS.items():
-        result_path = NQO_RESULTS / filename
+        result_path = NEURQO_RESULTS / filename
         if not result_path.is_file():
             errors.append(f"missing result: {result_path}")
             continue
@@ -103,7 +107,7 @@ def main() -> int:
             if not (script_root / producer).is_file():
                 errors.append(f"missing producer for {filename}: {producer}")
     for filename in SUMMARY_RESULTS:
-        result_path = NQO_RESULTS / filename
+        result_path = NEURQO_RESULTS / filename
         if not result_path.is_file() or not read_csv(result_path):
             errors.append(f"missing or empty summary: {result_path}")
 
@@ -137,12 +141,12 @@ def main() -> int:
 
     verify_learning_inventory(errors)
     if errors:
-        print("NQO artifact audit failed:")
+        print("NeurQO artifact audit failed:")
         for error in errors:
             print(f"- {error}")
         return 1
     print(
-        "NQO artifact audit passed: "
+        "NeurQO artifact audit passed: "
         f"{len(PRODUCERS)} reproduced CSVs and {len(SUMMARY_RESULTS)} summary "
         "CSVs, with all checkpoints and cache IDs present"
     )

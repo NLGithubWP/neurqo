@@ -38,25 +38,25 @@ def portable_path(path: Path) -> str:
 
 
 def stage_policy_runtime(pgdb_root: Path) -> Path:
-    """Mirror the NQO Python modules into the database container mount."""
+    """Mirror the NeurQO Python modules into the database container mount."""
     source = ROOT / "src"
-    runtime_source = pgdb_root / ".nqo_runtime" / "nqo" / "src"
+    runtime_source = pgdb_root / ".neurqo_runtime" / "neurqo" / "src"
     center_analysis_source = (
         ROOT
         / "scripts"
         / "reproduce"
-        / "nqo"
+        / "neurqo"
         / "workload_fk_center_analysis.json"
     )
     center_analysis_destination = (
         runtime_source.parent
         / "scripts"
         / "reproduce"
-        / "nqo"
+        / "neurqo"
         / center_analysis_source.name
     )
     destination = runtime_source
-    lock_path = pgdb_root / ".nqo_runtime" / "nqo" / ".sync.lock"
+    lock_path = pgdb_root / ".neurqo_runtime" / "neurqo" / ".sync.lock"
     lock_path.parent.mkdir(parents=True, exist_ok=True)
     destination.parent.mkdir(parents=True, exist_ok=True)
     with lock_path.open("a+") as lock_handle:
@@ -93,16 +93,16 @@ def repository_version(path: Path) -> dict[str, Any]:
             "src/runtime",
             "src/training",
             "src/benchmarking",
-            "scripts/nqo_benchmark.py",
-            "scripts/reproduce/nqo/workload_fk_center_analysis.json",
+            "scripts/neurqo_benchmark.py",
+            "scripts/reproduce/neurqo/workload_fk_center_analysis.json",
             "workloads/train_test.py",
         )
     else:
         pathspecs = (
             "dbengine/src/backend/parser/query_split.c",
-            "dbengine/src/backend/executor/nodeNqoAdaptiveJoin.c",
+            "dbengine/src/backend/executor/nodeNeurQOAdaptiveJoin.c",
             "dbengine/src/backend/utils/misc/guc_tables.c",
-            "dbengine/src/include/executor/nodeNqoAdaptiveJoin.h",
+            "dbengine/src/include/executor/nodeNeurQOAdaptiveJoin.h",
             "dbengine/src/include/parser/query_split.h",
         )
     files = command_output(

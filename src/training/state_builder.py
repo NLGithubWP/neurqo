@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from optimization.naming import environ
+
 import os
 from pathlib import Path
 from typing import Any
@@ -54,11 +56,11 @@ class ExecutionStateBuilder:
         if catalog is not None and catalog_path is not None:
             raise ValueError("pass catalog or catalog_path, not both")
         if catalog is None:
-            selected_path = catalog_path or os.environ.get("NQO_CATALOG_PATH")
+            selected_path = catalog_path or environ.get("NEURQO_CATALOG_PATH")
             if selected_path is None:
                 raise ValueError(
                     "ExecutionStateBuilder requires a database-derived catalog "
-                    "snapshot via catalog, catalog_path, or NQO_CATALOG_PATH"
+                    "snapshot via catalog, catalog_path, or NEURQO_CATALOG_PATH"
                 )
             catalog = CatalogInfo(selected_path)
         self.catalog = catalog

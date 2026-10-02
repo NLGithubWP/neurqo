@@ -20,7 +20,7 @@ class DockerFixedPolicyServer:
         runtime_host_dir: Path,
         runtime_container_dir: str,
         runtime_source_container: str = (
-            "/code/pgdb-dev/.nqo_runtime/nqo/src"
+            "/code/pgdb-dev/.neurqo_runtime/neurqo/src"
         ),
         run_label: Optional[str] = None,
         listen_host: str = "127.0.0.1",
@@ -176,7 +176,7 @@ class DockerLearnedPolicyServer(DockerFixedPolicyServer):
         workload: str,
         catalog_container_path: str,
         model_device: str,
-        nqo_src: str,
+        neurqo_src: str,
         inference_mode: str,
         temperature: float,
         exploration_epsilon: float,
@@ -190,14 +190,14 @@ class DockerLearnedPolicyServer(DockerFixedPolicyServer):
         fixed_sched_alpha: float | None = None,
         **kwargs: Any,
     ) -> None:
-        super().__init__(runtime_source_container=nqo_src, **kwargs)
+        super().__init__(runtime_source_container=neurqo_src, **kwargs)
         self.model_container_path = model_container_path
         self.model_method = model_method
         self.model_hidden = model_hidden
         self.workload = workload
         self.catalog_container_path = catalog_container_path
         self.model_device = model_device
-        self.nqo_src = nqo_src
+        self.neurqo_src = neurqo_src
         self.inference_mode = inference_mode
         self.temperature = temperature
         self.exploration_epsilon = exploration_epsilon
@@ -227,8 +227,8 @@ class DockerLearnedPolicyServer(DockerFixedPolicyServer):
             self.catalog_container_path,
             "--device",
             self.model_device,
-            "--nqo-src",
-            self.nqo_src,
+            "--neurqo-src",
+            self.neurqo_src,
             "--inference-mode",
             self.inference_mode,
             "--temperature",

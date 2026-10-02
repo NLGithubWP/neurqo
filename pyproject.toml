@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "nqo"
+name = "neurqo"
 version = "0.1.0"
 description = "Workload-agnostic learned query optimization runtime"
 readme = "README.md"
@@ -15,11 +15,11 @@ dependencies = [
 ]
 
 [project.scripts]
-nqo-server = "runtime.action_server:main"
-nqo-train = "training.experience_trainer:main"
-nqo-train-mixed = "training.multi_workload:main"
-nqo-incremental-trainer = "training.incremental_trainer:main"
-nqo-benchmark = "benchmarking.cli:main"
+neurqo-server = "runtime.action_server:main"
+neurqo-train = "training.experience_trainer:main"
+neurqo-train-mixed = "training.multi_workload:main"
+neurqo-incremental-trainer = "training.incremental_trainer:main"
+neurqo-benchmark = "benchmarking.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

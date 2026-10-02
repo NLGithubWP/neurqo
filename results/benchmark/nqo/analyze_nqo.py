@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Print NQO benchmark tables from nqo_runs.csv; never write derived data."""
+"""Print NeurQO benchmark tables from nqo_runs.csv; never write derived data."""
 
 from __future__ import annotations
 
@@ -13,6 +13,10 @@ import statistics
 from collections import defaultdict
 from pathlib import Path
 from typing import Any, Iterable
+
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
+from optimization.naming import ResultDictReader
 
 
 HERE = Path(__file__).resolve().parent
@@ -49,7 +53,7 @@ RAW_FIELDS = (
 
 def read_rows(path: Path) -> list[dict[str, str]]:
     with path.open(newline="", encoding="utf-8") as handle:
-        reader = csv.DictReader(handle)
+        reader = ResultDictReader(handle)
         if tuple(reader.fieldnames or ()) != RAW_FIELDS:
             raise RuntimeError(
                 f"unexpected columns in {path.name}: {reader.fieldnames}"
@@ -177,7 +181,7 @@ def print_overall(
     protocols = PROTOCOLS[dataset]
     methods = sorted(
         {row["method"] for row in rows if row["method"] != "PostgreSQL"},
-        key=lambda name: (name != "NQO", name.lower()),
+        key=lambda name: (name != "NeurQO", name.lower()),
     )
     print("1. Overall performance\n")
     print(
@@ -320,7 +324,7 @@ def print_action_frequency(dataset: str, rows: list[dict[str, str]]) -> None:
     denominators = {}
     for protocol in protocols:
         counts = {key: 0 for key in ACTION_KEYS}
-        for row in method_protocol_rows(rows, "NQO", protocol):
+        for row in method_protocol_rows(rows, "NeurQO", protocol):
             for key, value in count_actions(row["actions_json"]).items():
                 counts[key] += value
         by_protocol[protocol] = counts
@@ -417,7 +421,7 @@ def print_per_query(
     protocol_values: dict[str, dict[str, tuple[float, float, float]]] = {}
     for protocol in protocols:
         grouped: dict[str, list[tuple[float, float]]] = defaultdict(list)
-        for row in method_protocol_rows(rows, "NQO", protocol):
+        for row in method_protocol_rows(rows, "NeurQO", protocol):
             baseline = pg[(dataset, row["sql_path"])]
             query_id = Path(row["sql_path"]).stem
             grouped[query_id].append((baseline, runtime(row, False)))
@@ -433,12 +437,12 @@ def print_per_query(
     print("3. Per-Query Performance\n")
     if dataset == "TPCH":
         print(
-            "Δt(q) = tPG(q) - tNQO(q), in seconds; positive values mean NQO "
+            "Δt(q) = tPG(q) - tNQO(q), in seconds; positive values mean NeurQO "
             "is faster.\n"
         )
     else:
         print(
-            "Δt(q) = tPG(q) - tNQO(q), in seconds; positive values mean NQO "
+            "Δt(q) = tPG(q) - tNQO(q), in seconds; positive values mean NeurQO "
             "is faster. Duplicate query IDs are averaged inside a protocol "
             "before the cross-protocol mean and min–max range are computed.\n"
         )
@@ -459,7 +463,7 @@ def print_per_query(
                 )
             )
         print_table(
-            ("Query", "PG (s)", "NQO (s)", "Δt (s)"),
+            ("Query", "PG (s)", "NeurQO (s)", "Δt (s)"),
             table_rows,
             right_aligned={0, 1, 2, 3},
         )
@@ -509,7 +513,7 @@ def print_per_query(
         (
             "Query",
             "Mean PG (s)",
-            "Mean NQO (s)",
+            "Mean NeurQO (s)",
             "Mean Δt (s)",
             "Min Δt (s)",
             "Max Δt (s)",
@@ -533,12 +537,12 @@ def print_dataset(
     print()
     if not method_rows:
         print(
-            f"No NQO result rows are currently available for "
+            f"No NeurQO result rows are currently available for "
             f"{DATASET_LABELS[dataset]}.\n"
         )
         return False
     print_overall(dataset, rows, pg)
-    nqo_rows = [row for row in method_rows if row["method"] == "NQO"]
+    nqo_rows = [row for row in method_rows if row["method"] == "NeurQO"]
     if nqo_rows:
         print_action_frequency(dataset, rows)
         print_per_query(dataset, rows, pg)
@@ -547,7 +551,7 @@ def print_dataset(
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Print Overall, Action Frequency, and per-query NQO tables"
+        description="Print Overall, Action Frequency, and per-query NeurQO tables"
     )
     parser.add_argument("dataset", choices=("job", "stack", "tpch", "all"))
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)

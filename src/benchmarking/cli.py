@@ -1,4 +1,4 @@
-"""Unified command-line interface for NQO benchmark workflows."""
+"""Unified command-line interface for NeurQO benchmark workflows."""
 
 from __future__ import annotations
 
@@ -42,10 +42,10 @@ def _usage() -> str:
         for name, (_entrypoint, description) in COMMANDS.items()
     )
     return (
-        "usage: nqo-benchmark <command> [options]\n\n"
+        "usage: neurqo-benchmark <command> [options]\n\n"
         "commands:\n"
         f"{commands}\n\n"
-        "Run 'nqo-benchmark <command> --help' for command-specific options."
+        "Run 'neurqo-benchmark <command> --help' for command-specific options."
     )
 
 
@@ -58,7 +58,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     name = arguments.pop(0)
     command = COMMANDS.get(name)
     if command is None:
-        print(f"nqo-benchmark: unknown command: {name}\n", file=sys.stderr)
+        print(f"neurqo-benchmark: unknown command: {name}\n", file=sys.stderr)
         print(_usage(), file=sys.stderr)
         return 2
     entrypoint, _description = command

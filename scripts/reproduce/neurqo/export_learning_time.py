@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Export cumulative NQO learning times from workload matrix reports."""
+"""Export cumulative NeurQO learning times from workload matrix reports."""
 
 from __future__ import annotations
 
@@ -8,6 +8,10 @@ import csv
 import os
 from pathlib import Path
 from typing import Any
+
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
+from optimization.naming import ResultDictReader
 
 
 REPO = Path(__file__).resolve().parents[3]
@@ -35,7 +39,7 @@ def load_rows(inputs: list[tuple[str, Path]]) -> list[dict[str, Any]]:
             raise ValueError(f"duplicate matrix input for {dataset}")
         seen_datasets.add(dataset)
         with path.open(newline="", encoding="utf-8") as handle:
-            reader = csv.DictReader(handle)
+            reader = ResultDictReader(handle)
             required = {"protocol", "iteration", "elapsed_training_s"}
             if not required <= set(reader.fieldnames or ()):
                 raise RuntimeError(

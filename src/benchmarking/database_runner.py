@@ -94,16 +94,16 @@ def run_query_once(
         set_config(cursor, "statement_timeout", timeout_ms)
         set_config(cursor, "client_min_messages", "warning")
         set_config(cursor, "search_path", "public")
-        if profile.nqo_enabled:
+        if profile.neurqo_enabled:
             if server_url is None:
-                raise RuntimeError("NQO profile requires a policy server")
+                raise RuntimeError("NeurQO profile requires a policy server")
             for name, value in profile.guc_settings().items():
                 set_config(cursor, name, value)
-            set_config(cursor, "nqo.server_url", server_url)
-            set_config(cursor, "nqo.trajectory_log", db_trace_container)
-            set_config(cursor, "nqo", "on")
+            set_config(cursor, "neurqo.server_url", server_url)
+            set_config(cursor, "neurqo.trajectory_log", db_trace_container)
+            set_config(cursor, "neurqo", "on")
         else:
-            set_config(cursor, "nqo", "off")
+            set_config(cursor, "neurqo", "off")
         started = time.perf_counter()
         cursor.execute(sql)
         if cursor.description is None:

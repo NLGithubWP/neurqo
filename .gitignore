@@ -37,6 +37,7 @@ __pycache__/
 /results/raw_buffer/
 /results/runs/
 /results/benchmark/temp_baseline_reproduction/
+/results/benchmark/temp_neurqo_reproduction/
 /results/benchmark/temp_nqo_reproduction/
 
 # Local AutoSteer collection results and logs.

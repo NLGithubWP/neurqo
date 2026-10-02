@@ -11,6 +11,10 @@ import statistics
 from collections import Counter
 from pathlib import Path
 
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
+from optimization.naming import ResultDictReader
+
 
 HERE = Path(__file__).resolve().parent
 DEFAULT_INPUT = HERE / "nqo_alpha_sensitivity.csv"
@@ -24,7 +28,7 @@ POLICIES = (
 
 def read_rows(path: Path) -> list[dict[str, str]]:
     with path.open(newline="", encoding="utf-8") as handle:
-        rows = list(csv.DictReader(handle))
+        rows = list(ResultDictReader(handle))
     required = {
         "fold",
         "sql_path",
@@ -98,7 +102,7 @@ def main() -> int:
             )
         )
     print_table(
-        ("Schedule policy", "WS", "GS", "Imp", "NQO total (s)", "Runtime / learned"),
+        ("Schedule policy", "WS", "GS", "Imp", "NeurQO total (s)", "Runtime / learned"),
         result_rows,
     )
 

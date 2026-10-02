@@ -22,7 +22,7 @@ DEFAULT_OUTPUT = (
     REPO / "results" / "benchmark" / "nqo" / "nqo_independent_action_runs.csv"
 )
 DEFAULT_RUNTIME = (
-    PGDB_ROOT / ".nqo_runtime" / "reproduction" / "independent-actions"
+    PGDB_ROOT / ".neurqo_runtime" / "reproduction" / "independent-actions"
 )
 DATASET_SIZES = {"JOB": 113, "STACK": 112}
 PROFILE_METHODS = {

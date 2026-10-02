@@ -202,11 +202,11 @@ def configure_probe_session(
     set_config(cursor, "search_path", "public")
     set_config(cursor, "client_min_messages", "warning")
     set_config(cursor, "statement_timeout", statement_timeout_ms)
-    set_config(cursor, "nqo.server_timeout_ms", statement_timeout_ms)
-    set_config(cursor, "nqo.server_url", server_url)
-    set_config(cursor, "nqo.trajectory_log", "")
-    set_config(cursor, "nqo.max_rounds", 1)
-    set_config(cursor, "nqo", "on")
+    set_config(cursor, "neurqo.server_timeout_ms", statement_timeout_ms)
+    set_config(cursor, "neurqo.server_url", server_url)
+    set_config(cursor, "neurqo.trajectory_log", "")
+    set_config(cursor, "neurqo.max_rounds", 1)
+    set_config(cursor, "neurqo", "on")
 
 
 def cancel_backend(control_cursor: Any, pid: int) -> bool:
@@ -461,7 +461,7 @@ def analyze_workload(
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Probe NQO's PostgreSQL FK-Center implementation over workloads."
+        description="Probe NeurQO's PostgreSQL FK-Center implementation over workloads."
     )
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=15432)
@@ -566,7 +566,7 @@ def main() -> None:
             ),
             "null": (
                 "The query was excluded by the compatibility check or bypassed "
-                "the NQO decomposition hook, so FK-Centers were not enumerated."
+                "the NeurQO decomposition hook, so FK-Centers were not enumerated."
             ),
         },
         "workloads": workloads,

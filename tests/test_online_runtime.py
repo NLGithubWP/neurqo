@@ -36,7 +36,7 @@ from optimization.actions import (
 def test_global_experience_path_is_shared_per_dataset() -> None:
     root = Path("/tmp/pgdb")
     assert global_experience_path(root, "JOB") == (
-        root / ".nqo_runtime" / "experience" / "job_light.sql"
+        root / ".neurqo_runtime" / "experience" / "job_light.sql"
     )
     assert global_experience_path(root, "job") == global_experience_path(root, "JOB")
     assert global_experience_path(root, "STACK") != global_experience_path(root, "JOB")
@@ -56,11 +56,11 @@ def test_coverage_hash_matches_persisted_semantic_state_hash() -> None:
 
 def test_builtin_profiles_isolate_actions() -> None:
     profiles = builtin_profiles()
-    assert profiles["nqo_none"].nqo_enabled
-    assert profiles["nqo_none"].dec == "skip"
-    assert profiles["nqo_none"].enum == "native"
-    assert profiles["nqo_none"].filter == "none"
-    assert profiles["nqo_none"].ajoin == "off"
+    assert profiles["neurqo_none"].neurqo_enabled
+    assert profiles["neurqo_none"].dec == "skip"
+    assert profiles["neurqo_none"].enum == "native"
+    assert profiles["neurqo_none"].filter == "none"
+    assert profiles["neurqo_none"].ajoin == "off"
     assert profiles["query_split"].dec == "apply"
     assert profiles["query_split"].enum == "native"
     assert profiles["split_search"].dec == "skip"
@@ -70,8 +70,8 @@ def test_builtin_profiles_isolate_actions() -> None:
     assert profiles["aja_aggressive"].filter == "none"
     assert profiles["aja_aggressive"].ajoin == "aggressive"
     assert profiles["top5"].search_exact_cardinality is False
-    assert profiles["top5"].guc_settings()["nqo.search_exact_cardinality"] is False
-    assert "nqo.search_min_cost_improvement_pct" not in (
+    assert profiles["top5"].guc_settings()["neurqo.search_exact_cardinality"] is False
+    assert "neurqo.search_min_cost_improvement_pct" not in (
         profiles["top5"].guc_settings()
     )
     assert profiles["top5_lip_selective"].enum == "top5"
@@ -92,8 +92,8 @@ def test_fixed_profile_exports_per_round_alpha_sequence() -> None:
         sched_alpha_sequence=(0.75, 0.25),
     )
     environment = profile.policy_environment()
-    assert environment["NQO_FIXED_SCHED_ALPHA"] == "0.5"
-    assert environment["NQO_FIXED_SCHED_ALPHA_SEQUENCE"] == "0.75,0.25"
+    assert environment["NEURQO_FIXED_SCHED_ALPHA"] == "0.5"
+    assert environment["NEURQO_FIXED_SCHED_ALPHA_SEQUENCE"] == "0.75,0.25"
 
 
 def test_dynamic_timeout_is_bounded() -> None:

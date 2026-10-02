@@ -9,19 +9,23 @@ import math
 from collections import Counter
 from pathlib import Path
 
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
+from optimization.naming import ResultDictReader
+
 
 ROOT = Path(__file__).resolve().parent
 DEFAULT_RL = ROOT / "nqo_abl_rl_run.csv"
 DEFAULT_STATE = ROOT / "nqo_abl_sate_run.csv"
 DEFAULT_ACTION = ROOT / "nqo_abl_action_run.csv"
 MODEL_METHODS = (
-    "Full NQO",
+    "Full NeurQO",
     "One-step RL",
     "w/o Query Topology",
     "w/o Plan Topology",
 )
 ACTION_METHODS = (
-    "Full NQO",
+    "Full NeurQO",
     "w/o Query Split",
     "w/o TOPK",
     "w/o Filter",
@@ -54,7 +58,7 @@ def load(path: Path) -> list[dict[str, str]]:
     if not path.is_file():
         raise FileNotFoundError(path)
     with path.open(newline="", encoding="utf-8") as handle:
-        return list(csv.DictReader(handle))
+        return list(ResultDictReader(handle))
 
 
 def method_rows(
@@ -133,23 +137,23 @@ def main() -> int:
         key: value for key, value in state_pg.items() if key[0] in model_datasets
     } != rl_pg:
         raise RuntimeError("RL and state CSVs use different PostgreSQL baselines")
-    rl_full = method_rows(rl_rows, "Full NQO", model_datasets)
-    state_full = method_rows(state_rows, "Full NQO", state_datasets)
+    rl_full = method_rows(rl_rows, "Full NeurQO", model_datasets)
+    state_full = method_rows(state_rows, "Full NeurQO", state_datasets)
     if {
         key: value for key, value in state_full.items() if key[0] in model_datasets
     } != rl_full:
-        raise RuntimeError("RL and state CSVs contain different Full NQO rows")
+        raise RuntimeError("RL and state CSVs contain different Full NeurQO rows")
 
     action_datasets = ("JOB", "STACK", "TPCH")
     action_pg = method_rows(action_rows, "PostgreSQL", action_datasets)
-    action_full = method_rows(action_rows, "Full NQO", action_datasets)
+    action_full = method_rows(action_rows, "Full NeurQO", action_datasets)
     if action_pg != state_pg:
         raise RuntimeError("state and action CSVs use different baselines")
     if action_full != state_full:
-        raise RuntimeError("state and action CSVs contain different Full NQO rows")
+        raise RuntimeError("state and action CSVs contain different Full NeurQO rows")
 
     combined = {
-        "Full NQO": state_full,
+        "Full NeurQO": state_full,
         "One-step RL": method_rows(rl_rows, "One-step RL", model_datasets),
         "w/o Query Topology": method_rows(
             state_rows, "w/o Query Topology", state_datasets
@@ -159,7 +163,7 @@ def main() -> int:
         ),
     }
     action_combined = {
-        "Full NQO": action_full,
+        "Full NeurQO": action_full,
         "w/o Query Split": method_rows(
             action_rows, "w/o Query Split", ("JOB", "STACK")
         ),
@@ -182,7 +186,7 @@ def main() -> int:
     duplicates = Counter(
         (row["dataset"], row["fold"], row["sql_path"], row["method"])
         for row in rl_rows + state_rows
-        if row["method"] not in {"PostgreSQL", "Full NQO"}
+        if row["method"] not in {"PostgreSQL", "Full NeurQO"}
     )
     bad = [key for key, count in duplicates.items() if count != 1]
     if bad:
@@ -190,7 +194,7 @@ def main() -> int:
     action_duplicates = Counter(
         (row["dataset"], row["fold"], row["sql_path"], row["method"])
         for row in action_rows
-        if row["method"] not in {"PostgreSQL", "Full NQO"}
+        if row["method"] not in {"PostgreSQL", "Full NeurQO"}
     )
     action_bad = [
         key for key, count in action_duplicates.items() if count != 1
@@ -209,7 +213,7 @@ def main() -> int:
     action_ablation = [
         row
         for row in action_rows
-        if row["method"] not in {"PostgreSQL", "Full NQO"}
+        if row["method"] not in {"PostgreSQL", "Full NeurQO"}
     ]
     rl_tasks = {
         (row["dataset"], row["fold"], row["method"])
@@ -310,7 +314,7 @@ def main() -> int:
         format_table(
             [
                 "Dataset",
-                "Full NQO WS",
+                "Full NeurQO WS",
                 "w/o Query Split WS",
                 "w/o TOPK WS",
                 "w/o Filter WS",

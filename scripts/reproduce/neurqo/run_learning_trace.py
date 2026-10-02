@@ -23,7 +23,7 @@ DEFAULT_CHECKPOINT_INVENTORY = Path(__file__).with_name(
     "learning_trace_checkpoints.csv"
 )
 DEFAULT_RUNTIME = (
-    PGDB_ROOT / ".nqo_runtime" / "reproduction" / "learning-trace"
+    PGDB_ROOT / ".neurqo_runtime" / "reproduction" / "learning-trace"
 )
 FOLDS = ("a", "b", "c")
 DATASET_PROTOCOLS = {
@@ -53,7 +53,7 @@ CSV_FIELDS = (
     "iteration",
     "query_count",
     "pg_total_ms",
-    "nqo_total_ms",
+    "neurqo_total_ms",
     "ws",
     "inverse_ws",
     "cache_hits",
@@ -70,7 +70,11 @@ from run_abl_rl import (  # noqa: E402
     evaluate_task,
     parse_devices,
 )
-from scripts.reproduce.nqo.run import repo_relative  # noqa: E402
+from scripts.reproduce.neurqo.run import repo_relative  # noqa: E402
+
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
+from optimization.naming import ResultDictReader
 
 
 @dataclass(frozen=True)
@@ -92,7 +96,7 @@ class TraceTask:
     user: str
     server_action_host: str
     database_container: str
-    method: str = "NQO"
+    method: str = "NeurQO"
     action_ablation: str = "none"
 
     @property
@@ -116,7 +120,7 @@ def released_checkpoints(
     preceding: list[dict[str, Any]] = []
     selected: list[dict[str, Any]] = []
     with inventory_path.open(newline="", encoding="utf-8") as handle:
-        reader = csv.DictReader(handle)
+        reader = ResultDictReader(handle)
         expected_fields = (
             "workload",
             "protocol",
@@ -184,10 +188,10 @@ def load_reference() -> tuple[
     pg: dict[tuple[str, str], dict[str, str]] = {}
     best: dict[tuple[str, str, str], list[dict[str, str]]] = defaultdict(list)
     with REFERENCE_CSV.open(newline="", encoding="utf-8") as handle:
-        for row in csv.DictReader(handle):
+        for row in ResultDictReader(handle):
             if row["method"] == "PostgreSQL":
                 pg[(row["dataset"], row["sql_path"])] = row
-            elif row["method"] == "NQO":
+            elif row["method"] == "NeurQO":
                 best[(row["dataset"], row["protocol"], row["fold"])].append(row)
     if not pg:
         raise RuntimeError("missing PostgreSQL rows")
@@ -227,7 +231,7 @@ def aggregate_rows(
     if not rows:
         raise RuntimeError(f"empty result set: {dataset}/{protocol}/{fold}/{iteration}")
     pg_total = sum(float(pg[(dataset, row["sql_path"])]["runtime_ms"]) for row in rows)
-    nqo_total = sum(float(row["runtime_ms"]) for row in rows)
+    neurqo_total = sum(float(row["runtime_ms"]) for row in rows)
     return {
         "dataset": dataset,
         "protocol": protocol,
@@ -235,9 +239,9 @@ def aggregate_rows(
         "iteration": str(iteration),
         "query_count": str(len(rows)),
         "pg_total_ms": f"{pg_total:.12f}",
-        "nqo_total_ms": f"{nqo_total:.12f}",
-        "ws": f"{pg_total / nqo_total:.12f}",
-        "inverse_ws": f"{nqo_total / pg_total:.12f}",
+        "neurqo_total_ms": f"{neurqo_total:.12f}",
+        "ws": f"{pg_total / neurqo_total:.12f}",
+        "inverse_ws": f"{neurqo_total / pg_total:.12f}",
         "cache_hits": (
             str(sum(row.get("cache_hit") == "True" for row in rows))
             if source.startswith("cache_replay")
@@ -288,7 +292,7 @@ def estimated_initial_rows(
         for fold in FOLDS:
             query_count, pg_total = fold_totals[(dataset, protocol, fold)]
             fold_inverse_ws = inverse_ws + scale * deviations[fold]
-            nqo_total = pg_total * fold_inverse_ws
+            neurqo_total = pg_total * fold_inverse_ws
             estimates.append(
                 {
                     "dataset": dataset,
@@ -297,7 +301,7 @@ def estimated_initial_rows(
                     "iteration": str(iteration),
                     "query_count": str(query_count),
                     "pg_total_ms": f"{pg_total:.12f}",
-                    "nqo_total_ms": f"{nqo_total:.12f}",
+                    "neurqo_total_ms": f"{neurqo_total:.12f}",
                     "ws": f"{1.0 / fold_inverse_ws:.12f}",
                     "inverse_ws": f"{fold_inverse_ws:.12f}",
                     "cache_hits": "",

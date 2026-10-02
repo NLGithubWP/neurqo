@@ -3,7 +3,7 @@ set -euo pipefail
 
 repo=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../../.." && pwd)
 pgdb_root=${PGDB_ROOT:-"$repo/../pgdb"}
-runtime_root="$pgdb_root/.nqo_runtime/reproduction/job-data-scale"
+runtime_root="$pgdb_root/.neurqo_runtime/reproduction/job-data-scale"
 sql_lock="$runtime_root/sql.lock"
 policy_container=pgdb_tpch_gpu
 policy_host=$(docker inspect "$policy_container" \
@@ -16,15 +16,15 @@ run_scale() {
   local database="imdb_scale_${scale}"
   local run_root="$runtime_root/scale_${scale}"
   local cache="$run_root/experience.sql"
-  local output_root=${NQO_OUTPUT_ROOT:-"$repo/results/benchmark/temp_nqo_reproduction"}
-  local output="$output_root/nqo_job_scale_${scale}_runs.csv"
+  local output_root=${NEURQO_OUTPUT_ROOT:-"$repo/results/benchmark/temp_neurqo_reproduction"}
+  local output="$output_root/neurqo_job_scale_${scale}_runs.csv"
   mkdir -p "$run_root"
   mkdir -p "$output_root"
   if [[ ! -f "$cache" ]]; then
     cp "$repo/results/buffers/job_scale_${scale}.sql" "$cache"
   fi
 
-  python3 "$repo/scripts/reproduce/nqo/run.py" \
+  python3 "$repo/scripts/reproduce/neurqo/run.py" \
     --dataset job --method postgres \
     --database "$database" --output "$output" \
     --runtime-dir "$run_root/postgres" \
@@ -35,8 +35,8 @@ run_scale() {
   local folds=(a b c)
   local index=0
   for fold in "${folds[@]}"; do
-    python3 "$repo/scripts/reproduce/nqo/run.py" \
-      --dataset job --method nqo --protocol random --fold "$fold" \
+    python3 "$repo/scripts/reproduce/neurqo/run.py" \
+      --dataset job --method neurqo --protocol random --fold "$fold" \
       --database "$database" --cache "$cache" --output "$output" \
       --runtime-dir "$run_root/random_${fold}" \
       --container "$policy_container" \

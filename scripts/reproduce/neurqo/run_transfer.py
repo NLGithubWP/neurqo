@@ -30,7 +30,7 @@ DEFAULT_OUTPUT = (
 )
 DEFAULT_RUNTIME = (
     PGDB_ROOT
-    / ".nqo_runtime"
+    / ".neurqo_runtime"
     / "reproduction"
     / "zero-shot-transfer"
 )
@@ -43,8 +43,8 @@ ZERO_SHOT_CHECKPOINTS = {
     ("job", "stack", "c"): ("best", "0000"),
 }
 TRANSFER_METHODS = {
-    "zero-shot": "NQO zero-shot",
-    "mixed": "NQO mixed",
+    "zero-shot": "NeurQO zero-shot",
+    "mixed": "NeurQO mixed",
 }
 CSV_FIELDS = (
     "target_dataset",
@@ -68,9 +68,9 @@ CSV_FIELDS = (
 os.environ.setdefault("PYTHONUNBUFFERED", "1")
 sys.path.insert(0, str(REPO))
 
-from scripts.reproduce.nqo.run import (  # noqa: E402
+from scripts.reproduce.neurqo.run import (  # noqa: E402
     DATASETS,
-    PGDB_ROOT as NQO_PGDB_ROOT,
+    PGDB_ROOT as NEURQO_PGDB_ROOT,
     DockerLearnedPolicyServer,
     ExperienceStore,
     acquire_sql_execution_slot,
@@ -91,9 +91,13 @@ from scripts.reproduce.nqo.run import (  # noqa: E402
     stage_model,
 )
 
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
+from optimization.naming import ResultDictReader
 
-if NQO_PGDB_ROOT != PGDB_ROOT:
-    raise RuntimeError("NQO runtime root mismatch")
+
+if NEURQO_PGDB_ROOT != PGDB_ROOT:
+    raise RuntimeError("NeurQO runtime root mismatch")
 
 
 @dataclass(frozen=True)
@@ -245,7 +249,7 @@ def load_postgres_rows() -> tuple[list[dict[str, str]], dict[tuple[str, str], di
     selected: list[dict[str, str]] = []
     indexed: dict[tuple[str, str], dict[str, str]] = {}
     with PG_SOURCE.open(newline="", encoding="utf-8") as handle:
-        for row in csv.DictReader(handle):
+        for row in ResultDictReader(handle):
             if row["method"] != "PostgreSQL":
                 continue
             dataset = str(row["dataset"]).upper()
@@ -364,7 +368,7 @@ def evaluate_task(task: Task) -> dict[str, Any]:
                 workload=spec.name,
                 catalog_container_path=catalog_container_path,
                 model_device=task.device,
-                nqo_src="/code/pgdb-dev/.nqo_runtime/nqo/src",
+                neurqo_src="/code/pgdb-dev/.neurqo_runtime/neurqo/src",
                 inference_mode="deterministic",
                 temperature=1.0,
                 exploration_epsilon=0.0,
@@ -590,7 +594,7 @@ def load_preserved_rows(
     if not path.is_file():
         return []
     with path.open(newline="", encoding="utf-8") as handle:
-        reader = csv.DictReader(handle)
+        reader = ResultDictReader(handle)
         if tuple(reader.fieldnames or ()) != CSV_FIELDS:
             raise RuntimeError(f"unexpected transfer CSV schema: {path}")
         return [

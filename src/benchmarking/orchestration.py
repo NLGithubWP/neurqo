@@ -122,9 +122,9 @@ def sync_runtime(pgdb_root: Path, runtime_project: Path) -> None:
         "workloads",
         "tools",
         "tests",
-        "scripts/nqo_benchmark.py",
+        "scripts/neurqo_benchmark.py",
         "scripts/reproduce/common",
-        "scripts/reproduce/nqo/workload_fk_center_analysis.json",
+        "scripts/reproduce/neurqo/workload_fk_center_analysis.json",
     ):
         source = ROOT / relative
         if not source.exists():
@@ -154,7 +154,7 @@ def sync_runtime(pgdb_root: Path, runtime_project: Path) -> None:
     # Query split manifests import the immutable raw/derived workload inputs
     # through ROOT/results.  Isolated source snapshots share the already
     # staged copy without touching the default runtime's source tree.
-    default_runtime = pgdb_root / ".nqo_runtime" / "nqo"
+    default_runtime = pgdb_root / ".neurqo_runtime" / "neurqo"
     shared_results = default_runtime / "results"
     runtime_results = runtime_project / "results"
     if (
@@ -320,7 +320,7 @@ def action_runner_command(
                 str(args.hidden),
                 "--model-device",
                 args.model_device,
-                "--model-nqo-src",
+                "--model-neurqo-src",
                 (
                     host_to_container(args.runtime_project, args.pgdb_root)
                     + "/src"

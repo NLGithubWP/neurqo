@@ -9,12 +9,12 @@ fi
 
 repo=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../../.." && pwd)
 pgdb_root=${PGDB_ROOT:-"$repo/../pgdb"}
-output=${NQO_OUTPUT:-"$repo/results/benchmark/temp_nqo_reproduction/nqo_runs.csv"}
-log_root="$pgdb_root/.nqo_runtime/reproduction/nqo-evaluator/logs/stack"
+output=${NEURQO_OUTPUT:-"$repo/results/benchmark/temp_neurqo_reproduction/nqo_runs.csv"}
+log_root="$pgdb_root/.neurqo_runtime/reproduction/neurqo-evaluator/logs/stack"
 mkdir -p "$log_root" "$(dirname "$output")"
 cache_args=()
 if [[ "$cache_miss" == "execute" ]]; then
-  writable_cache="$pgdb_root/.nqo_runtime/reproduction/nqo-evaluator/stack-experience.sql"
+  writable_cache="$pgdb_root/.neurqo_runtime/reproduction/neurqo-evaluator/stack-experience.sql"
   if [[ ! -f "$writable_cache" ]]; then
     mkdir -p "$(dirname "$writable_cache")"
     cp "$repo/results/buffers/stack_light.sql" "$writable_cache"
@@ -28,7 +28,7 @@ pids=()
 labels=()
 port=18110
 
-python3 "$repo/scripts/reproduce/nqo/run.py" \
+python3 "$repo/scripts/reproduce/neurqo/run.py" \
   --dataset stack --method postgres --output "$output" \
   >"$log_root/postgres.log" 2>&1
 
@@ -45,7 +45,7 @@ for protocol in "${protocols[@]}"; do
     log="$log_root/${label}.log"
     (
       cd "$repo"
-      exec python3 "$repo/scripts/reproduce/nqo/run.py" \
+      exec python3 "$repo/scripts/reproduce/neurqo/run.py" \
         --dataset stack \
         --protocol "$protocol" \
         --fold "$fold" \

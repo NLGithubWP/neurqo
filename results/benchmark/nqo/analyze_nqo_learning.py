@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
-"""Summarize versioned NQO learning traces."""
+"""Summarize versioned NeurQO learning traces."""
 
 from __future__ import annotations
 
 import argparse
 import csv
 from pathlib import Path
+
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
+from optimization.naming import ResultDictReader
 
 
 DEFAULT_INPUT = Path(__file__).with_name("nqo_learning_trace.csv")
@@ -26,12 +30,12 @@ PROTOCOL_LABELS = {
 def load_rows(path: Path) -> list[dict[str, object]]:
     rows: list[dict[str, object]] = []
     with path.open(newline="", encoding="utf-8") as handle:
-        for raw in csv.DictReader(handle):
+        for raw in ResultDictReader(handle):
             row: dict[str, object] = dict(raw)
             row["iteration"] = int(raw["iteration"])
             row["query_count"] = int(raw["query_count"])
             row["pg_total_ms"] = float(raw["pg_total_ms"])
-            row["nqo_total_ms"] = float(raw["nqo_total_ms"])
+            row["neurqo_total_ms"] = float(raw["neurqo_total_ms"])
             row["ws"] = float(raw["ws"])
             row["inverse_ws"] = float(raw["inverse_ws"])
             rows.append(row)
@@ -41,7 +45,7 @@ def load_rows(path: Path) -> list[dict[str, object]]:
 def load_time_rows(path: Path) -> list[dict[str, object]]:
     rows: list[dict[str, object]] = []
     with path.open(newline="", encoding="utf-8") as handle:
-        for raw in csv.DictReader(handle):
+        for raw in ResultDictReader(handle):
             row: dict[str, object] = dict(raw)
             row["iteration"] = int(raw["iteration"])
             row["elapsed_min"] = float(raw["elapsed_min"])
@@ -135,9 +139,9 @@ def best_so_far(
         ]
         if not candidates:
             raise RuntimeError(f"no candidate at cutoff {cutoff} for fold {fold}")
-        chosen[fold] = min(candidates, key=lambda row: float(row["nqo_total_ms"]))
+        chosen[fold] = min(candidates, key=lambda row: float(row["neurqo_total_ms"]))
     pg_total = sum(float(row["pg_total_ms"]) for row in chosen.values())
-    nqo_total = sum(float(row["nqo_total_ms"]) for row in chosen.values())
+    nqo_total = sum(float(row["neurqo_total_ms"]) for row in chosen.values())
     return nqo_total / pg_total, chosen
 
 
@@ -152,13 +156,13 @@ def fold_best_so_far(
     ]
     if not candidates:
         return None
-    return min(candidates, key=lambda row: float(row["nqo_total_ms"]))
+    return min(candidates, key=lambda row: float(row["neurqo_total_ms"]))
 
 
 def print_checkpoint_tables(rows: list[dict[str, object]]) -> None:
     print("CHECKPOINT RESULTS")
     print(
-        "Fold columns report each fold's best-so-far WS = PG / NQO; "
+        "Fold columns report each fold's best-so-far WS = PG / NeurQO; "
         "the final column reports the cross-fold best-so-far 1/WS."
     )
     for dataset, protocols in PROTOCOLS.items():
@@ -278,7 +282,7 @@ def main() -> int:
     time_rows = load_time_rows(args.time_input)
     validate(rows)
     validate_time_rows(time_rows)
-    print("NQO LEARNING TRACE")
+    print("NeurQO LEARNING TRACE")
     estimated = sum(int(row["iteration"]) < 0 for row in rows)
     print(f"rows={len(rows)} estimated_init={estimated} measured={len(rows) - estimated}")
     print(

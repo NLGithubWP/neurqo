@@ -105,7 +105,7 @@ def query_path(workload: str, query_id: str) -> Path:
 
 def query_sql(workload: str, query_id: str) -> str:
     sql = query_path(workload, query_id).read_text()
-    # Some canonical workload files also serve as saved hinted inputs for NQO.
+    # Some canonical workload files also serve as saved hinted inputs for NeurQO.
     # Baseline systems must always start from the unhinted statement.
     return re.sub(r"/\*\+.*?\*/", "", sql, flags=re.DOTALL)
 

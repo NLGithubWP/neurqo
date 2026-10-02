@@ -23,7 +23,7 @@ DEFAULT_OUTPUT = (
     REPO / "results" / "benchmark" / "nqo" / "nqo_alpha_sensitivity.csv"
 )
 DEFAULT_RUNTIME_DIR = (
-    PGDB_ROOT / ".nqo_runtime" / "reproduction" / "alpha-sensitivity-job-random"
+    PGDB_ROOT / ".neurqo_runtime" / "reproduction" / "alpha-sensitivity-job-random"
 )
 FIELDS = (
     "dataset",
@@ -52,7 +52,7 @@ FIXED_POLICIES = {
 
 sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "src"))
-from scripts.reproduce.nqo import run as nqo_runner  # noqa: E402
+from scripts.reproduce.neurqo import run as neurqo_runner  # noqa: E402
 from benchmarking.action_runner import (  # noqa: E402
     acquire_sql_execution_slot,
     release_sql_execution_slot,
@@ -66,6 +66,10 @@ from experience.store import (  # noqa: E402
 from optimization.actions import (  # noqa: E402
     semantic_policy_trajectory,
 )
+
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
+from optimization.naming import ResultDictReader
 
 
 class ResultCsv:
@@ -89,7 +93,7 @@ class ResultCsv:
 
     def _load(self) -> None:
         with self.path.open(newline="", encoding="utf-8") as handle:
-            reader = csv.DictReader(handle)
+            reader = ResultDictReader(handle)
             missing = set(FIELDS) - set(reader.fieldnames or ())
             if missing:
                 raise RuntimeError(
@@ -148,7 +152,7 @@ class ResultCsv:
 
 def load_benchmark_rows(path: Path) -> tuple[list[dict[str, str]], dict[str, float]]:
     with path.open(newline="", encoding="utf-8") as handle:
-        rows = list(csv.DictReader(handle))
+        rows = list(ResultDictReader(handle))
     pg = {
         row["sql_path"]: float(row["runtime_ms"])
         for row in rows
@@ -159,7 +163,7 @@ def load_benchmark_rows(path: Path) -> tuple[list[dict[str, str]], dict[str, flo
         for row in rows
         if row["dataset"] == "JOB"
         and row["protocol"] == "random"
-        and row["method"] == "NQO"
+        and row["method"] == "NeurQO"
     ]
     if not pg or not learned:
         raise RuntimeError(f"missing JOB benchmark rows in {path}")
@@ -216,27 +220,27 @@ def evaluate_fold(
     fold: str,
     port: int,
 ) -> dict[str, int]:
-    spec = nqo_runner.DATASETS["job"]
-    fold_spec = nqo_runner.split_folds("JOB", "random")[f"random_{fold}"]
+    spec = neurqo_runner.DATASETS["job"]
+    fold_spec = neurqo_runner.split_folds("JOB", "random")[f"random_{fold}"]
     query_ids = [str(value) for value in fold_spec["test"]]
     pending = [
         query_id
         for query_id in query_ids
         if not output.contains(
-            policy, fold, nqo_runner.query_relative_path("JOB", query_id)
+            policy, fold, neurqo_runner.query_relative_path("JOB", query_id)
         )
     ]
     if not pending:
         return {"hits": 0, "misses": 0, "executed": 0, "skipped": len(query_ids)}
 
-    checkpoint = nqo_runner.model_path("job", "random", fold)
+    checkpoint = neurqo_runner.model_path("job", "random", fold)
     runtime_dir = args.runtime_dir / policy / fold
     runtime_dir.mkdir(parents=True, exist_ok=True)
-    staged, digest = nqo_runner.stage_model(checkpoint, runtime_dir)
+    staged, digest = neurqo_runner.stage_model(checkpoint, runtime_dir)
     runtime_relative = runtime_dir.resolve().relative_to(PGDB_ROOT)
     runtime_container_dir = f"/code/pgdb-dev/{runtime_relative.as_posix()}"
     staged_container = f"{runtime_container_dir}/models/{staged.name}"
-    _catalog_path, catalog_container_path = nqo_runner.stage_catalog_snapshot(
+    _catalog_path, catalog_container_path = neurqo_runner.stage_catalog_snapshot(
         workload="JOB",
         host=args.host,
         port=args.pg_port,
@@ -247,7 +251,7 @@ def evaluate_fold(
     )
     counters = {"hits": 0, "misses": 0, "executed": 0, "skipped": 0}
 
-    with nqo_runner.ExperienceStore(
+    with neurqo_runner.ExperienceStore(
         spec.cache, writable=args.cache_miss == "execute"
     ) as store:
         store.set_binding(
@@ -271,7 +275,7 @@ def evaluate_fold(
             workload="JOB",
             catalog_container_path=catalog_container_path,
             model_device=args.model_device,
-            nqo_src="/code/pgdb-dev/.nqo_runtime/nqo/src",
+            neurqo_src="/code/pgdb-dev/.neurqo_runtime/neurqo/src",
             inference_mode="deterministic",
             temperature=1.0,
             exploration_epsilon=0.0,
@@ -287,8 +291,8 @@ def evaluate_fold(
         with server_context as server:
             policy_offset = 0
             for index, query_id in enumerate(pending, start=1):
-                sql_path = nqo_runner.query_relative_path("JOB", query_id)
-                sql = nqo_runner.load_query_sql("JOB", query_id)
+                sql_path = neurqo_runner.query_relative_path("JOB", query_id)
+                sql = neurqo_runner.load_query_sql("JOB", query_id)
                 sql_hash = content_hash(sql)
                 expected_hash = store.expected_result_hash(sql_hash)
                 cached, policy_offset = lookup_cached_execution(
@@ -326,7 +330,7 @@ def evaluate_fold(
                             db_events,
                             policy_offset,
                             timeout_ms,
-                        ) = nqo_runner.execute_miss(
+                        ) = neurqo_runner.execute_miss(
                             args=args,
                             spec=spec,
                             query_id=query_id,
@@ -377,7 +381,7 @@ def evaluate_fold(
                         "fixed_alpha": f"{alpha:.1f}",
                         "runtime_ms": f"{float(execution['charged_wall_ms']):.12f}",
                         "inference_ms": (
-                            f"{nqo_runner.policy_inference_ms(db_events, policy_events):.12f}"
+                            f"{neurqo_runner.policy_inference_ms(db_events, policy_events):.12f}"
                         ),
                         "pg_runtime_ms": f"{pg[sql_path]:.12f}",
                         "status": execution["status"],
@@ -390,8 +394,8 @@ def evaluate_fold(
                         ),
                         "cache_id": cache_id,
                         "trajectory_hash": semantic_trajectory_hash(trajectory),
-                        "checkpoint": nqo_runner.repo_relative(checkpoint),
-                        "actions_json": nqo_runner.actions_json(trajectory),
+                        "checkpoint": neurqo_runner.repo_relative(checkpoint),
+                        "actions_json": neurqo_runner.actions_json(trajectory),
                     }
                 )
                 print(
@@ -423,7 +427,7 @@ def main() -> int:
     parser.add_argument(
         "--sql-execution-lock",
         type=Path,
-        default=PGDB_ROOT / ".nqo_runtime" / "reproduction" / ".alpha-sql.lock",
+        default=PGDB_ROOT / ".neurqo_runtime" / "reproduction" / ".alpha-sql.lock",
     )
     parser.add_argument("--sql-execution-slots", type=int, default=2)
     args = parser.parse_args()

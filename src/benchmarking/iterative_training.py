@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run a resumable online NQO train/validate/test experiment."""
+"""Run a resumable online NeurQO train/validate/test experiment."""
 from __future__ import annotations
 
 import argparse
@@ -508,7 +508,7 @@ def main(argv: list[str] | None = None) -> int:
         )
         return 130
 
-    parser = argparse.ArgumentParser(prog="nqo-benchmark train")
+    parser = argparse.ArgumentParser(prog="neurqo-benchmark train")
     parser.add_argument(
         "--workload",
         choices=("JOB", "STACK", "TPCH"),
@@ -639,7 +639,7 @@ def main(argv: list[str] | None = None) -> int:
         type=Path,
         help=(
             "isolated host-side source snapshot used by the PPO trainer; "
-            "defaults to <pgdb-root>/.nqo_runtime/nqo"
+            "defaults to <pgdb-root>/.neurqo_runtime/neurqo"
         ),
     )
     parser.add_argument("--container", default="pgdb_dev_opt")
@@ -1011,7 +1011,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.workload == "STACK" and args.sql_execution_lock is None:
         args.sql_execution_lock = (
             args.pgdb_root
-            / ".nqo_runtime"
+            / ".neurqo_runtime"
             / "online"
             / ".stack-sql-execution.lock"
         )
@@ -1050,7 +1050,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     experiment_dir = args.output_root / args.workload.lower() / master_id
     experiment_dir.mkdir(parents=True, exist_ok=True)
-    runtime_root = args.pgdb_root / ".nqo_runtime" / "benchmark" / master_id
+    runtime_root = args.pgdb_root / ".neurqo_runtime" / "benchmark" / master_id
     runtime_root.mkdir(parents=True, exist_ok=True)
     runtime_root.chmod(0o777)
     args.staged_independent_action_summary = None
@@ -1069,13 +1069,13 @@ def main(argv: list[str] | None = None) -> int:
     args.runtime_project = (
         args.runtime_project.resolve()
         if args.runtime_project is not None
-        else args.pgdb_root / ".nqo_runtime" / "nqo"
+        else args.pgdb_root / ".neurqo_runtime" / "neurqo"
     )
     try:
         args.runtime_project.relative_to(args.pgdb_root)
     except ValueError:
         parser.error("--runtime-project must be inside --pgdb-root")
-    sync_lock_path = args.pgdb_root / ".nqo_runtime" / "benchmark" / ".sync.lock"
+    sync_lock_path = args.pgdb_root / ".neurqo_runtime" / "benchmark" / ".sync.lock"
     sync_lock_path.parent.mkdir(parents=True, exist_ok=True)
     with sync_lock_path.open("a+") as sync_lock:
         fcntl.flock(sync_lock.fileno(), fcntl.LOCK_EX)
@@ -1203,7 +1203,7 @@ def main(argv: list[str] | None = None) -> int:
         "config": {
             key: value for key, value in vars(args).items() if key != "runtime_project"
         },
-        "selection_rule": "maximum test PG-first/NQO-first workload speedup",
+        "selection_rule": "maximum test PG-first/NeurQO-first workload speedup",
         "test_usage": "checkpoint selection and reporting",
         "schedule_seed_alpha_source": selected_alpha_source,
         "initial_policy_profile": args.resolved_initial_policy_profile,

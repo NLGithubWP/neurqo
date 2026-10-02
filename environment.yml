@@ -1,4 +1,4 @@
-name: nqo
+name: neurqo
 channels:
   - defaults
 dependencies:

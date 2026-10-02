@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run PostgreSQL, a versioned NQO model, or a fixed standalone Action."""
+"""Run PostgreSQL, a versioned NeurQO model, or a fixed standalone Action."""
 
 from __future__ import annotations
 
@@ -29,7 +29,7 @@ DEFAULT_OUTPUT = (
     REPO / "results" / "benchmark" / "nqo" / "nqo_runs.csv"
 )
 DEFAULT_RUNTIME_DIR = (
-    PGDB_ROOT / ".nqo_runtime" / "reproduction" / "nqo-evaluator"
+    PGDB_ROOT / ".neurqo_runtime" / "reproduction" / "neurqo-evaluator"
 )
 CSV_FIELDS = (
     "dataset",
@@ -98,6 +98,10 @@ from optimization.actions import (  # noqa: E402
     timeout_charged_runtime_ms,
     validate_policy_state_contract,
 )
+
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
+from optimization.naming import ResultDictReader
 
 
 ACTION_CONFIG = Path(__file__).with_name("action_config.json")
@@ -207,9 +211,9 @@ STACK_PROFILE = ActionProfile(
     lip_max_filters=4,
 )
 
-POSTGRES_PROFILE = ActionProfile(name="pg", nqo_enabled=False)
+POSTGRES_PROFILE = ActionProfile(name="pg", neurqo_enabled=False)
 POSTGRES_TIMEOUT_MS = 60_000
-NQO_ACTION_CONFIG_HASHES = {
+NEURQO_ACTION_CONFIG_HASHES = {
     "JOB": "9642f7cae030aac1e9f3d84519e19a41c8032645100b99942323e97fe234c665",
     "STACK": "ce4bc2e8dc5dee52150e62a5fee5dbdb9c90b439518ebfbcbe821045e4e312ad",
     "TPCH": "5945cde270af1c9297551845b6e1479b12db9070bb59c60de43d07fa233de4f5",
@@ -251,16 +255,16 @@ def execute_sql_once(
         set_session_config(cursor, "statement_timeout", timeout_ms)
         set_session_config(cursor, "client_min_messages", "warning")
         set_session_config(cursor, "search_path", "public")
-        if profile.nqo_enabled:
+        if profile.neurqo_enabled:
             if server_url is None:
-                raise RuntimeError("NQO requires a policy server")
+                raise RuntimeError("NeurQO requires a policy server")
             for name, value in profile.guc_settings().items():
                 set_session_config(cursor, name, value)
-            set_session_config(cursor, "nqo.server_url", server_url)
-            set_session_config(cursor, "nqo.trajectory_log", db_trace_container)
-            set_session_config(cursor, "nqo", "on")
+            set_session_config(cursor, "neurqo.server_url", server_url)
+            set_session_config(cursor, "neurqo.trajectory_log", db_trace_container)
+            set_session_config(cursor, "neurqo", "on")
         else:
-            set_session_config(cursor, "nqo", "off")
+            set_session_config(cursor, "neurqo", "off")
 
         started = time.perf_counter()
         cursor.execute(sql)
@@ -305,7 +309,7 @@ DATASETS = {
         name="JOB",
         cache=BUFFER_ROOT / "job_light.sql",
         profile=JOB_PROFILE,
-        action_config_hash=NQO_ACTION_CONFIG_HASHES["JOB"],
+        action_config_hash=NEURQO_ACTION_CONFIG_HASHES["JOB"],
         protocols=("base_query", "leave_one_out", "random"),
     ),
     # Unsupported TPC-H query shapes have no policy decisions and use the
@@ -314,7 +318,7 @@ DATASETS = {
         name="TPCH",
         cache=BUFFER_ROOT / "tpch_light.sql",
         profile=TPCH_PROFILE,
-        action_config_hash=NQO_ACTION_CONFIG_HASHES["TPCH"],
+        action_config_hash=NEURQO_ACTION_CONFIG_HASHES["TPCH"],
         protocols=("random",),
         fallback_queries=frozenset({"7", "8", "9", "13", "15", "22"}),
     ),
@@ -322,7 +326,7 @@ DATASETS = {
         name="STACK",
         cache=BUFFER_ROOT / "stack_light.sql",
         profile=STACK_PROFILE,
-        action_config_hash=NQO_ACTION_CONFIG_HASHES["STACK"],
+        action_config_hash=NEURQO_ACTION_CONFIG_HASHES["STACK"],
         protocols=("base_query", "leave_one_out", "random"),
     ),
 }
@@ -346,7 +350,7 @@ class ResultCsv:
         self.rows: dict[tuple[str, str, str, str, str], dict[str, str]] = {}
         if path.is_file() and path.stat().st_size:
             with path.open(newline="", encoding="utf-8") as handle:
-                reader = csv.DictReader(handle)
+                reader = ResultDictReader(handle)
                 if tuple(reader.fieldnames or ()) != CSV_FIELDS:
                     raise RuntimeError(
                         f"incompatible result CSV columns in {path}: "
@@ -390,7 +394,7 @@ class ResultCsv:
             existing: set[tuple[str, str, str, str, str]] = set()
             if self.path.is_file() and self.path.stat().st_size:
                 with self.path.open(newline="", encoding="utf-8") as handle:
-                    reader = csv.DictReader(handle)
+                    reader = ResultDictReader(handle)
                     if tuple(reader.fieldnames or ()) != CSV_FIELDS:
                         raise RuntimeError(
                             f"incompatible result CSV columns in {self.path}"
@@ -684,7 +688,7 @@ def evaluate_case(
     pending = []
     for query_id in query_ids:
         sql_path = query_relative_path(spec.name, query_id)
-        key = (spec.name, protocol, fold, sql_path, "NQO")
+        key = (spec.name, protocol, fold, sql_path, "NeurQO")
         if not results.contains(key):
             pending.append(query_id)
     if not pending:
@@ -733,7 +737,7 @@ def evaluate_case(
         workload=spec.name,
         catalog_container_path=catalog_container_path,
         model_device=args.model_device,
-        nqo_src="/code/pgdb-dev/.nqo_runtime/nqo/src",
+        neurqo_src="/code/pgdb-dev/.neurqo_runtime/neurqo/src",
         inference_mode="deterministic",
         temperature=1.0,
         exploration_epsilon=0.0,
@@ -853,7 +857,7 @@ def evaluate_case(
                     "protocol": protocol,
                     "fold": fold,
                     "sql_path": sql_path,
-                    "method": "NQO",
+                    "method": "NeurQO",
                     "runtime_ms": f"{runtime_ms:.12f}",
                     "inference_ms": f"{inference_ms:.12f}",
                     "status": result_status,
@@ -1068,15 +1072,15 @@ def evaluate_standalone(
 def main() -> int:
     parser = argparse.ArgumentParser(
         description=(
-            "Run one PostgreSQL measurement, a versioned NQO checkpoint, "
+            "Run one PostgreSQL measurement, a versioned NeurQO checkpoint, "
             "or a fixed standalone Action"
         )
     )
     parser.add_argument("--dataset", choices=sorted(DATASETS), default="job")
     parser.add_argument(
         "--method",
-        choices=("nqo", "postgres", *STANDALONE_METHODS),
-        default="nqo",
+        choices=("neurqo", "postgres", *STANDALONE_METHODS),
+        default="neurqo",
     )
     parser.add_argument("--protocol", choices=tuple(PROTOCOL_DIRS))
     parser.add_argument("--fold", choices=("a", "b", "c"))
@@ -1113,9 +1117,9 @@ def main() -> int:
         type=Path,
         default=(
             PGDB_ROOT
-            / ".nqo_runtime"
+            / ".neurqo_runtime"
             / "online"
-            / ".nqo-sql.lock"
+            / ".neurqo-sql.lock"
         ),
     )
     parser.add_argument("--sql-execution-slots", type=int, default=1)
@@ -1143,17 +1147,17 @@ def main() -> int:
         )
     if args.sql_execution_slots < 1:
         parser.error("--sql-execution-slots must be positive")
-    if args.method == "nqo":
+    if args.method == "neurqo":
         if args.protocol is None or args.fold is None:
-            parser.error("--method nqo requires --protocol and --fold")
+            parser.error("--method neurqo requires --protocol and --fold")
         if args.protocol not in spec.protocols:
             parser.error(
                 f"{spec.name} does not support protocol {args.protocol!r}"
             )
         if not args.output.is_file():
             raise FileNotFoundError(
-                "collect PostgreSQL rows before NQO evaluation with: "
-                f"python3 scripts/reproduce/nqo/run.py --method postgres "
+                "collect PostgreSQL rows before NeurQO evaluation with: "
+                f"python3 scripts/reproduce/neurqo/run.py --method postgres "
                 f"--dataset {args.dataset} --output {args.output}"
             )
         runtime_label = f"{args.protocol}-{args.fold}"
@@ -1203,7 +1207,7 @@ def main() -> int:
     with ExperienceStore(
         spec.cache, writable=args.cache_miss == "execute"
     ) as store:
-        if args.method == "nqo":
+        if args.method == "neurqo":
             print(f"== {spec.name}/{args.protocol}/{args.fold} ==", flush=True)
             totals = evaluate_case(
                 args=args,
@@ -1219,7 +1223,7 @@ def main() -> int:
                 "dataset": spec.name,
                 "protocol": args.protocol,
                 "fold": args.fold,
-                "method": "NQO",
+                "method": "NeurQO",
                 "cache_miss_mode": args.cache_miss,
                 **totals,
             }

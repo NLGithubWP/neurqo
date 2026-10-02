@@ -45,7 +45,7 @@ def replay_cached_trajectory(
     trajectory: list[dict[str, Any]],
 ) -> tuple[bool, list[dict[str, Any]], int]:
     """Replay cached states and require an exact semantic Action sequence."""
-    # An empty trajectory means this SQL shape bypasses the NQO hook. The
+    # An empty trajectory means this SQL shape bypasses the NeurQO hook. The
     # bypass is deterministic for the original SQL, so there is no model
     # decision to replay before reusing its execution label.
     if not trajectory:

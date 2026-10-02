@@ -11,6 +11,10 @@ import re
 from collections import Counter, defaultdict
 from pathlib import Path
 
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
+from optimization.naming import ResultDictReader
+
 
 REPO = Path(__file__).resolve().parents[3]
 DEFAULT_INPUT = (
@@ -65,14 +69,14 @@ def main() -> int:
         raise FileNotFoundError(args.input)
 
     with args.input.open(newline="", encoding="utf-8") as handle:
-        rows = list(csv.DictReader(handle))
+        rows = list(ResultDictReader(handle))
     pg = {
         (row["target_dataset"], row["sql_path"]): row
         for row in rows
         if row["method"] == "PostgreSQL"
     }
-    transfer = [row for row in rows if row["method"] == "NQO zero-shot"]
-    mixed = [row for row in rows if row["method"] == "NQO mixed"]
+    transfer = [row for row in rows if row["method"] == "NeurQO zero-shot"]
+    mixed = [row for row in rows if row["method"] == "NeurQO mixed"]
     if not pg:
         raise RuntimeError("missing PostgreSQL rows")
     pg_targets = {dataset for dataset, _ in pg}
