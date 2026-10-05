@@ -7,6 +7,8 @@ from pathlib import Path
 import matplotlib
 
 matplotlib.use("Agg")
+matplotlib.rcParams["pdf.fonttype"] = 42
+matplotlib.rcParams["ps.fonttype"] = 42
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FixedFormatter, FixedLocator, NullLocator
 from matplotlib.transforms import Bbox
