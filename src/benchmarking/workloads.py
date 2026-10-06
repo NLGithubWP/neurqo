@@ -37,6 +37,12 @@ SPLIT_PROTOCOLS = {
     "TPCH": ("random",),
 }
 
+QUERY_DIRECTORIES = {
+    "JOB": "query_job",
+    "STACK": "query_stack",
+    "TPCH": "query_tpch",
+}
+
 
 def dynamic_timeout_s(pg_time_s: float, factor: float = 5.0) -> float:
     return min(MAX_QUERY_TIMEOUT_S, factor * pg_time_s)
@@ -85,19 +91,9 @@ def workload_query_ids(workload: str) -> List[str]:
 
 def query_path(workload: str, query_id: str) -> Path:
     workload = workload.upper()
-    query_directories = {
-        "JOB": "query_job",
-        "STACK": "query_stack",
-        "TPCH": "query_tpch",
-    }
-    if workload not in query_directories:
+    if workload not in QUERY_DIRECTORIES:
         raise KeyError("unknown workload {}".format(workload))
-    path = (
-        ROOT
-        / "workloads"
-        / query_directories[workload]
-        / "{}.sql".format(query_id)
-    )
+    path = ROOT / "workloads" / QUERY_DIRECTORIES[workload] / "{}.sql".format(query_id)
     if not path.is_file():
         raise FileNotFoundError(path)
     return path

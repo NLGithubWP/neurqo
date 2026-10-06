@@ -7,6 +7,13 @@ import time
 from pathlib import Path
 from typing import Any, Optional
 
+from benchmarking.local_runtime import command as local_command
+from benchmarking.local_runtime import enabled as local_runtime
+from benchmarking.replay_runtime import (
+    release_container,
+    runtime_python,
+    stage_directory,
+)
 from optimization.actions import ActionProfile
 
 
@@ -17,11 +24,10 @@ class DockerFixedPolicyServer:
         container: str,
         port: int,
         profile: ActionProfile,
+        workload: str = "job",
         runtime_host_dir: Path,
         runtime_container_dir: str,
-        runtime_source_container: str = (
-            "/code/pgdb-dev/.neurqo_runtime/neurqo/src"
-        ),
+        runtime_source_container: str = ("/code/pgdb-dev/.neurqo_runtime/neurqo/src"),
         run_label: Optional[str] = None,
         listen_host: str = "127.0.0.1",
         action_host: str = "127.0.0.1",
@@ -30,6 +36,7 @@ class DockerFixedPolicyServer:
         self.container = container
         self.port = port
         self.profile = profile
+        self.workload = workload
         self.run_label = run_label or profile.name
         self.listen_host = listen_host
         self.action_host = action_host
@@ -39,6 +46,8 @@ class DockerFixedPolicyServer:
         self.runtime_host_dir = runtime_host_dir
         self.runtime_container_dir = runtime_container_dir
         self.runtime_source_container = runtime_source_container
+        if local_runtime():
+            self.runtime_source_container = str(Path(__file__).resolve().parents[1])
         self.policy_log_host = runtime_host_dir / f"{self.run_label}.policy.jsonl"
         self.policy_log_container = (
             f"{runtime_container_dir}/{self.run_label}.policy.jsonl"
@@ -52,6 +61,26 @@ class DockerFixedPolicyServer:
         return f"http://{self.action_host}:{self.port}/action"
 
     def _curl(self, path: str, method: str = "GET") -> subprocess.CompletedProcess:
+        if release_container() or local_runtime():
+            return subprocess.run(
+                local_command(
+                    [
+                        "docker",
+                        "exec",
+                        self.container,
+                        runtime_python(),
+                        "-c",
+                        "import sys,urllib.request;"
+                        "r=urllib.request.Request(sys.argv[1],method=sys.argv[2]);"
+                        "sys.stdout.buffer.write(urllib.request.urlopen(r,timeout=5).read())",
+                        f"http://127.0.0.1:{self.port}{path}",
+                        method,
+                    ]
+                ),
+                capture_output=True,
+                text=True,
+                timeout=15,
+            )
         return subprocess.run(
             [
                 "docker",
@@ -71,15 +100,55 @@ class DockerFixedPolicyServer:
     def policy_environment(self) -> dict[str, str]:
         return self.profile.policy_environment()
 
+    def _is_owned_health(self, result: subprocess.CompletedProcess) -> bool:
+        if result.returncode != 0:
+            return False
+        if (release_container() or local_runtime()) and hasattr(
+            self, "model_container_path"
+        ):
+            return (
+                f"model_source=checkpoint:{self.model_container_path}\n"
+                in result.stdout
+            )
+        return True
+
     def model_arguments(self) -> list[str]:
         return [
             "--model-module",
             "runtime.policies.fixed:predict",
             "--policy-version",
             f"fixed:{self.profile.name}",
+            "--workload",
+            self.workload.lower(),
         ]
 
     def _kill_owned_container_server(self) -> None:
+        if local_runtime():
+            if self.process is not None and self.process.poll() is None:
+                self.process.terminate()
+            return
+        if release_container():
+            subprocess.run(
+                [
+                    "docker",
+                    "exec",
+                    self.container,
+                    runtime_python(),
+                    "-c",
+                    "import os,signal,sys;from pathlib import Path;"
+                    "marker=sys.argv[1].encode();"
+                    "[(os.kill(int(p.name),signal.SIGTERM)) for p in Path('/proc').iterdir() "
+                    "if p.name.isdigit() and int(p.name)!=os.getpid() "
+                    "and (p/'cmdline').exists() "
+                    "and marker in (p/'cmdline').read_bytes().split(b'\\0') "
+                    "and b'runtime.action_server' in (p/'cmdline').read_bytes().split(b'\\0')]",
+                    self.policy_log_container,
+                ],
+                capture_output=True,
+                timeout=15,
+                check=False,
+            )
+            return
         subprocess.run(
             [
                 "docker",
@@ -95,7 +164,10 @@ class DockerFixedPolicyServer:
         )
 
     def _cleanup(self) -> None:
-        self._curl("/shutdown", method="POST")
+        if not (release_container() or local_runtime()) or self._is_owned_health(
+            self._curl("/")
+        ):
+            self._curl("/shutdown", method="POST")
         if self.process is not None:
             try:
                 self.process.wait(timeout=10.0)
@@ -121,6 +193,12 @@ class DockerFixedPolicyServer:
             raise RuntimeError(f"policy server port {self.port} is already in use")
         self.runtime_host_dir.mkdir(parents=True, exist_ok=True)
         self.policy_log_host.unlink(missing_ok=True)
+        if release_container():
+            stage_directory(
+                self.runtime_host_dir,
+                self.runtime_container_dir,
+                self.policy_log_container,
+            )
         self.log_handle = self.server_log_host.open("ab")
         command = ["docker", "exec"]
         command.extend(["-e", f"PYTHONPATH={self.runtime_source_container}"])
@@ -129,7 +207,7 @@ class DockerFixedPolicyServer:
         command.extend(
             [
                 self.container,
-                "python3",
+                runtime_python(),
                 "-m",
                 "runtime.action_server",
                 "--host",
@@ -144,7 +222,7 @@ class DockerFixedPolicyServer:
         )
         try:
             self.process = subprocess.Popen(
-                command,
+                local_command(command),
                 stdout=self.log_handle,
                 stderr=subprocess.STDOUT,
             )
@@ -154,7 +232,7 @@ class DockerFixedPolicyServer:
                     raise RuntimeError(
                         f"policy server exited; inspect {self.server_log_host}"
                     )
-                if self._curl("/").returncode == 0:
+                if self._is_owned_health(self._curl("/")):
                     return self
                 time.sleep(0.1)
             raise TimeoutError(f"policy server did not start on port {self.port}")
@@ -190,7 +268,9 @@ class DockerLearnedPolicyServer(DockerFixedPolicyServer):
         fixed_sched_alpha: float | None = None,
         **kwargs: Any,
     ) -> None:
-        super().__init__(runtime_source_container=neurqo_src, **kwargs)
+        super().__init__(
+            runtime_source_container=neurqo_src, workload=workload, **kwargs
+        )
         self.model_container_path = model_container_path
         self.model_method = model_method
         self.model_hidden = model_hidden
@@ -253,7 +333,5 @@ class DockerLearnedPolicyServer(DockerFixedPolicyServer):
         if self.stochastic_heads is not None:
             arguments.extend(["--stochastic-heads", self.stochastic_heads])
         if self.fixed_sched_alpha is not None:
-            arguments.extend(
-                ["--fixed-sched-alpha", str(self.fixed_sched_alpha)]
-            )
+            arguments.extend(["--fixed-sched-alpha", str(self.fixed_sched_alpha)])
         return arguments

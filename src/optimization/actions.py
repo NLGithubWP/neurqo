@@ -12,7 +12,6 @@ from pathlib import Path
 from typing import Any, Iterable, Optional
 
 from experience.store import canonical_json, content_hash
-from optimization.naming import legacy_profile, normalize_profile
 from optimization.action_vocabulary import (
     ADAPT_PHASE,
     DEC_PHASE,
@@ -27,6 +26,7 @@ from optimization.action_vocabulary import (
     normalize_policy_action,
     normalize_policy_state,
 )
+from optimization.naming import legacy_profile, normalize_profile
 
 ONLINE_ACTION_SPACE_VERSION = "dec2-sched3-enum2-adapt4-v3"
 STATE_CONTRACT_FORBIDDEN_FIELDS = {
@@ -142,9 +142,7 @@ class ActionProfile:
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "dec", canonical_dec_action(self.dec))
-        object.__setattr__(
-            self, "enum", canonical_enum_action(self.enum, self.enum_k)
-        )
+        object.__setattr__(self, "enum", canonical_enum_action(self.enum, self.enum_k))
         object.__setattr__(self, "filter", canonical_filter_action(self.filter))
         object.__setattr__(self, "ajoin", canonical_ajoin_action(self.ajoin))
         if not 0.0 <= self.sched_alpha <= 1.0:
@@ -223,7 +221,12 @@ class ActionProfile:
 
     def compatible_hashes(self) -> tuple[str, ...]:
         """Return canonical and released-v2 profile hashes, in preference order."""
-        hashes = (content_hash(self.to_dict()), content_hash(legacy_profile(self.to_dict())), content_hash(self.legacy_dict()))
+        hashes = (
+            content_hash(self.to_dict()),
+            content_hash(legacy_profile(self.to_dict())),
+            content_hash(self.legacy_dict()),
+            content_hash(normalize_profile(self.legacy_dict())),
+        )
         return tuple(dict.fromkeys(hashes))
 
     @classmethod
@@ -266,7 +269,9 @@ def builtin_profiles() -> dict[str, ActionProfile]:
         "top10": ActionProfile(name="top10", enum="top10", enum_k=10),
         "lip_full": ActionProfile(name="lip_full", filter="full"),
         "lip_selective": ActionProfile(name="lip_selective", filter="selective"),
-        "aja_conservative": ActionProfile(name="aja_conservative", ajoin="conservative"),
+        "aja_conservative": ActionProfile(
+            name="aja_conservative", ajoin="conservative"
+        ),
         "aja_aggressive": ActionProfile(name="aja_aggressive", ajoin="aggressive"),
         "lip_full_aja_conservative": ActionProfile(
             name="lip_full_aja_conservative",
@@ -490,8 +495,7 @@ def load_action_config(
     # returned object is canonical, while its original config_hash remains the
     # identity of the read-only released artifact.
     normalized_parameters = {
-        LEGACY_PROFILE_FIELDS.get(key, key): value
-        for key, value in parameters.items()
+        LEGACY_PROFILE_FIELDS.get(key, key): value for key, value in parameters.items()
     }
     missing = sorted(REQUIRED_ACTION_PARAMETERS - set(normalized_parameters))
     if missing:
@@ -640,9 +644,7 @@ def model_input_state(
         def canonical_temp(match: re.Match[str]) -> str:
             key = match.group(0).lower()
             if key not in temp_relations:
-                temp_relations[key] = (
-                    f"__nqo_temp_{len(temp_relations) + 1}"
-                )
+                temp_relations[key] = f"__nqo_temp_{len(temp_relations) + 1}"
             return temp_relations[key]
 
         return TEMP_RELATION_PATTERN.sub(canonical_temp, value)
@@ -656,6 +658,18 @@ def model_input_hash(state: dict[str, Any]) -> str:
 
 def _semantic_action(phase: str, action: dict[str, Any]) -> dict[str, Any]:
     phase = canonical_phase(phase)
+    explicit_adapt_choice = any(
+        key in action
+        for key in (
+            "filter_action",
+            "ajoin_action",
+            "lip_action",
+            "aja_level",
+            "execution_action",
+            "low_label",
+            "adapt_action",
+        )
+    )
     action = normalize_policy_action(action, phase=phase)
     fields = {
         DEC_PHASE: ("dec_action", "order_decision"),
@@ -666,7 +680,13 @@ def _semantic_action(phase: str, action: dict[str, Any]) -> dict[str, Any]:
         ENUM_PHASE: ("enum_action", "enum_k"),
         ADAPT_PHASE: ("ajoin_action", "filter_action"),
     }[phase]
-    return {key: action.get(key) for key in fields if action.get(key) is not None}
+    semantic = {key: action.get(key) for key in fields if action.get(key) is not None}
+    if action.get("action_index") is not None and (
+        not semantic or (phase == ADAPT_PHASE and not explicit_adapt_choice)
+    ):
+        # Index-only legacy records must not collapse into the same empty action.
+        return {"action_index": int(action["action_index"])}
+    return semantic
 
 
 def semantic_policy_trajectory(
@@ -799,9 +819,7 @@ def ingest_trajectory(
                     "observed_at_ms": int(
                         event.get("ts_ms") or time.time_ns() // 1_000_000
                     ),
-                    "downstream_signature": _downstream_signature(
-                        phase, phase_actions
-                    ),
+                    "downstream_signature": _downstream_signature(phase, phase_actions),
                     "environment_hash": environment_hash,
                     "implementation_version": implementation_version,
                     "policy": action,
@@ -823,8 +841,9 @@ def ingest_trajectory(
                 round_count += 1
 
             actions = {
-                canonical_phase((event.get("state") or {}).get("request_type")):
-                normalize_policy_action(
+                canonical_phase(
+                    (event.get("state") or {}).get("request_type")
+                ): normalize_policy_action(
                     event.get("action") or {},
                     phase=(event.get("state") or {}).get("request_type"),
                 )

@@ -20,14 +20,11 @@ from typing import Any, Iterable
 
 import psycopg2
 
-
 REPO = Path(__file__).resolve().parents[3]
-PGDB_ROOT = REPO.parent / "pgdb"
+PGDB_ROOT = Path(os.environ.get("NEURQO_REPLAY_ROOT", REPO.parent / "pgdb"))
 MODEL_ROOT = REPO / "results" / "models"
 BUFFER_ROOT = REPO / "results" / "buffers"
-DEFAULT_OUTPUT = (
-    REPO / "results" / "benchmark" / "nqo" / "nqo_runs.csv"
-)
+DEFAULT_OUTPUT = REPO / "results" / "benchmark" / "nqo" / "nqo_runs.csv"
 DEFAULT_RUNTIME_DIR = (
     PGDB_ROOT / ".neurqo_runtime" / "reproduction" / "neurqo-evaluator"
 )
@@ -61,16 +58,12 @@ SQL_DIRS = {
 sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "src"))
 
-from benchmarking.workloads import (  # noqa: E402
-    WORKLOAD_DATABASES,
-    split_folds,
-    workload_query_ids,
-)
+import sys
+
 from benchmarking.action_runner import (  # noqa: E402
     acquire_sql_execution_slot,
     release_sql_execution_slot,
 )
-from benchmarking.run_environment import stage_policy_runtime  # noqa: E402
 from benchmarking.execution_cache import (  # noqa: E402
     lookup_cached_execution,
     read_jsonl_since,
@@ -79,15 +72,28 @@ from benchmarking.policy_server import (  # noqa: E402
     DockerFixedPolicyServer,
     DockerLearnedPolicyServer,
 )
+from benchmarking.replay_runtime import (  # noqa: E402
+    configure_args,
+    container_path,
+    policy_source,
+    read_catalog,
+    release_container,
+)
+from benchmarking.run_environment import stage_policy_runtime  # noqa: E402
+from benchmarking.workloads import (  # noqa: E402
+    WORKLOAD_DATABASES,
+    split_folds,
+    workload_query_ids,
+)
+from database.catalog import (  # noqa: E402
+    read_postgres_catalog,
+    write_catalog_snapshot,
+)
 from experience.store import (  # noqa: E402
     ExperienceStore,
     canonical_json,
     content_hash,
     semantic_trajectory_hash,
-)
-from database.catalog import (  # noqa: E402
-    read_postgres_catalog,
-    write_catalog_snapshot,
 )
 from optimization.actions import (  # noqa: E402
     ActionProfile,
@@ -99,10 +105,8 @@ from optimization.actions import (  # noqa: E402
     validate_policy_state_contract,
 )
 
-import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
 from optimization.naming import ResultDictReader
-
 
 ACTION_CONFIG = Path(__file__).with_name("action_config.json")
 ACTION_PROFILE_CATALOG = json.loads(ACTION_CONFIG.read_text())
@@ -118,9 +122,7 @@ def profile_for(dataset: str, method: str) -> ActionProfile:
     dataset = dataset.upper()
     if method not in DATASET_METHODS[dataset]:
         raise ValueError(f"{dataset} has no benchmark result for {method}")
-    values = dict(
-        ACTION_PROFILE_CATALOG["datasets"][dataset]["base_profile"]
-    )
+    values = dict(ACTION_PROFILE_CATALOG["datasets"][dataset]["base_profile"])
     values.update(ACTION_PROFILE_CATALOG["method_overrides"][method])
     return ActionProfile.from_mapping(name=method, values=values)
 
@@ -344,6 +346,8 @@ class ResultCsv:
     def __init__(self, path: Path) -> None:
         self.path = path
         lock_root = DEFAULT_RUNTIME_DIR / "csv-locks"
+        if release_container():
+            lock_root = PGDB_ROOT.parent / "csv-locks"
         lock_root.mkdir(parents=True, exist_ok=True)
         lock_name = hashlib.sha256(str(path.resolve()).encode()).hexdigest()
         self.lock_path = lock_root / f"{lock_name}.lock"
@@ -417,6 +421,26 @@ class ResultCsv:
             fcntl.flock(lock.fileno(), fcntl.LOCK_UN)
         self.rows[key] = normalized
         return True
+
+
+def seed_postgres_reference(source: Path, output: Path, dataset: str) -> None:
+    if source.resolve() == output.resolve():
+        raise ValueError("reference CSV and replay output must be different files")
+    with source.open(newline="", encoding="utf-8") as handle:
+        rows = [
+            row
+            for row in ResultDictReader(handle)
+            if row["dataset"] == dataset and row["method"] == "PostgreSQL"
+        ]
+    if not rows:
+        raise ValueError(f"no {dataset}/PostgreSQL rows in {source}")
+    results = ResultCsv(output)
+    for row in rows:
+        previous = results.rows.get(results.key(row))
+        if previous is not None and any(previous[k] != row[k] for k in CSV_FIELDS):
+            raise ValueError(f"conflicting PostgreSQL reference for {row['sql_path']}")
+    for row in rows:
+        results.put(row)
 
 
 def collect_postgres(
@@ -595,16 +619,15 @@ def stage_catalog_snapshot(
 ) -> tuple[Path, str]:
     """Capture and stage the target DB catalog for a policy server."""
     path = runtime_dir / f"catalog-{workload.lower()}.snapshot.json"
-    connection = psycopg2.connect(
-        host=host,
-        port=port,
-        user=user,
-        dbname=database or WORKLOAD_DATABASES[workload.upper()],
-    )
-    try:
-        snapshot = read_postgres_catalog(connection, schema="public")
-    finally:
-        connection.close()
+    database = database or WORKLOAD_DATABASES[workload.upper()]
+    if release_container():
+        snapshot = read_catalog(database)
+    else:
+        connection = psycopg2.connect(host=host, port=port, user=user, dbname=database)
+        try:
+            snapshot = read_postgres_catalog(connection, schema="public")
+        finally:
+            connection.close()
     write_catalog_snapshot(path, snapshot)
     path.chmod(0o644)
     return path, f"{runtime_container_dir}/{path.name}"
@@ -624,6 +647,8 @@ def execute_miss(
     runtime_dir: Path,
     runtime_container_dir: str,
 ) -> tuple[dict[str, Any], list[dict[str, Any]], list[dict[str, Any]], int, int]:
+    if release_container():
+        raise RuntimeError("release replay cannot execute cache misses")
     timeout_ms = first_runtime_timeout_ms(pg_first_ms, factor=5.0, cap_ms=60_000)
     charged_failure_ms = timeout_charged_runtime_ms(
         pg_first_ms, factor=5.0, cap_ms=360_000
@@ -635,9 +660,7 @@ def execute_miss(
         workload=spec.name,
         database=args.database,
     )
-    trace_name = (
-        f"miss-{spec.name.lower()}-{os.getpid()}-{uuid.uuid4().hex}.db.jsonl"
-    )
+    trace_name = f"miss-{spec.name.lower()}-{os.getpid()}-{uuid.uuid4().hex}.db.jsonl"
     trace_host = runtime_dir / trace_name
     trace_container = f"{runtime_container_dir}/{trace_name}"
     policy_start = policy_offset
@@ -697,17 +720,9 @@ def evaluate_case(
 
     checkpoint = model_path(dataset_key, protocol, fold)
     staged, digest = stage_model(checkpoint, runtime_dir)
-    store.set_binding(
-        protocol=protocol, fold=fold, checkpoint_sha256=digest
-    )
+    store.set_binding(protocol=protocol, fold=fold, checkpoint_sha256=digest)
     store.set_action_config_hash(spec.action_config_hash)
-    try:
-        runtime_relative = runtime_dir.resolve().relative_to(PGDB_ROOT)
-    except ValueError as exc:
-        raise ValueError(
-            f"runtime directory must be inside {PGDB_ROOT}: {runtime_dir}"
-        ) from exc
-    runtime_container_dir = f"/code/pgdb-dev/{runtime_relative.as_posix()}"
+    runtime_container_dir = container_path(runtime_dir, PGDB_ROOT)
     staged_container = f"{runtime_container_dir}/models/{staged.name}"
     _catalog_path, catalog_container_path = stage_catalog_snapshot(
         workload=spec.name,
@@ -718,9 +733,7 @@ def evaluate_case(
         runtime_dir=runtime_dir,
         runtime_container_dir=runtime_container_dir,
     )
-    run_label = (
-        f"released-{spec.name.lower()}-{protocol}-{fold}-{digest[:12]}"
-    )
+    run_label = f"released-{spec.name.lower()}-{protocol}-{fold}-{digest[:12]}"
     counters = {"hits": 0, "misses": 0, "executed": 0, "skipped": 0}
     server_context = DockerLearnedPolicyServer(
         container=args.container,
@@ -737,7 +750,7 @@ def evaluate_case(
         workload=spec.name,
         catalog_container_path=catalog_container_path,
         model_device=args.model_device,
-        neurqo_src="/code/pgdb-dev/.neurqo_runtime/neurqo/src",
+        neurqo_src=policy_source(),
         inference_mode="deterministic",
         temperature=1.0,
         exploration_epsilon=0.0,
@@ -795,18 +808,18 @@ def evaluate_case(
                         policy_offset,
                         timeout_ms,
                     ) = execute_miss(
-                            args=args,
-                            spec=spec,
-                            query_id=query_id,
-                            sql=sql,
-                            pg_first_ms=pg_first_ms,
-                            expected_result_hash=expected_hash,
-                            profile=spec.profile,
-                            server=server,
-                            policy_offset=policy_offset,
-                            runtime_dir=runtime_dir,
-                            runtime_container_dir=runtime_container_dir,
-                        )
+                        args=args,
+                        spec=spec,
+                        query_id=query_id,
+                        sql=sql,
+                        pg_first_ms=pg_first_ms,
+                        expected_result_hash=expected_hash,
+                        profile=spec.profile,
+                        server=server,
+                        policy_offset=policy_offset,
+                        runtime_dir=runtime_dir,
+                        runtime_container_dir=runtime_container_dir,
+                    )
                 finally:
                     release_sql_execution_slot(sql_lock_handle)
                 trajectory = semantic_policy_trajectory(policy_events)
@@ -974,13 +987,7 @@ def evaluate_standalone(
     if not missing or args.cache_miss == "error":
         return counters
 
-    try:
-        runtime_relative = runtime_dir.resolve().relative_to(PGDB_ROOT)
-    except ValueError as exc:
-        raise ValueError(
-            f"runtime directory must be inside {PGDB_ROOT}: {runtime_dir}"
-        ) from exc
-    runtime_container_dir = f"/code/pgdb-dev/{runtime_relative.as_posix()}"
+    runtime_container_dir = container_path(runtime_dir, PGDB_ROOT)
     server_context = DockerFixedPolicyServer(
         container=args.container,
         port=args.server_port,
@@ -1086,10 +1093,13 @@ def main() -> int:
     parser.add_argument("--fold", choices=("a", "b", "c"))
     parser.add_argument("--query-id", action="append")
     parser.add_argument("--limit", type=int)
-    parser.add_argument(
-        "--cache-miss", choices=("error", "execute"), default="error"
-    )
+    parser.add_argument("--cache-miss", choices=("error", "execute"), default="error")
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument(
+        "--pg-reference",
+        type=Path,
+        help="reuse PostgreSQL rows from this CSV instead of collecting SQL",
+    )
     parser.add_argument("--runtime-dir", type=Path)
     parser.add_argument("--container", default="pgdb_dev_opt")
     parser.add_argument("--server-port", type=int, default=18095)
@@ -1115,15 +1125,18 @@ def main() -> int:
     parser.add_argument(
         "--sql-execution-lock",
         type=Path,
-        default=(
-            PGDB_ROOT
-            / ".neurqo_runtime"
-            / "online"
-            / ".neurqo-sql.lock"
-        ),
+        default=(PGDB_ROOT / ".neurqo_runtime" / "online" / ".neurqo-sql.lock"),
     )
     parser.add_argument("--sql-execution-slots", type=int, default=1)
     args = parser.parse_args()
+    configure_args(args)
+
+    if release_container() and args.method == "postgres" and args.pg_reference is None:
+        parser.error("release replay requires --pg-reference for PostgreSQL rows")
+    if args.pg_reference is not None:
+        seed_postgres_reference(
+            args.pg_reference, args.output, DATASETS[args.dataset].name
+        )
 
     if (
         args.cache_miss == "execute"
@@ -1151,9 +1164,7 @@ def main() -> int:
         if args.protocol is None or args.fold is None:
             parser.error("--method neurqo requires --protocol and --fold")
         if args.protocol not in spec.protocols:
-            parser.error(
-                f"{spec.name} does not support protocol {args.protocol!r}"
-            )
+            parser.error(f"{spec.name} does not support protocol {args.protocol!r}")
         if not args.output.is_file():
             raise FileNotFoundError(
                 "collect PostgreSQL rows before NeurQO evaluation with: "
@@ -1189,24 +1200,23 @@ def main() -> int:
     args.runtime_dir.mkdir(parents=True, exist_ok=True)
 
     if args.method == "postgres":
+        if args.pg_reference is not None:
+            print(f"Reused {spec.name}/PostgreSQL rows from {args.pg_reference}")
+            return 0
         print(f"== {spec.name}/PostgreSQL (one run) ==", flush=True)
         totals = collect_postgres(args=args, spec=spec, results=results)
         summary = {
             "dataset": spec.name,
             "method": "PostgreSQL",
             "measurements_per_query": 1,
-            "timing": (
-                "execute + complete result fetch + canonical SHA-256 hash"
-            ),
+            "timing": ("execute + complete result fetch + canonical SHA-256 hash"),
             **totals,
         }
         print(json.dumps(summary, indent=2, sort_keys=True))
         return 1 if totals["errors"] else 0
 
     stage_policy_runtime(PGDB_ROOT)
-    with ExperienceStore(
-        spec.cache, writable=args.cache_miss == "execute"
-    ) as store:
+    with ExperienceStore(spec.cache, writable=args.cache_miss == "execute") as store:
         if args.method == "neurqo":
             print(f"== {spec.name}/{args.protocol}/{args.fold} ==", flush=True)
             totals = evaluate_case(
@@ -1228,9 +1238,7 @@ def main() -> int:
                 **totals,
             }
         else:
-            print(
-                f"== {spec.name}/{METHOD_LABELS[args.method]} ==", flush=True
-            )
+            print(f"== {spec.name}/{METHOD_LABELS[args.method]} ==", flush=True)
             totals = evaluate_standalone(
                 args=args,
                 spec=spec,

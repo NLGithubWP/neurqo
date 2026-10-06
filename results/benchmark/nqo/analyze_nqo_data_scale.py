@@ -3,15 +3,15 @@
 
 from __future__ import annotations
 
+import argparse
 import csv
 import math
 import statistics
+import sys
 from pathlib import Path
 
-import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
 from optimization.naming import ResultDictReader
-
 
 ROOT = Path(__file__).resolve().parent
 EXPERIMENTS = (
@@ -109,6 +109,9 @@ def table(headers: tuple[str, ...], rows: list[tuple[str, ...]]) -> None:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--input-dir", type=Path, default=ROOT)
+    args = parser.parse_args()
     print(
         "PG baseline timeouts are excluded from paired metrics; "
         "NeurQO timeouts retain their charged runtime.\n"
@@ -118,7 +121,7 @@ def main() -> None:
     for dataset_index, (dataset, inputs) in enumerate(EXPERIMENTS):
         if dataset_index:
             print()
-        loaded = [(label, load(path)) for label, path in inputs]
+        loaded = [(label, load(args.input_dir / path.name)) for label, path in inputs]
         print(dataset)
         modes = (
             (False, "NeurQO end-to-end"),
@@ -153,15 +156,11 @@ def main() -> None:
                 )
                 if not without_inference:
                     values += (f"{inference_share:.2f}",)
-                output.append(
-                    values + (str(timeouts), str(excluded_pg_timeouts))
-                )
+                output.append(values + (str(timeouts), str(excluded_pg_timeouts)))
             headers = ("Data", "WS", "GS", "Imp", "PG (s)", "NeurQO (s)")
             if not without_inference:
                 headers += ("Inf. overhead (%)",)
-            table(
-                headers + ("NeurQO timeouts", "PG excluded"), output
-            )
+            table(headers + ("NeurQO timeouts", "PG excluded"), output)
 
 
 if __name__ == "__main__":

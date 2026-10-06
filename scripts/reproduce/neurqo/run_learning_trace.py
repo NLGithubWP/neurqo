@@ -14,17 +14,14 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-
 REPO = Path(__file__).resolve().parents[3]
-PGDB_ROOT = REPO.parent / "pgdb"
+PGDB_ROOT = Path(os.environ.get("NEURQO_REPLAY_ROOT", REPO.parent / "pgdb"))
 REFERENCE_CSV = REPO / "results" / "benchmark" / "nqo" / "nqo_runs.csv"
 DEFAULT_OUTPUT = REPO / "results" / "benchmark" / "nqo" / "nqo_learning_trace.csv"
 DEFAULT_CHECKPOINT_INVENTORY = Path(__file__).with_name(
     "learning_trace_checkpoints.csv"
 )
-DEFAULT_RUNTIME = (
-    PGDB_ROOT / ".neurqo_runtime" / "reproduction" / "learning-trace"
-)
+DEFAULT_RUNTIME = PGDB_ROOT / ".neurqo_runtime" / "reproduction" / "learning-trace"
 FOLDS = ("a", "b", "c")
 DATASET_PROTOCOLS = {
     "job": ("base_query", "leave_one_out", "random"),
@@ -65,15 +62,18 @@ os.environ.setdefault("PYTHONUNBUFFERED", "1")
 sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+import sys
+
 from run_abl_rl import (  # noqa: E402
     container_bridge_ip,
     evaluate_task,
     parse_devices,
 )
+
 from scripts.reproduce.neurqo.run import repo_relative  # noqa: E402
 
-import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
+from benchmarking.replay_runtime import configure_args
 from optimization.naming import ResultDictReader
 
 
@@ -130,9 +130,7 @@ def released_checkpoints(
             "selected",
         )
         if tuple(reader.fieldnames or ()) != expected_fields:
-            raise RuntimeError(
-                f"invalid checkpoint inventory schema: {inventory_path}"
-            )
+            raise RuntimeError(f"invalid checkpoint inventory schema: {inventory_path}")
         seen: set[tuple[str, str, str, int]] = set()
         for raw in reader:
             checkpoint_text = raw["checkpoint"]
@@ -168,8 +166,7 @@ def released_checkpoints(
         for fold in FOLDS
     }
     selected_scopes = [
-        (item["workload"], item["protocol"], item["fold"])
-        for item in selected
+        (item["workload"], item["protocol"], item["fold"]) for item in selected
     ]
     if set(selected_scopes) != expected_scopes or len(selected_scopes) != len(
         expected_scopes
@@ -270,24 +267,18 @@ def estimated_initial_rows(
             earliest[key] = row
     estimates: list[dict[str, str]] = []
     for (dataset, protocol, iteration), inverse_ws in INITIAL_INVERSE_WS.items():
-        weights = {
-            fold: fold_totals[(dataset, protocol, fold)][1] for fold in FOLDS
-        }
+        weights = {fold: fold_totals[(dataset, protocol, fold)][1] for fold in FOLDS}
         zero_values = {
             fold: float(earliest[(dataset, protocol, fold)]["inverse_ws"])
             for fold in FOLDS
         }
-        zero_center = sum(
-            weights[fold] * zero_values[fold] for fold in FOLDS
-        ) / sum(weights.values())
-        deviations = {
-            fold: zero_values[fold] - zero_center for fold in FOLDS
-        }
+        zero_center = sum(weights[fold] * zero_values[fold] for fold in FOLDS) / sum(
+            weights.values()
+        )
+        deviations = {fold: zero_values[fold] - zero_center for fold in FOLDS}
         max_deviation = max(abs(value) for value in deviations.values())
         scale = (
-            1.0
-            if max_deviation == 0.0
-            else min(1.0, 0.08 * inverse_ws / max_deviation)
+            1.0 if max_deviation == 0.0 else min(1.0, 0.08 * inverse_ws / max_deviation)
         )
         for fold in FOLDS:
             query_count, pg_total = fold_totals[(dataset, protocol, fold)]
@@ -356,6 +347,7 @@ def main() -> int:
     parser.add_argument("--sql-execution-slots", type=int, default=4)
     parser.add_argument("--overwrite", action="store_true")
     args = parser.parse_args()
+    configure_args(args)
     args.output = args.output.resolve()
     args.runtime_root = args.runtime_root.resolve()
     args.sql_execution_lock = args.sql_execution_lock.resolve()
@@ -365,9 +357,7 @@ def main() -> int:
     if args.workers < 1 or args.workers > 30:
         parser.error("--workers must be between 1 and 30")
 
-    preceding, selected = released_checkpoints(
-        args.checkpoint_inventory.resolve()
-    )
+    preceding, selected = released_checkpoints(args.checkpoint_inventory.resolve())
     pg, best_rows = load_reference()
     best_iteration = {
         (item["workload"].upper(), item["protocol"], item["fold"]): item
@@ -470,9 +460,7 @@ def main() -> int:
             sum(row.get("cache_hit") == "True" for row in result["rows"])
             for _, result in completed
         ),
-        "cache_misses": sum(
-            len(result["cache_misses"]) for _, result in completed
-        ),
+        "cache_misses": sum(len(result["cache_misses"]) for _, result in completed),
         "physical_executions": sum(
             result["physical_executions"] for _, result in completed
         ),

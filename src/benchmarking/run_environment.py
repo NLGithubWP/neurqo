@@ -11,8 +11,9 @@ import subprocess
 from pathlib import Path
 from typing import Any, Optional
 
+from benchmarking.local_runtime import enabled as local_runtime
+from benchmarking.replay_runtime import policy_source, release_container
 from experience.store import canonical_json
-
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -39,14 +40,14 @@ def portable_path(path: Path) -> str:
 
 def stage_policy_runtime(pgdb_root: Path) -> Path:
     """Mirror the NeurQO Python modules into the database container mount."""
+    if local_runtime():
+        return ROOT / "src"
+    if release_container():
+        return Path(policy_source())
     source = ROOT / "src"
     runtime_source = pgdb_root / ".neurqo_runtime" / "neurqo" / "src"
     center_analysis_source = (
-        ROOT
-        / "scripts"
-        / "reproduce"
-        / "neurqo"
-        / "workload_fk_center_analysis.json"
+        ROOT / "scripts" / "reproduce" / "neurqo" / "workload_fk_center_analysis.json"
     )
     center_analysis_destination = (
         runtime_source.parent
@@ -82,6 +83,17 @@ def stage_policy_runtime(pgdb_root: Path) -> Path:
 
 
 def repository_version(path: Path) -> dict[str, Any]:
+    if local_runtime():
+        digest = hashlib.sha256()
+        for root in (path / "src", path / "workloads"):
+            for source in sorted(root.rglob("*.py")):
+                digest.update(str(source.relative_to(path)).encode())
+                digest.update(source.read_bytes())
+        return {
+            "path": str(path),
+            "head": "container-workspace",
+            "implementation_hash": digest.hexdigest(),
+        }
     head = command_output(["git", "rev-parse", "HEAD"], path)
     status = command_output(["git", "status", "--porcelain"], path)
     if path.resolve() == ROOT.resolve():

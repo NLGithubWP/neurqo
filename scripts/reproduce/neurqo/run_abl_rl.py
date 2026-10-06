@@ -18,9 +18,8 @@ from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
 
-
 REPO = Path(__file__).resolve().parents[3]
-PGDB_ROOT = REPO.parent / "pgdb"
+PGDB_ROOT = Path(os.environ.get("NEURQO_REPLAY_ROOT", REPO.parent / "pgdb"))
 MODEL_ROOT = REPO / "results" / "models" / "ablation"
 LEGACY_ACTION_MODEL_DIR = {"no_dec": "no_split", "no_enum": "no_topk"}
 REFERENCE_CSV = REPO / "results" / "benchmark" / "nqo" / "nqo_runs.csv"
@@ -83,6 +82,11 @@ FAMILY_CONFIG = {
 os.environ.setdefault("PYTHONUNBUFFERED", "1")
 sys.path.insert(0, str(REPO))
 
+import sys
+
+from optimization.decomposition_eligibility import (  # noqa: E402
+    workload_supports_decomposition,
+)
 from scripts.reproduce.neurqo.run import (  # noqa: E402
     DATASETS,
     DockerLearnedPolicyServer,
@@ -103,12 +107,14 @@ from scripts.reproduce.neurqo.run import (  # noqa: E402
     stage_catalog_snapshot,
     stage_model,
 )
-from optimization.decomposition_eligibility import (  # noqa: E402
-    workload_supports_decomposition,
-)
 
-import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
+from benchmarking.replay_runtime import (
+    configure_args,
+    container_path,
+    policy_source,
+    release_container,
+)
 from optimization.naming import ResultDictReader
 
 
@@ -162,8 +168,7 @@ def parse_devices(value: str) -> tuple[str, ...]:
     if not devices:
         raise argparse.ArgumentTypeError("at least one device is required")
     if any(
-        item != "cpu" and re.fullmatch(r"cuda:\d+", item) is None
-        for item in devices
+        item != "cpu" and re.fullmatch(r"cuda:\d+", item) is None for item in devices
     ):
         raise argparse.ArgumentTypeError("devices must be cpu or cuda:<id>")
     return devices
@@ -175,7 +180,7 @@ def container_bridge_ip(container: str) -> str:
             "docker",
             "inspect",
             "-f",
-            "{{(index .NetworkSettings.Networks \"bridge\").IPAddress}}",
+            '{{(index .NetworkSettings.Networks "bridge").IPAddress}}',
             container,
         ],
         check=True,
@@ -189,6 +194,9 @@ def container_bridge_ip(container: str) -> str:
 
 
 def verify_database_can_reach_server(task: Task, action_url: str) -> None:
+    if release_container():
+        # Replay and inference share the container loopback; server startup checked it.
+        return
     health_url = action_url.rsplit("/", 1)[0] + "/"
     completed = subprocess.run(
         [
@@ -212,13 +220,12 @@ def verify_database_can_reach_server(task: Task, action_url: str) -> None:
 
 
 def runtime_container_dir(runtime_dir: Path) -> str:
-    relative = runtime_dir.resolve().relative_to(PGDB_ROOT.resolve())
-    return f"/code/pgdb-dev/{relative.as_posix()}"
+    return container_path(runtime_dir, PGDB_ROOT)
 
 
-def load_reference_rows(workloads: tuple[str, ...]) -> tuple[
-    list[dict[str, str]], dict[tuple[str, str], dict[str, str]]
-]:
+def load_reference_rows(
+    workloads: tuple[str, ...],
+) -> tuple[list[dict[str, str]], dict[tuple[str, str], dict[str, str]]]:
     selected: list[dict[str, str]] = []
     pg_index: dict[tuple[str, str], dict[str, str]] = {}
     with REFERENCE_CSV.open(newline="", encoding="utf-8") as handle:
@@ -301,7 +308,7 @@ def evaluate_task(task: Task) -> dict[str, Any]:
                 workload=spec.name,
                 catalog_container_path=catalog_container_path,
                 model_device=task.device,
-                neurqo_src="/code/pgdb-dev/.neurqo_runtime/neurqo/src",
+                neurqo_src=policy_source(),
                 inference_mode="deterministic",
                 temperature=1.0,
                 exploration_epsilon=0.0,
@@ -316,9 +323,7 @@ def evaluate_task(task: Task) -> dict[str, Any]:
                 action_host=task.server_action_host,
                 startup_timeout=60.0,
             )
-            fold_spec = split_folds(spec.name, protocol)[
-                f"{protocol}_{task.fold}"
-            ]
+            fold_spec = split_folds(spec.name, protocol)[f"{protocol}_{task.fold}"]
             query_ids = [str(value) for value in fold_spec["test"]]
 
             with ExperienceStore(
@@ -387,10 +392,7 @@ def evaluate_task(task: Task) -> dict[str, Any]:
                                 release_sql_execution_slot(lock_handle)
                             physical_executions += 1
                             trajectory = semantic_policy_trajectory(policy_events)
-                            if (
-                                not trajectory
-                                and query_id not in spec.fallback_queries
-                            ):
+                            if not trajectory and query_id not in spec.fallback_queries:
                                 raise RuntimeError(
                                     f"online miss produced no policy trajectory: "
                                     f"{spec.name}/{query_id}"
@@ -434,9 +436,7 @@ def evaluate_task(task: Task) -> dict[str, Any]:
                             result_rows = pg_row["result_rows"]
                         else:
                             runtime_ms = float(execution["charged_wall_ms"])
-                            inference_ms = policy_inference_ms(
-                                db_events, policy_events
-                            )
+                            inference_ms = policy_inference_ms(db_events, policy_events)
                             status = str(execution["status"])
                             result_hash = execution.get("result_hash") or ""
                             result_rows = (
@@ -559,6 +559,7 @@ def run_family(family: str) -> int:
     parser.add_argument("--overwrite", action="store_true")
     parser.add_argument("--merge-existing", action="store_true")
     args = parser.parse_args()
+    configure_args(args)
 
     args.output = args.output.resolve()
     args.runtime_root = args.runtime_root.resolve()
@@ -635,9 +636,7 @@ def run_family(family: str) -> int:
         "ablation_rows": len(ablation_rows),
         "method_rows": dict(Counter(row["method"] for row in rows)),
         "cache_hits": sum(row["cache_hit"] == "True" for row in ablation_rows),
-        "cache_misses": sum(
-            len(result["cache_misses"]) for result in completed
-        ),
+        "cache_misses": sum(len(result["cache_misses"]) for result in completed),
         "physical_executions": sum(
             result["physical_executions"] for result in completed
         ),

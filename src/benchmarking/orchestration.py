@@ -10,8 +10,9 @@ import sys
 from pathlib import Path
 from typing import Iterable
 
+from benchmarking.local_runtime import command as local_command
+from benchmarking.local_runtime import enabled as local_runtime
 from benchmarking.utils import safe_name
-
 
 ROOT = Path(__file__).resolve().parents[2]
 ACTION_RUNNER_MODULE = "benchmarking.action_runner"
@@ -89,11 +90,12 @@ def cleanup_docker_exec_child(command: list[str]) -> None:
 
 
 def run_command(command: list[str], *, cwd: Path = ROOT) -> None:
+    command = local_command(command)
     print("+ " + " ".join(command), flush=True)
     process = subprocess.Popen(
         command,
         cwd=str(cwd),
-        start_new_session=True,
+        start_new_session=not local_runtime(),
     )
     try:
         return_code = process.wait()
@@ -115,6 +117,10 @@ def run_command(command: list[str], *, cwd: Path = ROOT) -> None:
 
 
 def sync_runtime(pgdb_root: Path, runtime_project: Path) -> None:
+    if local_runtime():
+        if runtime_project.resolve() != ROOT.resolve():
+            raise ValueError("local runtime-project must be the active source checkout")
+        return
     runtime_project.mkdir(parents=True, exist_ok=True)
     for relative in (
         "src",
@@ -172,6 +178,8 @@ def sync_runtime(pgdb_root: Path, runtime_project: Path) -> None:
 
 
 def host_to_container(path: Path, pgdb_root: Path) -> str:
+    if local_runtime():
+        return str(path.resolve())
     relative = path.resolve().relative_to(pgdb_root.resolve())
     return str(Path("/code/pgdb-dev") / relative)
 
@@ -297,9 +305,7 @@ def action_runner_command(
         command.extend(["--baseline-json", str(baseline_json)])
     if getattr(args, "sql_execution_lock", None) is not None:
         command.extend(["--sql-execution-lock", str(args.sql_execution_lock)])
-        command.extend(
-            ["--sql-execution-slots", str(args.sql_execution_slots)]
-        )
+        command.extend(["--sql-execution-slots", str(args.sql_execution_slots)])
     if getattr(args, "action_config", None) is not None:
         command.extend(["--action-config", str(args.action_config)])
     if replay_group is not None:
@@ -321,10 +327,7 @@ def action_runner_command(
                 "--model-device",
                 args.model_device,
                 "--model-neurqo-src",
-                (
-                    host_to_container(args.runtime_project, args.pgdb_root)
-                    + "/src"
-                ),
+                (host_to_container(args.runtime_project, args.pgdb_root) + "/src"),
                 "--inference-mode",
                 inference_mode,
                 "--temperature",

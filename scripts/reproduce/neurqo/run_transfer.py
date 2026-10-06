@@ -18,22 +18,10 @@ from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
 
-
 REPO = Path(__file__).resolve().parents[3]
-PGDB_ROOT = REPO.parent / "pgdb"
-DEFAULT_OUTPUT = (
-    REPO
-    / "results"
-    / "benchmark"
-    / "nqo"
-    / "nqo_transfer_run.csv"
-)
-DEFAULT_RUNTIME = (
-    PGDB_ROOT
-    / ".neurqo_runtime"
-    / "reproduction"
-    / "zero-shot-transfer"
-)
+PGDB_ROOT = Path(os.environ.get("NEURQO_REPLAY_ROOT", REPO.parent / "pgdb"))
+DEFAULT_OUTPUT = REPO / "results" / "benchmark" / "nqo" / "nqo_transfer_run.csv"
+DEFAULT_RUNTIME = PGDB_ROOT / ".neurqo_runtime" / "reproduction" / "zero-shot-transfer"
 MIXED_MODEL_ROOT = REPO / "results" / "models" / "mixed"
 PG_SOURCE = REPO / "results" / "benchmark" / "nqo" / "nqo_runs.csv"
 WORKLOADS = ("job", "stack", "tpch")
@@ -68,9 +56,13 @@ CSV_FIELDS = (
 os.environ.setdefault("PYTHONUNBUFFERED", "1")
 sys.path.insert(0, str(REPO))
 
-from scripts.reproduce.neurqo.run import (  # noqa: E402
+import sys
+
+from scripts.reproduce.neurqo.run import (
     DATASETS,
-    PGDB_ROOT as NEURQO_PGDB_ROOT,
+)
+from scripts.reproduce.neurqo.run import PGDB_ROOT as NEURQO_PGDB_ROOT  # noqa: E402
+from scripts.reproduce.neurqo.run import (
     DockerLearnedPolicyServer,
     ExperienceStore,
     acquire_sql_execution_slot,
@@ -91,10 +83,14 @@ from scripts.reproduce.neurqo.run import (  # noqa: E402
     stage_model,
 )
 
-import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
+from benchmarking.replay_runtime import (
+    configure_args,
+    container_path,
+    policy_source,
+    release_container,
+)
 from optimization.naming import ResultDictReader
-
 
 if NEURQO_PGDB_ROOT != PGDB_ROOT:
     raise RuntimeError("NeurQO runtime root mismatch")
@@ -123,9 +119,7 @@ class Task:
 
     @property
     def label(self) -> str:
-        suffix = (
-            "" if self.checkpoint_label == "best" else f"-{self.checkpoint_label}"
-        )
+        suffix = "" if self.checkpoint_label == "best" else f"-{self.checkpoint_label}"
         return f"{self.source}-to-{self.target}-{self.fold}{suffix}"
 
     @property
@@ -233,17 +227,15 @@ def checkpoint_for_task(task: Task) -> Path:
         if task.checkpoint_label != "best":
             path = path.with_name(f"online-iter-{task.checkpoint_label}.pt")
         return path
-    path = (
-        MIXED_MODEL_ROOT
-        / f"random_{task.fold}"
-        / f"best-{task.target}.pt"
-    )
+    path = MIXED_MODEL_ROOT / f"random_{task.fold}" / f"best-{task.target}.pt"
     if not path.is_file():
         raise FileNotFoundError(path)
     return path
 
 
-def load_postgres_rows() -> tuple[list[dict[str, str]], dict[tuple[str, str], dict[str, str]]]:
+def load_postgres_rows() -> (
+    tuple[list[dict[str, str]], dict[tuple[str, str], dict[str, str]]]
+):
     if not PG_SOURCE.is_file():
         raise FileNotFoundError(PG_SOURCE)
     selected: list[dict[str, str]] = []
@@ -281,8 +273,7 @@ def load_postgres_rows() -> tuple[list[dict[str, str]], dict[tuple[str, str], di
 
 
 def runtime_container_dir(runtime_dir: Path) -> str:
-    relative = runtime_dir.resolve().relative_to(PGDB_ROOT.resolve())
-    return f"/code/pgdb-dev/{relative.as_posix()}"
+    return container_path(runtime_dir, PGDB_ROOT)
 
 
 def container_bridge_ip(container: str) -> str:
@@ -291,7 +282,7 @@ def container_bridge_ip(container: str) -> str:
             "docker",
             "inspect",
             "-f",
-            "{{(index .NetworkSettings.Networks \"bridge\").IPAddress}}",
+            '{{(index .NetworkSettings.Networks "bridge").IPAddress}}',
             container,
         ],
         check=True,
@@ -306,6 +297,9 @@ def container_bridge_ip(container: str) -> str:
 
 
 def verify_database_can_reach_server(task: Task, action_url: str) -> None:
+    if release_container():
+        # Replay and inference share the container loopback; server startup checked it.
+        return
     health_url = action_url.rsplit("/", 1)[0] + "/"
     completed = subprocess.run(
         [
@@ -368,7 +362,7 @@ def evaluate_task(task: Task) -> dict[str, Any]:
                 workload=spec.name,
                 catalog_container_path=catalog_container_path,
                 model_device=task.device,
-                neurqo_src="/code/pgdb-dev/.neurqo_runtime/neurqo/src",
+                neurqo_src=policy_source(),
                 inference_mode="deterministic",
                 temperature=1.0,
                 exploration_epsilon=0.0,
@@ -513,9 +507,7 @@ def evaluate_task(task: Task) -> dict[str, Any]:
                         else:
                             status = str(execution["status"])
                             runtime_ms = float(execution["charged_wall_ms"])
-                            inference_ms = policy_inference_ms(
-                                db_events, policy_events
-                            )
+                            inference_ms = policy_inference_ms(db_events, policy_events)
                         rows.append(
                             {
                                 "target_dataset": spec.name,
@@ -536,9 +528,7 @@ def evaluate_task(task: Task) -> dict[str, Any]:
                                 ),
                                 "cache_hit": str(cache_hit),
                                 "cache_id": cache_id,
-                                "trajectory_hash": semantic_trajectory_hash(
-                                    trajectory
-                                ),
+                                "trajectory_hash": semantic_trajectory_hash(trajectory),
                                 "checkpoint": repo_relative(checkpoint),
                                 "actions_json": actions_json(trajectory),
                             }
@@ -577,9 +567,7 @@ def write_csv_atomic(path: Path, rows: list[dict[str, str]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".tmp")
     with temporary.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(
-            handle, fieldnames=CSV_FIELDS, lineterminator="\n"
-        )
+        writer = csv.DictWriter(handle, fieldnames=CSV_FIELDS, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
         handle.flush()
@@ -647,9 +635,7 @@ def main() -> int:
     )
     parser.add_argument("--workers", type=int, default=18)
     parser.add_argument("--base-port", type=int, default=23100)
-    parser.add_argument(
-        "--cache-miss", choices=("error", "execute"), default="error"
-    )
+    parser.add_argument("--cache-miss", choices=("error", "execute"), default="error")
     parser.add_argument("--host", default="localhost")
     parser.add_argument("--pg-port", type=int, default=15432)
     parser.add_argument("--user", default="pgdb")
@@ -663,6 +649,7 @@ def main() -> int:
     parser.add_argument("--sql-execution-slots", type=int, default=4)
     parser.add_argument("--overwrite", action="store_true")
     args = parser.parse_args()
+    configure_args(args)
 
     args.output = args.output.resolve()
     args.runtime_root = args.runtime_root.resolve()
@@ -680,9 +667,7 @@ def main() -> int:
     args.sql_execution_lock.parent.mkdir(parents=True, exist_ok=True)
 
     pg_rows, pg_index = load_postgres_rows()
-    server_action_host = (
-        args.server_action_host or container_bridge_ip(args.container)
-    )
+    server_action_host = args.server_action_host or container_bridge_ip(args.container)
     task_args = {
         "container": args.container,
         "runtime_root": args.runtime_root,
@@ -747,13 +732,10 @@ def main() -> int:
     preserved_rows = load_preserved_rows(args.output, replaced_tasks)
     combined_transfer_rows = preserved_rows + transfer_rows
     pg_needed = {
-        (row["target_dataset"], row["sql_path"])
-        for row in combined_transfer_rows
+        (row["target_dataset"], row["sql_path"]) for row in combined_transfer_rows
     }
     selected_pg = [
-        row
-        for row in pg_rows
-        if (row["target_dataset"], row["sql_path"]) in pg_needed
+        row for row in pg_rows if (row["target_dataset"], row["sql_path"]) in pg_needed
     ]
     rows = sorted(
         selected_pg + combined_transfer_rows,
@@ -773,9 +755,7 @@ def main() -> int:
         for result in completed
         for query_id in result["misses"]
     ]
-    encountered_misses = sum(
-        len(result["cache_misses"]) for result in completed
-    )
+    encountered_misses = sum(len(result["cache_misses"]) for result in completed)
     physical_executions = sum(
         int(result["physical_executions"]) for result in completed
     )
@@ -788,9 +768,7 @@ def main() -> int:
         "new_rows": len(transfer_rows),
         "preserved_rows": len(preserved_rows),
         "method_rows": dict(
-            sorted(
-                Counter(row["method"] for row in combined_transfer_rows).items()
-            )
+            sorted(Counter(row["method"] for row in combined_transfer_rows).items())
         ),
         "cache_hits": len(transfer_rows) - encountered_misses,
         "cache_misses": encountered_misses,

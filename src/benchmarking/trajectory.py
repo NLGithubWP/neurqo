@@ -9,7 +9,6 @@ from typing import Any
 
 from optimization.actions import ingest_trajectory, semantic_policy_trajectory
 
-
 EPISODE_FIELDS = (
     "result_key",
     "experiment_id",
@@ -76,12 +75,12 @@ def ingest_benchmark_trajectory(
         episode_status=episode_status,
         runtime_source="cache" if cache_hit else "physical",
     )
-    if cache_hit and semantic_policy_trajectory(policy_events) and not counts[
-        "decisions"
-    ]:
-        raise RuntimeError(
-            "cached policy rollout did not produce training decisions"
-        )
+    if (
+        cache_hit
+        and semantic_policy_trajectory(policy_events)
+        and not counts["decisions"]
+    ):
+        raise RuntimeError("cached policy rollout did not produce training decisions")
     return counts
 
 
@@ -118,6 +117,10 @@ class EpisodeCsv:
             if record["profile"] != profile:
                 continue
             converted = dict(record)
+            result_rows = record.get("result_rows")
+            converted["result_rows"] = (
+                int(result_rows) if result_rows not in ("", None) else None
+            )
             for key in ("is_warmup", "cache_hit", "search_applied"):
                 converted[key] = str(record.get(key, False)).lower() in {"1", "true"}
             for key in (

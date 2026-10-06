@@ -7,14 +7,14 @@ from benchmarking.action_runner import (
     acquire_sql_execution_slot,
     release_sql_execution_slot,
 )
-from benchmarking.run_environment import validate_resume_manifest
 from benchmarking.execution_cache import (
     cached_trajectory_state_key,
-    replay_cached_trajectory,
     replay_cached_trajectories_statewise,
+    replay_cached_trajectory,
     select_cached_trajectory_by_state_actions,
     unique_cached_trajectory_states,
 )
+from benchmarking.run_environment import validate_resume_manifest
 from benchmarking.trajectory import (
     EPISODE_FIELDS,
     EpisodeCsv,
@@ -25,7 +25,30 @@ from experience.store import (
     content_hash,
     semantic_trajectory_hash,
 )
-from optimization.actions import stable_state
+from optimization.actions import query_runtime_summary, stable_state
+
+
+@pytest.mark.parametrize("result_rows", [None, 0, 1])
+def test_episode_csv_preserves_result_count_type_on_resume(tmp_path, result_rows):
+    path = tmp_path / "episodes.csv"
+    store = EpisodeCsv(path)
+    record = dict.fromkeys(EPISODE_FIELDS, "")
+    record.update(
+        result_key="run:query:0",
+        profile="pg",
+        query_id="query",
+        repetition=0,
+        is_warmup=False,
+        status="ok",
+        client_wall_ms=10.0,
+        charged_wall_ms=10.0,
+        result_rows=result_rows,
+    )
+    store.append(record)
+    before = query_runtime_summary(store.profile_records("pg"))
+    after = query_runtime_summary(EpisodeCsv(path).profile_records("pg"))
+    assert before == after
+    assert after["query"]["result_rows"] == result_rows
 
 
 def test_resume_manifest_accepts_exact_contract(tmp_path):

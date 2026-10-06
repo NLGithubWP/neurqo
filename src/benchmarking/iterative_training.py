@@ -5,8 +5,8 @@ from __future__ import annotations
 import argparse
 import csv
 import fcntl
-import math
 import json
+import math
 import os
 import shutil
 import sys
@@ -20,20 +20,16 @@ import psycopg2
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_PGDB_ROOT = ROOT.parent / "pgdb"
 
-from benchmarking.workloads import (  # noqa: E402
-    WORKLOAD_DATABASES,
-    split_folds,
-    workload_query_ids,
-)
+from benchmarking.local_runtime import scoped_id  # noqa: E402
 from benchmarking.orchestration import (  # noqa: E402
     action_runner_command,
     host_to_container,
     run_command,
-    runner_run_id,
     sync_runtime,
 )
 from benchmarking.training_strategy import (  # noqa: E402
     INDEPENDENT_ACTION_PROFILES,
+    _structural_query_family,
     build_coverage_snapshot,
     coverage_iteration_query_batch,
     early_stopping_counter,
@@ -42,12 +38,16 @@ from benchmarking.training_strategy import (  # noqa: E402
     select_initial_policy_profile,
     stochastic_heads_for_iteration,
 )
-
+from benchmarking.utils import utc_stamp, write_json_atomic  # noqa: E402
+from benchmarking.workloads import (  # noqa: E402
+    WORKLOAD_DATABASES,
+    split_folds,
+    workload_query_ids,
+)
 from database.catalog import (  # noqa: E402
     read_postgres_catalog,
     write_catalog_snapshot,
 )
-
 from experience.store import (  # noqa: E402
     ExperienceStore,
     content_hash,
@@ -63,14 +63,11 @@ from optimization.actions import (  # noqa: E402
 from optimization.decomposition_eligibility import (  # noqa: E402
     workload_supports_decomposition,
 )
-from benchmarking.utils import utc_stamp, write_json_atomic  # noqa: E402
 
 TRAINER_MODULE = "training.experience_trainer"
 TRAINING_STOP_FILE = ROOT / ".local" / "STOP_ALL_TRAINING"
 FIRST_RUNTIME_SEMANTICS = "pg_first_over_nqo_first"
 FORMAL_RUNTIME_SEMANTICS = "pg_third_over_nqo_third"
-
-
 
 
 def append_jsonl(path: Path, payload: dict[str, Any]) -> None:
@@ -92,10 +89,6 @@ def load_jsonl(path: Path) -> list[dict[str, Any]]:
     ]
 
 
-
-
-
-
 def trainer_command(
     args: argparse.Namespace,
     *,
@@ -108,6 +101,9 @@ def trainer_command(
     replay_only: bool = False,
 ) -> list[str]:
     runtime_project = args.runtime_project
+    replay_epochs = args.replay_epochs
+    if replay_only and getattr(args, "bootstrap_replay_epochs", None) is not None:
+        replay_epochs = args.bootstrap_replay_epochs
     command = [
         "docker",
         "exec",
@@ -166,7 +162,7 @@ def trainer_command(
         "--fold",
         args.fold,
         "--replay-epochs",
-        str(args.replay_epochs),
+        str(replay_epochs),
         "--replay-batch-size",
         str(args.replay_batch_size),
         "--replay-minimum-samples",
@@ -256,9 +252,12 @@ def trainer_command(
 
 
 def bootstrap_fixed_replay_enabled(args: argparse.Namespace) -> bool:
+    replay_epochs = getattr(args, "bootstrap_replay_epochs", None)
+    if replay_epochs is None:
+        replay_epochs = args.replay_epochs
     phase_epochs = [
         (
-            args.replay_epochs
+            replay_epochs
             if getattr(args, f"{phase}_replay_epochs") is None
             else getattr(args, f"{phase}_replay_epochs")
         )
@@ -325,9 +324,7 @@ def load_profile_summary(
         if per_query_speedups
         else None
     )
-    improved_queries_first = sum(
-        value > 1.0 for value in per_query_speedups.values()
-    )
+    improved_queries_first = sum(value > 1.0 for value in per_query_speedups.values())
     improved_pct_first = (
         100.0 * improved_queries_first / len(query_ids) if query_ids else None
     )
@@ -446,15 +443,12 @@ def evaluate_checkpoint(
     )
     experiment_id = experiment_base_id
     retry_index = 0
-    while (
-        args.output_root / args.workload.lower() / experiment_id
-    ).exists():
+    while (args.output_root / args.workload.lower() / experiment_id).exists():
         retry_index += 1
         experiment_id = f"{experiment_base_id}-retry{retry_index}"
     if retry_index:
         print(
-            f"retrying {evaluation_name} iteration {iteration} as "
-            f"{experiment_id}",
+            f"retrying {evaluation_name} iteration {iteration} as " f"{experiment_id}",
             flush=True,
         )
     run_command(
@@ -511,7 +505,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="neurqo-benchmark train")
     parser.add_argument(
         "--workload",
-        choices=("JOB", "STACK", "TPCH"),
+        choices=WORKLOAD_DATABASES,
         default="JOB",
     )
     parser.add_argument(
@@ -680,9 +674,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--decomposition-seed-manifest",
         type=Path,
-        help=(
-            "use the fixed-experience seed alpha recorded in the given manifest"
-        ),
+        help=("use the fixed-experience seed alpha recorded in the given manifest"),
     )
     parser.add_argument("--initial-action-bias", type=float, default=0.5)
     parser.add_argument(
@@ -716,6 +708,11 @@ def main(argv: list[str] | None = None) -> int:
         help="retain state features while ablating graph/tree topology",
     )
     parser.add_argument("--replay-epochs", type=int, default=32)
+    parser.add_argument(
+        "--bootstrap-replay-epochs",
+        type=int,
+        help="override replay epochs for pretraining only",
+    )
     parser.add_argument("--independent-prior-epochs", type=int, default=0)
     for phase in ("dec", "sched", "enum", "adapt"):
         parser.add_argument(f"--independent-{phase}-prior-epochs", type=int)
@@ -835,6 +832,8 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--seed", type=int, default=42)
     args = parser.parse_args(argv)
+    if args.bootstrap_replay_epochs is not None and args.bootstrap_replay_epochs < 0:
+        parser.error("--bootstrap-replay-epochs must be nonnegative")
     frozen_action_config = None
     if args.action_config is not None:
         args.action_config = args.action_config.resolve()
@@ -930,9 +929,7 @@ def main(argv: list[str] | None = None) -> int:
     for phase in ("dec", "sched", "enum", "adapt"):
         phase_epochs = getattr(args, f"independent_{phase}_prior_epochs")
         if phase_epochs is not None and phase_epochs < 0:
-            parser.error(
-                f"--independent-{phase}-prior-epochs must be nonnegative"
-            )
+            parser.error(f"--independent-{phase}-prior-epochs must be nonnegative")
     if args.independent_prior_temperature < 0.0:
         parser.error("--independent-prior-temperature must be nonnegative")
     if (
@@ -954,13 +951,8 @@ def main(argv: list[str] | None = None) -> int:
         if args.independent_dec_prior_epochs is not None
         else args.independent_prior_epochs
     )
-    if (
-        args.residual_split_prior_epochs > 0
-        and configured_dec_prior_epochs <= 0
-    ):
-        parser.error(
-            "--residual-split-prior-epochs requires Dec independent priors"
-        )
+    if args.residual_split_prior_epochs > 0 and configured_dec_prior_epochs <= 0:
+        parser.error("--residual-split-prior-epochs requires Dec independent priors")
     if (
         args.residual_split_prior_epochs > 0
         and args.residual_split_root_objective == "cost_regression"
@@ -986,10 +978,7 @@ def main(argv: list[str] | None = None) -> int:
         parser.error("--sched-replay-temperature must be positive")
     if args.replay_action_cost_temperature < 0.0:
         parser.error("--replay-action-cost-temperature must be nonnegative")
-    if (
-        args.replay_action_cost_regression
-        and args.replay_action_cost_temperature > 0.0
-    ):
+    if args.replay_action_cost_regression and args.replay_action_cost_temperature > 0.0:
         parser.error(
             "--replay-action-cost-regression cannot be combined with "
             "--replay-action-cost-temperature"
@@ -1010,10 +999,7 @@ def main(argv: list[str] | None = None) -> int:
         parser.error("--sql-execution-slots must be positive")
     if args.workload == "STACK" and args.sql_execution_lock is None:
         args.sql_execution_lock = (
-            args.pgdb_root
-            / ".neurqo_runtime"
-            / "online"
-            / ".stack-sql-execution.lock"
+            args.pgdb_root / ".neurqo_runtime" / "online" / ".stack-sql-execution.lock"
         )
     if args.sql_execution_lock is not None:
         args.sql_execution_lock = args.sql_execution_lock.resolve()
@@ -1038,13 +1024,13 @@ def main(argv: list[str] | None = None) -> int:
         and args.independent_action_summary is None
     ):
         parser.error(
-            "--initial-policy-profile=auto requires "
-            "--independent-action-summary"
+            "--initial-policy-profile=auto requires " "--independent-action-summary"
         )
     master_id = args.experiment_id or (
         f"{args.workload.lower()}-{args.protocol}-{args.fold}-{utc_stamp()}"
     )
-    args.online_replay_group = f"{master_id}:online"
+    policy_namespace = scoped_id(master_id, args.pgdb_root)
+    args.online_replay_group = f"{policy_namespace}:online"
     args.replay_groups = sorted(
         set((args.fixed_replay_group or []) + [args.online_replay_group])
     )
@@ -1058,9 +1044,7 @@ def main(argv: list[str] | None = None) -> int:
         prior_dir = runtime_root / "priors"
         prior_dir.mkdir(parents=True, exist_ok=True)
         prior_dir.chmod(0o777)
-        args.staged_independent_action_summary = (
-            prior_dir / "independent-actions.json"
-        )
+        args.staged_independent_action_summary = prior_dir / "independent-actions.json"
         shutil.copy2(
             args.independent_action_summary,
             args.staged_independent_action_summary,
@@ -1140,9 +1124,7 @@ def main(argv: list[str] | None = None) -> int:
     else:
         baseline_source_path = args.baseline_json.resolve()
     experience_db.chmod(0o666)
-    baseline_source = json.loads(
-        baseline_source_path.read_text(encoding="utf-8")
-    )
+    baseline_source = json.loads(baseline_source_path.read_text(encoding="utf-8"))
     missing_baselines = sorted(set(baseline_query_ids) - set(baseline_source))
     if missing_baselines:
         raise RuntimeError(
@@ -1233,8 +1215,7 @@ def main(argv: list[str] | None = None) -> int:
             entry.get("iteration")
             for entry in load_jsonl(history_path)
             if entry.get("runtime_semantics") != FIRST_RUNTIME_SEMANTICS
-            or entry.get("test", {}).get("runtime_semantics")
-            != FIRST_RUNTIME_SEMANTICS
+            or entry.get("test", {}).get("runtime_semantics") != FIRST_RUNTIME_SEMANTICS
         ]
         if incompatible_history:
             raise RuntimeError(
@@ -1247,13 +1228,11 @@ def main(argv: list[str] | None = None) -> int:
         current_checkpoint = Path(state["latest_checkpoint"])
         current_policy = str(state["latest_policy_version"])
         best_test_ws = float(state["best_test_ws"])
-        evals_without_improvement = int(
-            state.get("evals_without_improvement", 0)
-        )
+        evals_without_improvement = int(state.get("evals_without_improvement", 0))
     else:
         current_iteration = 0
         current_checkpoint = checkpoints_dir / "online-iter-0000.pt"
-        current_policy = f"{master_id}-policy-0000"
+        current_policy = f"{policy_namespace}-policy-0000"
         bootstrap_replay = bootstrap_fixed_replay_enabled(args)
         run_command(
             trainer_command(
@@ -1306,8 +1285,7 @@ def main(argv: list[str] | None = None) -> int:
         if entry.get("iteration") is not None
     }
     current_requires_evaluation = (
-        current_iteration % args.eval_every == 0
-        or current_iteration == args.iterations
+        current_iteration % args.eval_every == 0 or current_iteration == args.iterations
     )
     if current_requires_evaluation and current_iteration not in history_iterations:
         evaluation = evaluate_checkpoint(
@@ -1360,9 +1338,7 @@ def main(argv: list[str] | None = None) -> int:
             seed=args.seed,
             coverage_mix=args.coverage_mix,
             baseline=baseline,
-            query_trajectory_counts=coverage_snapshot[
-                "query_trajectory_counts"
-            ],
+            query_trajectory_counts=coverage_snapshot["query_trajectory_counts"],
             workload=args.workload,
             query_sampling=args.query_sampling,
         )
@@ -1375,8 +1351,7 @@ def main(argv: list[str] | None = None) -> int:
         held_out_intersection = sorted(set(batch) & set(test_query_ids))
         if held_out_intersection:
             raise RuntimeError(
-                "query sampler selected test SQL: "
-                + ", ".join(held_out_intersection)
+                "query sampler selected test SQL: " + ", ".join(held_out_intersection)
             )
         write_json_atomic(
             experiment_dir / "sampling" / f"iter-{iteration:04d}.json",
@@ -1384,9 +1359,7 @@ def main(argv: list[str] | None = None) -> int:
                 "schema_version": 1,
                 "iteration": iteration,
                 "mode": args.query_sampling,
-                "training_query_ids_hash": content_hash(
-                    sorted(training_query_ids)
-                ),
+                "training_query_ids_hash": content_hash(sorted(training_query_ids)),
                 "selected_query_ids": batch,
                 "selected_families": [
                     _structural_query_family(
@@ -1398,9 +1371,7 @@ def main(argv: list[str] | None = None) -> int:
                 "held_out_intersection": held_out_intersection,
             },
         )
-        collection_id = (
-            f"{master_id}-collect-{iteration:04d}-{args.cache_match_mode}"
-        )
+        collection_id = f"{master_id}-collect-{iteration:04d}-{args.cache_match_mode}"
         # A failed collection can leave a valid but partial output directory
         # while training_state still points at the previous checkpoint.  Keep
         # that evidence immutable and retry under a fresh run/episode identity;
@@ -1408,9 +1379,7 @@ def main(argv: list[str] | None = None) -> int:
         # transition metadata may be exactly what caused the failed update.
         collection_base_id = collection_id
         retry_index = 0
-        while (
-            args.output_root / args.workload.lower() / collection_id
-        ).exists():
+        while (args.output_root / args.workload.lower() / collection_id).exists():
             retry_index += 1
             collection_id = f"{collection_base_id}-retry{retry_index}"
         if retry_index:
@@ -1443,20 +1412,12 @@ def main(argv: list[str] | None = None) -> int:
                 execution_cache="read-write",
             )
         )
-        collection_run_id = runner_run_id(
-            collection_id,
-            f"learned@{current_policy}",
-            args.protocol,
-            args.fold,
-            "train",
-        )
         next_checkpoint = checkpoints_dir / f"online-iter-{iteration:04d}.pt"
-        next_policy = f"{master_id}-policy-{iteration:04d}"
+        next_policy = f"{policy_namespace}-policy-{iteration:04d}"
         run_command(
             trainer_command(
                 args,
                 experience_db=experience_db,
-                run_id=collection_run_id,
                 output_checkpoint=next_checkpoint,
                 output_policy_version=next_policy,
                 base_checkpoint=current_checkpoint,
@@ -1558,9 +1519,7 @@ def main(argv: list[str] | None = None) -> int:
         formal_finalists.append(
             {
                 "selection_rank": rank,
-                "selection_test_ws": float(
-                    finalist["test"]["workload_speedup"] or 0.0
-                ),
+                "selection_test_ws": float(finalist["test"]["workload_speedup"] or 0.0),
                 "iteration": int(finalist["iteration"]),
                 "policy_version": str(finalist["policy_version"]),
                 "checkpoint": str(finalist["checkpoint"]),

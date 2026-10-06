@@ -16,7 +16,6 @@ from optimization.action_vocabulary import (
     normalize_policy_state,
 )
 
-
 REPLAY_CACHE_COLUMNS = (
     "cache_id",
     "query_id",
@@ -101,7 +100,7 @@ def canonical_trajectory(
 ) -> list[dict[str, Any]]:
     """Normalize legacy records in memory; callers never mutate old buffers."""
     # Imported lazily to avoid the module-level actions -> store dependency.
-    from optimization.actions import stable_state
+    from optimization.actions import _semantic_action, stable_state
 
     normalized: list[dict[str, Any]] = []
     for stored_decision in trajectory:
@@ -110,9 +109,9 @@ def canonical_trajectory(
         decision["phase"] = phase
         decision["state"] = normalize_policy_state(decision.get("state") or {})
         decision["state_hash"] = content_hash(stable_state(decision["state"]))
-        decision["action"] = normalize_policy_action(
-            decision.get("action") or {}, phase=phase
-        )
+        # Compare the same semantic fields as live policy events. Normalization
+        # also adds descriptive labels (e.g. adapt_action), not extra decisions.
+        decision["action"] = _semantic_action(phase, decision.get("action") or {})
         decision["policy"] = normalize_policy_action(
             decision.get("policy") or decision.get("action") or {}, phase=phase
         )
@@ -192,8 +191,7 @@ class ExperienceStore:
                 f"found tables {sorted(tables)}"
             )
         self.columns = {
-            str(row[1])
-            for row in self.db.execute("PRAGMA table_info(replay_cache)")
+            str(row[1]) for row in self.db.execute("PRAGMA table_info(replay_cache)")
         }
         missing = REPLAY_CACHE_REQUIRED_COLUMNS - self.columns
         if missing:
@@ -219,9 +217,7 @@ class ExperienceStore:
     def set_action_config_hash(self, value: str) -> None:
         self.action_config_hash = str(value)
 
-    def set_binding(
-        self, *, protocol: str, fold: str, checkpoint_sha256: str
-    ) -> None:
+    def set_binding(self, *, protocol: str, fold: str, checkpoint_sha256: str) -> None:
         self.binding = {
             "protocol": protocol,
             "fold": fold,
@@ -254,22 +250,23 @@ class ExperienceStore:
         if timeout_limit_ms is None:
             raise ValueError("timeout_limit_ms is required")
         action_config_hash = str(
-            action_config_hash
-            or self.action_config_hash
-            or "default"
+            action_config_hash or self.action_config_hash or "default"
         )
         # Accept legacy caller objects during the transition, but persist only
         # the canonical paper-aligned protocol in newly created buffers.
         trajectory = canonical_trajectory(trajectory)
         trajectory_hash = semantic_trajectory_hash(trajectory)
         if source_episode_id is None:
-            source_episode_id = "trajectory_" + content_hash(
-                {
-                    "sql_hash": sql_hash,
-                    "trajectory_hash": trajectory_hash,
-                    "action_config_hash": action_config_hash,
-                }
-            )[:24]
+            source_episode_id = (
+                "trajectory_"
+                + content_hash(
+                    {
+                        "sql_hash": sql_hash,
+                        "trajectory_hash": trajectory_hash,
+                        "action_config_hash": action_config_hash,
+                    }
+                )[:24]
+            )
         cache_id = cache_id or content_hash(
             {
                 "source_episode_id": source_episode_id,
@@ -278,8 +275,8 @@ class ExperienceStore:
                 "action_config_hash": action_config_hash,
             }
         )
-        trajectory_encoding, trajectory_payload, trajectory_blob_hash = (
-            encode_payload(trajectory)
+        trajectory_encoding, trajectory_payload, trajectory_blob_hash = encode_payload(
+            trajectory
         )
         db_encoding, db_payload, db_blob_hash = encode_payload(db_events)
         columns = list(REPLAY_CACHE_COLUMNS[:-1])
@@ -307,9 +304,7 @@ class ExperienceStore:
         if self.has_bindings:
             columns.append("bindings_json")
             values.append(
-                canonical_json(
-                    bindings or ([self.binding] if self.binding else [])
-                )
+                canonical_json(bindings or ([self.binding] if self.binding else []))
             )
         placeholders = ",".join("?" for _ in columns)
         before = self.db.total_changes
@@ -349,9 +344,7 @@ class ExperienceStore:
         # canonical identity for current cache matching. Legacy field names
         # intentionally produce a different semantic hash after normalization.
         item["stored_trajectory_hash"] = str(item["trajectory_hash"])
-        item["canonical_trajectory_hash"] = semantic_trajectory_hash(
-            item["trajectory"]
-        )
+        item["canonical_trajectory_hash"] = semantic_trajectory_hash(item["trajectory"])
         item["db_events"] = decode_payload(
             str(item["db_events_encoding"]), item["db_events_payload"]
         )
@@ -382,16 +375,13 @@ class ExperienceStore:
             params.append(str(action_config_hash))
         where = f"WHERE {' AND '.join(clauses)}" if clauses else ""
         rows = self.db.execute(
-            f"SELECT * FROM replay_cache {where} "
-            "ORDER BY created_at_ms, cache_id",
+            f"SELECT * FROM replay_cache {where} " "ORDER BY created_at_ms, cache_id",
             params,
         )
         for row in rows:
             yield self._decode_row(row)
 
-    def trajectory_cache_candidates(
-        self, *, sql_hash: str
-    ) -> list[dict[str, Any]]:
+    def trajectory_cache_candidates(self, *, sql_hash: str) -> list[dict[str, Any]]:
         clauses = ["sql_hash=?"]
         params: list[Any] = [str(sql_hash)]
         if self.action_config_hash is not None:
@@ -415,8 +405,7 @@ class ExperienceStore:
             exact = [
                 item
                 for item in eligible
-                if self.binding
-                in json.loads(str(item.get("bindings_json") or "[]"))
+                if self.binding in json.loads(str(item.get("bindings_json") or "[]"))
             ]
             if exact:
                 eligible = exact
@@ -529,9 +518,7 @@ class ExperienceStore:
         return {
             "episodes": len(entries),
             "timeouts": sum(item["status"] == "timeout" for item in entries),
-            "wrong_results": sum(
-                item["status"] == "wrong_result" for item in entries
-            ),
+            "wrong_results": sum(item["status"] == "wrong_result" for item in entries),
             "measured_wall_ms": sum(
                 float(item["charged_runtime_ms"]) for item in entries
             ),

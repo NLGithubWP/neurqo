@@ -18,24 +18,24 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 
+from experience.store import ExperienceStore, content_hash
+from model.encoders.query_graph import CatalogInfo
+from model.encoders.state import StructuredState
 from model.policy.action_space import (
     ACTION_ABLATIONS,
     ADAPT_LABELS,
-    N_DEC,
-    N_ADAPT,
-    N_SCHED,
-    N_ENUM,
-    SCHED_ALPHA_VALUES,
     ENUM_LABELS,
+    N_ADAPT,
+    N_DEC,
+    N_ENUM,
+    N_SCHED,
+    SCHED_ALPHA_VALUES,
     Transition,
     _base_query_family,
     apply_action_ablation_mask,
     migrate_action_space_checkpoint_tensors,
 )
 from model.policy.hierarchical_actor_critic import HACNetwork, ppo_update
-from experience.store import ExperienceStore, content_hash
-from optimization.actions import stable_state
-from optimization.decomposition_eligibility import workload_supports_decomposition
 from optimization.action_vocabulary import (
     ADAPT_PHASE,
     DEC_PHASE,
@@ -45,12 +45,13 @@ from optimization.action_vocabulary import (
     normalize_policy_action,
     normalize_policy_state,
 )
-from model.encoders.query_graph import CatalogInfo
-from model.encoders.state import StructuredState
+from optimization.actions import stable_state
+from optimization.decomposition_eligibility import workload_supports_decomposition
 from training.state_builder import (
     STATE_ABLATIONS,
     ExecutionStateBuilder,
 )
+
 PHASE_LEVEL = {
     DEC_PHASE: "dec",
     SCHED_PHASE: "sched",
@@ -58,16 +59,12 @@ PHASE_LEVEL = {
     ADAPT_PHASE: "adapt",
 }
 
-FROZEN_REPLAY_ENCODER_PHASES = frozenset(
-    {SCHED_PHASE, ENUM_PHASE, ADAPT_PHASE}
-)
+FROZEN_REPLAY_ENCODER_PHASES = frozenset({SCHED_PHASE, ENUM_PHASE, ADAPT_PHASE})
 
 # Independent-Action pretraining may specialize the Adapt-only plan encoder.
 # Sched and Enum still detach the shared query representation so their
 # marginal fixed-profile labels cannot overwrite the Dec representation.
-FROZEN_INDEPENDENT_PRIOR_ENCODER_PHASES = frozenset(
-    {SCHED_PHASE, ENUM_PHASE}
-)
+FROZEN_INDEPENDENT_PRIOR_ENCODER_PHASES = frozenset({SCHED_PHASE, ENUM_PHASE})
 
 INITIAL_POLICY_PROFILES = (
     "postgres",
@@ -76,7 +73,6 @@ INITIAL_POLICY_PROFILES = (
     "lip_selective",
     "aja_conservative",
 )
-
 
 
 @dataclass
@@ -91,8 +87,6 @@ class ReplayTarget:
     state_hash: str
     query_id: str
     action_costs_ms: dict[int, float]
-
-
 
 
 def expand_legacy_checkpoint_tensors(
@@ -139,9 +133,7 @@ def load_model_checkpoint(
         state_dict = payload
     state_dict, expanded = expand_legacy_checkpoint_tensors(model, state_dict)
     incompatible = model.load_state_dict(state_dict, strict=False)
-    missing = [
-        key for key in incompatible.missing_keys if not key.startswith("sched_")
-    ]
+    missing = [key for key in incompatible.missing_keys if not key.startswith("sched_")]
     if incompatible.unexpected_keys or missing:
         raise RuntimeError(
             "checkpoint mismatch: "
@@ -190,9 +182,7 @@ def _phase_action_index(phase: str, action: dict[str, Any]) -> int:
     # exact selective/conservative training costs and labels.
     prefix = "filter_selective" if filter_action in {"selective", "full"} else ""
     if ajoin_action in {"conservative", "aggressive"}:
-        label = (
-            f"{prefix}+ajoin_conservative" if prefix else "ajoin_conservative"
-        )
+        label = f"{prefix}+ajoin_conservative" if prefix else "ajoin_conservative"
     else:
         label = prefix or "none"
     return ADAPT_LABELS.index(label)
@@ -258,17 +248,10 @@ def _decision_rows(
             if not isinstance(policy, dict):
                 policy = {}
             stored_policy_version = policy.get("policy_version")
-            if (
-                policy_version is not None
-                and stored_policy_version != policy_version
-            ):
+            if policy_version is not None and stored_policy_version != policy_version:
                 continue
-            action = normalize_policy_action(
-                {**semantic_action, **policy}, phase=phase
-            )
-            round_index = int(
-                decision.get("round_index", state.get("round") or 0)
-            )
+            action = normalize_policy_action({**semantic_action, **policy}, phase=phase)
+            round_index = int(decision.get("round_index", state.get("round") or 0))
             event = round_events.get(round_index, {})
             timing = event.get("timing_ms") or {}
             fallback_runtime = float(timing.get("total") or 0.0)
@@ -284,11 +267,7 @@ def _decision_rows(
                 runtime_ms = fallback_runtime or execution["first_runtime_ms"]
             charged_runtime_ms = float(
                 decision.get("charged_runtime_ms")
-                or (
-                    execution["charged_runtime_ms"]
-                    if is_timeout
-                    else runtime_ms
-                )
+                or (execution["charged_runtime_ms"] if is_timeout else runtime_ms)
             )
             state_hash = str(
                 decision.get("state_hash") or content_hash(stable_state(state))
@@ -329,8 +308,7 @@ def _decision_rows(
                     "training_runtime_ms": charged_runtime_ms,
                     "is_timeout": int(is_timeout),
                     "observed_at_ms": int(
-                        decision.get("observed_at_ms")
-                        or execution["created_at_ms"]
+                        decision.get("observed_at_ms") or execution["created_at_ms"]
                     ),
                     "started_at_ms": int(execution["created_at_ms"]),
                     "trajectory_hash": str(execution["trajectory_hash"]),
@@ -388,9 +366,9 @@ def collect_transitions(
     if cutoff_ms is not None:
         grouped: dict[tuple[str, str], list[float]] = defaultdict(list)
         for row in rows:
-            grouped[
-                (row["measurement_key"], row["downstream_signature"])
-            ].append(float(row["charged_runtime_ms"]))
+            grouped[(row["measurement_key"], row["downstream_signature"])].append(
+                float(row["charged_runtime_ms"])
+            )
         medians = {key: statistics.median(values) for key, values in grouped.items()}
         for row in rows:
             row["training_runtime_ms"] = medians[
@@ -410,9 +388,7 @@ def collect_transitions(
 
     if reward_scale_ms is None:
         episode_baselines = {
-            str(row["episode_id"]): max(
-                float(row["charged_runtime_ms"] or 1.0), 1.0
-            )
+            str(row["episode_id"]): max(float(row["charged_runtime_ms"] or 1.0), 1.0)
             for row, _state, _action in prepared
         }
         reward_scale_ms = (
@@ -566,6 +542,7 @@ def collect_replay_targets(
     ordinary_samples: dict[tuple[str, str], dict[int, list[float]]] = defaultdict(
         lambda: defaultdict(list)
     )
+
     def register_group(
         row: dict[str, Any],
         phase: str,
@@ -677,10 +654,7 @@ def collect_replay_targets(
         return {
             action: min(costs)
             for action, costs in candidates.items()
-            if costs
-            and mask is not None
-            and action < len(mask)
-            and mask[action] > 0.0
+            if costs and mask is not None and action < len(mask) and mask[action] > 0.0
         }
 
     dec_state_hashes = {
@@ -803,9 +777,7 @@ def collect_independent_action_targets(
             raise ValueError(
                 f"independent-action summary is missing profile {profile!r}"
             )
-        missing = sorted(
-            set(query_ids) - set(summary[profile].get("queries") or {})
-        )
+        missing = sorted(set(query_ids) - set(summary[profile].get("queries") or {}))
         if missing:
             raise ValueError(
                 f"independent-action profile {profile!r} is missing "
@@ -884,10 +856,7 @@ def collect_independent_action_targets(
             }
         # Alpha=0.5 is the only independently measured Sched action. It is
         # a useful prior only where that complete split policy beats default.
-        if (
-            "dec" in phase_costs
-            and phase_costs["dec"][1] < phase_costs["dec"][0]
-        ):
+        if "dec" in phase_costs and phase_costs["dec"][1] < phase_costs["dec"][0]:
             phase_costs["sched"] = {
                 SCHED_ALPHA_VALUES.index(0.5): phase_costs["dec"][1]
             }
@@ -1068,9 +1037,7 @@ def _apply_conservative_crossfit_prior(
     try:
         from sklearn.ensemble import ExtraTreesRegressor
     except ImportError as exc:  # pragma: no cover - deployment validation
-        raise RuntimeError(
-            "conservative crossfit priors require scikit-learn"
-        ) from exc
+        raise RuntimeError("conservative crossfit priors require scikit-learn") from exc
 
     profiles = (
         "postgres",
@@ -1087,7 +1054,10 @@ def _apply_conservative_crossfit_prior(
         )
 
     features = np.stack(
-        [_independent_query_features(dec_by_query[query_id].state) for query_id in query_ids]
+        [
+            _independent_query_features(dec_by_query[query_id].state)
+            for query_id in query_ids
+        ]
     )
     costs = []
     for query_id in query_ids:
@@ -1105,9 +1075,7 @@ def _apply_conservative_crossfit_prior(
             ]
         )
     costs_array = np.asarray(costs, dtype=np.float64)
-    log_relative_costs = np.log(
-        np.maximum(costs_array / costs_array[:, :1], 1e-6)
-    )
+    log_relative_costs = np.log(np.maximum(costs_array / costs_array[:, :1], 1e-6))
     reference = min(
         range(len(profiles)),
         key=lambda index: (float(costs_array[:, index].sum()), index),
@@ -1145,8 +1113,7 @@ def _apply_conservative_crossfit_prior(
         selected = conservative_scores.argmin(axis=1)
         chosen_profiles[validation] = selected
         confidence_margins[validation] = np.maximum(
-            reference_lower
-            - conservative_scores[np.arange(len(validation)), selected],
+            reference_lower - conservative_scores[np.arange(len(validation)), selected],
             0.0,
         )
 
@@ -1188,7 +1155,10 @@ def _apply_conservative_crossfit_prior(
         for target in targets[phase]:
             profile = profile_by_query[target.query_id]
             selected_action = action_map[profile]
-            if selected_action < len(target.mask) and target.mask[selected_action] > 0.0:
+            if (
+                selected_action < len(target.mask)
+                and target.mask[selected_action] > 0.0
+            ):
                 target.target = selected_action
             target.weight = max(1.0 + margin_by_query[target.query_id], 0.05)
 
@@ -1287,9 +1257,9 @@ def replay_policy_update(
                 )
                 regression_targets = torch.stack(regression_targets)
                 measured_masks = torch.stack(measured_masks)
-                losses = (
-                    ((logits - regression_targets) ** 2) * measured_masks
-                ).sum(dim=-1) / measured_masks.sum(dim=-1).clamp_min(1.0)
+                losses = (((logits - regression_targets) ** 2) * measured_masks).sum(
+                    dim=-1
+                ) / measured_masks.sum(dim=-1).clamp_min(1.0)
             elif action_cost_temperature is not None:
                 soft_targets = torch.stack(
                     [
@@ -1367,8 +1337,7 @@ def joint_dec_prior_update(
             regression_targets_tensor = torch.stack(regression_targets)
             measured_masks_tensor = torch.stack(measured_masks)
             root_loss = (
-                ((root_logits - regression_targets_tensor) ** 2)
-                * measured_masks_tensor
+                ((root_logits - regression_targets_tensor) ** 2) * measured_masks_tensor
             ).sum(dim=-1) / measured_masks_tensor.sum(dim=-1).clamp_min(1.0)
             root_loss = root_loss.mean()
         else:
@@ -1648,9 +1617,13 @@ def initialize_safe_policy(
 
 
 def main() -> int:
+    from benchmarking.workloads import WORKLOAD_DATABASES
+
     parser = argparse.ArgumentParser()
     parser.add_argument("--experience-db", type=Path, required=True)
-    parser.add_argument("--workload", choices=("job", "stack", "tpch"), required=True)
+    parser.add_argument(
+        "--workload", choices=[key.lower() for key in WORKLOAD_DATABASES], required=True
+    )
     parser.add_argument(
         "--catalog-path",
         type=Path,
@@ -1839,7 +1812,9 @@ def main() -> int:
         choices=("direct", "conservative_crossfit"),
         default="direct",
     )
-    parser.add_argument("--independent-crossfit-confidence-z", type=float, default=1.645)
+    parser.add_argument(
+        "--independent-crossfit-confidence-z", type=float, default=1.645
+    )
     parser.add_argument("--independent-crossfit-trees", type=int, default=100)
     parser.add_argument(
         "--random-initial-policy",
@@ -1900,9 +1875,7 @@ def main() -> int:
     }
     for phase, configured_epochs in independent_phase_epochs.items():
         if configured_epochs is not None and configured_epochs < 0:
-            parser.error(
-                f"--independent-{phase}-prior-epochs must be nonnegative"
-            )
+            parser.error(f"--independent-{phase}-prior-epochs must be nonnegative")
         independent_phase_epochs[phase] = (
             args.independent_prior_epochs
             if configured_epochs is None
@@ -1924,13 +1897,8 @@ def main() -> int:
         parser.error("--independent-crossfit-trees must be positive")
     if args.residual_split_prior_epochs < 0:
         parser.error("--residual-split-prior-epochs must be nonnegative")
-    if (
-        args.residual_split_prior_epochs > 0
-        and independent_phase_epochs["dec"] <= 0
-    ):
-        parser.error(
-            "--residual-split-prior-epochs requires Dec independent priors"
-        )
+    if args.residual_split_prior_epochs > 0 and independent_phase_epochs["dec"] <= 0:
+        parser.error("--residual-split-prior-epochs requires Dec independent priors")
     if (
         args.residual_split_prior_epochs > 0
         and args.residual_split_root_objective == "cost_regression"
@@ -1940,9 +1908,8 @@ def main() -> int:
             "cost-regression residual split priors require "
             "--independent-prior-cost-regression"
         )
-    independent_prior_enabled = (
-        args.independent_action_summary is not None
-        and any(int(value) > 0 for value in independent_phase_epochs.values())
+    independent_prior_enabled = args.independent_action_summary is not None and any(
+        int(value) > 0 for value in independent_phase_epochs.values()
     )
     if args.independent_action_summary is not None:
         args.independent_action_summary = args.independent_action_summary.resolve()
@@ -1951,10 +1918,11 @@ def main() -> int:
                 "independent-action summary does not exist: "
                 f"{args.independent_action_summary}"
             )
-    if any(int(value) > 0 for value in independent_phase_epochs.values()) and not independent_prior_enabled:
-        parser.error(
-            "--independent-prior-epochs requires --independent-action-summary"
-        )
+    if (
+        any(int(value) > 0 for value in independent_phase_epochs.values())
+        and not independent_prior_enabled
+    ):
+        parser.error("--independent-prior-epochs requires --independent-action-summary")
     if runtime_replay_enabled and not args.replay_query_id:
         parser.error(
             "runtime replay requires at least one --replay-query-id from the "
@@ -1970,10 +1938,7 @@ def main() -> int:
         parser.error("--sched-replay-temperature must be positive")
     if args.replay_action_cost_temperature < 0.0:
         parser.error("--replay-action-cost-temperature must be nonnegative")
-    if (
-        args.replay_action_cost_regression
-        and args.replay_action_cost_temperature > 0.0
-    ):
+    if args.replay_action_cost_regression and args.replay_action_cost_temperature > 0.0:
         parser.error(
             "--replay-action-cost-regression cannot be combined with "
             "--replay-action-cost-temperature"
@@ -2018,9 +1983,7 @@ def main() -> int:
     policy_version = args.policy_version or f"online-iter-{next_iteration}"
 
     losses = {phase: 0.0 for phase in PHASE_LEVEL}
-    ppo_diagnostics: dict[str, dict[str, Any]] = {
-        phase: {} for phase in PHASE_LEVEL
-    }
+    ppo_diagnostics: dict[str, dict[str, Any]] = {phase: {} for phase in PHASE_LEVEL}
     counts = {phase: 0 for phase in PHASE_LEVEL}
     replay_losses = {phase: 0.0 for phase in PHASE_LEVEL}
     replay_counts = {phase: 0 for phase in PHASE_LEVEL}
@@ -2117,8 +2080,7 @@ def main() -> int:
                             args.replay_action_cost_temperature or None
                         ),
                         action_cost_regression=(
-                            args.replay_action_cost_regression
-                            and phase != "sched"
+                            args.replay_action_cost_regression and phase != "sched"
                         ),
                         balance_classes=(
                             False
@@ -2184,8 +2146,7 @@ def main() -> int:
                             args.independent_prior_temperature or None
                         ),
                         action_cost_regression=(
-                            args.independent_prior_cost_regression
-                            and phase != "sched"
+                            args.independent_prior_cost_regression and phase != "sched"
                         ),
                         balance_classes=False,
                     )
@@ -2212,8 +2173,7 @@ def main() -> int:
                         device,
                         epochs=args.residual_split_prior_epochs,
                         root_cost_regression=(
-                            args.residual_split_root_objective
-                            == "cost_regression"
+                            args.residual_split_root_objective == "cost_regression"
                         ),
                     )
                     print(
@@ -2279,9 +2239,7 @@ def main() -> int:
                 "importance_power": args.replay_importance_power,
                 "phase_importance_power": (phase_replay_importance_power),
                 "sched_cost_temperature": (args.sched_replay_temperature),
-                "action_cost_temperature": (
-                    args.replay_action_cost_temperature
-                ),
+                "action_cost_temperature": (args.replay_action_cost_temperature),
                 "action_cost_regression": args.replay_action_cost_regression,
                 "target_selection": "minimum_fixed_runtime",
                 "target_counts": replay_counts,
@@ -2298,9 +2256,7 @@ def main() -> int:
                 ),
                 "epochs": args.independent_prior_epochs,
                 "phase_epochs": independent_phase_epochs,
-                "relative_regret_temperature": (
-                    args.independent_prior_temperature
-                ),
+                "relative_regret_temperature": (args.independent_prior_temperature),
                 "cost_regression": args.independent_prior_cost_regression,
                 "mode": args.independent_prior_mode,
                 "crossfit_confidence_z": args.independent_crossfit_confidence_z,
@@ -2309,9 +2265,7 @@ def main() -> int:
                 "target_counts": independent_prior_counts,
                 "target_action_counts": independent_prior_action_counts,
                 "losses": independent_prior_losses,
-                "encoder_frozen_heads": sorted(
-                    FROZEN_INDEPENDENT_PRIOR_ENCODER_PHASES
-                ),
+                "encoder_frozen_heads": sorted(FROZEN_INDEPENDENT_PRIOR_ENCODER_PHASES),
                 "state_source": "measured_root_online_states",
                 "runtime_source": "fixed_independent_action_summary",
                 "residual_split_prior": {
@@ -2322,8 +2276,7 @@ def main() -> int:
                     "target_action": "split",
                     "joint_root_loss": (
                         "independent_action_cost_regression"
-                        if args.residual_split_root_objective
-                        == "cost_regression"
+                        if args.residual_split_root_objective == "cost_regression"
                         else "conservative_independent_action_label"
                     ),
                     "root_objective": args.residual_split_root_objective,

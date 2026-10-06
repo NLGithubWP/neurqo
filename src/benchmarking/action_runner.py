@@ -16,18 +16,46 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_PGDB_ROOT = ROOT.parent / "pgdb"
 
+from benchmarking.database_runner import (  # noqa: E402
+    create_catalog_snapshot,
+    prewarm_database,
+    run_query_once,
+)
+from benchmarking.execution_cache import (  # noqa: E402
+    lookup_cached_execution,
+    read_jsonl_since,
+)
+from benchmarking.local_runtime import enabled as local_runtime  # noqa: E402
+from benchmarking.local_runtime import scoped_id
+from benchmarking.policy_server import (  # noqa: E402
+    DockerFixedPolicyServer,
+    DockerLearnedPolicyServer,
+)
+from benchmarking.run_environment import (  # noqa: E402
+    file_sha256,
+    portable_path,
+    repository_version,
+    stage_policy_runtime,
+    validate_resume_manifest,
+)
+from benchmarking.run_results import write_result_tables  # noqa: E402
+from benchmarking.trajectory import (  # noqa: E402
+    EpisodeCsv,
+    ingest_benchmark_trajectory,
+)
+from benchmarking.utils import safe_name, utc_stamp, write_json_atomic  # noqa: E402
 from benchmarking.workloads import (  # noqa: E402
+    WORKLOAD_DATABASES,
     query_sql,
     split_folds,
     workload_query_ids,
 )
-
+from database.catalog import write_catalog_snapshot  # noqa: E402
 from experience.store import (  # noqa: E402
     ExperienceStore,
     content_hash,
     semantic_trajectory_hash,
 )
-from database.catalog import write_catalog_snapshot  # noqa: E402
 from optimization.actions import (  # noqa: E402
     ONLINE_ACTION_SPACE_VERSION,
     STATEMENT_TIMEOUT_MS,
@@ -46,33 +74,6 @@ from optimization.actions import (  # noqa: E402
     validate_policy_state_contract,
     workload_metrics,
 )
-from benchmarking.utils import safe_name, utc_stamp, write_json_atomic  # noqa: E402
-from benchmarking.policy_server import (  # noqa: E402
-    DockerFixedPolicyServer,
-    DockerLearnedPolicyServer,
-)
-from benchmarking.database_runner import (  # noqa: E402
-    create_catalog_snapshot,
-    prewarm_database,
-    run_query_once,
-)
-from benchmarking.execution_cache import (  # noqa: E402
-    lookup_cached_execution,
-    read_jsonl_since,
-)
-from benchmarking.trajectory import (  # noqa: E402
-    EpisodeCsv,
-    ingest_benchmark_trajectory,
-)
-from benchmarking.run_environment import (  # noqa: E402
-    file_sha256,
-    portable_path,
-    repository_version,
-    stage_policy_runtime,
-    validate_resume_manifest,
-)
-from benchmarking.run_results import write_result_tables  # noqa: E402
-
 
 
 def acquire_sql_execution_slot(lock_path: Path, slots: int):
@@ -100,15 +101,6 @@ def acquire_sql_execution_slot(lock_path: Path, slots: int):
 def release_sql_execution_slot(handle) -> None:
     fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
     handle.close()
-
-
-
-
-
-
-
-
-
 
 
 def query_ids_for(args: argparse.Namespace) -> list[str]:
@@ -167,11 +159,9 @@ def load_profiles(args: argparse.Namespace) -> list[ActionProfile]:
     return profiles
 
 
-
-
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="neurqo-benchmark run")
-    parser.add_argument("--workload", choices=("JOB", "STACK", "TPCH"), default="JOB")
+    parser.add_argument("--workload", choices=WORKLOAD_DATABASES, default="JOB")
     parser.add_argument(
         "--profiles",
         default=(
@@ -345,6 +335,8 @@ def main(argv: list[str] | None = None) -> int:
         default="strict",
     )
     args = parser.parse_args(argv)
+    if local_runtime():
+        args.model_neurqo_src = str(ROOT / "src")
     frozen_action_config = None
     if args.action_config is not None:
         args.action_config = args.action_config.resolve()
@@ -418,10 +410,9 @@ def main(argv: list[str] | None = None) -> int:
     query_ids = query_ids_for(args)
     profiles = load_profiles(args)
     buffers_root = (ROOT / "results" / "buffers").resolve()
-    if (
-        any(not profile.is_postgres for profile in profiles)
-        and experience_path.is_relative_to(buffers_root)
-    ):
+    if any(
+        not profile.is_postgres for profile in profiles
+    ) and experience_path.is_relative_to(buffers_root):
         raise RuntimeError(
             "benchmark collection cannot write directly to results/buffers; "
             "copy the versioned buffer to a temporary *_light.sql file first"
@@ -522,7 +513,9 @@ def main(argv: list[str] | None = None) -> int:
         args.pgdb_root.resolve() / ".neurqo_runtime" / "benchmark" / args.experiment_id
     )
     runtime_container_dir = (
-        f"/code/pgdb-dev/.neurqo_runtime/benchmark/{args.experiment_id}"
+        str(runtime_host_dir)
+        if local_runtime()
+        else f"/code/pgdb-dev/.neurqo_runtime/benchmark/{args.experiment_id}"
     )
     runtime_host_dir.mkdir(parents=True, exist_ok=True)
     model_container_path = None
@@ -600,7 +593,11 @@ def main(argv: list[str] | None = None) -> int:
         },
         "sql_execution_slots": args.sql_execution_slots,
         "action_config": {
-            "path": portable_path(args.action_config) if args.action_config is not None else None,
+            "path": (
+                portable_path(args.action_config)
+                if args.action_config is not None
+                else None
+            ),
             "config_hash": (
                 frozen_action_config["config_hash"]
                 if frozen_action_config is not None
@@ -635,8 +632,11 @@ def main(argv: list[str] | None = None) -> int:
                 }
             )
             run_id = safe_name(
-                f"run_{args.experiment_id}_{profile_label}_{args.protocol}_"
-                f"{args.fold}_{args.role}"
+                scoped_id(
+                    f"run_{args.experiment_id}_{profile_label}_{args.protocol}_"
+                    f"{args.fold}_{args.role}",
+                    args.pgdb_root,
+                )
             )
 
             if profile.is_postgres:
@@ -678,6 +678,7 @@ def main(argv: list[str] | None = None) -> int:
                     container=args.container,
                     port=args.ai_port + profile_index,
                     profile=profile,
+                    workload=args.workload,
                     runtime_host_dir=runtime_host_dir,
                     runtime_container_dir=runtime_container_dir,
                     run_label=safe_name(profile_label),
@@ -700,10 +701,7 @@ def main(argv: list[str] | None = None) -> int:
                             factor=args.timeout_charge_factor,
                             cap_ms=60_000,
                         )
-                        if (
-                            not profile.is_postgres
-                            and pg_ms is not None
-                        )
+                        if (not profile.is_postgres and pg_ms is not None)
                         else args.statement_timeout_ms
                     )
                     failure_charge_ms = (

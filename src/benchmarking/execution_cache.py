@@ -9,20 +9,28 @@ import time
 from pathlib import Path
 from typing import Any
 
+from benchmarking.local_runtime import command as local_command
+from benchmarking.replay_runtime import (
+    read_remote_jsonl,
+    release_container,
+    runtime_python,
+)
 from experience.store import (
     ExperienceStore,
     canonical_json,
     semantic_trajectory_hash,
 )
-from optimization.actions import model_input_hash, semantic_policy_trajectory
 from optimization.action_vocabulary import (
     canonical_phase,
     normalize_policy_action,
     normalize_policy_state,
 )
+from optimization.actions import model_input_hash, semantic_policy_trajectory
 
 
 def read_jsonl_since(path: Path, offset: int) -> tuple[list[dict[str, Any]], int]:
+    if release_container():
+        return read_remote_jsonl(path, offset)
     if not path.is_file():
         return [], offset
     events = []
@@ -61,16 +69,18 @@ def replay_cached_trajectory(
         "timeout=30.0)) for s in states]"
     )
     subprocess.run(
-        [
-            "docker",
-            "exec",
-            "-i",
-            container,
-            "python3",
-            "-c",
-            replay_script,
-            server_url,
-        ],
+        local_command(
+            [
+                "docker",
+                "exec",
+                "-i",
+                container,
+                runtime_python(),
+                "-c",
+                replay_script,
+                server_url,
+            ]
+        ),
         input=canonical_json([item["state"] for item in trajectory]),
         text=True,
         stdout=subprocess.DEVNULL,
@@ -86,10 +96,7 @@ def replay_cached_trajectory(
         expected_action = normalize_policy_action(
             expected.get("action") or {}, phase=expected_phase
         )
-        if (
-            actual["phase"] != expected_phase
-            or actual["action"] != expected_action
-        ):
+        if actual["phase"] != expected_phase or actual["action"] != expected_action:
             return False, [], offset
     return True, replay_events, offset
 
@@ -132,25 +139,25 @@ def replay_cached_state_batch(
         "headers={'Content-Type':'application/json'},method='POST'),"
         "timeout=30.0)) for s in states]"
     )
-    replay_pid = -(
-        os.getpid() * 1_000_000_000 + time.monotonic_ns() % 1_000_000_000
-    )
+    replay_pid = -(os.getpid() * 1_000_000_000 + time.monotonic_ns() % 1_000_000_000)
     replay_states = []
     for item in states:
         replay_state = dict(item["state"])
         replay_state["pid"] = replay_pid
         replay_states.append(replay_state)
     subprocess.run(
-        [
-            "docker",
-            "exec",
-            "-i",
-            container,
-            "python3",
-            "-c",
-            replay_script,
-            server_url,
-        ],
+        local_command(
+            [
+                "docker",
+                "exec",
+                "-i",
+                container,
+                runtime_python(),
+                "-c",
+                replay_script,
+                server_url,
+            ]
+        ),
         input=canonical_json(replay_states),
         text=True,
         stdout=subprocess.DEVNULL,
@@ -268,15 +275,10 @@ def replay_cached_trajectories_prefix(
         event["state"] = item["state"]
         selected_events.append(event)
     selected_semantic = semantic_policy_trajectory(selected_events)
-    if (
-        semantic_trajectory_hash(selected_semantic)
-        != selected.get(
-            "canonical_trajectory_hash", selected["trajectory_hash"]
-        )
+    if semantic_trajectory_hash(selected_semantic) != selected.get(
+        "canonical_trajectory_hash", selected["trajectory_hash"]
     ):
-        raise RuntimeError(
-            "prefix cache matcher failed complete trajectory validation"
-        )
+        raise RuntimeError("prefix cache matcher failed complete trajectory validation")
     return selected, selected_events, policy_offset, len(predicted_actions)
 
 
@@ -314,8 +316,7 @@ def select_cached_trajectory_by_state_actions(
         return empty[0]
     for candidate in candidates:
         if all(
-            predicted_actions.get(cached_trajectory_state_key(item))
-            == item["action"]
+            predicted_actions.get(cached_trajectory_state_key(item)) == item["action"]
             for item in candidate["trajectory"]
         ):
             return candidate
@@ -359,25 +360,25 @@ def replay_cached_trajectories_statewise(
     # after its client has moved on to cache replay. Mark synthetic requests
     # through the ephemeral PID field so late decisions cannot contaminate
     # this batch. ``stable_state`` excludes PID, so cache identity is unchanged.
-    replay_pid = -(
-        os.getpid() * 1_000_000_000 + time.monotonic_ns() % 1_000_000_000
-    )
+    replay_pid = -(os.getpid() * 1_000_000_000 + time.monotonic_ns() % 1_000_000_000)
     replay_states = []
     for item in states:
         replay_state = dict(item["state"])
         replay_state["pid"] = replay_pid
         replay_states.append(replay_state)
     subprocess.run(
-        [
-            "docker",
-            "exec",
-            "-i",
-            container,
-            "python3",
-            "-c",
-            replay_script,
-            server_url,
-        ],
+        local_command(
+            [
+                "docker",
+                "exec",
+                "-i",
+                container,
+                runtime_python(),
+                "-c",
+                replay_script,
+                server_url,
+            ]
+        ),
         input=canonical_json(replay_states),
         text=True,
         stdout=subprocess.DEVNULL,
@@ -427,11 +428,8 @@ def replay_cached_trajectories_statewise(
         event["state"] = item["state"]
         selected_events.append(event)
     selected_semantic = semantic_policy_trajectory(selected_events)
-    if (
-        semantic_trajectory_hash(selected_semantic)
-        != selected.get(
-            "canonical_trajectory_hash", selected["trajectory_hash"]
-        )
+    if semantic_trajectory_hash(selected_semantic) != selected.get(
+        "canonical_trajectory_hash", selected["trajectory_hash"]
     ):
         raise RuntimeError(
             "statewise cache matcher failed complete trajectory validation"
@@ -525,9 +523,7 @@ def lookup_cached_execution(
         {
             "cache_source": str(selected["cache_id"]),
             "trajectory_hash": str(
-                selected.get(
-                    "canonical_trajectory_hash", selected["trajectory_hash"]
-                )
+                selected.get("canonical_trajectory_hash", selected["trajectory_hash"])
             ),
             "cache_saved_wall_ms": float(selected["query_wall_ms"]),
             "policy_events": replay_events,

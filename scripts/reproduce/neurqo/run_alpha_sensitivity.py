@@ -15,13 +15,10 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Any
 
-
 REPO = Path(__file__).resolve().parents[3]
-PGDB_ROOT = REPO.parent / "pgdb"
+PGDB_ROOT = Path(os.environ.get("NEURQO_REPLAY_ROOT", REPO.parent / "pgdb"))
 DEFAULT_INPUT = REPO / "results" / "benchmark" / "nqo" / "nqo_runs.csv"
-DEFAULT_OUTPUT = (
-    REPO / "results" / "benchmark" / "nqo" / "nqo_alpha_sensitivity.csv"
-)
+DEFAULT_OUTPUT = REPO / "results" / "benchmark" / "nqo" / "nqo_alpha_sensitivity.csv"
 DEFAULT_RUNTIME_DIR = (
     PGDB_ROOT / ".neurqo_runtime" / "reproduction" / "alpha-sensitivity-job-random"
 )
@@ -52,13 +49,15 @@ FIXED_POLICIES = {
 
 sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "src"))
-from scripts.reproduce.neurqo import run as neurqo_runner  # noqa: E402
+import sys
+
 from benchmarking.action_runner import (  # noqa: E402
     acquire_sql_execution_slot,
     release_sql_execution_slot,
 )
 from benchmarking.execution_cache import lookup_cached_execution  # noqa: E402
 from benchmarking.policy_server import DockerLearnedPolicyServer  # noqa: E402
+from benchmarking.replay_runtime import configure_args, container_path, policy_source
 from experience.store import (  # noqa: E402
     content_hash,
     semantic_trajectory_hash,
@@ -66,8 +65,8 @@ from experience.store import (  # noqa: E402
 from optimization.actions import (  # noqa: E402
     semantic_policy_trajectory,
 )
+from scripts.reproduce.neurqo import run as neurqo_runner  # noqa: E402
 
-import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
 from optimization.naming import ResultDictReader
 
@@ -96,9 +95,7 @@ class ResultCsv:
             reader = ResultDictReader(handle)
             missing = set(FIELDS) - set(reader.fieldnames or ())
             if missing:
-                raise RuntimeError(
-                    f"{self.path} is missing columns: {sorted(missing)}"
-                )
+                raise RuntimeError(f"{self.path} is missing columns: {sorted(missing)}")
             for row in reader:
                 key = self.key(row)
                 if key in self.rows:
@@ -121,9 +118,7 @@ class ResultCsv:
                 return False
             write_header = not self.path.is_file() or self.path.stat().st_size == 0
             with self.path.open("a", newline="", encoding="utf-8") as handle:
-                writer = csv.DictWriter(
-                    handle, fieldnames=FIELDS, lineterminator="\n"
-                )
+                writer = csv.DictWriter(handle, fieldnames=FIELDS, lineterminator="\n")
                 if write_header:
                     writer.writeheader()
                 writer.writerow(normalized)
@@ -205,9 +200,7 @@ def assert_fixed_alpha(trajectory: list[dict[str, Any]], alpha: float) -> None:
             continue
         actual = float(decision["action"]["sched_alpha"])
         if abs(actual - alpha) > 1e-9:
-            raise RuntimeError(
-                f"Sched override failed: expected {alpha}, got {actual}"
-            )
+            raise RuntimeError(f"Sched override failed: expected {alpha}, got {actual}")
 
 
 def evaluate_fold(
@@ -237,8 +230,7 @@ def evaluate_fold(
     runtime_dir = args.runtime_dir / policy / fold
     runtime_dir.mkdir(parents=True, exist_ok=True)
     staged, digest = neurqo_runner.stage_model(checkpoint, runtime_dir)
-    runtime_relative = runtime_dir.resolve().relative_to(PGDB_ROOT)
-    runtime_container_dir = f"/code/pgdb-dev/{runtime_relative.as_posix()}"
+    runtime_container_dir = container_path(runtime_dir, PGDB_ROOT)
     staged_container = f"{runtime_container_dir}/models/{staged.name}"
     _catalog_path, catalog_container_path = neurqo_runner.stage_catalog_snapshot(
         workload="JOB",
@@ -275,7 +267,7 @@ def evaluate_fold(
             workload="JOB",
             catalog_container_path=catalog_container_path,
             model_device=args.model_device,
-            neurqo_src="/code/pgdb-dev/.neurqo_runtime/neurqo/src",
+            neurqo_src=policy_source(),
             inference_mode="deterministic",
             temperature=1.0,
             exploration_epsilon=0.0,
@@ -412,9 +404,7 @@ def main() -> int:
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--overwrite", action="store_true")
-    parser.add_argument(
-        "--cache-miss", choices=("error", "execute"), default="error"
-    )
+    parser.add_argument("--cache-miss", choices=("error", "execute"), default="error")
     parser.add_argument("--workers", type=int, default=3)
     parser.add_argument("--container", default="pgdb_tpch_gpu")
     parser.add_argument("--action-host")
@@ -431,6 +421,7 @@ def main() -> int:
     )
     parser.add_argument("--sql-execution-slots", type=int, default=2)
     args = parser.parse_args()
+    configure_args(args)
     if args.workers < 1 or args.sql_execution_slots < 1:
         parser.error("worker and SQL slot counts must be positive")
     if args.action_host is None:
