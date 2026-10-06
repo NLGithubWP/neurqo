@@ -46,5 +46,5 @@ __pycache__/
 # Local AutoSteer collection results and logs.
 /results/benchmark/genjoin_baselines/auto_steer/
 
-# Generated paper figures
-/results/paper/figs/*.pdf
+# Local paper records, plotting scripts, and figures.
+/results/paper/
