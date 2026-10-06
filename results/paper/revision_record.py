@@ -4,12 +4,12 @@ import math
 import re
 from pathlib import Path
 
-
 RECORD_PATH = Path(__file__).resolve().with_name("all_record.md")
 
 
 def _record_text() -> str:
-    return RECORD_PATH.read_text()
+    # Accept archived table headings without rewriting the archived file.
+    return RECORD_PATH.read_text().replace("NQO", "NeurQO")
 
 
 def _between(text: str, start: str, end: str | None = None) -> str:
@@ -67,14 +67,10 @@ def _required_number(
         raise ValueError(f"missing {column!r} for query {qid!r}")
     cleaned = row[column].replace("`", "").replace(",", "").strip()
     if not re.fullmatch(r"[-+]?\d+(?:\.\d+)?", cleaned):
-        raise ValueError(
-            f"invalid {column!r} value {row[column]!r} for query {qid!r}"
-        )
+        raise ValueError(f"invalid {column!r} value {row[column]!r} for query {qid!r}")
     value = float(cleaned)
     if not math.isfinite(value) or value < 0 or (integral and not value.is_integer()):
-        raise ValueError(
-            f"invalid {column!r} value {row[column]!r} for query {qid!r}"
-        )
+        raise ValueError(f"invalid {column!r} value {row[column]!r} for query {qid!r}")
     return value
 
 
@@ -108,7 +104,9 @@ def _curve_points(
 
 
 def load_learning_curves() -> dict[str, dict[str, dict]]:
-    text = _between(_record_text(), "# 1. Learning efficiency", "# 2. Action Importance")
+    text = _between(
+        _record_text(), "# 1. Learning efficiency", "# 2. Action Importance"
+    )
     out: dict[str, dict[str, dict]] = {"JOB": {}, "STACK": {}, "TPC-H": {}}
 
     tpch = _between(text, "## TPC-H", "## JOB")
@@ -116,9 +114,7 @@ def load_learning_curves() -> dict[str, dict[str, dict]]:
     q_match = re.search(r"#SubQ\s*=\s*(\d+)", tpch)
     out["TPC-H"]["Random"] = {
         "subq": int(q_match.group(1)) if q_match else None,
-        "points": _curve_points(
-            rows, "Elapsed Time (min)", "Best-so-far 1/WS"
-        ),
+        "points": _curve_points(rows, "Elapsed Time (min)", "Best-so-far 1/WS"),
     }
 
     job = _between(text, "## JOB", "## STACK")
@@ -176,7 +172,7 @@ def load_action_importance() -> dict[str, dict[str, float | None]]:
     _, rows = _tables(text)[0]
     workload_names = {"JOB": "job", "STACK": "stack", "TPC-H": "tpch"}
     columns = {
-        "nqo": "NQO WS",
+        "nqo": "NeurQO WS",
         "wo_split": "w/o Query Split WS",
         "wo_search": "w/o TOPK WS",
         "wo_lip": "w/o filter WS",
@@ -193,7 +189,9 @@ def load_action_importance() -> dict[str, dict[str, float | None]]:
 
 
 def load_action_distribution_means() -> list[dict]:
-    text = _between(_record_text(), "# 3. Action Frequence", "# 4. Per-Query Performance")
+    text = _between(
+        _record_text(), "# 3. Action Frequence", "# 4. Per-Query Performance"
+    )
     blocks = {
         "TPCH": _between(text, "## TPC-H (random)", "## JOB"),
         "JOB": _between(text, "## JOB", "## STACK"),
@@ -258,9 +256,7 @@ def load_action_distribution_means() -> list[dict]:
 
 
 def load_per_query_panels() -> dict[str, list[dict]]:
-    text = _between(
-        _record_text(), "# 4. Per-Query Performance", "# 5. RL Formulation"
-    )
+    text = _between(_record_text(), "# 4. Per-Query Performance", "# 5. RL Formulation")
     blocks = {
         "TPC-H": _between(text, "## TPC-H (random)", "## JOB"),
         "JOB": _between(text, "## JOB", "## STACK"),
@@ -273,13 +269,11 @@ def load_per_query_panels() -> dict[str, list[dict]]:
         {
             "qid": row["Query"][1:] if row["Query"].startswith("Q") else row["Query"],
             "pg_s": _number(row["PG (s)"]),
-            "nqo_s": _number(row["NQO (s)"]),
+            "nqo_s": _number(row["NeurQO (s)"]),
             "delta_s": _number(row["Δt (s)"]),
             "delta_min": _number(row["Δt (s)"]),
             "delta_max": _number(row["Δt (s)"]),
-            "join_count": _required_number(
-                row, "# Joins", row["Query"], integral=True
-            ),
+            "join_count": _required_number(row, "# Joins", row["Query"], integral=True),
             "intermediate_rows": _required_number(
                 row, "Intermediate Rows", row["Query"]
             ),
@@ -293,7 +287,7 @@ def load_per_query_panels() -> dict[str, list[dict]]:
             {
                 "qid": row["Query"],
                 "pg_s": _number(row["Mean PG (s)"]),
-                "nqo_s": _number(row["Mean NQO (s)"]),
+                "nqo_s": _number(row["Mean NeurQO (s)"]),
                 "delta_s": _number(row["Mean Δt (s)"]),
                 "delta_min": _number(row["Min Δt (s)"]),
                 "delta_max": _number(row["Max Δt (s)"]),

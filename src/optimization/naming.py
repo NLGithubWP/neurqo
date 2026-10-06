@@ -1,4 +1,4 @@
-"""NeurQO names and read-only adapters for released NQO artifacts."""
+"""NeurQO names and read-only adapters for legacy released artifacts."""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ from typing import Any
 
 
 class CompatibleEnvironment(Mapping[str, str]):
-    """Prefer NEURQO_* while accepting NQO_* without changing os.environ."""
+    """Prefer current environment names while accepting legacy aliases."""
 
     def __getitem__(self, name: str) -> str:
         if name in os.environ:

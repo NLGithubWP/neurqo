@@ -11,7 +11,6 @@ import numpy as np
 import pandas as pd
 from matplotlib.gridspec import GridSpec
 
-
 ROOT = Path(__file__).resolve().parents[2]
 OUT_DIR = ROOT / "results" / "paper" / "figs"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -25,7 +24,7 @@ FONT = {
     "tick": 11.2,
 }
 
-METHODS = ["FASTgres", "TONIC", "GenJoin", "HybridQO", "AutoSteer", "NQO"]
+METHODS = ["FASTgres", "TONIC", "GenJoin", "HybridQO", "AutoSteer", "NeurQO"]
 WORKLOADS = ["JOB", "STACK", "TPCH"]
 WORKLOAD_LABELS = {"JOB": "JOB", "STACK": "STACK", "TPCH": "TPC-H"}
 
@@ -35,7 +34,7 @@ COLORS = {
     "GenJoin": "#f7f26b",
     "HybridQO": "#e7a3d1",
     "AutoSteer": "#98ee99",
-    "NQO": "#b691e5",
+    "NeurQO": "#b691e5",
 }
 
 HATCHES = {
@@ -44,7 +43,7 @@ HATCHES = {
     "GenJoin": "//",
     "HybridQO": "..",
     "AutoSteer": "xx",
-    "NQO": "\\\\",
+    "NeurQO": "\\\\",
 }
 
 COLUMNS = (
@@ -63,7 +62,10 @@ def _ws(cell: str) -> float:
 
 
 def build_ratio_df() -> pd.DataFrame:
-    table = pd.read_csv(OVERALL_RESULTS).set_index("Method")
+    table = pd.read_csv(OVERALL_RESULTS)
+    # Normalize released method labels in memory; never rewrite the CSV.
+    table["Method"] = table["Method"].str.replace(r"\bNQO\b", "NeurQO", regex=True)
+    table = table.set_index("Method")
     rows = []
     for method in METHODS:
         without_method = f"{method} w/o inference time"
@@ -91,9 +93,8 @@ def build_ratio_df() -> pd.DataFrame:
 
 
 def summarize(df: pd.DataFrame) -> pd.DataFrame:
-    return (
-        df.groupby(["workload", "method"], as_index=False)["ratio"]
-        .agg(mean_ratio="mean", min_ratio="min", max_ratio="max", splits="size")
+    return df.groupby(["workload", "method"], as_index=False)["ratio"].agg(
+        mean_ratio="mean", min_ratio="min", max_ratio="max", splits="size"
     )
 
 
@@ -158,9 +159,7 @@ def main():
         hspace=0.06,
     )
     axes_top = [fig.add_subplot(gs[0, i]) for i in range(3)]
-    axes_bot = [
-        fig.add_subplot(gs[1, i], sharex=axes_top[i]) for i in range(3)
-    ]
+    axes_bot = [fig.add_subplot(gs[1, i], sharex=axes_top[i]) for i in range(3)]
     fig.subplots_adjust(left=0.065, right=0.995, bottom=0.31, top=0.90)
 
     x = np.arange(len(METHODS))
@@ -203,7 +202,7 @@ def main():
         ax_top.set_title(WORKLOAD_LABELS[workload], fontsize=FONT["title"], pad=3)
         ax_bot.set_xticks(x)
         ax_bot.set_xticklabels(
-            ["NeurQO" if method == "NQO" else method for method in METHODS],
+            METHODS,
             rotation=36,
             ha="right",
             rotation_mode="anchor",

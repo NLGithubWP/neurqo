@@ -1,7 +1,7 @@
 # Released execution buffers
 
 These files are read-only SQLite databases containing execution experience
-collected on the authors' PostgreSQL installation. They let NQO replay matching
+collected on the authors' PostgreSQL installation. They let NeurQO replay matching
 state--action trajectories and train policies without executing the same SQL
 again. Fresh experiments should write to a separate buffer path.
 

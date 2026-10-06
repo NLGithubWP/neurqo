@@ -1,6 +1,6 @@
 # Overall performance
 
-Learned baselines come from `results/benchmark/overall_performance_comparison.csv`; non-learned methods and NQO come from `results/benchmark/nqo/nqo_runs.csv` and are summarized in `results/benchmark/nqo/analyze_nqo.log`. Each cell reports `WS / GS / Imp` under the `first-vs-first` protocol. Non-learned methods are independent of the train-test split, so the same result is repeated for all three JOB/STACK protocols. For TPC-H, QuerySplit falls back to PostgreSQL on all queries.
+Learned baselines come from `results/benchmark/overall_performance_comparison.csv`; non-learned methods and NeurQO come from `results/benchmark/nqo/nqo_runs.csv` and are summarized in `results/benchmark/nqo/analyze_nqo.log`. Each cell reports `WS / GS / Imp` under the `first-vs-first` protocol. Non-learned methods are independent of the train-test split, so the same result is repeated for all three JOB/STACK protocols. For TPC-H, QuerySplit falls back to PostgreSQL on all queries.
 
 | Category | Method | JOB Base-query | JOB Leave-one-out | JOB Random | STACK Base-query | STACK Leave-one-out | STACK Random | TPC-H Random |
 |---|---|---|---|---|---|---|---|---|
@@ -21,12 +21,12 @@ Learned baselines come from `results/benchmark/overall_performance_comparison.cs
 | Non-learned | AJA (Aggr.) | 1.294500 / 1.174292 / 64/113 (56.64%) | 1.294500 / 1.174292 / 64/113 (56.64%) | 1.294500 / 1.174292 / 64/113 (56.64%) | 0.592711 / 0.654932 / 30/112 (26.79%) | 0.592711 / 0.654932 / 30/112 (26.79%) | 0.592711 / 0.654932 / 30/112 (26.79%) | 0.991224 / 0.978384 / 5/22 (22.73%) |
 | Non-learned | TOP-5 (DP) | 0.424694 / 0.356730 / 24/113 (21.24%) | 0.424694 / 0.356730 / 24/113 (21.24%) | 0.424694 / 0.356730 / 24/113 (21.24%) | 0.268614 / 0.117544 / 15/112 (13.39%) | 0.268614 / 0.117544 / 15/112 (13.39%) | 0.268614 / 0.117544 / 15/112 (13.39%) | 0.937317 / 0.893397 / 9/22 (40.91%) |
 | Non-learned | TOP-10 (DP) | 0.521842 / 0.450093 / 20/113 (17.70%) | 0.521842 / 0.450093 / 20/113 (17.70%) | 0.521842 / 0.450093 / 20/113 (17.70%) | 0.334469 / 0.349914 / 1/112 (0.89%) | 0.334469 / 0.349914 / 1/112 (0.89%) | 0.334469 / 0.349914 / 1/112 (0.89%) | 0.943686 / 0.897916 / 11/22 (50.00%) |
-| NQO | NQO | 1.732855 / 0.977054 / 54/113 (47.79%) | 1.723802 / 0.986182 / 58/115 (50.43%) | 1.789778 / 1.024788 / 60/113 (53.10%) | 1.511860 / 0.910650 / 43/112 (38.39%) | 1.681650 / 0.936187 / 44/112 (39.29%) | 1.635543 / 0.904246 / 42/112 (37.50%) | 1.048593 / 1.004016 / 8/22 (36.36%) |
-| NQO | NQO w/o inference time | 1.854701 / 1.250958 / 61/113 (53.98%) | 1.860182 / 1.317016 / 63/115 (54.78%) | 1.924302 / 1.350700 / 63/113 (55.75%) | 1.585140 / 1.175222 / 53/112 (47.32%) | 1.782788 / 1.260174 / 60/112 (53.57%) | 1.688047 / 1.091101 / 49/112 (43.75%) | 1.051918 / 1.011531 / 8/22 (36.36%) |
+| NeurQO | NeurQO | 1.732855 / 0.977054 / 54/113 (47.79%) | 1.723802 / 0.986182 / 58/115 (50.43%) | 1.789778 / 1.024788 / 60/113 (53.10%) | 1.511860 / 0.910650 / 43/112 (38.39%) | 1.681650 / 0.936187 / 44/112 (39.29%) | 1.635543 / 0.904246 / 42/112 (37.50%) | 1.048593 / 1.004016 / 8/22 (36.36%) |
+| NeurQO | NeurQO w/o inference time | 1.854701 / 1.250958 / 61/113 (53.98%) | 1.860182 / 1.317016 / 63/115 (54.78%) | 1.924302 / 1.350700 / 63/113 (55.75%) | 1.585140 / 1.175222 / 53/112 (47.32%) | 1.782788 / 1.260174 / 60/112 (53.57%) | 1.688047 / 1.091101 / 49/112 (43.75%) | 1.051918 / 1.011531 / 8/22 (36.36%) |
 
-# 1. Learning efficiency of NQO on training queries
+# 1. Learning efficiency of NeurQO on training queries
 Original figure caption:
-"Normalized runtime is defined as Σ tNQO / Σ tPG. #SubQ denotes the final number of unique executed subquery-action pairs observed during training."
+"Normalized runtime is defined as Σ tNeurQO / Σ tPG. #SubQ denotes the final number of unique executed subquery-action pairs observed during training."
 
 This file records the data used to redraw the original paper figures with the new experiments. `Best-so-far 1/WS` first selects the best result for each fold up to the current iteration, including the `-2/-1` initialization points, and then aggregates execution time across folds. `Elapsed Time` is the equivalent cumulative cost of running all three folds of one protocol sequentially. It includes model pretraining before iteration 0, PPO updates, training-SQL collection, evaluation every four iterations, and versioned light-buffer lookup costs. Policy inference is rerun at every evaluation point, but SQL is not re-executed when the predicted complete trajectory hits the cache; a miss executes once and is written back. SQL episodes are aligned with the versioned light buffer by semantic trajectory ID and use the first execution time stored there. Each protocol starts with an empty logical cache, its three folds share the cache, and SQL time is charged only on the first appearance of a trajectory. Model time is estimated from manifest, label-snapshot, sampling, and checkpoint timestamps and excludes SQL-lock waiting. Measured mean costs for querying and decompressing candidate trajectories are TPC-H `1.461 ms/query`, JOB `79.562 ms/query`, and STACK `88.835 ms/query`; these costs are charged for every training sample and checkpoint evaluation. The `-2/-1` points are protocol-defined initialization measurements. For JOB/STACK, `-1` includes the initialization cost of the three sequential folds; for TPC-H, `-1` is a zero-cost pretraining point. A fresh evaluation of the final best checkpoint is excluded from the training curve.
 
@@ -59,7 +59,7 @@ The final `1/WS = 0.953659`, corresponding to `WS = 1.048593`.
 
 ## JOB
 
-WS uses the first-vs-first protocol: NQO uses the first stored trajectory result, while PostgreSQL uses baseline repetition 0. `#SubQ` globally deduplicates training trajectories from iterations 1--32 across all three folds. `Elapsed Time` is reconstructed with the cache-aware protocol above from each stage's final `episodes.csv`. It excludes duplicate SQLite episodes left by interruption and resume, excludes time spent by nine concurrent tasks waiting for the shared SQL lock, and does not sum wall time from overlapping processes.
+WS uses the first-vs-first protocol: NeurQO uses the first stored trajectory result, while PostgreSQL uses baseline repetition 0. `#SubQ` globally deduplicates training trajectories from iterations 1--32 across all three folds. `Elapsed Time` is reconstructed with the cache-aware protocol above from each stage's final `episodes.csv`. It excludes duplicate SQLite episodes left by interruption and resume, excludes time spent by nine concurrent tasks waiting for the shared SQL lock, and does not sum wall time from overlapping processes.
 
 Independent-action prior collection is reported separately and is not included in iteration 0 of each protocol: PostgreSQL `3.855 min` + Query Split `2.502 min` + TOPK `11.405 min` + AJA `8.043 min` + LIP `3.836 min` = **`29.640 min`**.
 
@@ -85,7 +85,7 @@ Independent-action prior collection is reported separately and is not included i
 
 ## STACK
 
-All results use the first-vs-first protocol: `WS_first = ΣPG_first / ΣNQO_first`. `Best-so-far` lets each fold select its best checkpoint through the current iteration, including the `-2/-1` initialization points, before aggregating total time across folds. Base-query and Leave-one-out begin at iteration 0. For Random at iteration 0, folds a/b use R0/T0, while fold c carries forward its iteration -1 best result because no iteration 0 checkpoint exists.
+All results use the first-vs-first protocol: `WS_first = ΣPG_first / ΣNeurQO_first`. `Best-so-far` lets each fold select its best checkpoint through the current iteration, including the `-2/-1` initialization points, before aggregating total time across folds. Base-query and Leave-one-out begin at iteration 0. For Random at iteration 0, folds a/b use R0/T0, while fold c carries forward its iteration -1 best result because no iteration 0 checkpoint exists.
 
 `#SubQ` follows the JOB protocol and globally deduplicates training-only `(subquery SQL hash, round action tuple)` pairs across all three folds. Base-query and Leave-one-out cover iterations 1--16; the measured Random checkpoint curve extends through iteration 24.
 
@@ -115,11 +115,11 @@ Independent-action prior collection is reported separately and is not included i
 
 
 # 2. Action Importance on the Random split.
-Original figure caption: Action importance of NQO on the Random split.
+Original figure caption: Action importance of NeurQO on the Random split.
 
-After removing one optimization action, the model is trained from scratch and evaluated on all three folds. Each JOB/STACK fold independently selects its best-so-far checkpoint, and `WS = ΣPG_first / ΣNQO_first` is computed from total first-vs-first time across folds. TPC-H uses the official third run of the complete three-run action grid and aggregates third-vs-third. Neither protocol is an arithmetic mean of per-fold WS values.
+After removing one optimization action, the model is trained from scratch and evaluated on all three folds. Each JOB/STACK fold independently selects its best-so-far checkpoint, and `WS = ΣPG_first / ΣNeurQO_first` is computed from total first-vs-first time across folds. TPC-H uses the official third run of the complete three-run action grid and aggregates third-vs-third. Neither protocol is an arithmetic mean of per-fold WS values.
 
-| Dataset | NQO WS | w/o Query Split WS | w/o TOPK WS | w/o filter WS | w/o Ajoin WS |
+| Dataset | NeurQO WS | w/o Query Split WS | w/o TOPK WS | w/o filter WS | w/o Ajoin WS |
 |---|---:|---:|---:|---:|---:|
 | TPC-H | 1.048593 | — | 1.013135 | 1.009105 | 1.015898 |
 | JOB | 1.789778 | 1.248472 | 1.360611 | 1.451699 | 1.496277 |
@@ -127,9 +127,9 @@ After removing one optimization action, the model is trained from scratch and ev
 
 
 # 3. Action Frequence
-Original figure caption: “Hierarchical action distribution of NQO”
+Original figure caption: “Hierarchical action distribution of NeurQO”
 
-Frequencies are computed from deterministic predictions of the selected NQO checkpoints on test queries and normalized independently within each head: `frequency = count / total decisions for that head`. The six bypassed TPC-H queries produce no policy decisions, so the denominator is the remaining 16 queries.
+Frequencies are computed from deterministic predictions of the selected NeurQO checkpoints on test queries and normalized independently within each head: `frequency = count / total decisions for that head`. The six bypassed TPC-H queries produce no policy decisions, so the denominator is the remaining 16 queries.
 
 ## TPC-H (random)
 
@@ -188,20 +188,20 @@ Normalization check: High, Select, Search, and Low each sum to `1.0000` for ever
 
 # 4. Per-Query Performance
 Original figure caption:
-"Per-query performance of NQO relative to PostgreSQL on JOB, STACK, and TPC-H. Bars show the average execution-
+"Per-query performance of NeurQO relative to PostgreSQL on JOB, STACK, and TPC-H. Bars show the average execution-
 time difference after aligning identical query IDs across available split settings, with error bars indicating the min-max range.
 The blue and orange curves correspond to the number of joins and the baseline intermediate rows, respectively"
 
-`Δt(q) = tPG(q) - tNQO(q)` in seconds; positive values mean NQO is faster and negative values mean it is slower. For SQL timeouts, `tNQO` uses the paper's charged value `Ttimeout = min(5 × tPG, 360 s)` rather than the slightly larger client-observed wall time after cancellation.
+`Δt(q) = tPG(q) - tNeurQO(q)` in seconds; positive values mean NeurQO is faster and negative values mean it is slower. For SQL timeouts, `tNeurQO` uses the paper's charged value `Ttimeout = min(5 × tPG, 360 s)` rather than the slightly larger client-observed wall time after cancellation.
 
 The final two columns below record fixed measurements from each query's PostgreSQL baseline plan: `# Joins` counts join operators (including nested loops), and `Intermediate Rows` sums `Actual Rows` over those operators.
 
 
 ## TPC-H (random)
 
-Q7, Q8, Q9, Q13, Q15, and Q22 use the PostgreSQL fallback, so NQO time equals PostgreSQL time and `Δt=0`.
+Q7, Q8, Q9, Q13, Q15, and Q22 use the PostgreSQL fallback, so NeurQO time equals PostgreSQL time and `Δt=0`.
 
-| Query | PG (s) | NQO (s) | Δt (s) | # Joins | Intermediate Rows |
+| Query | PG (s) | NeurQO (s) | Δt (s) | # Joins | Intermediate Rows |
 |---:|---:|---:|---:|---:|---:|
 | Q1 | 7.487681 | 7.262005 | +0.225675 | 0 | 0 |
 | Q2 | 1.019194 | 1.049498 | -0.030305 | 7 | 6427 |
@@ -228,7 +228,7 @@ Q7, Q8, Q9, Q13, Q15, and Q22 use the PostgreSQL fallback, so NQO time equals Po
 
 ## JOB
 
-Each protocol uses the WS-first best checkpoint for every fold: Base-query a/4, b/16, c/4; Leave-one-out a/4, b/24, c/0; Random a/0, b/28, c/4. Query IDs are aligned within each protocol before computing the cross-protocol mean and min--max of `Δt`. The duplicated 24a and 32a entries in Leave-one-out are averaged within that protocol first. PostgreSQL and NQO both use first-vs-first measurements.
+Each protocol uses the WS-first best checkpoint for every fold: Base-query a/4, b/16, c/4; Leave-one-out a/4, b/24, c/0; Random a/0, b/28, c/4. Query IDs are aligned within each protocol before computing the cross-protocol mean and min--max of `Δt`. The duplicated 24a and 32a entries in Leave-one-out are averaged within that protocol first. PostgreSQL and NeurQO both use first-vs-first measurements.
 
 | Protocol | WS | GS | Imp |
 |---|---:|---:|---:|
@@ -238,7 +238,7 @@ Each protocol uses the WS-first best checkpoint for every fold: Base-query a/4, 
 
 Pairwise Pearson correlations of per-query `Δt` across the three protocols range from `0.9784` to `0.9845`. For 95/113 queries (84.07%), the direction is consistent across all protocols: 47 are always faster and 48 are always slower. The table therefore reports the cross-protocol mean with min--max ranges for protocol sensitivity.
 
-| Query | Mean PG (s) | Mean NQO (s) | Mean Δt (s) | Min Δt (s) | Max Δt (s) | # Joins | Intermediate Rows |
+| Query | Mean PG (s) | Mean NeurQO (s) | Mean Δt (s) | Min Δt (s) | Max Δt (s) | # Joins | Intermediate Rows |
 |---:|---:|---:|---:|---:|---:|---:|---:|
 | 1a | 0.125740 | 0.217240 | -0.091500 | -0.338693 | +0.033290 | 4 | 681 |
 | 1b | 0.011885 | 0.138007 | -0.126122 | -0.126122 | -0.126122 | 4 | 83 |
@@ -356,7 +356,7 @@ Pairwise Pearson correlations of per-query `Δt` across the three protocols rang
 
 ## STACK
 
-Each protocol uses the WS-first best checkpoint for every fold: Base-query a/16, b/16, c/0; Leave-one-out a/4, b/12, c/12; Random a/42, b/18, c/22. Results are reproduced strictly offline from versioned checkpoints and light buffers bound to complete trajectories; measurements are never substituted across policies. PostgreSQL and NQO both use first-run measurements. All 112 query IDs are unique within each protocol, after which the mean and min--max of `Δt` are computed across protocols.
+Each protocol uses the WS-first best checkpoint for every fold: Base-query a/16, b/16, c/0; Leave-one-out a/4, b/12, c/12; Random a/42, b/18, c/22. Results are reproduced strictly offline from versioned checkpoints and light buffers bound to complete trajectories; measurements are never substituted across policies. PostgreSQL and NeurQO both use first-run measurements. All 112 query IDs are unique within each protocol, after which the mean and min--max of `Δt` are computed across protocols.
 
 | Protocol | WS_first | GS_first | Imp_first |
 |---|---:|---:|---:|
@@ -366,7 +366,7 @@ Each protocol uses the WS-first best checkpoint for every fold: Base-query a/16,
 
 Pairwise Pearson correlations of per-query `Δt` across the three protocols range from `0.9044` to `0.9773`. For 90/112 queries (80.36%), the direction is consistent across all protocols: 30 are always faster and 60 are always slower.
 
-| Query | Mean PG (s) | Mean NQO (s) | Mean Δt (s) | Min Δt (s) | Max Δt (s) | # Joins | Intermediate Rows |
+| Query | Mean PG (s) | Mean NeurQO (s) | Mean Δt (s) | Min Δt (s) | Max Δt (s) | # Joins | Intermediate Rows |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | q1_q1-009 | 0.012445 | 0.063774 | -0.051329 | -0.054428 | -0.049780 | 3 | 55 |
 | q1_q1-031 | 0.010677 | 0.053136 | -0.042459 | -0.042706 | -0.041966 | 3 | 37 |
@@ -485,24 +485,24 @@ Pairwise Pearson correlations of per-query `Δt` across the three protocols rang
 
 Original experiment title: “Comparison of different RL formulations and state representations on the Random split.”
 
-All three datasets use only the Random split, with the fold iteration of Full NQO as the training budget. Released checkpoints are: One-step RL, JOB `0/4/4` and STACK `0/0/0`; w/o Query Topology, JOB `0/4/4`, STACK `0/0/4`, and TPC-H `0/40/0`; w/o Plan Topology, JOB `0/20/4`, STACK `0/0/0`, and TPC-H `0/16/0`. WS is not averaged arithmetically across folds; it is aggregated as `WS = ΣPG / ΣNQO`. GS and Imp are also computed over the combined test queries. Results include inference overhead. TPC-H adds only the state ablations and does not repeat One-step RL.
+All three datasets use only the Random split, with the fold iteration of Full NeurQO as the training budget. Released checkpoints are: One-step RL, JOB `0/4/4` and STACK `0/0/0`; w/o Query Topology, JOB `0/4/4`, STACK `0/0/4`, and TPC-H `0/40/0`; w/o Plan Topology, JOB `0/20/4`, STACK `0/0/0`, and TPC-H `0/16/0`. WS is not averaged arithmetically across folds; it is aggregated as `WS = ΣPG / ΣNeurQO`. GS and Imp are also computed over the combined test queries. Results include inference overhead. TPC-H adds only the state ablations and does not repeat One-step RL.
 
 `One-step RL` retains the same hierarchical action space and network but sets `γ=0, λ=0` to remove cross-step credit assignment. `w/o Query Topology` retains query-node features while removing query-graph edges. `w/o Plan Topology` retains plan-operator features while flattening the plan-tree topology.
 
 | Method | JOB WS | JOB GS | JOB Imp | STACK WS | STACK GS | STACK Imp | TPC-H WS | TPC-H GS | TPC-H Imp |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| Full NQO | 1.789778 | 1.024788 | 60/113 (53.10%) | 1.635543 | 0.904246 | 42/112 (37.50%) | 1.048593 | 1.004016 | 8/22 (36.36%) |
+| Full NeurQO | 1.789778 | 1.024788 | 60/113 (53.10%) | 1.635543 | 0.904246 | 42/112 (37.50%) | 1.048593 | 1.004016 | 8/22 (36.36%) |
 | One-step RL | 1.654796 | 0.926309 | 55/113 (48.67%) | 1.462874 | 0.945720 | 40/112 (35.71%) | — | — | — |
 | w/o Query Topology | 1.714203 | 0.971524 | 51/113 (45.13%) | 1.424510 | 0.947381 | 38/112 (33.93%) | 1.009295 | 0.961522 | 8/22 (36.36%) |
 | w/o Plan Topology | 1.532734 | 0.930065 | 50/113 (44.25%) | 1.472904 | 0.950055 | 40/112 (35.71%) | 1.009286 | 0.961485 | 8/22 (36.36%) |
 
-All three TPC-H configurations outperform PostgreSQL on the same eight queries (Q1, Q3, Q6, Q10, Q12, Q14, Q17, and Q18), so each has Imp `8/22 (36.36%)`; the results are not reused. State topology primarily affects speedup magnitude rather than the number of improved queries. For example, Q10 improves from `1.0560×` under either topology ablation to `2.4882×` under Full NQO, substantially raising aggregate WS/GS. Full NQO and the two ablations predict different action trajectories on 9/22 queries, while the two ablations differ only on Q14. Q7, Q8, Q9, Q13, Q15, and Q22 are deterministic bypasses with PostgreSQL-equivalent runtime and are not counted in Imp under the strict `t_NQO < t_PG` definition.
+All three TPC-H configurations outperform PostgreSQL on the same eight queries (Q1, Q3, Q6, Q10, Q12, Q14, Q17, and Q18), so each has Imp `8/22 (36.36%)`; the results are not reused. State topology primarily affects speedup magnitude rather than the number of improved queries. For example, Q10 improves from `1.0560×` under either topology ablation to `2.4882×` under Full NeurQO, substantially raising aggregate WS/GS. Full NeurQO and the two ablations predict different action trajectories on 9/22 queries, while the two ablations differ only on Q14. Q7, Q8, Q9, Q13, Q15, and Q22 are deterministic bypasses with PostgreSQL-equivalent runtime and are not counted in Imp under the strict `t_NeurQO < t_PG` definition.
 
 # 6. Cross-workload Transferability
 
-Original figure caption: “Cross-workload transferability of NQO: same-workload training vs. transfer from other source workloads.”
+Original figure caption: “Cross-workload transferability of NeurQO: same-workload training vs. transfer from other source workloads.”
 
-All results use the Random split and compute `WS_first = ΣPG_first / ΣNQO_first` from total time across three folds. `Cross-workload` applies the reported source-workload checkpoints directly to the target without target-workload fine-tuning. For JOB-to-STACK transfer, folds A/B/C use `best`, `online-iter-0016.pt`, and `online-iter-0000.pt`, respectively; the other directions use the source-best checkpoint in all three folds. `Mixed-workload` trains on combined JOB, STACK, and TPC-H data. An em dash indicates that source and target are identical and the result already appears under `Same-workload`.
+All results use the Random split and compute `WS_first = ΣPG_first / ΣNeurQO_first` from total time across three folds. `Cross-workload` applies the reported source-workload checkpoints directly to the target without target-workload fine-tuning. For JOB-to-STACK transfer, folds A/B/C use `best`, `online-iter-0016.pt`, and `online-iter-0000.pt`, respectively; the other directions use the source-best checkpoint in all three folds. `Mixed-workload` trains on combined JOB, STACK, and TPC-H data. An em dash indicates that source and target are identical and the result already appears under `Same-workload`.
 
 | Target workload | Same-workload | Mixed-workload | Cross: source=JOB | Cross: source=STACK | Cross: source=TPC-H |
 |---|---:|---:|---:|---:|---:|
@@ -523,7 +523,7 @@ Per-query data is stored in `results/benchmark/nqo/nqo_transfer_run.csv`, with s
 
 ## Data-scale robustness
 
-Full-data Random checkpoints are evaluated directly on scaled database instances without retraining. JOB retains 75%/50%/25% of titles selected by a fixed hash together with their reference closures. STACK retains 50% of question threads and their answers, comments, tags, and links. PostgreSQL and NQO execute every SQL statement once using a fresh connection. A PostgreSQL baseline timeout removes the query from paired WS, GS, and Imp calculations; an NQO timeout still uses its official charged runtime. Only `q2_q2-098` in STACK Thread 50% triggers a PostgreSQL timeout, so that group uses the other 111 queries; no other group has a PostgreSQL timeout. `Inf. overhead` is computed directly as `Σ inference_ms / Σ NQO end-to-end runtime_ms` over valid paired queries and includes inference completed before an NQO timeout.
+Full-data Random checkpoints are evaluated directly on scaled database instances without retraining. JOB retains 75%/50%/25% of titles selected by a fixed hash together with their reference closures. STACK retains 50% of question threads and their answers, comments, tags, and links. PostgreSQL and NeurQO execute every SQL statement once using a fresh connection. A PostgreSQL baseline timeout removes the query from paired WS, GS, and Imp calculations; an NeurQO timeout still uses its official charged runtime. Only `q2_q2-098` in STACK Thread 50% triggers a PostgreSQL timeout, so that group uses the other 111 queries; no other group has a PostgreSQL timeout. `Inf. overhead` is computed directly as `Σ inference_ms / Σ NeurQO end-to-end runtime_ms` over valid paired queries and includes inference completed before an NeurQO timeout.
 
 | Workload | Data instance | Pairs | WS | GS | Imp | Inf. overhead | WS w/o Inf. | GS w/o Inf. | Imp w/o Inf. |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -538,7 +538,7 @@ The full STACK database and Thread 50% instance contain the same 33 permanent in
 
 # 7. Decomposition-depth microbenchmark
 
-The microbenchmark fixes `Select alpha=0.5`, `Search=default`, and `Low=none`, changing only the High-head stop position. Depth `d` forces `d` splits followed by stop; a successful run therefore has `d+1` executable units (`d` materialized subqueries plus one residual query). Every query enters the complete PostgreSQL decomposition/materialization/rewrite/replanning path from its original SQL rather than executing a manually decomposed statement. JOB and STACK each contribute three queries with different structures and benefit trends. PostgreSQL and NQO both use first-run measurements, and timeouts are charged as `min(5×PG, 360s)`.
+The microbenchmark fixes `Select alpha=0.5`, `Search=default`, and `Low=none`, changing only the High-head stop position. Depth `d` forces `d` splits followed by stop; a successful run therefore has `d+1` executable units (`d` materialized subqueries plus one residual query). Every query enters the complete PostgreSQL decomposition/materialization/rewrite/replanning path from its original SQL rather than executing a manually decomposed statement. JOB and STACK each contribute three queries with different structures and benefit trends. PostgreSQL and NeurQO both use first-run measurements, and timeouts are charged as `min(5×PG, 360s)`.
 
 The full experiment contains 41 fixed-depth points: 20 reuse existing complete trajectories, while 21 cache misses execute once and are written to a dedicated cache. Raw data is in `results/benchmark/nqo/nqo_decomposition_depth.csv`, with a readable summary in `results/benchmark/nqo/analyze_nqo_decomposition_depth.log`.
 
@@ -564,24 +564,24 @@ These results do not imply that more decomposition is always faster. The optimal
 
 # 8. Resource and runtime overhead
 
-Results are recomputed offline by `results/benchmark/nqo/analyze_nqo_overhead.py`, with summaries in `results/benchmark/nqo/analyze_nqo_overhead.log`. First-run independent-action records come from `results/benchmark/nqo/nqo_independent_action_runs.csv`. NQO uses the official Random-protocol results in `nqo_runs.csv` and reads the corresponding execution events from versioned light buffers through `cache_id`.
+Results are recomputed offline by `results/benchmark/nqo/analyze_nqo_overhead.py`, with summaries in `results/benchmark/nqo/analyze_nqo_overhead.log`. First-run independent-action records come from `results/benchmark/nqo/nqo_independent_action_runs.csv`. NeurQO uses the official Random-protocol results in `nqo_runs.csv` and reads the corresponding execution events from versioned light buffers through `cache_id`.
 
 ## Materialization footprint
 
-`Avg. materializations/query (#)` is the number of intermediate results materialized per original SQL statement. `Avg. materialized data/query (MiB)` is the cumulative materialized data produced per original statement, not peak process memory. `Materialized-data reduction (%)` uses QuerySplit as the baseline and is computed as `1 - NQO MiB/query / QuerySplit MiB/query`.
+`Avg. materializations/query (#)` is the number of intermediate results materialized per original SQL statement. `Avg. materialized data/query (MiB)` is the cumulative materialized data produced per original statement, not peak process memory. `Materialized-data reduction (%)` uses QuerySplit as the baseline and is computed as `1 - NeurQO MiB/query / QuerySplit MiB/query`.
 
 | Workload | Method | Avg. materializations/query (#) | Avg. materialized data/query (MiB) | Materialized-data reduction (%) |
 |---|---|---:|---:|---:|
 | JOB | QuerySplit | 3.68 | 6.80 | — |
-| JOB | NQO | **1.71** | **3.88** | **42.9%** |
+| JOB | NeurQO | **1.71** | **3.88** | **42.9%** |
 | STACK | QuerySplit | 4.99 | 5.97 | — |
-| STACK | NQO | **3.04** | **2.47** | **58.7%** |
+| STACK | NeurQO | **3.04** | **2.47** | **58.7%** |
 
-TPC-H does not enable Query Split, so no materialization footprint is reported. By learning to stop earlier, NQO reduces both materialization count and cumulative materialized data per query.
+TPC-H does not enable Query Split, so no materialization footprint is reported. By learning to stop earlier, NeurQO reduces both materialization count and cumulative materialized data per query.
 
-## NQO-specific runtime overhead
+## NeurQO-specific runtime overhead
 
-The values below are measured component times as percentages of end-to-end NQO runtime. Decomposition bookkeeping includes only `ANALYZE` and residual rewriting. Materialized-subquery execution, normal PostgreSQL planning, and final query execution are part of query processing and are not counted as NQO-specific overhead.
+The values below are measured component times as percentages of end-to-end NeurQO runtime. Decomposition bookkeeping includes only `ANALYZE` and residual rewriting. Materialized-subquery execution, normal PostgreSQL planning, and final query execution are part of query processing and are not counted as NeurQO-specific overhead.
 
 | Workload | #Q | Inference | LIP build | AJA build | Search | Decomposition bookkeeping | Total measured |
 |---|---:|---:|---:|---:|---:|---:|---:|
@@ -593,7 +593,7 @@ The values below are measured component times as percentages of end-to-end NQO r
 
 For the three versioned best JOB Random checkpoints, High, Search, and Low remain unchanged while every Select decision is fixed to `alpha=0`, `0.5`, or `1` and compared with the model's state-dependent learned `alpha_t`. All configurations use the same test folds, PostgreSQL baselines, first-run runtimes, and timeout charging. The three folds are aggregated by total time rather than by the arithmetic mean of fold WS values.
 
-| Schedule policy | WS | GS | Imp | NQO total runtime (s) | Runtime / learned |
+| Schedule policy | WS | GS | Imp | NeurQO total runtime (s) | Runtime / learned |
 |---|---:|---:|---:|---:|---:|
 | Fixed alpha=0.0 | 1.581317 | 0.920016 | 53/113 (46.90%) | 185.637 | 1.1318 |
 | Fixed alpha=0.5 | 1.777505 | 1.008728 | 59/113 (52.21%) | 165.148 | 1.0069 |

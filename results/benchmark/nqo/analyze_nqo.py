@@ -10,14 +10,13 @@ import json
 import math
 import re
 import statistics
+import sys
 from collections import defaultdict
 from pathlib import Path
 from typing import Any, Iterable
 
-import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
 from optimization.naming import ResultDictReader
-
 
 HERE = Path(__file__).resolve().parent
 DEFAULT_INPUT = HERE / "nqo_runs.csv"
@@ -90,17 +89,11 @@ def method_protocol_rows(
     rows: list[dict[str, str]], method: str, protocol: str
 ) -> list[dict[str, str]]:
     exact = [
-        row
-        for row in rows
-        if row["method"] == method and row["protocol"] == protocol
+        row for row in rows if row["method"] == method and row["protocol"] == protocol
     ]
     if exact:
         return exact
-    return [
-        row
-        for row in rows
-        if row["method"] == method and not row["protocol"]
-    ]
+    return [row for row in rows if row["method"] == method and not row["protocol"]]
 
 
 def runtime(row: dict[str, str], without_inference: bool) -> float:
@@ -108,9 +101,7 @@ def runtime(row: dict[str, str], without_inference: bool) -> float:
     if without_inference and row["status"] == "ok":
         measured -= float(row["inference_ms"] or 0.0)
     if measured <= 0.0:
-        raise ValueError(
-            f"non-positive runtime for {row['method']}/{row['sql_path']}"
-        )
+        raise ValueError(f"non-positive runtime for {row['method']}/{row['sql_path']}")
     return measured
 
 
@@ -129,9 +120,7 @@ def metrics(
     if not pairs:
         raise ValueError("cannot compute metrics for an empty result set")
     ws = sum(base for base, _ in pairs) / sum(value for _, value in pairs)
-    gs = math.exp(
-        statistics.fmean(math.log(base / value) for base, value in pairs)
-    )
+    gs = math.exp(statistics.fmean(math.log(base / value) for base, value in pairs))
     improved = sum(value < base for base, value in pairs)
     return ws, gs, improved, len(pairs)
 
@@ -196,12 +185,12 @@ def print_overall(
         for protocol in protocols:
             current = method_protocol_rows(rows, method, protocol)
             selected[protocol] = current
-            has_inference |= any(float(row["inference_ms"] or 0.0) > 0.0 for row in current)
+            has_inference |= any(
+                float(row["inference_ms"] or 0.0) > 0.0 for row in current
+            )
             cells.append(
                 metric_cell(
-                    metrics(current, pg, without_inference=False)
-                    if current
-                    else None
+                    metrics(current, pg, without_inference=False) if current else None
                 )
             )
         table_rows.append((method, *cells))
@@ -403,9 +392,7 @@ def pearson(left: list[float], right: list[float]) -> float:
         return float("nan")
     left_mean = statistics.fmean(left)
     right_mean = statistics.fmean(right)
-    numerator = sum(
-        (a - left_mean) * (b - right_mean) for a, b in zip(left, right)
-    )
+    numerator = sum((a - left_mean) * (b - right_mean) for a, b in zip(left, right))
     left_ss = sum((value - left_mean) ** 2 for value in left)
     right_ss = sum((value - right_mean) ** 2 for value in right)
     denominator = math.sqrt(left_ss * right_ss)
@@ -437,12 +424,12 @@ def print_per_query(
     print("3. Per-Query Performance\n")
     if dataset == "TPCH":
         print(
-            "Δt(q) = tPG(q) - tNQO(q), in seconds; positive values mean NeurQO "
+            "Δt(q) = tPG(q) - tNeurQO(q), in seconds; positive values mean NeurQO "
             "is faster.\n"
         )
     else:
         print(
-            "Δt(q) = tPG(q) - tNQO(q), in seconds; positive values mean NeurQO "
+            "Δt(q) = tPG(q) - tNeurQO(q), in seconds; positive values mean NeurQO "
             "is faster. Duplicate query IDs are averaged inside a protocol "
             "before the cross-protocol mean and min–max range are computed.\n"
         )
